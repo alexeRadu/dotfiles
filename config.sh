@@ -1,60 +1,45 @@
+#!/bin/sh
 
-is_debian_based=$(ls -l /etc/ | grep lsb-release)
-if [ -z $is_debian_base ]; then
-	DISTRO=$(cat /etc/system-release | cut -d' ' -f1)
-else
-	DISTRO=$(cat /etc/lsb-release)
-fi
-
-echo $DISTRO
-case $DISTRO in 
-	Fedora|CentOS|RedHat)
-		INSTALL="yum install"
-		SEARCH_LOCAL="yum list"
-		;;
-	
-	Ubuntu|Debian)
-		INSTALL="apt-get"
-		SEARCH_LOCAL=""
-		;;
-
-	*)
-		echo "Error:Unknown distro"
-		exit
-		;;
-esac
-
-function isInstalled {
-	local ret=$($SEARCH_LOCAL $@ >/dev/null)
-
-	if [ -z $ret ]; then
-		echo 1
-	else
-		echo 0
-	fi
+usage() {
+	echo "usage: $(basename $0) [-h] <command>"
+	echo ""
+	echo "  -h  display this help and exit"
+	echo ""
+	echo "There are only two commands:"
+	echo "  update   Copy configuration files to home directory"
+	echo "  save     Copy configuration files from home directory"
 }
 
-# git
-if [ $(isInstalled git) -eq 0 ]; then
-	echo "Git is not installed. Installing git."
-fi
+HOMEDIR="~/"
+update() {
+	cp bashrc $HOMEDIR/.bashrc
+	cp vimrc $HOMEDIR/.vimrc
+	cp gitconfig $HOMEDIR/.gitconfig
+}
 
-# git configuration
-GIT_USER="Radu Alexe"
-GIT_EMAIL="raduandrei.alexe@freescale.freescale.com"
-GIT_EDITOR="vim"
+save() {
+	cp $HOMEDIR/.bashrc bashrc
+	cp $HOMEDIR/.vimrc vimrc
+	cp $HOMEDIR/.gitconfig gitconfig
+}
 
-git config --global user.name $GIT_USER
-git config --global user.email $GIT_EMAIL
-git config --global color.ui always
-git config --global core.editor $GIT_EDITOR
 
-# vim 
-if [ $(isInstalled git) -eq 0 ]; then
-	echo "Vim is not installed. Installing vim"
-fi
-
-# git configuration
-
-# bash configuration
-
+while :; do
+	case $1 in
+		-h|-\?|--help)
+			usage	
+			exit
+			;;
+		update)
+			update
+			exit
+			;;
+		save)
+			save
+			exit
+			;;
+		*)
+			echo "Error: Unknown command. Use $(basename $0) -h for help"
+			break
+	esac
+done

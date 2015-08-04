@@ -1,0 +1,14 @@
+[user]
+	name = Radu Alexe
+	email = raduandrei.alexe@freescale.com
+[color]
+	ui = auto
+[alias]
+	ci = commit
+	st = status
+	logc = log --oneline --no-abbrev-commit --decorate=full
+	co = checkout
+[credential]
+	helper = cache
+[core]
+	editor = vim
