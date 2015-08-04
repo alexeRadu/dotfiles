@@ -10,17 +10,16 @@ usage() {
 	echo "  save     Copy configuration files from home directory"
 }
 
-HOMEDIR="~/"
 update() {
-	cp bashrc $HOMEDIR/.bashrc
-	cp vimrc $HOMEDIR/.vimrc
-	cp gitconfig $HOMEDIR/.gitconfig
+	cp bashrc $HOME/.bashrc
+	cp vimrc $HOME/.vimrc
+	cp gitconfig $HOME/.gitconfig
 }
 
 save() {
-	cp $HOMEDIR/.bashrc bashrc
-	cp $HOMEDIR/.vimrc vimrc
-	cp $HOMEDIR/.gitconfig gitconfig
+	cp $HOME/.bashrc bashrc
+	cp $HOME/.vimrc vimrc
+	cp $HOME/.gitconfig gitconfig
 }
 
 
