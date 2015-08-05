@@ -11,6 +11,10 @@ usage() {
 }
 
 update() {
+	# pull from git
+	git pull origin 
+
+	# copy files
 	cp bashrc $HOME/.bashrc
 	cp vimrc $HOME/.vimrc
 	cp gitconfig $HOME/.gitconfig
