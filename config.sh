@@ -20,6 +20,11 @@ save() {
 	cp $HOME/.bashrc bashrc
 	cp $HOME/.vimrc vimrc
 	cp $HOME/.gitconfig gitconfig
+
+	# save them to git
+	git add -u
+	git commit -m "snapshot at $(date '+%F %H:%M')"
+	git push origin master
 }
 
 

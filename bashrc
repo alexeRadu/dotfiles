@@ -7,10 +7,11 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-#. /sge6/default/common/settings.sh
-
 # LS colors
 alias ls='ls --color'
+alias ll='ls -l'
+alias la='ls -la'
+alias l='clear; ll'
 LS_COLORS=$LS_COLORS:'no=00:di=1;35:'
 export LS_COLORS
 
