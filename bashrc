@@ -15,11 +15,21 @@ alias l='clear; ll'
 LS_COLORS=$LS_COLORS:'no=00:di=1;35:'
 export LS_COLORS
 
+# clear alias
+alias cl='clear'
+
+
 # grep aliases
 alias grep='grep --color'
 alias grepc='grep  -r --include \*.c --include \*.h --include \*.cpp'
 alias grepsh='grep -r --include \*.sh'
 alias greppy='grep -r --include \*.py'
+
+# git helpers
+source ~/git-completion.bash
+alias gls='git status'
+alias gdif='git diff'
+alias gdifh='git diff --cached'
 
 # no more annoying beeps
 set betll-style none
