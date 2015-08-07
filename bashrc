@@ -27,9 +27,6 @@ alias greppy='grep -r --include \*.py'
 
 # git helpers
 source ~/git-completion.bash
-alias gls='git status'
-alias gdif='git diff'
-alias gdifh='git diff --cached'
 
 # no more annoying beeps
 set betll-style none
