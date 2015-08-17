@@ -8,8 +8,8 @@ set number
 " Tabs
 "retab               " Change the existing tab characters to spaces
 "set expandtab       " Insert spaces instead of tab
-set tabstop=8       " Change the number of spaces for tab
-set shiftwidth=8    " Change the number of space characters inserted for indentation
+set tabstop=4       " Change the number of spaces for tab
+set shiftwidth=4    " Change the number of space characters inserted for indentation
 
 " Disable all kinds of bells
 set noerrorbells
@@ -20,6 +20,8 @@ set title titlestring=%F\ %m
 " Remove search highlighting
 set nohlsearch
 
+" Remap Esc key to Caps Lock for easy access
+inoremap <Tab> <Esc>
 
 " ===========================================
 " Color Scheme
