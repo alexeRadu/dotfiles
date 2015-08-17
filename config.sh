@@ -18,14 +18,14 @@ update() {
 	cp bashrc $HOME/.bashrc
 	cp vimrc $HOME/.vimrc
 	cp gitconfig $HOME/.gitconfig
-	cp git-completion.bash $HOME/git-completion.bash
+	cp git-completion.bash $HOME/.git-completion.bash
 }
 
 save() {
 	cp $HOME/.bashrc bashrc
 	cp $HOME/.vimrc vimrc
 	cp $HOME/.gitconfig gitconfig
-	cp $HOME/git-completion.bash git-completion.bash
+	cp $HOME/.git-completion.bash git-completion.bash
 
 	# save them to git
 	git add -u
