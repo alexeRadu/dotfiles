@@ -25,8 +25,17 @@ alias grepc='grep  -r --include \*.c --include \*.h --include \*.cpp'
 alias grepsh='grep -r --include \*.sh'
 alias greppy='grep -r --include \*.py'
 
+# alias for going to home directory
+alias home='cd /home/b47441'
+
+# quickly edit files
+alias chbash='vim $HOME/.bashrc'
+alias chvim='vim $HOME/.vimrc'
+
 # git helpers
-source ~/git-completion.bash
+source ~/.git-completion.bash
 
 # no more annoying beeps
 set betll-style none
+
+
