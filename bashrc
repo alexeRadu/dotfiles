@@ -8,7 +8,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # LS colors
-alias ls='ls --color'
+alias ls='ls --color --group-directories-first'
 alias ll='ls -l'
 alias la='ls -la'
 alias l='clear; ll'
