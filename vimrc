@@ -21,7 +21,7 @@ set title titlestring=%F\ %m
 set nohlsearch
 
 " Remap Esc key to Caps Lock for easy access
-inoremap <Tab> <Esc>
+inoremap jj <Esc>
 
 " ===========================================
 " Color Scheme
