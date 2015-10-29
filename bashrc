@@ -38,4 +38,5 @@ source ~/.git-completion.bash
 # no more annoying beeps
 set betll-style none
 
-
+# use vi style of editing
+set -o vi
