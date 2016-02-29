@@ -18,6 +18,8 @@ export LS_COLORS
 # clear alias
 alias cl='clear'
 
+# alias for bitbake
+alias bb='bitbake'
 
 # grep aliases
 alias grep='grep --color'
@@ -38,3 +40,5 @@ source ~/.git-completion.bash
 # no more annoying beeps
 set betll-style none
 
+# disable something
+stty -ixon
