@@ -17,6 +17,7 @@ update() {
 	# copy files
 	cp bashrc $HOME/.bashrc
 	cp vimrc $HOME/.vimrc
+	cp vim $HOME/.vim -Rf
 	cp gitconfig $HOME/.gitconfig
 	cp git-completion.bash $HOME/.git-completion.bash
 }
@@ -24,6 +25,7 @@ update() {
 save() {
 	cp $HOME/.bashrc bashrc
 	cp $HOME/.vimrc vimrc
+	cp $HOME/.vim vim -Rf
 	cp $HOME/.gitconfig gitconfig
 	cp $HOME/.git-completion.bash git-completion.bash
 

@@ -1,25 +1,12 @@
 " ===========================================
-" Command for easy edits inside vim
+" Commands for easy edits inside vim
 " ===========================================
 
-" edit .vimrc by entering the command :EditVim
-function! EditVim()
-	:vsplit $MYVIMRC
-endfunction
+" edit .vimrc by entering the command :VimRcEdit
+command! VimRcEdit	:vsp $MYVIMRC
 
-if !exists(":EditVim")
-	command EditVim :call EditVim()
-endif
-
-" automatically reload .vimrc when closed
-function! ReloadVimRC()
-	:source $MYVIMRC
-endfunction
-
-if !exists("g:vimrcLoaded")
-	autocmd BufUnload .vimrc :call ReloadVimRC()
-	let	g:vimrcLoaded = 1
-endif
+" reload .vimrc by entering the command :VimRcReload
+command! VimRcReload	:source $MYVIMRC
 
 " ===========================================
 " General Setup
@@ -32,17 +19,11 @@ set number
 set rnu
 
 " Tabs
-set tabstop=4       " Change the number of spaces for tab
-set shiftwidth=4    " Change the number of space characters inserted for indentation
+set tabstop=4
+set shiftwidth=4
 
 " Disable all kinds of bells
 set noerrorbells
-
-" Title of the window
-set title titlestring=%F\ %m
-
-" Remove search highlighting
-"set nohlsearch
 
 " Enable the mouse for all modes
 set mouse=a
@@ -59,8 +40,36 @@ set cursorline
 " Use colorscheme
 colorscheme default-dark
 
-"Ctags
+" Ctags
 set tags=./tags;/
+
+" ===========================================
+" Status line
+" ===========================================
+
+" make status line always visible
+set laststatus=2 
+
+" show the current editing status
+set showmode
+
+" human readable file size
+fu! StatuslineFilesize()
+	let filesize = line2byte(line("$") + 1) - 1
+
+	if $filetype == "netrw" || filesize < 0
+		return ""
+	elseif filesize < 1024
+		return " | " . filesize . " bytes"
+	elseif filesize < 1024*1024
+		return " | " . (filesize / 1024) . " kB"
+	else
+		return " | " . (filesize / (1024*1024)) . " MB"
+	endif
+endf
+
+" format statusline
+set statusline=%t\ \|\ %L\ lines%{StatuslineFilesize()}\ %y%m%=L%-6l\ C%-2c
 
 " ===========================================
 " Splits
