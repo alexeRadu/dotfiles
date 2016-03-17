@@ -111,6 +111,19 @@ inoremap <c-q> <esc>:q!<cr>
 vnoremap <c-q> <esc>:q!<cr>
 
 " =========================================
+" Folding
+" ===========================================
+
+nnoremap z{ vi{zf
+
+function! FoldEnable()
+	set foldmethod=manual
+	set foldcolumn=3
+endfunc
+command! FoldEnable	:call FoldEnable()
+
+
+" =========================================
 " Show highlighting groups for current word
 " ===========================================
 nnoremap <c-s-p> :call <SID>SynStack()<CR>
