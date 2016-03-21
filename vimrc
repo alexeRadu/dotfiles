@@ -2,10 +2,9 @@
 " Commands for easy edits inside vim
 " ===========================================
 
-" edit .vimrc by entering the command :VimRcEdit
-command! VimRcEdit	:vsp $MYVIMRC
-
-" reload .vimrc by entering the command :VimRcReload
+" edit and reload .vimrc 
+command! VimRcEdit		:vsp $MYVIMRC
+command! VimRcOpen  	:edit $MYVIMRC
 command! VimRcReload	:source $MYVIMRC
 
 " ===========================================
@@ -101,14 +100,20 @@ inoremap <c-s> <esc>:w<cr>
 vnoremap <c-s> <esc>:w<cr>
 
 " Save current buffer and exit
-nnoremap <c-x> :x<cr>
-inoremap <c-x> <esc>:x<cr>
-vnoremap <c-x> <esc>:x<cr>
+nnoremap <c-w> :x<cr>
+inoremap <c-w> <esc>:x<cr>
+vnoremap <c-w> <esc>:x<cr>
 
 " Exit without saving
 nnoremap <c-q> :q!<cr>
 inoremap <c-q> <esc>:q!<cr>
 vnoremap <c-q> <esc>:q!<cr>
+
+" Insert a space, tab, line in normal mode
+nnoremap <space> i<space><esc>l
+nnoremap <tab> i<tab><esc>l
+nnoremap <c-o> o<esc>k
+
 
 " =========================================
 " Folding

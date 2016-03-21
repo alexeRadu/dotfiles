@@ -17,7 +17,7 @@ update() {
 	# copy files
 	cp bashrc $HOME/.bashrc
 	cp vimrc $HOME/.vimrc
-	cp vim/* $HOME/.vim -Rf
+	cp vim $HOME/.vim -Rf
 	cp gitconfig $HOME/.gitconfig
 	cp git-completion.bash $HOME/.git-completion.bash
 }
