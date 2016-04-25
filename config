@@ -35,6 +35,13 @@ update() {
 	# git push origin master
 }
 
+# if no argument ring usage
+if [ -z "$1" ];
+then
+	usage
+	exit
+fi
+
 
 while :; do
 	case $1 in
