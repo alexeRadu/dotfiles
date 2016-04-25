@@ -7,7 +7,7 @@ usage() {
 	echo ""
 	echo "There are only two commands:"
 	echo "  pull   Pull configuration data from cloud"
-	echo "  push	Push configuration data to cloud"
+	echo "  update Update the current directory with the files/directories from the system"	
 }
 
 pull() {
@@ -22,7 +22,7 @@ pull() {
 	cp git-completion.bash $HOME/.git-completion.bash
 }
 
-push() {
+update() {
 	cp $HOME/.bashrc bashrc
 	cp $HOME/.vimrc vimrc
 	cp $HOME/.vim vim -TRf
@@ -46,8 +46,8 @@ while :; do
 			pull
 			exit
 			;;
-		push)
-			push
+		update)
+			update
 			exit
 			;;
 		*)
