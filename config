@@ -6,11 +6,11 @@ usage() {
 	echo "  -h  display this help and exit"
 	echo ""
 	echo "There are only two commands:"
-	echo "  update   Copy configuration files to home directory"
-	echo "  save     Copy configuration files from home directory"
+	echo "  pull   Pull configuration data from cloud"
+	echo "  push	Push configuration data to cloud"
 }
 
-update() {
+pull() {
 	# pull from git
 	git pull origin 
 
@@ -22,7 +22,7 @@ update() {
 	cp git-completion.bash $HOME/.git-completion.bash
 }
 
-save() {
+push() {
 	cp $HOME/.bashrc bashrc
 	cp $HOME/.vimrc vimrc
 	cp $HOME/.vim vim -Rf
@@ -42,12 +42,12 @@ while :; do
 			usage	
 			exit
 			;;
-		update)
-			update
+		pull)
+			pull
 			exit
 			;;
-		save)
-			save
+		push)
+			push
 			exit
 			;;
 		*)
