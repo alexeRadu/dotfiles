@@ -30,9 +30,9 @@ push() {
 	cp $HOME/.git-completion.bash git-completion.bash
 
 	# save them to git
-	git add -u
-	git commit -m "snapshot at $(date '+%F %H:%M')"
-	git push origin master
+	# git add -u
+	# git commit -m "snapshot at $(date '+%F %H:%M')"
+	# git push origin master
 }
 
 
