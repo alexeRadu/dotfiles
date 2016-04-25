@@ -28,7 +28,12 @@ alias grepsh='grep -r --include \*.sh'
 alias greppy='grep -r --include \*.py'
 
 # alias for going to home directory
-alias home='cd /home/b47441'
+if [ "$(hostname)" = "enigma.ea.freescale.net" ];
+then
+	alias home='cd /home/b47441'
+else
+	alias home='cd ~'
+fi
 
 # quickly edit files
 alias chbash='vim $HOME/.bashrc'
