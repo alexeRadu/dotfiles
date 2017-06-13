@@ -1,16 +1,16 @@
+[color]
+	status = auto
+	grep = auto
+	diff = auto
 [user]
 	name = Radu Alexe
-	email = raduandrei.alexe@freescale.com
-[color]
-	ui = auto
-[alias]
-	ci = commit
-	st = status
-	logc = log --oneline --no-abbrev-commit --decorate=full
-	co = checkout
-[credential]
-	helper = cache
+	email = radu.alexe@nxp.com
 [core]
 	editor = vim
-[push]
-	default = simple
+[sendmail]
+	from = Radu Alexe <radu.alexe@nxp.com>
+	confirm = always
+	smtpserver = remotesmtp.freescale.net
+	aliasesfile = /home/b47441/.mailrc
+	aliasfiletype = mailrc
+
