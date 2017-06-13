@@ -11,7 +11,7 @@ fi
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -l'
 alias la='ls -la'
-alias l='clear; ll'
+
 LS_COLORS=$LS_COLORS:'no=00:di=1;35:'
 export LS_COLORS
 
@@ -23,9 +23,6 @@ alias bb='bitbake'
 
 # grep aliases
 alias grep='grep --color'
-alias grepc='grep  -r --include \*.c --include \*.h --include \*.cpp'
-alias grepsh='grep -r --include \*.sh'
-alias greppy='grep -r --include \*.py'
 
 # git helpers
 source ~/.git-completion.bash
