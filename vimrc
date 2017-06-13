@@ -1,25 +1,15 @@
-" ===========================================
-" Commands for easy edits inside vim
-" ===========================================
-
-" edit and reload .vimrc 
-command! VimRcEdit		:vsp $MYVIMRC
-command! VimRcOpen  	:edit $MYVIMRC
-command! VimRcReload	:source $MYVIMRC
-
-" ===========================================
-" General Setup
-" ===========================================
-
 " Print line numbers in front of each line
 set number
 
-" Relative numbers
-set rnu
+" Relative numbers (rnu)
+if exists("&rnu")
+	" For version <= 7.0.xxx rnu is not implemented
+	set rnu
+endif
 
 " Tabs
-set tabstop=4
-set shiftwidth=4
+set tabstop=8
+set shiftwidth=8
 
 " Disable all kinds of bells
 set noerrorbells
@@ -29,9 +19,16 @@ set mouse=a
 
 " Search settings
 set incsearch
+set hlsearch
 
-" Turn on the syntax
-syntax on
+" Turn on the syntax highlighting only when the terminal supports colors.
+if &t_Co > 1
+	syntax on
+endif
+
+if exists('+colorcolumn')
+	set colorcolumn=80
+endif
 
 " Highlight current line
 set cursorline
@@ -70,50 +67,9 @@ endf
 " format statusline
 set statusline=%t\ \|\ %L\ lines%{StatuslineFilesize()}\ %y%m%=L%-6l\ C%-2c
 
-" ===========================================
-" Splits
-" ===========================================
-
-" Open split panes to right and bottom
+" Prefer new splits to the right and bottom
 set splitbelow
 set splitright
-
-" Navigation
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
-" Resizing
-nnoremap - <c-w>-
-nnoremap = <c-w>+
-nnoremap _ <c-w><
-nnoremap + <c-w>>
-
-" ===========================================
-" Basic Mappings
-" ===========================================
-
-" Save current buffer
-nnoremap <c-s> :w<cr>
-inoremap <c-s> <esc>:w<cr>
-vnoremap <c-s> <esc>:w<cr>
-
-" Save current buffer and exit
-nnoremap <c-w> :x<cr>
-inoremap <c-w> <esc>:x<cr>
-vnoremap <c-w> <esc>:x<cr>
-
-" Exit without saving
-nnoremap <c-q> :q!<cr>
-inoremap <c-q> <esc>:q!<cr>
-vnoremap <c-q> <esc>:q!<cr>
-
-" Insert a space, tab, line in normal mode
-nnoremap <space> i<space><esc>l
-nnoremap <tab> i<tab><esc>l
-nnoremap <c-o> o<esc>k
-
 
 " =========================================
 " Folding
@@ -122,20 +78,27 @@ nnoremap <c-o> o<esc>k
 nnoremap z{ vi{zf
 
 function! FoldEnable()
-	set foldmethod=manual
+	set foldmethod=syntax
 	set foldcolumn=3
 endfunc
 command! FoldEnable	:call FoldEnable()
 
+" save folds on buffer leave and load when enter
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
-" =========================================
-" Show highlighting groups for current word
-" ===========================================
-nnoremap <c-s-p> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-	if !exists("*synstack")
-		return
-	endif
-	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
+" A way to toggle comments for lines or selected chunks of code
+let s:comment_map = {
+	\	"c":		["/* ",	"*/"],
+	\	"python":	["# ",	""],
+	\	"vim":		["\" ",	""],
+	\}
 
+function! ToggleComment()
+	if has_key(s:comment_map, &filetype)
+		let [s, e] = s:comment_map[&filetype]
+		echo "start " s "end" e
+	else
+		echo "No comment found for filetype...better add one!"
+	end
+endfunction
