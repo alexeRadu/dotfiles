@@ -1,0 +1,2 @@
+* consider removing 'vim/view' and 'vim/.netrwhist' from .gitignore and rather
+  not move them from their location to the 'dotfiles' directory.
