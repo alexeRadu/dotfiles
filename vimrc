@@ -84,8 +84,8 @@ endfunc
 command! FoldEnable	:call FoldEnable()
 
 " save folds on buffer leave and load when enter
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+autocmd BufWinLeave * mkview
+autocmd BufWinEnter * silent loadview
 
 " A way to toggle comments for lines or selected chunks of code
 let s:comment_map = {
