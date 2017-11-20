@@ -15,7 +15,7 @@ pull() {
 	cp bashrc $HOME/.bashrc
 	cp vimrc $HOME/.vimrc
 	cp vim $HOME/.vim -TRf
-	cp gitconfig $HOME/.gitconfig
+	./config-git.sh
 	cp git-completion.bash $HOME/.git-completion.bash
 }
 
