@@ -1,2 +1,3 @@
-* consider removing 'vim/view' and 'vim/.netrwhist' from .gitignore and rather
-  not move them from their location to the 'dotfiles' directory.
+- [git]	 move functions is_work_machine() and is_personal_machine() to general 		a common file that can be shared.
+- [git]  move back to file based configuration but have different files/configs
+	 based on the machine detected
