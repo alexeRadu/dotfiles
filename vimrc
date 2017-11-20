@@ -106,3 +106,9 @@ function! ToggleComment()
 		echo "No comment found for filetype...better add one!"
 	end
 endfunction
+
+" Arduino Specific {{{1
+augroup filetype_arduino
+	autocmd!
+	autocmd FileType arduino nnoremap <buffer> <leader>c :ArduinoVerify<CR>
+augroup END
