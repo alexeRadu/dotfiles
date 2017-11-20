@@ -1,3 +1,8 @@
+" Install packages using pathogen
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
 " Print line numbers in front of each line
 set number
 
