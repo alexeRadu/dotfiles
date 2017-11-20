@@ -1,7 +1,12 @@
+" Packages {{{1
 " Install packages using pathogen
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
+
+" Basic settings {{{1
+" Leader key; not sure yet if it is usefull but I'm willing to give it a try
+let mapleader = ","
 
 " Print line numbers in front of each line
 set number
@@ -44,10 +49,7 @@ colorscheme default-dark
 " Ctags
 set tags=./tags;/
 
-" ===========================================
-" Status line
-" ===========================================
-
+" Status Line {{{1
 " make status line always visible
 set laststatus=2 
 
@@ -76,10 +78,7 @@ set statusline=%t\ \|\ %L\ lines%{StatuslineFilesize()}\ %y%m%=L%-6l\ C%-2c
 set splitbelow
 set splitright
 
-" =========================================
-" Folding
-" ===========================================
-
+" Folding {{{1
 nnoremap z{ vi{zf
 
 function! FoldEnable()
