@@ -28,7 +28,6 @@ USERNAME="Radu Alexe"
 EDITOR="vim"
 
 if [ -n  "$(is_work_machine)" ]; then
-	echo "Really"
 	EMAIL="radu.alexe@nxp.com"
 elif [ -n "$(is_personal_machine)" ]; then
 	EMAIL="alexeradu2007@gmail.com"
