@@ -1,0 +1,84 @@
+#!/bin/sh
+
+STASHDIR="*stash*"
+if [ -n "`busybox`" ]; then
+	UNLINK=rm
+else
+	UNLINK=unlink
+fi
+
+if [ ! -d ${STASHDIR} ]; then
+	mkdir ${STASHDIR}
+else
+	if [ "`ls -A ${STASHDIR}`" ]; then
+		echo "Warning: cleaning non-empty ${STASHDIR} directory!"
+		`rm -Rf ${STASHDIR}/*`
+	fi
+	touch ${STASHDIR}/links
+fi
+
+function log {
+	local module=$1
+	local msg=$2
+
+	printf "%-20s $msg\n" "$module"
+}
+
+function stash_link {
+	local link=`basename $1`
+	local target=`readlink $1`
+
+	echo "$link,$target" >> ${STASHDIR}/links
+	log `basename $link` "Stashing link $link -> $target"
+}
+
+function stash_file {
+	local fname=`basename $1`
+	local dst="`pwd`/${STASHDIR}/$fname"
+	local src="$HOME/$fname"
+
+	`mv $src $dst`
+	log $fname "Stashing file"
+}
+
+function stash_dir {
+	local fname=`basename $1`
+	local dst="`pwd`/${STASHDIR}/$fname"
+	local src="$HOME/$fname"
+
+	`cp -Rf $src $dst`
+	`rm -Rf $src`
+	log $fname "Stashing directory"
+}
+
+function process {
+	target=$1
+	src="$HOME/.${target}"
+	dst="`pwd`/${target}"
+
+	if [ -L $src ]; then
+		if [ `readlink $src` != $dst ]; then
+			stash_link $src
+
+			`${UNLINK} $src`
+		else
+			log "$target" "Nothing to do"
+			return
+		fi
+	elif [ -f $src ]; then
+		stash_file $src
+	elif [ -d $src ]; then
+		stash_dir $src
+	elif [ -e $src ]; then
+		log $target "Target is neither a link, a file or a directory. Skipping"
+		return
+	fi
+
+	`ln -s $dst $src`
+	log "$target" "Linked .$target -> dotfiles/$target"
+}
+
+process vimrc
+process vim
+process bashrc
+process git-completion.bash
