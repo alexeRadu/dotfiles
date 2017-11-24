@@ -8,7 +8,11 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # LS colors
-alias ls='ls --color=auto --group-directories-first'
+if [ -n "`busybox 2> /dev/null`" ]; then
+	alias ls='ls --color=auto'
+else
+	alias ls='ls --color=auto --group-directories-first'
+fi
 alias ll='ls -l'
 alias la='ls -la'
 
