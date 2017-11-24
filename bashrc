@@ -45,3 +45,9 @@ if [ "$LOGNAME" == "b47441" ]; then
 	# other aliases
 	alias myboards='lars list boards | grep "Alexe Radu Andrei-B47441"'
 fi
+
+function get_git_branch {
+	git branch 2> /dev/null | sed -e 's/* \(.*\)/ (\1)/'
+}
+
+export PS1='\u@\[\033[36m\]\h\[\033[32m\]`get_git_branch`\[\033[33m\] \w\[\033[00m\]\n\\$ '
