@@ -1,7 +1,7 @@
 #!/bin/sh
 
 STASHDIR="*stash*"
-if [ -n "`busybox`" ]; then
+if [ -n "`busybox 2> /dev/null`" ]; then
 	UNLINK=rm
 else
 	UNLINK=unlink
