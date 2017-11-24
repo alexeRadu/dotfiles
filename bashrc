@@ -12,6 +12,7 @@ if [ -n "`busybox 2> /dev/null`" ]; then
 	alias ls='ls --color=auto'
 else
 	alias ls='ls --color=auto --group-directories-first'
+	alias grep='grep --color'
 fi
 alias ll='ls -l'
 alias la='ls -la'
@@ -24,9 +25,6 @@ alias cl='clear'
 
 # alias for bitbake
 alias bb='bitbake'
-
-# grep aliases
-alias grep='grep --color'
 
 # git helpers
 source ~/.git-completion.bash
