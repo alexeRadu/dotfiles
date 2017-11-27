@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 STASHDIR="*stash*"
 if [ -n "`busybox 2> /dev/null`" ]; then
