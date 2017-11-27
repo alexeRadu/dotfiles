@@ -108,6 +108,10 @@ function! ToggleComment()
 endfunction
 
 " Arduino Specific {{{1
+let g:arduino_dir = '/home/radu/arduino'
+let g:arduino_cmd = '/home/radu/arduino/arduino'
+let g:arduino_serial_cmd = 'picocom /dev/ttyACM0 -b 9600 -l'
+
 augroup filetype_arduino
 	autocmd!
 	autocmd FileType arduino nnoremap <buffer> <leader>c :ArduinoVerify<CR>

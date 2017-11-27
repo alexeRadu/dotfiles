@@ -7,8 +7,10 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+tty=`ps h -o cmd -p $$`
+
 # LS colors
-if [ -n "`busybox 2> /dev/null`" ]; then
+if [ "$tty" = "busybox" ]; then
 	alias ls='ls --color=auto'
 else
 	alias ls='ls --color=auto --group-directories-first'
