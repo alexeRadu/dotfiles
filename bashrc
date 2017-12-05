@@ -8,7 +8,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 tty=`ps -p $$ | tail -n +2 | grep -oE '[^ \/]+$'`
-platform=`uname -a | grep -oE '[^ ]+$'
+platform=`uname -a | grep -oE '[^ ]+$'`
 
 # LS colors
 if [ "$tty" = "busybox" ]; then
