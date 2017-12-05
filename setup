@@ -83,3 +83,10 @@ process vim
 process bashrc
 process git-completion.bash
 process tmux.conf
+
+# can be Cygwin or GNU/Linux
+platform=`uname -a | grep -oE '[^ ]+$'`
+
+if [ `${platform}` = "Cygwin" ]; then
+	process minttyrc
+fi
