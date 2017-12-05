@@ -8,6 +8,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 tty=`ps -p $$ | tail -n +2 | grep -oE '[^ \/]+$'`
+platform=`uname -a | grep -oE '[^ ]+$'
 
 # LS colors
 if [ "$tty" = "busybox" ]; then
@@ -34,6 +35,10 @@ source ~/.git-completion.bash
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export TERM='xterm-256color'
+
+if [ "${platform}" = "Cygwin" ]; then
+	export DISPLAY=':0.0'
+fi
 
 if [ "$LOGNAME" == "b47441" ]; then
 	alias home='cd /home/b47441'
