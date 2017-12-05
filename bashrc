@@ -33,6 +33,7 @@ source ~/.git-completion.bash
 
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
+export TERM='xterm-256color'
 
 if [ "$LOGNAME" == "b47441" ]; then
 	alias home='cd /home/b47441'
