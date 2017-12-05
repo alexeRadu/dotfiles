@@ -7,7 +7,7 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-tty=`ps h -o cmd -p $$`
+tty=`ps -p $$ | tail -n +2 | grep -oE '[^ \/]+$'`
 
 # LS colors
 if [ "$tty" = "busybox" ]; then
