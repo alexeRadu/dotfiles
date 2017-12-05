@@ -82,3 +82,4 @@ process vimrc
 process vim
 process bashrc
 process git-completion.bash
+process tmux.conf
