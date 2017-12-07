@@ -49,6 +49,33 @@ colorscheme default-dark
 " Ctags
 set tags=./tags;/
 
+" {{{1 Whitespaces
+
+" Highlight extra whitespaces and remove them.
+" references:
+"   http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+"   http://vim.wikia.com/wiki/Remove_unwanted_spaces
+augroup whitespaces
+	autocmd!
+	" Detect any space withing a tab sequence and any trailing whitespace on
+	" buffer entrance and insert leave.
+	autocmd BufWinEnter * match ExtraWhitespace /\t*\zs \+\ze\t\+\|\s\+$/
+	autocmd InsertLeave * match ExtraWhitespace /\t*\zs \+\ze\t\+\|\s\+$/
+
+	" When in insert mode don't highlight the current trailing whitespace.
+	autocmd InsertEnter * match ExtraWhitespace  /\s\+\%#\@<!$/
+
+	" When writing buffer clear all extra whitespaces
+	autocmd BufWritePre * %s/\t*\zs \+\ze\t\+//e
+	autocmd BufWritePre * %s/\s\+$//e
+
+	" remove matches when leaving buffer (due to some glitch)
+	if version >= 702
+		autocmd BufWinLeave * call clearmatches()
+	endif
+augroup END
+" }}}
+
 " Status Line {{{1
 " make status line always visible
 set laststatus=2 

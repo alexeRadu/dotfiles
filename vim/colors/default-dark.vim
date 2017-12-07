@@ -76,3 +76,7 @@ hi StatusLineNC		ctermfg=245	ctermbg=237	cterm=none
 hi ColorColumn		ctermbg=237
 hi Folded		ctermfg=244	ctermbg=237
 " }}}
+
+" {{{ Miscellaneaous
+hi ExtraWhitespace	ctermbg=1
+" }}}
