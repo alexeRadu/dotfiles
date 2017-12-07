@@ -66,8 +66,8 @@ augroup whitespaces
 	autocmd InsertEnter * match ExtraWhitespace  /\s\+\%#\@<!$/
 
 	" When writing buffer clear all extra whitespaces
-	autocmd BufWritePre * %s/\t*\zs \+\ze\t\+//e
-	autocmd BufWritePre * %s/\s\+$//e
+	autocmd BufWritePre * %s/\t*\zs \+\ze\t\+//ge
+	autocmd BufWritePre * %s/\s\+$//ge
 
 	" remove matches when leaving buffer (due to some glitch)
 	if version >= 702
