@@ -10,11 +10,11 @@ set t_Co=256
 " run ':help group-name' to get list of base colors
 hi Normal		ctermfg=252	ctermbg=235	cterm=none
 
-hi Comment		ctermfg=240	ctermbg=none 	cterm=none
+hi Comment		ctermfg=240	ctermbg=none	cterm=none
 
 hi Constant		ctermfg=209	ctermbg=none	cterm=none
 hi String		ctermfg=36	ctermbg=none	cterm=none
-hi Character	 	ctermfg=36	ctermbg=none	cterm=none
+hi Character		ctermfg=36	ctermbg=none	cterm=none
 hi Number		ctermfg=209	ctermbg=none	cterm=none
 hi Boolean		ctermfg=209	ctermbg=none	cterm=none
 hi Float		ctermfg=209	ctermbg=none	cterm=none
@@ -61,12 +61,12 @@ hi Todo			ctermfg=247	ctermbg=none	cterm=bold
 " {{{ Display
 " line numbers and cursors
 hi LineNr		ctermfg=244	ctermbg=none	cterm=none
-hi CursorLineNr		ctermfg=250	ctermbg=237 	cterm=none
+hi CursorLineNr		ctermfg=250	ctermbg=237	cterm=none
 hi CursorLine		ctermfg=none	ctermbg=237	cterm=none
 
 " search and visual mode
-hi Search 		ctermfg=none  	ctermbg=none  	cterm=reverse
-hi Visual		ctermfg=none	ctermbg=237 	cterm=none
+hi Search		ctermfg=none	ctermbg=none	cterm=reverse
+hi Visual		ctermfg=none	ctermbg=237	cterm=none
 
 " statusline
 hi StatusLine		ctermfg=White	ctermbg=237	cterm=none

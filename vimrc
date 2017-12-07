@@ -78,7 +78,7 @@ augroup END
 
 " Status Line {{{1
 " make status line always visible
-set laststatus=2 
+set laststatus=2
 
 " show the current editing status
 set showmode
