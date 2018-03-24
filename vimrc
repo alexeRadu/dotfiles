@@ -17,10 +17,6 @@ if exists("&rnu")
 	set rnu
 endif
 
-" Tabs
-set tabstop=8
-set shiftwidth=8
-
 " Disable all kinds of bells
 set noerrorbells
 
@@ -49,6 +45,16 @@ colorscheme default-dark
 " Ctags
 set tags=./tags;/
 
+" {{{1 Tabs
+" General settings
+set tabstop=8
+set shiftwidth=8
+
+augroup filetype_tabs
+	autocmd!
+	autocmd FileType html setlocal tabstop=4
+augroup END
+" }}}
 " {{{1 Whitespaces
 
 " Highlight extra whitespaces and remove them.
@@ -75,7 +81,6 @@ augroup whitespaces
 	endif
 augroup END
 " }}}
-
 " Status Line {{{1
 " make status line always visible
 set laststatus=2
@@ -106,34 +111,15 @@ set splitbelow
 set splitright
 
 " Folding {{{1
-nnoremap z{ vi{zf
-
-function! FoldEnable()
-	set foldmethod=syntax
-	set foldcolumn=3
-endfunc
-command! FoldEnable	:call FoldEnable()
-
 " save folds on buffer leave and load when enter
 autocmd BufWinLeave * mkview
 autocmd BufWinEnter * silent loadview
 
-" A way to toggle comments for lines or selected chunks of code
-let s:comment_map = {
-	\	"c":		["/* ",	"*/"],
-	\	"python":	["# ",	""],
-	\	"vim":		["\" ",	""],
-	\}
-
-function! ToggleComment()
-	if has_key(s:comment_map, &filetype)
-		let [s, e] = s:comment_map[&filetype]
-		echo "start " s "end" e
-	else
-		echo "No comment found for filetype...better add one!"
-	end
-endfunction
-
+" custom folding
+augroup custom_folding
+	autocmd!
+	autocmd FileType vimrc setlocal foldmethod=marker
+augroup END
 " Arduino Specific {{{1
 let g:arduino_dir = '/home/radu/arduino'
 let g:arduino_cmd = '/home/radu/arduino/arduino'
