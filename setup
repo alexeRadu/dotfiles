@@ -83,6 +83,7 @@ process vim
 process bashrc
 process git-completion.bash
 process tmux.conf
+process emacs.d
 
 # can be Cygwin or GNU/Linux
 platform=`uname -a | grep -oE '[^ ]+$'`
