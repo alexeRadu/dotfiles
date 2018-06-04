@@ -1,15 +1,25 @@
+;; INTERFACE
+;; Don't show the menu-bar
+(menu-bar-mode -1)
 
-;; Packages
-(package-initialize)
+;; Don't show the scroll-bar
+(toggle-scroll-bar -1)
 
+;; Don't show the tool-bar
+(tool-bar-mode -1)
+
+;; Disable startup screen
 (setq inhibit-startup-message t)
 
-(require 'package)
-(setq package-enable-at-startup nil)
+;; Theming
+(load-theme 'wombat)
+
+
+;; PACKAGES
+;; Add other repositories
+(package-initialize)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/"))
-
-(package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -22,26 +32,12 @@
   :ensure t
   :config (which-key-mode))
 
-;; Interface
-;; Don't show the menu-bar
-(menu-bar-mode -1)
-
-;; Don't show the scroll-bar
-(toggle-scroll-bar -1)
-
-;; Don't show the tool-bar
-(tool-bar-mode -1)
-
-;; Theming
-(load-theme 'wombat)
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (which-key try use-package))))
+ '(package-selected-packages (quote (use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
