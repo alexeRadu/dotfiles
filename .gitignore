@@ -11,6 +11,8 @@ vim/view
 # Some of emacs's configuration files
 emacs.d/elpa/*
 emacs.d/auto-save-list
+emacs.d/ido.last
+emacs.d/recentf
 
 # emacs temp files
 *~
