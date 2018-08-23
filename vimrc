@@ -112,8 +112,8 @@ set splitright
 
 " Folding {{{1
 " save folds on buffer leave and load when enter
-autocmd BufWinLeave * mkview
-autocmd BufWinEnter * silent loadview
+autocmd BufWinLeave *.c  mkview
+autocmd BufWinEnter *.c silent loadview
 
 " custom folding
 augroup custom_folding
