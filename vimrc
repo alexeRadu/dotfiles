@@ -118,7 +118,7 @@ autocmd BufWinEnter *.c silent loadview
 " custom folding
 augroup custom_folding
 	autocmd!
-	autocmd FileType vimrc setlocal foldmethod=marker
+	autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " Arduino Specific {{{1
 let g:arduino_dir = '/home/radu/arduino'
