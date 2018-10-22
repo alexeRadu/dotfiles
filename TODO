@@ -1,4 +1,4 @@
-- [git]	 move functions is_work_machine() and is_personal_machine() to general 		a common file that can be shared.
+- [git]	 move functions is_work_machine() and is_personal_machine() to general
+	 a common file that can be shared.
 - [git]  move back to file based configuration but have different files/configs
 	 based on the machine detected
-- [vim]  check syntax/c.vim file
