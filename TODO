@@ -1,4 +1,7 @@
-- [git]	 move functions is_work_machine() and is_personal_machine() to general
-	 a common file that can be shared.
-- [git]  move back to file based configuration but have different files/configs
-	 based on the machine detected
+* [ ] [git]	move functions is_work_machine() and is_personal_machine() to general
+	 	a common file that can be shared.
+* [ ] [git]  	move back to file based configuration but have different files/configs
+	 	based on the machine detected
+* [ ] [vim]  	folds for python (SimpylFold)
+* [ ] [git]	update completion for git diff/add/checkout to use unstaged files
+* [ ] [sublime] save sublime settings to dotfiles
