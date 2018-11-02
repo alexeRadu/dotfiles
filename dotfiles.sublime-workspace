@@ -1,0 +1,717 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"kS",
+				"kStatus_Fail"
+			],
+			[
+				"ESP_LO",
+				"ESP_LOGI"
+			],
+			[
+				"wifi_",
+				"wifi_cmd"
+			],
+			[
+				"pass",
+				"passwd_len"
+			],
+			[
+				"ESP_WIFI",
+				"ESP_WIFI_CMD_TYPE_WIFI_ON"
+			],
+			[
+				"ESP_WIFI_CMD_",
+				"ESP_WIFI_CMD_CONNECT_AP"
+			],
+			[
+				"SE",
+				"SEXPR_TYPE_LIST"
+			],
+			[
+				"SEXPR",
+				"SEXPR_TYPE_NUMBER"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "tmux.conf",
+			"settings":
+			{
+				"buffer_size": 1012,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "TODO",
+			"settings":
+			{
+				"buffer_size": 409,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "dotfiles.sublime-workspace",
+			"settings":
+			{
+				"buffer_size": 18471,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 173.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"setings",
+				"Preferences: Settings"
+			],
+			[
+				"toggle minima",
+				"View: Toggle Minimap"
+			],
+			[
+				"settings",
+				"Preferences: Settings"
+			],
+			[
+				"ctags",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"user settings",
+				"Preferences: Terminal Settings – User"
+			],
+			[
+				"syntax: shell",
+				"Set Syntax: Bourne Again Shell (bash)"
+			],
+			[
+				"ke",
+				"Preferences: Terminal Key Bindings – User"
+			],
+			[
+				"git pull",
+				"Git: Pull"
+			],
+			[
+				"git",
+				"Git: Status"
+			],
+			[
+				"keybindings",
+				"Preferences: Key Bindings"
+			],
+			[
+				"terminal",
+				"Terminal: Open in project folder"
+			],
+			[
+				"rebuild",
+				"CTags: Rebuild Tags"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			]
+		],
+		"width": 565.0
+	},
+	"console":
+	{
+		"height": 227.0,
+		"history":
+		[
+			"print(\"Olaaa\")",
+			"example-command",
+			"win.panels()",
+			"sublime.windows()[1].run_command(\"show_panel\", \"console\")",
+			"sublime.windows()[1].run_command(\"show_panel\", \"output.Radu\")",
+			"sublime.windows()",
+			"win1.project_data()",
+			"win1.project_file_name()",
+			"win1",
+			"win1 = sublime.active_window()",
+			"sublime.active_window().folders()",
+			"sublime.active_window()"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/cygwin64/home/nxa06732/dotfiles"
+	],
+	"file_history":
+	[
+		"/C/cygwin64/home/nxa06732/dotfiles/emacs.d/config.el",
+		"/C/cygwin64/home/nxa06732/dotfiles/minttyrc",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/aws_wifi/common.h",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/main/simple_wifi.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/aws_wifi/aws_wifi.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_wifi_internal.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/driver/include/driver/sdio_slave.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/soc/esp32/include/soc/host_reg.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/driver/sdio_slave.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_wifi.h",
+		"/C/Users/nxa06732/Desktop/iodev.c",
+		"/C/Users/nxa06732/Desktop/iodev.h",
+		"/C/msys32/home/nxa06732/esp-idf/examples/peripherals/sdio/host/main/app_main.c",
+		"/C/msys32/home/nxa06732/esp-idf/examples/wifi/getting_started/softAP/main/softap_example_main.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/lwip/lwip/src/core/ipv4/ip4.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/log/include/esp_log.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/log/log.c",
+		"/C/msys32/home/nxa06732/esp-idf/examples/peripherals/sdio/host/components/esp_slave/esp_slave.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_err.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/rom/ets_sys.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_wifi_types.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/panic.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/aws_wifi/aws_wifi.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/sdmmc/test/test_sdio.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/main/common.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/freertos/include/freertos/portmacro.h",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/aws_wifi/aws_wifi_config.h",
+		"/C/msys32/home/nxa06732/esp-idf/examples/wifi/getting_started/station/main/station_example_main.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/wifi_init.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/event_default_handlers.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_event.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/tcpip_adapter/include/tcpip_adapter.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/tcpip_adapter/tcpip_adapter_lwip.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/event_loop.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/lwip/port/esp32/netif/wlanif.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_interface.h",
+		"/C/msys32/home/nxa06732/esp-idf/examples/protocols/asio/chat_client/components/wifi_asio.cpp",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/aws_wifi/component.mk",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/aws_wifi/tcpip_adapter.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/wlanif_sdio/wlanif_stub.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/main/component.mk",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_event_loop.h",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/main/Kconfig.projbuild",
+		"/C/msys32/home/nxa06732/esp-idf/components/lwip/lwip/src/core/ipv4/etharp.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/lwip/lwip/src/netif/ethernet.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/lwip/lwip/src/include/lwip/etharp.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/lwip/lwip/src/api/tcpip.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/lwip/lwip/src/include/lwip/tcpip.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/lwip/lwip/src/core/netif.c",
+		"/C/msys32/home/nxa06732/esp-idf/examples/system/ota/simple_ota_example/main/simple_ota_example.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp_https_ota/src/esp_https_ota.c",
+		"/C/msys32/home/nxa06732/esp-idf/examples/wifi/espnow/main/espnow_example_main.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_now.h",
+		"/C/msys32/home/nxa06732/esp-idf/examples/wifi/wpa2_enterprise/main/wpa2_enterprise_main.c",
+		"/C/msys32/home/nxa06732/esp-idf/examples/wifi/wps/main/wps.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/ethernet/emac_main.c",
+		"/C/msys32/home/nxa06732/esp-idf/components/esp32/include/esp_task.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/bootloader_support/include/esp_image_format.h",
+		"/C/msys32/home/nxa06732/esp-idf/components/libsodium/libsodium/src/libsodium/crypto_generichash/blake2b/ref/blake2.h",
+		"/C/msys32/home/nxa06732/esp-idf/examples/peripherals/sdio/host/components/esp_slave/include/esp_slave.h",
+		"/C/msys32/home/nxa06732/esp-idf/tags",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/.git/info/exclude",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/esp-idf-master.sublime-project",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/examples/wifi/simple_wifi/main/simple_wifi.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/tcpip_adapter/include/tcpip_adapter.h",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/examples/wifi/simple_wifi/components/aws_wifi/tcpip_adapter.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/esp32/event_default_handlers.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/esp-idf-master/components/tcpip_adapter/tcpip_adapter_lwip.c",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/evkbimxrt1050_lwip_udpecho_freertos/.project",
+		"/C/msys32/home/nxa06732/imxrt_esp32_wifi/evkbimxrt1050_lwip_udpecho_freertos/.cproject",
+		"/C/Users/nxa06732/Documents/MCUXpressoIDE_10.2.1_795/workspace/evkbimxrt1050_usdcard_interrupt/.project",
+		"/C/Users/nxa06732/Documents/MCUXpressoIDE_10.2.1_795/workspace/evkbimxrt1050_usdcard_interrupt/.cproject",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/middleware/sdmmc/port/sdhc/freertos/fsl_sdmmc_host.c",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/platform/drivers/sdif/fsl_sdif.h",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/platform/drivers/common/fsl_common.h",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/middleware/sdmmc/inc/fsl_sdmmc_host.h",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/middleware/sdmmc/port/sdif/interrupt/fsl_sdmmc_host.c",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/middleware/sdmmc/src/fsl_sdio.c",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/boards/src/driver_examples/sdio/sdio.c",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/middleware/sdmmc/port/sdif/freertos/fsl_sdmmc_event.c",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/platform/drivers/sdif/fsl_sdif.c",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/platform/drivers/sdif/doxygen/sdif.dox",
+		"/C/Users/nxa06732/workspace/mcu-sdk-2.0/boards/lpc54018iotmodule/board.h",
+		"/C/Users/nxa06732/VeriWave/WaveDynamix/profiles/unu_ac_mcs7_100.pl3",
+		"/C/Users/nxa06732/VeriWave/WaveDynamix/profiles/unu_ac_mcs7_100.pl2",
+		"/C/Users/nxa06732/VeriWave/WaveDynamix/profiles/unu_ac_mcs7.pcl",
+		"/C/Users/nxa06732/VeriWave/WaveDynamix/profiles/unu_52.wdc",
+		"/C/Users/nxa06732/Documents/My Received Files/unu_ac_mcs7_100.pl2",
+		"/C/Users/nxa06732/Desktop/Harta Muntii Bucegi.kml",
+		"/C/Users/nxa06732/Desktop/1. Sinaia (620 m) - Hotel Alpin (cota 1400 m) - Curmatura Vf cu Dor (1938 m) -  Valea Izvorul Dorului - Muntele Nucetul -Cabana Cheile Zanoagei..gpx",
+		"/C/Users/nxa06732/Desktop/1. Sinaia (620 m) - Hotel Alpin (cota 1400 m) - Curmatura Vf cu Dor (1938 m) -  Valea Izvorul Dorului - Muntele Nucetul -Cabana Cheile Zanoagei..kml",
+		"/C/Users/nxa06732/Desktop/setup",
+		"/C/Users/nxa06732/Desktop/plaintext",
+		"/C/Users/nxa06732/Desktop/test.txt",
+		"/Z/sdk-devel/sources/fslwifi/fslwifi.sublime-project",
+		"/Z/sdk-devel/sources/fslwifi/description",
+		"/Z/sdk-devel/sources/fslwifi/src/trans.c",
+		"/Z/sdk-devel/sources/fslwifi/src/fsl_wifi_hw.h",
+		"/Z/sdk-devel/sources/fslwifi/src/mac80211.c",
+		"/C/Program Files/Sublime Text 3/Packages/Default.sublime-package",
+		"/C/Users/nxa06732/Desktop/test.sh",
+		"/C/Users/nxa06732/AppData/Roaming/Sublime Text 3/Packages/User/Terminal.sublime-settings",
+		"/Z/sdk-devel/sources/fslwifi/src/build.sh",
+		"/Z/sdk-devel/sources/fslwifi/src/Makefile",
+		"/Z/sdk-devel/sources/fslwifi/src/drv.c",
+		"/Z/sdk-devel/sources/fslwifi/src/fsl_wifi_vq.c",
+		"/Z/sdk-devel/sources/fslwifi/src/fsl_wifi_vq.h",
+		"/C/Users/nxa06732/Desktop/ap",
+		"/C/Users/nxa06732/Desktop/5g_cmd.txt",
+		"/C/Users/nxa06732/Desktop/sta",
+		"/C/Users/nxa06732/Desktop/test.c",
+		"/C/Users/nxa06732/Desktop/wi5gtxparam.m",
+		"/Z/sdk-devel/sources/fslwifi/src/README.txt",
+		"/C/Users/nxa06732/workspace/aiopsl/pcapgen.py",
+		"/C/Program Files/Sublime Text 3/sublime.py",
+		"/C/Users/nxa06732/AppData/Roaming/Sublime Text 3/Packages/User/PluginTutorial.py",
+		"/C/Users/nxa06732/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Program Files/Sublime Text 3/sublime_plugin.py",
+		"/C/Users/nxa06732/Desktop/ccmp.py",
+		"/C/Users/nxa06732/Desktop/AES.py",
+		"/C/Users/nxa06732/Desktop/lisp.c",
+		"/C/Users/nxa06732/Desktop/test.hexdump",
+		"/C/Users/nxa06732/workspace/fslwifi/rootfs/home/root/init_wifi.sh",
+		"/C/Users/nxa06732/workspace/aiopsl/build/generic/rev1/mac_wifi/UA-rel/makefile.local",
+		"/C/Users/nxa06732/workspace/aiopsl/build/generic/rev1/mac_wifi/UA-rel/makefile",
+		"/C/Users/nxa06732/workspace/aiopsl/build/generic/rev1/mac_wifi/UA-rel/objects.mk",
+		"/C/Users/nxa06732/workspace/aiopsl/build/generic/rev1/mac_wifi/UA-rel/sources.mk",
+		"/C/Users/nxa06732/workspace/aiopsl/src/drivers/sec/01_01/desc.h"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"ret = sdio_slave_send_get_finished(NULL, portMAX_DELAY);",
+			"ret = sdio_slave_send_queue(buffer_send, IO_MSG_HEADER_LEN, NULL, portMAX_DELAY);",
+			"SDIO_SLAVE_HOSTINT_SEND_NEW_PACKET",
+			"ESP_IF_WIFI_STA",
+			"buffer_send",
+			"data_out",
+			"wifi_cmd->",
+			"buffer_send",
+			"ESP_LOG_ERROR",
+			"ap_",
+			"ESP_LOG_ERROR",
+			"s_log_print_func",
+			"send_pkt",
+			"#define portUSING_MPU_WRAPPERS",
+			"portUSING_MPU_WRAPPERS",
+			"esp_ip",
+			"tcpip_adapter_sta_input",
+			"wlanif_input",
+			"cb",
+			"rx",
+			"esp_wifi_internal_tx",
+			"tx_sent_buffers",
+			"esp_wifi_internal_tx",
+			"con",
+			"connect",
+			"_rx",
+			"rx_",
+			"tx",
+			"esp_wifi_stop",
+			"esp_event_loop_set_cb",
+			"esp_event_loop",
+			"WIFI_STORAGE_RAM",
+			"etharp_output",
+			"tcpip_input",
+			"TCPIP_ADAPTER_IF_MAX",
+			"tcpip_adapter_init",
+			"ESP_IF_WIFI_STA",
+			"esp_netif_init_fn",
+			"example_espnow_send_cb",
+			"esp_wifi_start",
+			"event_handler",
+			"esp_event_send",
+			"SDIO_SLAVE_QUEUE_SIZE",
+			"system_event_ap_start_handle_default",
+			"esp_event_set_default_wifi_handlers",
+			"esp_event_set_default_eth_handlers",
+			"esp_event_send",
+			"wifi_cmd.",
+			"_esp_wifi_cmd",
+			"portUSING_MPU_",
+			"pack(1)",
+			"packed",
+			"wret",
+			"freertos.c",
+			"SDIF_BLKSIZ_BLOCK_SIZE",
+			"BLKSIZ",
+			"BLK",
+			"typedef",
+			"SDIF_Type",
+			"SDIF",
+			"_Type",
+			"Type",
+			"SDIF_Type",
+			"BOARD_InitHardware",
+			"SDIF_Type",
+			"mcu-sdk-2.0",
+			"1050",
+			"fsl_sdif.h",
+			"3c 00 00 60 37 3a 85 22 00 60 37 3a 85 e7 00 60 37 3a 85 e7 00 00 00 00 aa aa 03 00 00 00 08 00 45 00 00 80 4b fd 40 00 40 11 da 6d 0a 00 00 01 0a 00 00 02 e3 2d 30 39 00 6c d",
+			"3c 00 00 60 37 3a 85 22 00 60 37 3a 85 e7 00 60 37 3a 85 e7",
+			"3c 00 00 60 37 3a 85 22 00 60 37 3a 85 e7 00 60 37 3a 85 e7 00 00 00 00 aa aa 03 00 00 00 08 00 45 00 00 80 4b fd 40 00 40 11 da 6d 0a 00 00 01 0a 00 00 02 e3 2d 30 39 00 6c d7 ac 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+			"00 6c",
+			"00 6c d7 ac",
+			" 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+			"00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+			"00 6c d7 ac 00 00 00 00 00 00 00 00 00 00 00 00",
+			"40 11 da 6d 0a 00 00 01 0a 00 00 02 e3 2d 30 39",
+			"aa aa 03 00 00 00 08 00 45 00 00 80 4b fd 40 00",
+			"9f aa",
+			"aa aa 03 00",
+			" 01 0a 00 0",
+			"1a dc 18",
+			"c7 0a d7 ",
+			"72 84",
+			"72 84 7a",
+			"9f aa",
+			"5e 91",
+			"e5 af 17 3e ff 49 29 9b e9 cb 05 7f 01 9f 75 8b",
+			"e1 d7",
+			"5e 91",
+			"98 da 0a 35 e4 fd b4",
+			"98 da 0a",
+			"31 5d",
+			"41 52 0a 8d a3 13 c2 48 4c 0b c2",
+			"08 42 3c 00 ff ff ff ff ff ff 00 60 37 3a 85 2f 00 60 37 3a 85 2f 50 03 be 9a 00 20 78 56 34 12",
+			"08 42 3c 00 ff ff ff ff ff ff 00 60 37 3a 85 2f 00 60 37 3a 85 2f 50 03 be 9a 00 20 78 56 34 12 47 e6 6c e2 97 ed e2 8d 2d 8b 97 2c 9d 9c a6 79 97 98 7f ca 3d 89 4d 7f d7 63 9c d7 ce 6d 9b f1 df 41 52 0a 8d a3 13 c2 48 4c 0b c2",
+			"08 42 3c 00 ff ff ff ff ff ff 00 60 37 3a 85 2f"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "tmux.conf",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1012,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "TODO",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 409,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								409,
+								409
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "dotfiles.sublime-workspace",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18471,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								60,
+								60
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/zzz A File Icon zzz/aliases/JSON (Sublime).sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 405.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 304.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "dotfiles.sublime-project",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"portmacro.h",
+				"esp-idf\\components\\freertos\\include\\freertos\\portmacro.h"
+			],
+			[
+				"adapt",
+				"esp-idf\\components\\tcpip_adapter\\tcpip_adapter_lwip.c"
+			],
+			[
+				"wimple",
+				"examples\\wifi\\simple_wifi\\main\\simple_wifi.c"
+			],
+			[
+				"tcpip_ada",
+				"examples\\wifi\\simple_wifi\\components\\aws_wifi\\tcpip_adapter.c"
+			],
+			[
+				"fsl_sdmmc_host.c",
+				"middleware\\sdmmc\\port\\sdif\\interrupt\\fsl_sdmmc_host.c"
+			],
+			[
+				"fsl_mmc_host.c",
+				"middleware\\sdmmc\\port\\sdhc\\freertos\\fsl_sdmmc_host.c"
+			],
+			[
+				"fsl_common.h",
+				"platform\\drivers\\common\\fsl_common.h"
+			],
+			[
+				"fsl_sdmmc",
+				"middleware\\sdmmc\\port\\sdif\\freertos\\fsl_sdmmc_event.c"
+			],
+			[
+				"sdio.c",
+				"boards\\src\\driver_examples\\sdio\\sdio.c"
+			],
+			[
+				"sublim",
+				"fslwifi.sublime-project"
+			],
+			[
+				"vq.",
+				"src\\fsl_wifi_vq.h"
+			],
+			[
+				"vq",
+				"src\\fsl_wifi_vq.c"
+			],
+			[
+				"rx_pro",
+				"apps\\mac_wifi\\rx_process.c"
+			],
+			[
+				"tx_process",
+				"apps\\mac_wifi\\tx_process.c"
+			],
+			[
+				"tx_sta",
+				"apps\\mac_wifi\\tx_staging_area.c"
+			],
+			[
+				"tx_process.c",
+				"apps\\mac_wifi\\tx_process.c"
+			],
+			[
+				".gi",
+				".gitignore"
+			],
+			[
+				"tx_stagin",
+				"apps\\mac_wifi\\tx_staging_area.c"
+			],
+			[
+				"rx_process",
+				"apps\\mac_wifi\\rx_process.c"
+			],
+			[
+				"config",
+				"apps\\CEU_test\\config.c"
+			],
+			[
+				"",
+				"apps\\mac_wifi\\apps.c"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 490.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 722.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 282.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
