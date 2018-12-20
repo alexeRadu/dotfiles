@@ -84,6 +84,7 @@ process bashrc
 process git-completion.bash
 process tmux.conf
 process emacs.d
+process xinitrc
 
 # can be Cygwin or GNU/Linux
 platform=`uname -a | grep -oE '[^ ]+$'`
