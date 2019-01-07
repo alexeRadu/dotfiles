@@ -16,4 +16,4 @@ emacs.d/*
 # emacs temp files
 *~
 
-# *.sublime-workspace
+*.sublime-workspace
