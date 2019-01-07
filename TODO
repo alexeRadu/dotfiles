@@ -1,1 +1,2 @@
 * [ ] [git]	update completion for git diff/add/checkout to use unstaged files
+* [ ] check ansible to save dotfiles and maybe more
