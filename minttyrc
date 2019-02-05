@@ -9,7 +9,6 @@ Font=Consolas
 FontHeight=9
 FontSmoothing=full
 
-
 CursorColour=120,81,140
 ForegroundColour=204,204,204
 BackgroundColour=54,61,69
@@ -29,3 +28,8 @@ Cyan=87,132,163
 BoldCyan=110,158,181
 White=169,179,183
 BoldWhite=215,216,217
+
+# * Command Line Options *
+# Settings that are the file-versions of command line options
+# They don't appear in the options dialog.
+Icon=~/dotfiles/icons/terminal.ico
