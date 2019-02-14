@@ -5,7 +5,7 @@ set background=dark
 set t_Co=256
 
 
-" {{{ Syntax
+" Syntax {{{1
 " This is in the same order they appear in group-name
 " run ':help group-name' to get list of base colors
 hi Normal		ctermfg=252	ctermbg=235	cterm=none
@@ -56,9 +56,8 @@ hi Tag			ctermfg=fg	ctermbg=174	cterm=none
 hi Error		ctermfg=196	ctermbg=none	cterm=bold
 
 hi Todo			ctermfg=247	ctermbg=none	cterm=bold
-" }}}
 
-" {{{ Display
+" Display {{{1
 " line numbers and cursors
 hi LineNr		ctermfg=244	ctermbg=none	cterm=none
 hi CursorLineNr		ctermfg=250	ctermbg=237	cterm=none
@@ -75,8 +74,6 @@ hi StatusLineNC		ctermfg=245	ctermbg=237	cterm=none
 " other
 hi ColorColumn		ctermbg=237
 hi Folded		ctermfg=244	ctermbg=237
-" }}}
 
-" {{{ Miscellaneaous
+"  Miscellaneaous {{{1
 hi ExtraWhitespace	ctermbg=1
-" }}}
