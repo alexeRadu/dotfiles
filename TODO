@@ -3,3 +3,5 @@
 * [ ] command-line package manager for cygwin
 * [ ] better gitlog -> see inbox url
 * [ ] [mintty]	add additional fonts to Mintty
+* [ ] fuzzy finding of files
+  * [ ] try different fuzzy finders (ack, ag(silver_searcher), fzy, fzf, ctrl-t, command-p, etc)
