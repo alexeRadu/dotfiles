@@ -39,6 +39,8 @@ export LC_CTYPE="en_US.UTF-8"
 export TERM='xterm-256color'
 export EDITOR=vim
 
+export PATH=~/dotfiles/modules/fff:${PATH}
+
 if [ "${platform}" = "Cygwin" ]; then
 	export DISPLAY=':0.0'
 fi
