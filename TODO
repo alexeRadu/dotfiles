@@ -1,7 +1,5 @@
 * [ ] [git]	update completion for git diff/add/checkout to use unstaged files
-* [ ] check ansible to save dotfiles and maybe more
-* [ ] command-line package manager for cygwin
-* [ ] better gitlog -> see inbox url
+* [ ]		command-line package manager for cygwin
+* [ ] [git]	better gitlog -> see inbox url
 * [ ] [mintty]	add additional fonts to Mintty
-* [ ] fuzzy finding of files
-  * [ ] try different fuzzy finders (ack, ag(silver_searcher), fzy, fzf, ctrl-t, command-p, etc)
+* [ ]		try/read different fuzzy finders (ack, ag(silver_searcher), fzy, fzf, ctrl-t, command-p, etc)
