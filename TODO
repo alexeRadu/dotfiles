@@ -1,5 +1,5 @@
 * [ ] [git]	update completion for git diff/add/checkout to use unstaged files
-* [ ]		command-line package manager for cygwin
+* [ ] [cygwin]	command-line package manager for cygwin
 * [ ] [git]	better gitlog -> see inbox url
 * [ ] [mintty]	add additional fonts to Mintty
-* [ ]		try/read different fuzzy finders (ack, ag(silver_searcher), fzy, fzf, ctrl-t, command-p, etc)
+* [ ] [vim]	try/read different fuzzy finders (ack, ag(silver_searcher), fzy, fzf, ctrl-t, command-p, etc)
