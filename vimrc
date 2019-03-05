@@ -49,6 +49,9 @@ colorscheme default-dark
 " Ctags
 set tags=./tags;/
 
+" Enable modeline
+set modeline
+
 " {{{1 Tabs
 " General settings
 set tabstop=8
