@@ -10,7 +10,7 @@ let g:fff#split_direction = "nosplitbelow nosplitright"
 
 " Basic settings {{{1
 " Leader key; not sure yet if it is usefull but I'm willing to give it a try
-let mapleader = ","
+let mapleader = "\<space>"
 
 " Print line numbers in front of each line
 set number
