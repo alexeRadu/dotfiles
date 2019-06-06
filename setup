@@ -86,6 +86,8 @@ process tmux.conf
 process emacs.d
 process xinitrc
 process config/i3
+process config/i3status
+process config/i3blocks
 
 # can be Cygwin or GNU/Linux
 platform=`uname -a | grep -oE '[^ ]+$'`
