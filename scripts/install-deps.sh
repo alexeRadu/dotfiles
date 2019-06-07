@@ -2,6 +2,7 @@
 
 pkgs=(chromium			# currently my browser
 	make pkgconf gcc	# usefull for building stuff
+	python-pip		# for python packages
 	openssh)		# provides: ssh-keygen
 
 echo "Installing packages"
