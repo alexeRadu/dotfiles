@@ -129,7 +129,18 @@ Use it to test packages without installing them. On a new restart they will not 
     (progn
       (evil-mode)
       ))
-
-
 #+END_SRC
 
+*** Projectile
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure t
+    :config
+    (progn
+      (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+      (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+      (projectile-global-mode +1)
+      (setq projectile-completion-syste 'ivy)
+      )
+    )
+#+END_SRC
