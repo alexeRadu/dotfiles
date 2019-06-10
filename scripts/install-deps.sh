@@ -3,6 +3,9 @@
 pkgs=(chromium			# currently my browser
 	make pkgconf gcc	# usefull for building stuff
 	python-pip		# for python packages
+	sddm			#
+	qt5-graphicaleffects	# additional for sddm
+	qt5-quickcontrols	#
 	openssh)		# provides: ssh-keygen
 
 echo "Installing packages"
