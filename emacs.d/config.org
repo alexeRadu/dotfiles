@@ -144,3 +144,29 @@ Use it to test packages without installing them. On a new restart they will not 
       )
     )
 #+END_SRC
+
+*** Treemacs
+#+BEGIN_SRC emacs-lisp
+  (use-package treemacs
+    :ensure t
+    :defer t
+    :config
+    (progn
+      (setq treemacs-show-cursor nil
+	    treemacs-indentation 4
+	    )
+      (treemacs-resize-icons 16)
+	    )
+    :bind
+    (:map global-map
+	  ([f8] . treemacs)))
+
+  (use-package treemacs-evil
+    :after treemacs evil
+    :ensure t)
+
+  (use-package treemacs-projectile
+    :after treemacs projectile
+    :ensure t)
+#+END_SRC
+
