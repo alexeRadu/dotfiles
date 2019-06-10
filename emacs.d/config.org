@@ -140,7 +140,8 @@ Use it to test packages without installing them. On a new restart they will not 
       (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
       (projectile-global-mode +1)
-      (setq projectile-completion-syste 'ivy)
+      (setq projectile-completion-system 'ivy)
+      (setq projectile-git-submodule-command nil)
       )
     )
 #+END_SRC
@@ -154,8 +155,11 @@ Use it to test packages without installing them. On a new restart they will not 
     (progn
       (setq treemacs-show-cursor nil
 	    treemacs-indentation 4
+	    treemacs-recent-after-file-follow nil
+	    treemacs-silent-refresh t
 	    )
       (treemacs-resize-icons 16)
+      (treemacs-filewatch-mode t)
 	    )
     :bind
     (:map global-map
@@ -167,6 +171,11 @@ Use it to test packages without installing them. On a new restart they will not 
 
   (use-package treemacs-projectile
     :after treemacs projectile
-    :ensure t)
+    :ensure t
+    :config
+    (progn
+      (add-hook 'projectile-after-switch-project-hook (lambda () (print "Hello there")))
+      )
+   )
 #+END_SRC
 
