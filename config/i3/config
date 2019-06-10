@@ -2,6 +2,16 @@ for_window [class="^.*"] border pixel 2
 gaps inner 4
 gaps outer 4
 
+# Theme colors
+# class			border  background text    indicator child_border
+client.focused		#c5c8c6 #1d1f21    #c5c8c6 #81a2be   #81a2be
+client.unfocused	#c5c8c6 #1d1f21    #c5c8c6 #5f819d   #5f819d
+client.focused_inactive	#c5c8c6 #1d1f21    #c5c8c6 #5f819d   #5f819d
+client.urgent		#c5c8c6 #1d1f21    #c5c8c6 #5f819d   #5f819d
+client.placeholder	#c5c8c6 #1d1f21    #c5c8c6 #5f819d   #5f819d
+
+client.background	#1d1f21
+
 # Alt is mod for WMs
 set $mod Mod1
 
