@@ -123,5 +123,5 @@ bar {
 	status_command i3status
 	position top
 	mode dock
-	font pango:mono 10
+	font pango:mono 12
 }
