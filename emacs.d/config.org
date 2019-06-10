@@ -112,3 +112,24 @@ Use it to test packages without installing them. On a new restart they will not 
     ))
 #+END_SRC
 
+*** Evil
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :ensure t ;; install if not already installed
+
+    :init     ;; configuration before loading
+    (progn
+      (setq evil-search-module 'evil-search)
+      (setq evil-ex-complete-emacs-commands nil)
+      (setq evil-vsplit-window-right t)
+      (setq evil-split-window-below t)
+      )
+
+    :config   ;; configuration after loading
+    (progn
+      (evil-mode)
+      ))
+
+
+#+END_SRC
+
