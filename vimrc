@@ -37,7 +37,7 @@ if &t_Co > 1
 endif
 
 if exists('+colorcolumn')
-	set colorcolumn=80
+	set colorcolumn=72
 endif
 
 " Highlight current line
