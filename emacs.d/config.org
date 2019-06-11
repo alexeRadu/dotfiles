@@ -174,8 +174,21 @@ Use it to test packages without installing them. On a new restart they will not 
     :ensure t
     :config
     (progn
-      (add-hook 'projectile-after-switch-project-hook (lambda () (print "Hello there")))
+      (add-hook 'projectile-after-switch-project-hook
+		(lambda ()
+		  (let ((project-path (projectile-project-root))
+			(project-name (file-name-nondirectory
+				       (directory-file-name
+					(file-name-directory
+					 (projectile-project-root)))))
+			(active-projects (treemacs-workspace->projects (treemacs-current-workspace))))
+		    (dolist (project active-projects)
+		      (treemacs-do-remove-project-from-workspace project))
+		    (treemacs-do-add-project-to-workspace project-path project-name)
+		    )
+		  )
+		)
       )
-   )
+    )
 #+END_SRC
 
