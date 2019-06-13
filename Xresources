@@ -38,7 +38,7 @@
 *.color15: #fdf6e3
 
 !! URxvt Appearance
-URxvt*font: xft:Source Code Pro Light:style=Regular:size=9
+URxvt*font: xft:Source Code Pro Light:style=Regular:size=10
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 !URxvt.geometry: 92x24
