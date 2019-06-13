@@ -101,17 +101,6 @@ Use it to test packages without installing them. On a new restart they will not 
   :bind (("M-s" . avy-goto-char)))
 #+END_SRC
 
-*** Auto-Complete
-#+BEGIN_SRC emacs-lisp
-(use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
-#+END_SRC
-
 *** Evil
 #+BEGIN_SRC emacs-lisp
   (use-package evil
@@ -129,6 +118,27 @@ Use it to test packages without installing them. On a new restart they will not 
     (progn
       (evil-mode)
       ))
+#+END_SRC
+
+*** Company
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :ensure t
+    :defer t
+    :init (global-company-mode)
+    :config
+    (progn
+      (setq company-tooltip-align-annotations t
+	    company-show-numbers t)
+      (setq company-dabbrev-downcase nil))
+    )
+#+END_SRC
+
+*** Flycheck
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
 #+END_SRC
 
 *** Projectile
@@ -190,5 +200,45 @@ Use it to test packages without installing them. On a new restart they will not 
 		)
       )
     )
+#+END_SRC
+
+*** RTags
+#+BEGIN_SRC emacs-lisp
+  (use-package rtags
+    :ensure t
+    :config
+    (progn
+      (setf rtags-path "/home/radu/rtags/bin")
+
+      ;; start rdm only in c mode (for now)
+      (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
+      ))
+
+  (use-package company-rtags
+    :ensure t
+    :after company rtags
+    :config
+    (progn
+      (setq rtags-autostart-diagnostics t)
+      (rtags-diagnostics)
+      (setq rtags-completions-enabled t)
+      (push 'company-rtags company-backends)
+      ))
+
+  (use-package flycheck-rtags
+    :ensure t
+    :after flycheck rtags
+    :config
+    (progn
+      (defun setup-flycheck-rtags()
+	(flycheck-select-checker 'rtags)
+	(setq-local flycheck-highlighting-mode nil)
+	(setq-local flycheck-check-syntax-automatically nil)
+	(rtags-set-periodic-reparse-timeout 2.0)
+	)
+
+      (add-hook 'c-mode-hook #'setup-flycheck-rtags)
+      (add-hook 'c++-mode-hook #'setup-flycheck-rtags)
+      ))
 #+END_SRC
 
