@@ -52,6 +52,9 @@ set tags=./tags;/
 " Enable modeline
 set modeline
 
+set wildmenu			" enable completion mode
+set wildmode=longest,list	" complete longest commont string then list alternatives
+
 " {{{1 Tabs
 " General settings
 set tabstop=8
