@@ -22,14 +22,13 @@ font pango:Source Code Pro 9
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec urxvt
+# Keyginding to start applications
+bindsym $mod+d	    exec dmenu_run	# dmenu
+bindsym $mod+Return exec urxvt		# terminal
+bindsym $mod+F2     exec chromium       # browser
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
 
 # change focus
 bindsym $mod+h focus left
