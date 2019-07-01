@@ -130,3 +130,6 @@ bar {
 	mode dock
 	font pango:Source Code Pro 12
 }
+
+# Launch applications at startup
+exec urxvt
