@@ -5,8 +5,17 @@ general {
 	interval = 1
 }
 
+order += "volume master"
 order += "battery 0"
 order += "tztime local"
+
+volume master {
+	format = "<span background='#b48aed'> &#x1f508; %volume </span>"
+	format_muted = "<span background='#ebcb8b'> #&x1f507; Muted </span>"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
 
 battery 0 {
 	last_full_capacity = true
@@ -15,7 +24,7 @@ battery 0 {
 	status_chr = "&#x26a1;"
 	status_bat = "&#x1f50b;"
 	status_unk = "?"
-	status_full = "&#1f50b;"
+	status_full = "&#x1f50b;"
 	path = "/sys/class/power_supply/BAT%d/uevent"
 	low_threshold=10
 }
