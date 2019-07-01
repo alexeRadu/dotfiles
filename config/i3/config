@@ -5,14 +5,12 @@ gaps inner 4
 gaps outer 4
 
 # Theme colors
-# class			border  background text    indicator child_border
-client.focused		#c5c8c6 #1d1f21    #c5c8c6 #81a2be   #81a2be
-client.unfocused	#c5c8c6 #1d1f21    #c5c8c6 #5f819d   #5f819d
-client.focused_inactive	#c5c8c6 #1d1f21    #c5c8c6 #5f819d   #5f819d
-client.urgent		#c5c8c6 #1d1f21    #c5c8c6 #5f819d   #5f819d
-client.placeholder	#c5c8c6 #1d1f21    #c5c8c6 #5f819d   #5f819d
+# class			  border    bkgd      text      indic.    child_border
+client.focused            #272C33F  #67727E   #ffffff   #272C33
+client.focused_inactive   #2C313B   #272C33   #bbbbbb   #272C33
+client.unfocused          #2C313B   #272C33   #bbbbbb   #272C33
 
-client.background	#1d1f21
+client.background	  #1d1f21
 
 # Alt is mod for WMs
 set $mod Mod1
