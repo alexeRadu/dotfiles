@@ -5,12 +5,13 @@ gaps inner 4
 gaps outer 4
 
 # Theme colors
-# class			  border    bkgd      text      indic.    child_border
-client.focused            #272C33F  #67727E   #ffffff   #272C33
-client.focused_inactive   #2C313B   #272C33   #bbbbbb   #272C33
-client.unfocused          #2C313B   #272C33   #bbbbbb   #272C33
-
-client.background	  #1d1f21
+# class			    border  bkgd    text    indic.  child_border
+client.focused              #67727e #2f343f #d8dee8 #67727e #67727e
+client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.background           #2f343f
 
 # Alt is mod for WMs
 set $mod Mod1
@@ -126,7 +127,18 @@ bar {
 	status_command i3status
 	position top
 	mode dock
-	font pango:Source Code Pro 12
+	font pango:Source Code Pro 11
+
+	colors {
+		background #2f343f
+		statusline #2f343f
+		separator  #4b5262
+
+		# class			border	bckg	text
+		focused_workspace	#81a1c1 #2f343f #81a1c1
+		active_workspace	#81a1c1 #81a1c1 #2f343f
+		inactive_workspace	#81a1c1 #81a1c1 #2f343f
+	}
 }
 
 # Launch applications at startup
