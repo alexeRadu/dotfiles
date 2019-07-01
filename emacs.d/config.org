@@ -209,6 +209,10 @@ Use it to test packages without installing them. On a new restart they will not 
     :config
     (progn
       (setf rtags-path "/home/radu/rtags/bin")
+      (setq rtags-use-mark-as-current-symbol t)
+      (setq rtags-display-result-backend 'ivy)
+
+      (rtags-enable-standard-keybindings)
 
       ;; start rdm only in c mode (for now)
       (add-hook 'c-mode-hook 'rtags-start-process-unless-running)
@@ -240,5 +244,19 @@ Use it to test packages without installing them. On a new restart they will not 
       (add-hook 'c-mode-hook #'setup-flycheck-rtags)
       (add-hook 'c++-mode-hook #'setup-flycheck-rtags)
       ))
+
+  (use-package ivy-rtags
+    :ensure t
+    :after rtags ivy
+    :config
+    (progn
+      (setq rtags-display-result-backend 'ivy)
+      ))
+
 #+END_SRC
 
+*** RealGUD
+#+BEGIN_SRC emacs-lisp
+  (use-package realgud
+    :ensure t)
+#+END_SRC
