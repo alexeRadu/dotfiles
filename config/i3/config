@@ -135,9 +135,9 @@ bar {
 		separator  #4b5262
 
 		# class			border	bckg	text
-		focused_workspace	#81a1c1 #2f343f #81a1c1
+		focused_workspace	#81a1c1 #81a1c1 #2f343f
 		active_workspace	#81a1c1 #81a1c1 #2f343f
-		inactive_workspace	#81a1c1 #81a1c1 #2f343f
+		inactive_workspace	#81a1c1 #2f343f #81a1c1
 	}
 }
 
