@@ -5,9 +5,21 @@ general {
 	interval = 1
 }
 
+order += "ethernet enp0s3"
+#order += "wireless wlp2s0"
 order += "volume master"
 order += "battery 0"
 order += "tztime local"
+
+ethernet enp0s3 {
+	format_up = "<span background='#88c0d0'> <span size='small'>&#xf796;</span> %ip </span>"
+	format_down = "<span background='#88c0d0'> <span size='small'>&#xf12a;</span> disconnected </span>"
+}
+
+wireless wlp2s0 {
+	format_up = "<span background='#b48ead'> <span size='small'>&#xf1eb;</span> %essid </span>"
+	format_down = "<span background='#b48ead'> <span size='small'>&#xf1eb;</span> disconnected </span>"
+}
 
 volume master {
 	format = "<span background='#b48aed'> <span size='small'>&#xf028;</span> %volume </span>"
