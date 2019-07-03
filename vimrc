@@ -37,8 +37,9 @@ if &t_Co > 1
 endif
 
 if exists('+colorcolumn')
-	set colorcolumn=72
+	set colorcolumn=80
 endif
+autocmd FileType gitcommit if exists('+colorcolumn') | set colorcolumn=72 | endif
 
 " Highlight current line
 set cursorline
