@@ -131,8 +131,8 @@ bar {
 
 	colors {
 		background #2f343f
-		statusline #2f343f
-		separator  #4b5262
+		statusline #81a1c1
+		separator  #81a1c1
 
 		# class			border	bckg	text
 		focused_workspace	#81a1c1 #81a1c1 #2f343f
