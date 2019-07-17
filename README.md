@@ -1,9 +1,10 @@
-<h1>My Linux Setup</h1>
+# Dotfiles
 
-This project is a helper for saving/restoring basic linux settings for new images.
+Configuration files for vim, bash, tmux, i3 and others.
+These files are linked to from the home directory. This way I get to edit them from any part of the system and at the same contain them in a repository where I can version the changes.
 
-<h2>Folder Structure</h2>
-<ul>
-<li>config</li>
-<li>sync</li>
-</ul>
+To create links just run from this repository:
+
+```bash
+./setup
+```
