@@ -36,10 +36,22 @@ if &t_Co > 1
 	syntax on
 endif
 
-if exists('+colorcolumn')
-	set colorcolumn=80
-endif
-autocmd FileType gitcommit if exists('+colorcolumn') | set colorcolumn=72 | endif
+function SetColorColumn(value)
+	if exists('+colorcolumn')
+		let &l:colorcolumn=a:value
+	endif
+endfunction
+
+" By default the 'colorcolumn' should be set at 80
+autocmd FileType c,h SetColorColumn(80)
+autocmd FileType vim SetColorColumn(80)
+
+" For certain filetypes on different projects the colorcolumn should be set to
+" a different value than the default
+
+" TODO: detect we are in a zephyr project
+" set 'colorcolumn' only for 'gitcommit' file type for the Zephyr project
+autocmd FileType gitcommit :call SetColorColumn(72)
 
 " Highlight current line
 set cursorline
