@@ -135,8 +135,10 @@ set splitright
 
 " Folding {{{1
 " save folds on buffer leave and load when enter
-autocmd BufWinLeave *.c  mkview
-autocmd BufWinEnter *.c silent loadview
+" TODO: cool feature but should be enabled more carefull so to not overwrite
+" new settings added to .vimrc (ex: colorcolumn)
+" autocmd BufWinLeave *.c  mkview
+" autocmd BufWinEnter *.c silent loadview
 
 " custom folding
 augroup custom_folding
