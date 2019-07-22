@@ -146,15 +146,3 @@ augroup custom_folding
 	autocmd!
 	autocmd FileType vim setlocal foldmethod=marker
 augroup END
-" Arduino Specific {{{1
-let g:arduino_dir = '/home/radu/arduino'
-let g:arduino_cmd = '/home/radu/arduino/arduino'
-let g:arduino_serial_cmd = 'picocom /dev/ttyACM0 -b 9600 -l'
-
-augroup filetype_arduino
-	autocmd!
-	autocmd FileType arduino nnoremap <buffer> <leader>c :ArduinoVerify<CR>
-	autocmd FileType arduino nnoremap <buffer> <leader>s :ArduinoSerial<CR>
-	autocmd FileType arduino nnoremap <buffer> <leader>u :ArduinoUpload<CR>
-	autocmd FileType arduino nnoremap <buffer> <leader>d :ArduinoUploadAndSerial<CR>
-augroup END
