@@ -1,0 +1,29 @@
+#!/bin/bash
+
+I3CONF=${HOME}/.config/i3
+theme="$1"
+
+if [ -z "$theme" ]; then
+	echo "Error: provide an i3 theme"
+	exit
+fi
+
+colors_fpath="${I3CONF}/themes/base16-i3/colors/${theme}.config"
+bar_colors_fpath="${I3CONF}/themes/base16-i3/bar-colors/${theme}.config"
+client_properties_fpath="${I3CONF}/themes/base16-i3/client-properties/${theme}.config"
+
+echo $colors_fpath
+
+if [ ! -f "$colors_fpath" ] ||
+	[ ! -f "$bar_colors_fpath" ] ||
+	[ ! -f "$client_properties_fpath" ]
+then
+	echo "Error: unable to find $theme files"
+	exit
+fi
+
+cat ${I3CONF}/base.config > ${I3CONF}/config
+sed -e '/#{{colors}}/ {' -e "r $colors_fpath" -e 'd' -e '}' -i ${I3CONF}/config
+sed -e '/#{{bar-colors}}/ {' -e "r $bar_colors_fpath" -e 'd' -e '}' -i ${I3CONF}/config
+sed -e '/#{{client-properties}}/ {' -e "r $client_properties_fpath" -e 'd' -e '}' -i ${I3CONF}/config
+i3-msg "reload"

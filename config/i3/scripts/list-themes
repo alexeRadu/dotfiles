@@ -1,0 +1,6 @@
+#!/bin/bash
+
+THEMEDIR="${HOME}/.config/i3/themes/"
+
+# base16
+ls "${THEMEDIR}/base16-i3/themes" | cut -d" " -f9 | cut -d"." -f1

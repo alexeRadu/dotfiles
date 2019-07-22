@@ -1,0 +1,12 @@
+#!/bin/awk -f
+
+BEGIN {
+	if (theme == "") {
+		print("Please provide a theme: -v theme=<your theme>");
+		exit;
+	}
+
+	print theme
+}
+
+/#{{colors}}/ { print "Radu" }
