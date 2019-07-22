@@ -72,16 +72,6 @@ set modeline
 set wildmenu			" enable completion mode
 set wildmode=longest,list	" complete longest commont string then list alternatives
 
-" {{{1 Tabs
-" General settings
-set tabstop=8
-set shiftwidth=8
-
-augroup filetype_tabs
-	autocmd!
-	autocmd FileType html setlocal tabstop=4
-augroup END
-" }}}
 " {{{1 Whitespaces
 
 " Highlight extra whitespaces and remove them.
