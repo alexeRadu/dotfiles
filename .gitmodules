@@ -1,3 +1,6 @@
 [submodule "modules/fff"]
 	path = modules/fff
 	url = https://github.com/dylanaraps/fff.git
+[submodule "config/i3/themes/base16-i3"]
+	path = config/i3/themes/base16-i3
+	url = https://github.com/khamer/base16-i3.git
