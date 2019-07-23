@@ -114,27 +114,27 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-## Base16 Nord
-# Author: arcticicestudio
+## Base16 Ocean
+# Author: Chris Kempson (http://chriskempson.com)
 #
 # You can use these variables anywhere in the i3 configuration file.
 
-set $base00 #2E3440
-set $base01 #3B4252
-set $base02 #434C5E
-set $base03 #4C566A
-set $base04 #D8DEE9
-set $base05 #E5E9F0
-set $base06 #ECEFF4
-set $base07 #8FBCBB
-set $base08 #88C0D0
-set $base09 #81A1C1
-set $base0A #5E81AC
-set $base0B #BF616A
-set $base0C #D08770
-set $base0D #EBCB8B
-set $base0E #A3BE8C
-set $base0F #B48EAD
+set $base00 #2b303b
+set $base01 #343d46
+set $base02 #4f5b66
+set $base03 #65737e
+set $base04 #a7adba
+set $base05 #c0c5ce
+set $base06 #dfe1e8
+set $base07 #eff1f5
+set $base08 #bf616a
+set $base09 #d08770
+set $base0A #ebcb8b
+set $base0B #a3be8c
+set $base0C #96b5b4
+set $base0D #8fa1b3
+set $base0E #b48ead
+set $base0F #ab7967
 
 # Basic color configuration using the Base16 variables for windows and borders.
 # Property Name         Border  BG      Text    Indicator Child Border
@@ -151,18 +151,18 @@ bar {
 	mode dock
 	font pango:Source Code Pro 11
 
-colors {
-    background $base00
-    separator  $base01
-    statusline $base04
+	colors {
+	    background $base00
+	    separator  $base01
+	    statusline $base04
 
-    # State             Border  BG      Text
-    focused_workspace   $base05 $base0D $base00
-    active_workspace    $base05 $base03 $base00
-    inactive_workspace  $base03 $base01 $base05
-    urgent_workspace    $base08 $base08 $base00
-    binding_mode        $base00 $base0A $base00
-}
+	    # State             Border  BG      Text
+	    focused_workspace   $base05 $base0D $base00
+	    active_workspace    $base05 $base03 $base00
+	    inactive_workspace  $base03 $base01 $base05
+	    urgent_workspace    $base08 $base08 $base00
+	    binding_mode        $base00 $base0A $base00
+	}
 }
 
 # Launch applications at startup
