@@ -1,6 +1,7 @@
 #!/bin/bash
 
-I3CONF=${HOME}/.config/i3
+i3path=${HOME}/.config/i3
+conf=${i3path}/config
 theme="$1"
 
 if [ -z "$theme" ]; then
@@ -8,22 +9,12 @@ if [ -z "$theme" ]; then
 	exit
 fi
 
-colors_fpath="${I3CONF}/themes/base16-i3/colors/${theme}.config"
-bar_colors_fpath="${I3CONF}/themes/base16-i3/bar-colors/${theme}.config"
-client_properties_fpath="${I3CONF}/themes/base16-i3/client-properties/${theme}.config"
-
-echo $colors_fpath
-
-if [ ! -f "$colors_fpath" ] ||
-	[ ! -f "$bar_colors_fpath" ] ||
-	[ ! -f "$client_properties_fpath" ]
-then
+fpath="${i3path}/themes/base16-i3/colors/base16-${theme}.config"
+if [ ! -f "$fpath" ]; then
 	echo "Error: unable to find $theme files"
 	exit
 fi
 
-cat ${I3CONF}/base.config > ${I3CONF}/config
-sed -e '/#{{colors}}/ {' -e "r $colors_fpath" -e 'd' -e '}' -i ${I3CONF}/config
-sed -e '/#{{bar-colors}}/ {' -e "r $bar_colors_fpath" -e 'd' -e '}' -i ${I3CONF}/config
-sed -e '/#{{client-properties}}/ {' -e "r $client_properties_fpath" -e 'd' -e '}' -i ${I3CONF}/config
-i3-msg "reload"
+cat $i3path/base.config > $conf
+sed -e '/#{{colors}}/ {' -e "r $fpath" -e 'd' -e '}' -i $conf
+i3-msg "reload" 2>&1 1>/dev/null

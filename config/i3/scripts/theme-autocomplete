@@ -1,5 +1,5 @@
 #!/bin/bash
 
-themes=$(ls -l "${HOME}/.config/i3/themes/base16-i3/themes" | cut -d" " -f9 | cut -d"." -f1)
+themes=$(ls -l "${HOME}/.config/i3/themes/base16-i3/colors" | cut -d" " -f9 | cut -d"." -f1 | cut -d"-" -f2-)
 
 complete -W "$themes" theme
