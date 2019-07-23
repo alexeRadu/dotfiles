@@ -31,6 +31,8 @@ alias bb='bitbake'
 
 # git helpers
 source ~/.git-completion.bash
+source ~/.config/i3/scripts/theme-autocomplete
+
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold yellow)%d%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(green)- %an%C(reset)'"
 alias gist="git status"
 
