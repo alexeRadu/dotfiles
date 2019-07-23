@@ -90,6 +90,8 @@ process config/i3status
 process config/i3blocks
 process Xresources
 
+process bin
+
 # can be Cygwin or GNU/Linux
 platform=`uname -a | grep -oE '[^ ]+$'`
 
