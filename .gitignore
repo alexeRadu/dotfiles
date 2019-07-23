@@ -7,13 +7,3 @@ vim/view
 # They can be restored to their original value once I am no longer the owner/
 # user.
 *stash*
-
-# Some of emacs's configuration files
-emacs.d/*
-!emacs.d/init.el
-!emacs.d/config.org
-
-# emacs temp files
-*~
-
-*.sublime-workspace
