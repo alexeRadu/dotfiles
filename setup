@@ -87,7 +87,7 @@ process emacs.d
 process xinitrc
 process config/i3
 process config/i3status
-process config/i3blocks
+process config/termite
 process Xresources
 
 process bin

@@ -10,7 +10,6 @@
 * bash - set base16 colors
 * vim - set base16 colors
 * rofi - try
-* termite -try
 * x - set base16 for xresources
 * i3 - simplify 'theme' script
 * vim - setup listchars
