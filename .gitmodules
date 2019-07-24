@@ -4,3 +4,6 @@
 [submodule "config/i3/themes/base16-i3"]
 	path = config/i3/themes/base16-i3
 	url = https://github.com/khamer/base16-i3.git
+[submodule "config/termite/themes/base16-termite"]
+	path = config/termite/themes/base16-termite
+	url = https://github.com/khamer/base16-termite.git
