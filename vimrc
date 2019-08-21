@@ -48,7 +48,7 @@ endfunction
 " By default the 'colorcolumn' should be set at 80
 autocmd FileType c,h,cpp :call SetColorColumn(80)
 autocmd FileType vim :call SetColorColumn(80)
-autocmd Filetype markdown :call SetColorColumn(80)
+autocmd FileType markdown :call SetColorColumn(80)
 
 " For certain filetypes on different projects the colorcolumn should be set to
 " a different value than the default
