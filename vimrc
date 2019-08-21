@@ -49,6 +49,7 @@ endfunction
 autocmd FileType c,h,cpp :call SetColorColumn(80)
 autocmd FileType vim :call SetColorColumn(80)
 autocmd FileType markdown :call SetColorColumn(80)
+autocmd FileType python :call SetColorColumn(80)
 
 " For certain filetypes on different projects the colorcolumn should be set to
 " a different value than the default
