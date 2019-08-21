@@ -139,3 +139,19 @@ augroup custom_folding
 	autocmd!
 	autocmd FileType vim setlocal foldmethod=marker
 augroup END
+
+" gdb.vim {{{1
+" [NOTE] This is work in progress. It may change or be completly removed in
+" the near future
+
+" Recommended settings
+nnoremap <C-b> <Plug>GGBreakSwitch
+vmap <F2> <Plug>GGStdInSelected
+nnoremap <F4> :GGstdin<CR>
+nnoremap <F5> :GGmode debug<CR>
+nnoremap <S-F5> :GGmode code<CR>
+nnoremap <F8> :GG continue<CR>
+nnoremap <S-F8> :GG process interrupt<CR>
+nnoremap <F9> :GG print <C-R>=expand('<cword>')<CR>
+vnoremap <F9> :<C-U>GG print <C-R>=gdb#util#get_selection()<CR><CR>
+nnoremap <F10> :echo job_status(g:gdb#_job)<CR>
