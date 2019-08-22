@@ -1,4 +1,5 @@
-# vim: tw=80 ai
+<!-- vim: tw=80 ai
+-->
 
 * script to upload/manage keys for Github
 * script to upload/manage keys for Bitbucket
