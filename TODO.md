@@ -12,3 +12,4 @@
 * rofi - try
 * i3 - simplify 'theme' script
 * vim - setup listchars
+* vim - setup gdb debugger
