@@ -2,7 +2,6 @@
 
 * script to upload/manage keys for Github
 * script to upload/manage keys for Bitbucket
-* script to setup automatic store credetials for git https
 * sddm - better (simpler) theme based on existing?
 * sddm - save existing theme (deepin)
 * git - update completion for git diff/add/checkout to use unstaged files
