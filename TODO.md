@@ -13,3 +13,4 @@
 * i3 - simplify 'theme' script
 * vim - setup listchars
 * vim - setup gdb debugger
+* vim - test "Command-T" plugin
