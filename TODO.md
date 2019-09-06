@@ -14,3 +14,4 @@
 * vim - setup listchars
 * vim - setup gdb debugger
 * vim - test "Command-T" plugin
+* vim - test "YCM" plugin for zephyr
