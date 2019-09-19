@@ -24,6 +24,27 @@ function! dbug#StopDebug()
 	call job_stop(s:job)
 endfunction
 
+function! dbug#LoadTarget(fname)
+	if !executable(a:fname)
+		echo "File " . a:fname . " is not a valid executable"
+	endif
+
+	let first_char = strgetchar(a:fname, 0)
+	if first_char != '/' && first_char != '.'
+		let fname = "./" . a:fname
+	else
+		let fname = a:fname
+	endif
+
+	let fpath = exepath(fname)
+	if empty(fpath)
+		echo "DBUG: unable to find path to file " . fname
+	endif
+
+	let msg = {"type": "gdb", "cmd": "-file-exec-file " . fpath}
+	call dbug#SendMessage(msg)
+endfunction
+
 function! dbug#CheckStatus()
 	if exists('s:job')
 		echo "job status: " . job_status(s:job)

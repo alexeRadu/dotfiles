@@ -1,4 +1,5 @@
 from select import select
+from pygdbmi.gdbcontroller import GdbController
 import logging
 import json
 import sys
@@ -17,6 +18,8 @@ logging.root.setLevel(logging.DEBUG)
 
 logger = logging.getLogger(__name__)
 
+gdbmi = GdbController()
+
 vim_echo("GDB server started")
 logger.info("GDB server started")
 
@@ -28,7 +31,10 @@ while True:
 
     index, msg = json.loads(sys.stdin.readline())
 
-    msg = str(msg)
-    logger.debug("Rcvd: %d - %s" % (index, msg))
+    logger.debug("Rcvd: %d - %s" % (index, str(msg)))
+    vim_echo(str(msg))
 
-    vim_echo(msg)
+    if type(msg) is dict and "type" in msg and msg["type"] == "gdb":
+        response = gdbmi.write(msg["cmd"])
+        logger.debug("gdb response: " + str(response))
+
