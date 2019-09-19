@@ -16,6 +16,14 @@ function! dbug#StartDebug()
 	call dbug#StartServer()
 endfunction
 
+function! dbug#StopDebug()
+	if !exists('s:job') || job_status(s:job) != 'run'
+		return
+	endif
+
+	call job_stop(s:job)
+endfunction
+
 function! dbug#CheckStatus()
 	if exists('s:job')
 		echo "job status: " . job_status(s:job)
