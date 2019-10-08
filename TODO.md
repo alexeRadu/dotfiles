@@ -15,3 +15,6 @@
 * vim - setup gdb debugger
 * vim - test "Command-T" plugin
 * vim - test "YCM" plugin for zephyr
+
+* vim/dbug: remove pygdbmi logging output from main logging
+* vim/debug: see if you can have exception output piped to logging
