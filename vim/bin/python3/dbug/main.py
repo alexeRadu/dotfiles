@@ -13,10 +13,9 @@ def vim_echo(msg):
 
 handler = logging.FileHandler('/tmp/dbug.log', 'w')
 handler.formatter = logging.Formatter('%(msecs)6d %(levelname)-5s   %(message)s')
-logging.root.addHandler(handler)
-logging.root.setLevel(logging.DEBUG)
-
 logger = logging.getLogger(__name__)
+logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
 
 gdbmi = GdbController()
 
