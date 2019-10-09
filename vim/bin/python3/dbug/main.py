@@ -22,18 +22,21 @@ gdbmi = GdbController()
 vim_echo("GDB server started")
 logger.info("GDB server started")
 
-while True:
-    ready, _, _ = select([sys.stdin], [], [], 2)
 
-    if not ready:
-        continue
+try:
+    while True:
+        ready, _, _ = select([sys.stdin], [], [], 2)
 
-    index, msg = json.loads(sys.stdin.readline())
+        if not ready:
+            continue
 
-    logger.debug("Rcvd: %d - %s" % (index, str(msg)))
-    vim_echo(str(msg))
+        index, msg = json.loads(sys.stdin.readline())
 
-    if type(msg) is dict and "type" in msg and msg["type"] == "gdb":
-        response = gdbmi.write(msg["cmd"])
-        logger.debug("gdb response: " + str(response))
+        logger.debug("Rcvd: %d - %s" % (index, str(msg)))
+        vim_echo(str(msg))
 
+        if type(msg) is dict and "type" in msg and msg["type"] == "gdb":
+            response = gdbmi.write(msg["cmd"])
+            logger.debug("gdb response: " + str(response))
+except:
+    logger.exception("Unexpected exception")
