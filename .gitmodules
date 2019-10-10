@@ -7,9 +7,6 @@
 [submodule "config/termite/themes/base16-termite"]
 	path = config/termite/themes/base16-termite
 	url = https://github.com/khamer/base16-termite.git
-[submodule "vim/bundle/gdb.vim"]
-	path = vim/bundle/gdb.vim
-	url = https://github.com/dbgx/gdb.vim.git
 [submodule "vim/bundle/command-t"]
 	path = vim/bundle/command-t
 	url = https://github.com/wincent/command-t.git
