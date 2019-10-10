@@ -45,6 +45,13 @@ function! dbug#LoadTarget(fname)
 	call dbug#SendMessage(msg)
 endfunction
 
+function! dbug#SetBreakpoint(fname, lineno)
+	let msg = {"type": "gdb", "cmd": "-break-insert " . a:fname . ":" . a:lineno}
+
+	echo "Breakpoint at " . a:fname . ":" . a:lineno
+	call dbug#SendMessage(msg)
+endfunction
+
 function! dbug#CheckStatus()
 	if exists('s:job')
 		echo "job status: " . job_status(s:job)
