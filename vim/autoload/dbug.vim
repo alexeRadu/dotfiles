@@ -41,7 +41,7 @@ function! dbug#LoadTarget(fname)
 		echo "DBUG: unable to find path to file " . fname
 	endif
 
-	let msg = {"type": "gdb", "cmd": "-file-exec-file " . fpath}
+	let msg = {"type": "gdb", "cmd": "-file-exec-and-symbols " . fpath}
 	call dbug#SendMessage(msg)
 endfunction
 
