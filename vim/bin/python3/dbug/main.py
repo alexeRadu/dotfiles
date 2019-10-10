@@ -1,6 +1,7 @@
 from select import select
 from pygdbmi.gdbcontroller import GdbController
 import logging
+import pprint
 import json
 import sys
 
@@ -32,11 +33,11 @@ try:
 
         index, msg = json.loads(sys.stdin.readline())
 
-        logger.debug("Rcvd: %d - %s" % (index, str(msg)))
+        logger.debug("Rcvd: %d \n%s" % (index, pprint.pformat(msg)))
         vim_echo(str(msg))
 
         if type(msg) is dict and "type" in msg and msg["type"] == "gdb":
             response = gdbmi.write(msg["cmd"])
-            logger.debug("gdb response: " + str(response))
+            logger.debug("gdb response: \n" + pprint.pformat(response))
 except:
     logger.exception("Unexpected exception")
