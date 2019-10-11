@@ -45,8 +45,8 @@ function! dbug#LoadTarget(fname)
 	call dbug#SendMessage(msg)
 endfunction
 
-function! dbug#SetBreakpoint(fname, lineno)
-	let msg = {"name": "set-breakpoint", "filename": a:fname, "line": a:lineno}
+function! dbug#ToggleBreakpoint(fname, lineno)
+	let msg = {"name": "toggle-breakpoint", "filename": a:fname, "line": a:lineno}
 
 	call dbug#SendMessage(msg)
 endfunction
