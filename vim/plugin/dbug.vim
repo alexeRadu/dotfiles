@@ -10,3 +10,5 @@ command! -nargs=1 DbgSend					call dbug#SendMessage(<q-args>)
 command! -nargs=0 DbgBreakpoint		call dbug#SetBreakpoint(bufname("$"), getcurpos()[1])
 
 command! -nargs=1 -complete=file DbgLoad call dbug#LoadTarget(<q-args>)
+
+nnoremap <f9> :DbgBreakpoint<CR>
