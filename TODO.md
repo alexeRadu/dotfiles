@@ -12,6 +12,5 @@
 * rofi - try
 * i3 - simplify 'theme' script
 * vim - setup listchars
-* vim - setup gdb debugger
-* vim - test "Command-T" plugin
 * vim - test "YCM" plugin for zephyr
+* vim/dbug - add support to adding signs (for breakpoints and current PC)
