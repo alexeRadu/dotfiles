@@ -41,12 +41,12 @@ function! dbug#LoadTarget(fname)
 		echo "DBUG: unable to find path to file " . fname
 	endif
 
-	let msg = {"type": "gdb", "cmd": "-file-exec-and-symbols " . fpath}
+	let msg = {"name": "load-target", "path": fpath}
 	call dbug#SendMessage(msg)
 endfunction
 
 function! dbug#SetBreakpoint(fname, lineno)
-	let msg = {"type": "gdb", "cmd": "-break-insert " . a:fname . ":" . a:lineno}
+	let msg = {"name": "set-breakpoint", "filename": a:fname, "line": a:lineno}
 
 	:exe ":sign place 1 line=" . a:lineno . " name=dbg_bp file=" . a:fname
 

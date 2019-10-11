@@ -22,10 +22,15 @@ try:
     while True:
         msg = vim.recv_msg()
 
-        vim.echo(str(msg))
+        if msg["name"] == "load-target":
+            response = gdbmi.write("-file-exec-and-symbols " + msg["path"])
+        elif msg["name"] == "set-breakpoint":
+            location = msg["filename"] + ":" +  str(msg["line"])
+            response = gdbmi.write("-break-insert " + location)
+        else:
+            logger.debug("Unknown message name: " + msg["name"])
+            continue
 
-        if type(msg) is dict and "type" in msg and msg["type"] == "gdb":
-            response = gdbmi.write(msg["cmd"])
-            logger.debug("gdb response: \n" + pprint.pformat(response))
+        logger.debug("gdb response: \n" + pprint.pformat(response))
 except:
     logger.exception("Unexpected exception")
