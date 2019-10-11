@@ -48,8 +48,6 @@ endfunction
 function! dbug#SetBreakpoint(fname, lineno)
 	let msg = {"name": "set-breakpoint", "filename": a:fname, "line": a:lineno}
 
-	:exe ":sign place 1 line=" . a:lineno . " name=dbg_bp file=" . a:fname
-
 	call dbug#SendMessage(msg)
 endfunction
 
