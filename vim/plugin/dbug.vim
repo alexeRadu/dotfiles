@@ -3,6 +3,9 @@ if exists('g:loaded_dbug')
 endif
 let g:loaded_dbug = 1
 
+sign define dbg_bp	text=●
+sign define dbg_pc	text=->
+
 command! -nargs=0 Dbg							call dbug#StartDebug()
 command! -nargs=0 DbgStop					call dbug#StopDebug()
 command! -nargs=0 DbgStatus				call dbug#CheckStatus()

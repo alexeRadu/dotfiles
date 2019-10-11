@@ -48,7 +48,8 @@ endfunction
 function! dbug#SetBreakpoint(fname, lineno)
 	let msg = {"type": "gdb", "cmd": "-break-insert " . a:fname . ":" . a:lineno}
 
-	echo "Breakpoint at " . a:fname . ":" . a:lineno
+	:exe ":sign place 1 line=" . a:lineno . " name=dbg_bp file=" . a:fname
+
 	call dbug#SendMessage(msg)
 endfunction
 
