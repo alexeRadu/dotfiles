@@ -50,11 +50,14 @@ def get_result(response):
 
 gdb_is_running = False
 gdb_is_debugging = False
+result = None
 pc = None
 
 def parse_response(response):
+    global result
+
     unused = []
-    result = False
+    result = None
 
     for r in response:
         if r["type"] == "notify":
@@ -76,6 +79,7 @@ def parse_response(response):
                 logger.debug("Gdb: debugging stopped")
             elif r["message"] in ["thread-group-exited",
                                   "thread-group-started",
+                                  "thread-group-added",
                                   "breakpoint-modified"]:   # TODO: treat this?
                 pass
             else:
@@ -85,8 +89,7 @@ def parse_response(response):
             logger.debug("GDB: %s" % (r["payload"]))
 
         elif r["type"] == "result":
-            if r["message"] == "running":
-                result = True
+            result = r["message"]
 
         elif r["type"] == "console":
             # ignore cosole output for now
@@ -98,16 +101,22 @@ def parse_response(response):
     if unused:
         logger.debug("From GDB - not treated:\n" + pprint.pformat(unused))
 
-    return result
-
 
 try:
     while True:
         msg = vim.recv_msg()
 
         if msg["name"] == "load-target":
-            response = gdbmi.write("-file-exec-and-symbols " + msg["path"])
-            logger.debug("gdb response: \n" + pprint.pformat(response))
+            filepath = msg["path"]
+
+            response = gdbmi.write("-file-exec-and-symbols %s" % (filepath))
+            parse_response(response)
+
+            if not result or result == "error":
+                logger.error("GDB unable to load exec and symbols file: %s" % filepath)
+                continue
+
+            logger.debug("GDB loaded exec and symbols file: %s" % filepath)
 
         elif msg["name"] == "toggle-breakpoint":
             if msg not in bpdb:
