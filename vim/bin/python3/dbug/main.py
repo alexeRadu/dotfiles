@@ -48,13 +48,9 @@ def get_result(response):
         if msg["type"] == "result":
             return msg
 
-def get_stop_info(response):
-    for msg in response:
-        if msg["type"] == "notify" and msg["message"] == "stopped":
-            return msg["payload"]
-
 gdb_is_running = False
 gdb_is_debugging = False
+pc = None
 
 def parse_response(response):
     unused = []
