@@ -2,6 +2,7 @@
 *.pyc
 vim/.netrwhist
 vim/view
+vim/test/test
 
 # This is the directory that holds the files that are replaced with my dotfiles.
 # They can be restored to their original value once I am no longer the owner/
