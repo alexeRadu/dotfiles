@@ -51,6 +51,11 @@ function! dbug#ToggleBreakpoint(fname, lineno)
 	call dbug#SendMessage(msg)
 endfunction
 
+function! dbug#Continue()
+	let msg = {"name": "continue"}
+	call dbug#SendMessage(msg)
+endfunction
+
 function! dbug#CheckStatus()
 	if exists('s:job')
 		echo "job status: " . job_status(s:job)

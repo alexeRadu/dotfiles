@@ -48,6 +48,63 @@ def get_result(response):
         if msg["type"] == "result":
             return msg
 
+def get_stop_info(response):
+    for msg in response:
+        if msg["type"] == "notify" and msg["message"] == "stopped":
+            return msg["payload"]
+
+gdb_is_running = False
+gdb_is_debugging = False
+
+def parse_response(response):
+    unused = []
+    result = False
+
+    for r in response:
+        if r["type"] == "notify":
+            if r["message"] == "stopped":
+                gdb_is_running = False
+            elif r["message"] == "running":
+                gdb_is_running = True
+            elif r["message"] == "library-loaded":
+                libinfo = r["payload"]
+                logger.debug("Gdb: library loaded: %s" % (libinfo["target-name"]))
+            elif r["message"] == "library-unloaded":
+                libinfo = r["payload"]
+                logger.debug("Gdb: library unloaded: %s" % (libinfo["target-name"]))
+            elif r["message"] == "thread-created":
+                gdb_is_debugging = True
+                logger.debug("Gdb: started debugging")
+            elif r["message"] == "thread-exited":
+                gdb_is_debugging = False
+                logger.debug("Gdb: debugging stopped")
+            elif r["message"] in ["thread-group-exited",
+                                  "thread-group-started",
+                                  "breakpoint-modified"]:   # TODO: treat this?
+                pass
+            else:
+                unused.append(r)
+
+        elif r["type"] == "log":
+            logger.debug("GDB: %s" % (r["payload"]))
+
+        elif r["type"] == "result":
+            if r["message"] == "running":
+                result = True
+
+        elif r["type"] == "console":
+            # ignore cosole output for now
+            pass
+
+        else:
+            unused.append(r)
+
+    if unused:
+        logger.debug("From GDB - not treated:\n" + pprint.pformat(unused))
+
+    return result
+
+
 try:
     while True:
         msg = vim.recv_msg()
@@ -87,6 +144,16 @@ try:
                 expr = "sign unplace %d" % (bp["number"])
                 vim.execute(expr)
                 vim.redraw()
+        elif msg["name"] == "continue":
+
+            if not gdb_is_debugging:
+                cmd = "-exec-run"
+            else:
+                cmd = "-exec-continue"
+
+            response = gdbmi.write(cmd)
+            parse_response(response)
+
         else:
             logger.debug("Unknown message name: " + msg["name"])
 
