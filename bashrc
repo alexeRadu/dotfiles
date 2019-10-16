@@ -44,22 +44,6 @@ export EDITOR=vim
 
 export PATH=${HOME}/.bin:${PATH}
 
-if [ "${platform}" = "Cygwin" ]; then
-	export DISPLAY=':0.0'
-fi
-
-if [ "$LOGNAME" == "b47441" ]; then
-	alias home='cd /home/b47441'
-
-	# env variables
-	HOME=/homedir/b47441
-	PWD=/homedir/b47441
-	PATH=${PATH}:/home/b47441/usr/bin
-
-	# other aliases
-	alias myboards='lars list boards | grep "Alexe Radu Andrei-B47441"'
-fi
-
 function get_git_branch {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
