@@ -19,32 +19,16 @@ logger.info("GDB server started")
 
 
 class Breakpoint(object):
-    def __init__(self, filepath, line):
+    def __init__(self, filepath, line, number):
         self.filepath = filepath
-        self.line     = line
-        self.number   = None
+        self.line     = str(line)
+        self.number   = str(number)
 
     def location(self):
-        return "%s:%d" % (self.filepath, self.line)
-
-    def insert(self):
-        global bkpt_info
-
-        response = gdbmi.write("-break-insert %s" % (bp.location()))
-        parse_response(response)
-
-        if bkpt_info:
-            self.number = bkpt_info["number"]
-
-    def inserted(self):
-        return True if self.number != None else False
-
-    def remove(self):
-        response = gdbmi.write("-break-delete %s" % (self.number))
-        parse_response(response)
+        return "%s:%s" % (self.filepath, self.line)
 
     def place(self):
-        expr = "sign place %s line=%d name=dbg_bp file=%s" % (self.number, self.line, self.filepath)
+        expr = "sign place %s line=%s name=dbg_bp file=%s" % (self.number, self.line, self.filepath)
         vim.execute(expr)
         vim.redraw()
 
@@ -59,34 +43,35 @@ class BreakpointDB(object):
         # TODO: investigate better solution for storing breakpoints
         self.breakpoints = []
 
-    def get(self, filepath, line):
-        bkpt = Breakpoint(filepath, line)
-
-        for bp in self.breakpoints:
-            if bp.location() == bkpt.location():
-                return bp
-
+    def add(self, bkpt):
         self.breakpoints.append(bkpt)
-        return bkpt
 
     def remove(self, bp):
         self.breakpoints.remove(bp)
+
+    def get(self, location):
+        for bp in self.breakpoints:
+            if bp.location() == location:
+                return bp
 
 bpdb = BreakpointDB()
 
 gdb_is_running = False
 gdb_is_debugging = False
-bkpt_info = None
+bp_number = None
+bp_line = None
 result = None
 pc = None
 
 def parse_response(response):
     global result
-    global bkpt_info
+    global bp_number
+    global bp_line
 
     unused = []
     result = None
-    bkpt_info = None
+    bp_number = None
+    bp_line = None
 
     for r in response:
         if r["type"] == "notify":
@@ -121,8 +106,8 @@ def parse_response(response):
             result = r["message"]
 
             if r["payload"] and "bkpt" in r["payload"]:
-                bkpt_info = r["payload"]["bkpt"]
-                unused.append(r)
+                bp_number = r["payload"]["bkpt"]["number"]
+                bp_line = r["payload"]["bkpt"]["line"]
 
         elif r["type"] == "console":
             # ignore cosole output for now
@@ -154,24 +139,43 @@ try:
         elif msg["name"] == "toggle-breakpoint":
             filepath = msg["filename"]
             line = msg["line"]
+            location = "%s:%d" % (filepath, line)
 
-            bp = bpdb.get(filepath, line)
+            bp = bpdb.get(location)
 
-            if not bp.inserted():
-                bp.insert()
-
-                if not result or result == "error":
-                    continue
-
-                bp.place()
-            else:
-                bp.remove()
+            if not bp:
+                response = gdbmi.write("-break-insert %s" % (location))
+                parse_response(response)
 
                 if not result or result == "error":
                     continue
 
-                bp.unplace()
-                bpdb.remove(bp)
+                location = "%s:%s" % (filepath, bp_line)
+
+                bp = bpdb.get(location)
+                if not bp:
+                    bp = Breakpoint(filepath, bp_line, bp_number)
+
+                    bp.place()
+                    bpdb.add(bp)
+
+                    logger.debug("Added breakpoint at %s:%s" % (bp.filepath, bp.line))
+
+                    continue
+
+                gdbmi.write("-break-remove %s" % (bp_number))
+                parse_response(response)
+
+            response = gdbmi.write("-break-delete %s" % (bp.number))
+            parse_response(response)
+
+            if not result or result == "error":
+                continue
+
+            bp.unplace()
+            bpdb.remove(bp)
+
+            logger.debug("Removed breakpoint at %s:%s" % (bp.filepath, bp.line))
 
         elif msg["name"] == "continue":
 
