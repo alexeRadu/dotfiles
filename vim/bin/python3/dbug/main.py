@@ -217,14 +217,10 @@ try:
             logger.debug("Removed breakpoint at %s:%s" % (bp.filepath, bp.line))
 
         elif msg["name"] == "continue":
-
-            if not gdb_is_debugging:
-                cmd = "-exec-run"
-            else:
-                cmd = "-exec-continue"
-
-            response = gdbmi.write(cmd)
+            response = gdbmi.write("-exec-continue")
             parse_response(response)
+
+            logger.info("Continue")
 
         else:
             logger.debug("Unknown message name: " + msg["name"])
