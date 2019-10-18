@@ -124,6 +124,9 @@ def parse_response(response):
             # ignore cosole output for now
             pass
 
+        elif r["type"] == "output":
+            pass
+
         else:
             unused.append(r)
 
@@ -160,6 +163,16 @@ try:
                 continue
 
             logger.debug("GDB connect to remote %s" % (address))
+
+        elif msg["name"] == "target-load":
+            response = gdbmi.write("-target-download")
+            parse_response(response)
+
+            if not result or result == "error":
+                logger.error("GDB unable to do target download")
+                continue
+
+            logger.debug("GDB target download successfully")
 
         elif msg["name"] == "toggle-breakpoint":
             filepath = msg["filename"]

@@ -19,15 +19,24 @@ function! DbgStartCompletion(arg_lead, cmd_line, cursor_pos)
 	return []
 endfunction
 
+function! DbgRemoteCompletion(arg_lead, cmd_line, cursor_pos)
+	if a:arg_lead == ""
+		return ["load"]
+	endif
+
+	return []
+endfunction
+
 command! -nargs=0 DbgStop					call dbug#StopDebug()
 command! -nargs=0 DbgStatus				call dbug#CheckStatus()
 command! -nargs=1 DbgSend					call dbug#SendMessage(<q-args>)
-command! -nargs=0 DbgRemote				call dbug#Remote()
 command! -nargs=0 DbgBreakpoint		call dbug#ToggleBreakpoint(bufname("%"), getcurpos()[1])
 command! -nargs=0 DbgContinue			call dbug#Continue()
 
 command! -nargs=? -complete=customlist,DbgStartCompletion Dbg
 					\ call dbug#StartDebug(<q-args>)
+command! -nargs=? -complete=customlist,DbgRemoteCompletion DbgRemote
+					\ call dbug#Remote(<q-args>)
 command! -nargs=1 -complete=file DbgLoad call dbug#LoadTarget(<q-args>)
 
 nnoremap <silent> <f9> :DbgBreakpoint<CR>

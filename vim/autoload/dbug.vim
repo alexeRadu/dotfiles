@@ -51,12 +51,17 @@ function! dbug#LoadTarget(fname)
 	call dbug#SendMessage(msg)
 endfunction
 
-function! dbug#Remote()
-	let remote = input("Remote: ", "localhost")
-	let port = input("Port: ", "3333")
+function! dbug#Remote(...)
+	if a:1 == "load"
+		let msg = {"name": "target-load"}
+		call dbug#SendMessage(msg)
+	else
+		let remote = input("Remote: ", "localhost")
+		let port = input("Port: ", "3333")
 
-	let msg = {"name": "target-remote", "remote": remote, "port": port}
-	call dbug#SendMessage(msg)
+		let msg = {"name": "target-remote", "remote": remote, "port": port}
+		call dbug#SendMessage(msg)
+	endif
 endfunction
 
 function! dbug#ToggleBreakpoint(fname, lineno)
