@@ -125,7 +125,8 @@ def parse_response(response):
             pass
 
         elif r["type"] == "output":
-            pass
+            if r["stream"] == "stdout":
+                logger.info("%s" % (r["payload"]))
 
         else:
             unused.append(r)
@@ -168,7 +169,7 @@ try:
             response = gdbmi.write("-target-download")
             parse_response(response)
 
-            if not result or result == "error":
+            if result and result == "error":
                 logger.error("GDB unable to do target download")
                 continue
 
