@@ -75,6 +75,11 @@ function! dbug#Continue()
 	call dbug#SendMessage(msg)
 endfunction
 
+function! dbug#Step()
+	let msg = {"name": "step"}
+	call dbug#SendMessage(msg)
+endfunction
+
 function! dbug#CheckStatus()
 	if exists('s:job')
 		echo "job status: " . job_status(s:job)

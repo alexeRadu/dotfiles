@@ -107,6 +107,9 @@ def parse_response(response):
                     pc.filepath = p["frame"]["fullname"]
                     pc.line     = p["frame"]["line"]
 
+                    # open file and move cursor on line
+                    vim.execute(":e %s" % (pc.filepath))
+                    vim.execute(":%s" % (pc.line))
                     pc.place()
 
                 if "reason" in p and p["reason"] == "signal-received":
@@ -253,6 +256,12 @@ try:
             parse_response(response)
 
             logger.info("Continue")
+
+        elif msg["name"] == "step":
+            response = gdbmi.write("-exec-step")
+            parse_response(response)
+
+            logger.info("Step")
 
         else:
             logger.debug("Unknown message name: " + msg["name"])
