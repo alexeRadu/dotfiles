@@ -2,6 +2,7 @@ from pygdbmi.gdbcontroller import GdbController
 import logging
 import pprint
 from vim import Vim
+import sys
 
 
 handler = logging.FileHandler('/tmp/dbug.log', 'w')
@@ -10,12 +11,29 @@ logger = logging.getLogger(__name__)
 logger.addHandler(handler)
 logger.setLevel(logging.DEBUG)
 
-gdbmi = GdbController()
-vim = Vim()
 
-vim.echo("GDB server started")
 logger.info("\n\n\n\n\n")
-logger.info("GDB server started")
+
+try:
+    if len(sys.argv) == 1:
+        gdbmi = GdbController()
+        logger.info("GDB server started")
+    elif len(sys.argv) == 2:
+        gdb_path = sys.argv[1]
+        logger.debug("gdb_path: %s" % (gdb_path))
+        gdbmi = GdbController(gdb_path = gdb_path)
+        logger.info("GDB server started %s" % (gdb_path))
+    else:
+        gdb_path = sys.argv[1]
+        gdb_args = sys.argv[2:]
+
+        gdbmi = GdbController(gdb_path = gdb_path, gdb_args = gdb_args)
+        logger.info("GDB server started %s with args %s" % (gdb_path, str(gdb_args)))
+except:
+    logger.exception("Unexpected exception")
+
+
+vim = Vim()
 
 
 class Breakpoint(object):

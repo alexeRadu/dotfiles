@@ -5,15 +5,21 @@ let g:autoloaded_dbug = 1
 
 let s:server = "/home/radu/.vim/bin/python3/dbug/main.py"
 
-function! dbug#StartServer()
+function! dbug#StartDebug(...)
 	let cmd = ['python3', s:server]
+
+	if a:1 != ""
+		let cmd = cmd + [a:1]
+	endif
+
 	let options = {'in_mode':  'json', 'out_mode': 'json'}
 
 	let s:job = job_start(cmd, options)
-endfunction
 
-function! dbug#StartDebug()
-	call dbug#StartServer()
+	if a:1 != ""
+		let fname = input("Executable: ", "/home/radu/zephyrproject/zephyr/samples/hello_world/build/zephyr/zephyr.elf", "file")
+		call dbug#LoadTarget(fname)
+	endif
 endfunction
 
 function! dbug#StopDebug()
@@ -29,8 +35,8 @@ function! dbug#LoadTarget(fname)
 		echo "File " . a:fname . " is not a valid executable"
 	endif
 
-	let first_char = strgetchar(a:fname, 0)
-	if first_char != '/' && first_char != '.'
+	let first_char = nr2char(strgetchar(a:fname, 0))
+	if first_char != '/' && first_char != '.' && first_char != '~'
 		let fname = "./" . a:fname
 	else
 		let fname = a:fname
