@@ -147,6 +147,20 @@ try:
 
             logger.debug("GDB loaded exec and symbols file: %s" % filepath)
 
+        elif msg["name"] == "target-remote":
+            remote = msg["remote"]
+            port = msg["port"]
+            address = "%s:%s" % (remote, port)
+
+            response = gdbmi.write("-target-select remote %s" % (address))
+            parse_response(response)
+
+            if not result or result == "error":
+                logger.error("GDB unable to target remote to %s" % (address))
+                continue
+
+            logger.debug("GDB connect to remote %s" % (address))
+
         elif msg["name"] == "toggle-breakpoint":
             filepath = msg["filename"]
             line = msg["line"]

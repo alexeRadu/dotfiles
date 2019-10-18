@@ -51,6 +51,14 @@ function! dbug#LoadTarget(fname)
 	call dbug#SendMessage(msg)
 endfunction
 
+function! dbug#Remote()
+	let remote = input("Remote: ", "localhost")
+	let port = input("Port: ", "3333")
+
+	let msg = {"name": "target-remote", "remote": remote, "port": port}
+	call dbug#SendMessage(msg)
+endfunction
+
 function! dbug#ToggleBreakpoint(fname, lineno)
 	let msg = {"name": "toggle-breakpoint", "filename": a:fname, "line": a:lineno}
 
