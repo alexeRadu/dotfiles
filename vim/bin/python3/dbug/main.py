@@ -28,25 +28,39 @@ except:
 
 vim = Vim()
 
-
-class Breakpoint(object):
-    def __init__(self, filepath, line, number):
+class VimSign():
+    def __init__(self, filepath, line, number, name):
         self.filepath = filepath
         self.line     = str(line)
         self.number   = str(number)
+        self.name     = name
+        self.placed    = False
+
+    def place(self):
+        if self.placed:
+            self.unplace()
+
+        expr = "sign place %s line=%s name=%s file=%s" % (self.number, self.line, self.name, self.filepath)
+        vim.execute(expr)
+        vim.redraw()
+
+        self.placed = True
+
+    def unplace(self):
+        if self.placed:
+            expr = "sign unplace %s" % (self.number)
+            vim.execute(expr)
+            vim.redraw()
+
+            self.placed = False
+
+
+class Breakpoint(VimSign):
+    def __init__(self, filepath, line, number):
+        super().__init__(filepath, line, number, "dbg_bp")
 
     def location(self):
         return "%s:%s" % (self.filepath, self.line)
-
-    def place(self):
-        expr = "sign place %s line=%s name=dbg_bp file=%s" % (self.number, self.line, self.filepath)
-        vim.execute(expr)
-        vim.redraw()
-
-    def unplace(self):
-        expr = "sign unplace %s" % (self.number)
-        vim.execute(expr)
-        vim.redraw()
 
 
 class BreakpointDB(object):
@@ -65,19 +79,19 @@ class BreakpointDB(object):
             if bp.location() == location:
                 return bp
 
+
 bpdb = BreakpointDB()
 
-gdb_is_running = False
-gdb_is_debugging = False
 bp_number = None
 bp_line = None
 result = None
-pc = None
+pc = VimSign("", "", 1000, "dbg_pc")
 
 def parse_response(response):
     global result
     global bp_number
     global bp_line
+    global pc
 
     unused = []
     result = None
@@ -87,26 +101,44 @@ def parse_response(response):
     for r in response:
         if r["type"] == "notify":
             if r["message"] == "stopped":
-                gdb_is_running = False
+                p = r["payload"]
+
+                if 'frame' in p:
+                    pc.filepath = p["frame"]["fullname"]
+                    pc.line     = p["frame"]["line"]
+
+                    pc.place()
+
+                if "reason" in p and p["reason"] == "signal-received":
+                    vim.echo("GDB: Segmentation fault")
+                    pass
+
+                unused.append(r)
+
+
             elif r["message"] == "running":
-                gdb_is_running = True
+                pass
+
             elif r["message"] == "library-loaded":
                 libinfo = r["payload"]
                 logger.debug("Gdb: library loaded: %s" % (libinfo["target-name"]))
+
             elif r["message"] == "library-unloaded":
                 libinfo = r["payload"]
                 logger.debug("Gdb: library unloaded: %s" % (libinfo["target-name"]))
+
             elif r["message"] == "thread-created":
-                gdb_is_debugging = True
                 logger.debug("Gdb: started debugging")
+
             elif r["message"] == "thread-exited":
-                gdb_is_debugging = False
                 logger.debug("Gdb: debugging stopped")
+
             elif r["message"] in ["thread-group-exited",
                                   "thread-group-started",
                                   "thread-group-added",
                                   "breakpoint-modified"]:   # TODO: treat this?
                 pass
+
             else:
                 unused.append(r)
 
