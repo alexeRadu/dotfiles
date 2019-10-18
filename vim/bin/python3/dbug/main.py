@@ -20,15 +20,8 @@ try:
         logger.info("GDB server started")
     elif len(sys.argv) == 2:
         gdb_path = sys.argv[1]
-        logger.debug("gdb_path: %s" % (gdb_path))
         gdbmi = GdbController(gdb_path = gdb_path)
         logger.info("GDB server started %s" % (gdb_path))
-    else:
-        gdb_path = sys.argv[1]
-        gdb_args = sys.argv[2:]
-
-        gdbmi = GdbController(gdb_path = gdb_path, gdb_args = gdb_args)
-        logger.info("GDB server started %s with args %s" % (gdb_path, str(gdb_args)))
 except:
     logger.exception("Unexpected exception")
 
