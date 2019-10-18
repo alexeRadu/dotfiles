@@ -116,9 +116,6 @@ def parse_response(response):
                     vim.echo("GDB: Segmentation fault")
                     pass
 
-                unused.append(r)
-
-
             elif r["message"] == "running":
                 pass
 
