@@ -13,4 +13,3 @@
 * i3 - simplify 'theme' script
 * vim - setup listchars
 * vim - test "YCM" plugin for zephyr
-* vim/dbug - add support to adding signs (for breakpoints and current PC)
