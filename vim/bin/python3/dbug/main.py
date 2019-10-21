@@ -29,7 +29,7 @@ try:
     while True:
         msg = vim.recv_msg()
 
-        if msg["name"] == "load-target":
+        if msg["name"] == "file":
             filepath = msg["path"]
 
             gdb.file_and_exec_symbols(filepath)

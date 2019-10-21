@@ -32,12 +32,12 @@ command! -nargs=0 DbgStatus				call dbug#CheckStatus()
 command! -nargs=0 DbgBreakpoint		call dbug#ToggleBreakpoint(bufname("%"), getcurpos()[1])
 command! -nargs=0 DbgContinue			call dbug#Continue()
 command! -nargs=0 DbgStep					call dbug#Step()
+command! -nargs=0 DbgFile					call dbug#File()
 
 command! -nargs=? -complete=customlist,DbgStartCompletion Dbg
 					\ call dbug#StartDebug(<q-args>)
 command! -nargs=? -complete=customlist,DbgRemoteCompletion DbgRemote
 					\ call dbug#Remote(<q-args>)
-command! -nargs=1 -complete=file DbgLoad call dbug#LoadTarget(<q-args>)
 
 nnoremap <silent> <f5>  :DbgContinue<CR>
 nnoremap <silent> <f9>  :DbgBreakpoint<CR>

@@ -15,11 +15,6 @@ function! dbug#StartDebug(...)
 	let options = {'in_mode':  'json', 'out_mode': 'json'}
 
 	let s:job = job_start(cmd, options)
-
-	if a:1 != ""
-		let fname = input("Executable: ", "/home/radu/zephyrproject/zephyr/samples/hello_world/build/zephyr/zephyr.elf", "file")
-		call dbug#LoadTarget(fname)
-	endif
 endfunction
 
 function! dbug#StopDebug()
@@ -30,24 +25,18 @@ function! dbug#StopDebug()
 	call job_stop(s:job)
 endfunction
 
-function! dbug#LoadTarget(fname)
-	if !executable(a:fname)
-		echo "File " . a:fname . " is not a valid executable"
+function! dbug#File()
+	if !exists("g:dbug_file")
+		let g:dbug_file = input("Executable: ", "/home/radu/zephyrproject/zephyr/samples/hello_world/build/zephyr/zephyr.elf", "file")
 	endif
 
-	let first_char = nr2char(strgetchar(a:fname, 0))
-	if first_char != '/' && first_char != '.' && first_char != '~'
-		let fname = "./" . a:fname
-	else
-		let fname = a:fname
+	if !executable(g:dbug_file)
+		echo "File " . g:dbug_file . " is not a valid executable"
 	endif
 
-	let fpath = exepath(fname)
-	if empty(fpath)
-		echo "DBUG: unable to find path to file " . fname
-	endif
+	let fpath = exepath(g:dbug_file)
 
-	let msg = {"name": "load-target", "path": fpath}
+	let msg = {"name": "file", "path": fpath}
 	call dbug#SendMessage(msg)
 endfunction
 
