@@ -75,6 +75,15 @@ try:
 
             logger.debug("Removed breakpoint at %s:%s" % (bp.filepath, bp.line))
 
+        elif msg["name"] == "run":
+            if not gdb.insert_bp("main"):
+                continue
+
+            bp_number = gdb.bp_number
+
+            gdb.go()
+            gdb.delete_bp(bp_number)
+
         elif msg["name"] == "continue":
             gdb.go()
 

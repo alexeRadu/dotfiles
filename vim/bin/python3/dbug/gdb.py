@@ -130,8 +130,8 @@ class Gdb:
                 self.result = r["message"]
 
                 if r["payload"] and "bkpt" in r["payload"]:
-                    self.bp_number = r["payload"]["bkpt"]["number"]
-                    self.bp_line   = r["payload"]["bkpt"]["line"]
+                    self.bp_number = r["payload"]["bkpt"].get("number", None)
+                    self.bp_line   = r["payload"]["bkpt"].get("line", None)
 
             elif r["type"] == "console":
                 # ignore cosole output for now

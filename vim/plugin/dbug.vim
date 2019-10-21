@@ -18,7 +18,8 @@ command! -nargs=0 DbgBreakpoint		call dbug#ToggleBreakpoint(bufname("%"), getcur
 command! -nargs=0 DbgContinue			call dbug#Continue()
 command! -nargs=0 DbgStep					call dbug#Step()
 
-nnoremap <silent> <f5>  :DbgContinue<CR>
+nnoremap <silent> <f5>	:call dbug#SendMessage({"name": "run"})<CR>
+nnoremap <silent> <f6>  :DbgContinue<CR>
 nnoremap <silent> <f9>  :DbgBreakpoint<CR>
 nnoremap <silent> <f10> :DbgStep<CR>
 nnoremap <silent> <f8> :call dbug#RunUntill(bufname("%"), getcurpos()[1])<CR>
