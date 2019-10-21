@@ -72,6 +72,11 @@ function! dbug#ToggleBreakpoint(fname, lineno)
 	call dbug#SendMessage(msg)
 endfunction
 
+function! dbug#Run()
+	let msg = {"name": "run"}
+	call dbug#SendMessage(msg)
+endfunction
+
 function! dbug#Continue()
 	let msg = {"name": "continue"}
 	call dbug#SendMessage(msg)

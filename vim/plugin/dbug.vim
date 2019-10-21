@@ -15,10 +15,11 @@ command! -nargs=0 DbgRemote				call dbug#Remote()
 command! -nargs=0 DbgLoad					call dbug#Load()
 
 command! -nargs=0 DbgBreakpoint		call dbug#ToggleBreakpoint(bufname("%"), getcurpos()[1])
+command! -nargs=0 DbgRun					call dbug#Run()
 command! -nargs=0 DbgContinue			call dbug#Continue()
 command! -nargs=0 DbgStep					call dbug#Step()
 
-nnoremap <silent> <f5>	:call dbug#SendMessage({"name": "run"})<CR>
+nnoremap <silent> <f5>	:DbgRun<CR>
 nnoremap <silent> <f6>  :DbgContinue<CR>
 nnoremap <silent> <f9>  :DbgBreakpoint<CR>
 nnoremap <silent> <f10> :DbgStep<CR>
