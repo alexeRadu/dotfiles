@@ -97,9 +97,6 @@ class Gdb:
                         vim.echo("GDB: Segmentation fault")
                         pass
 
-                elif r["message"] == "running":
-                    pass
-
                 elif r["message"] == "library-loaded":
                     libinfo = r["payload"]
                     logger.debug("Gdb: library loaded: %s" % (libinfo["target-name"]))
@@ -108,15 +105,12 @@ class Gdb:
                     libinfo = r["payload"]
                     logger.debug("Gdb: library unloaded: %s" % (libinfo["target-name"]))
 
-                elif r["message"] == "thread-created":
-                    logger.debug("Gdb: started debugging")
-
-                elif r["message"] == "thread-exited":
-                    logger.debug("Gdb: debugging stopped")
-
                 elif r["message"] in ["thread-group-exited",
                                       "thread-group-started",
                                       "thread-group-added",
+                                      "thread-created",
+                                      "thread-exited",
+                                      "running",
                                       "breakpoint-modified"]:   # TODO: treat this?
                     pass
 
