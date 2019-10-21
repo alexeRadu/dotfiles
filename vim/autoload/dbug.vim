@@ -8,8 +8,10 @@ let s:server = "/home/radu/.vim/bin/python3/dbug/main.py"
 function! dbug#StartDebug(...)
 	let cmd = ['python3', s:server]
 
-	if a:1 != ""
-		let cmd = cmd + [a:1]
+	if !exists("g:dbug_gdb_path")
+		let cmd = ['python3', s:server]
+	else
+		let cmd = ['python3', s:server, g:dbug_gdb_path]
 	endif
 
 	let options = {'in_mode':  'json', 'out_mode': 'json'}
