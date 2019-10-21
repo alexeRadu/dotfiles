@@ -15,6 +15,4 @@
 * vim - test "YCM" plugin for zephyr
 * vim: dbug: implement breakpoint command that takes a function name as input
 * vim: dbug: start gdb server automatically (not by hand) - maybe in python?
-* vim: dbug: move classes into their files
-* vim: dbug: incapsulate parse_response into gdb.py/class Gdb
 * vim: dbug: implement "run_to_cursor" command
