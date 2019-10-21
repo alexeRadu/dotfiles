@@ -1,7 +1,7 @@
 from pygdbmi.gdbcontroller import GdbController
 import logging
 import pprint
-from vim import Vim
+from vim import vim, VimSign
 import sys
 
 
@@ -24,35 +24,6 @@ try:
         logger.info("GDB server started %s" % (gdb_path))
 except:
     logger.exception("Unexpected exception")
-
-
-vim = Vim()
-
-class VimSign():
-    def __init__(self, filepath, line, number, name):
-        self.filepath = filepath
-        self.line     = str(line)
-        self.number   = str(number)
-        self.name     = name
-        self.placed    = False
-
-    def place(self):
-        if self.placed:
-            self.unplace()
-
-        expr = "sign place %s line=%s name=%s file=%s" % (self.number, self.line, self.name, self.filepath)
-        vim.execute(expr)
-        vim.redraw()
-
-        self.placed = True
-
-    def unplace(self):
-        if self.placed:
-            expr = "sign unplace %s" % (self.number)
-            vim.execute(expr)
-            vim.redraw()
-
-            self.placed = False
 
 
 class Breakpoint(VimSign):

@@ -2,6 +2,7 @@ import json
 import sys
 
 
+
 class VimError(Exception):
     """ Exception returned by Vim class"""
     pass
@@ -114,3 +115,37 @@ class Vim:
 
     def echo(self, msg):
         self.execute("echo \"{}\"".format(msg))
+
+
+vim = Vim()
+
+
+class VimSign():
+    def __init__(self, filepath, line, number, name):
+        self.filepath = filepath
+        self.line     = str(line)
+        self.number   = str(number)
+        self.name     = name
+        self.placed    = False
+
+    def place(self):
+        global vim
+
+        if self.placed:
+            self.unplace()
+
+        expr = "sign place %s line=%s name=%s file=%s" % (self.number, self.line, self.name, self.filepath)
+        vim.execute(expr)
+        vim.redraw()
+
+        self.placed = True
+
+    def unplace(self):
+        global vim
+
+        if self.placed:
+            expr = "sign unplace %s" % (self.number)
+            vim.execute(expr)
+            vim.redraw()
+
+            self.placed = False
