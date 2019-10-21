@@ -2,6 +2,7 @@ import logging
 from vim import vim, VimSign
 from util import BreakpointDB, Breakpoint
 import sys
+import time
 
 
 handler = logging.FileHandler('/tmp/dbug.log', 'w')
@@ -76,6 +77,10 @@ try:
             logger.debug("Removed breakpoint at %s:%s" % (bp.filepath, bp.line))
 
         elif msg["name"] == "run":
+            gdb.load()
+
+            time.sleep(1)
+
             if not gdb.insert_bp("main"):
                 continue
 
