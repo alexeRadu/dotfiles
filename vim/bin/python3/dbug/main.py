@@ -17,7 +17,6 @@ from gdb import Gdb
 
 try:
     logger.info("\n\n\n\n\n")
-    logger.info("__name__ %s" % (__name__))
 
     if len(sys.argv) == 1:
         gdb = Gdb()
