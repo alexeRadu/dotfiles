@@ -29,7 +29,6 @@ endfunction
 
 command! -nargs=0 DbgStop					call dbug#StopDebug()
 command! -nargs=0 DbgStatus				call dbug#CheckStatus()
-command! -nargs=1 DbgSend					call dbug#SendMessage(<q-args>)
 command! -nargs=0 DbgBreakpoint		call dbug#ToggleBreakpoint(bufname("%"), getcurpos()[1])
 command! -nargs=0 DbgContinue			call dbug#Continue()
 command! -nargs=0 DbgStep					call dbug#Step()
