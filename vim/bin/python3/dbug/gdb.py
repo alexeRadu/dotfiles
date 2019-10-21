@@ -28,7 +28,7 @@ class Gdb:
 
         logger.debug("GDB loaded exec and symbols file: %s" % filepath)
 
-    def target_remote(self, address):
+    def remote(self, address):
         response = self.gdbmi.write("-target-select remote %s" % (address))
         self.__parse_response(response)
 
@@ -38,15 +38,13 @@ class Gdb:
 
         logger.debug("GDB connect to remote %s" % (address))
 
-    def target_load(self):
+    def load(self):
         response = self.gdbmi.write("-target-download")
         self.__parse_response(response)
 
         if self.result and self.result == "error":
             logger.error("GDB unable to do target download")
             return
-
-        logger
 
     def insert_bp(self, location):
         response = self.gdbmi.write("-break-insert %s" % (location))

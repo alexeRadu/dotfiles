@@ -46,17 +46,20 @@ function! dbug#File()
 	call dbug#SendMessage(msg)
 endfunction
 
-function! dbug#Remote(...)
-	if a:1 == "load"
-		let msg = {"name": "target-load"}
-		call dbug#SendMessage(msg)
-	else
-		let remote = input("Remote: ", "localhost")
-		let port = input("Port: ", "3333")
-
-		let msg = {"name": "target-remote", "remote": remote, "port": port}
-		call dbug#SendMessage(msg)
+function! dbug#Remote()
+	if !exists("g:dbug_remote_hint")
+		g:dbug_remote_hint = ""
 	endif
+
+	let address = input("Remote: ", g:dbug_remote_hint)
+
+	let msg = {"name": "remote", "address": address}
+	call dbug#SendMessage(msg)
+endfunction
+
+function! dbug#Load()
+	let msg = {"name": "load"}
+	call dbug#SendMessage(msg)
 endfunction
 
 function! dbug#ToggleBreakpoint(fname, lineno)
@@ -72,6 +75,12 @@ endfunction
 
 function! dbug#Step()
 	let msg = {"name": "step"}
+	call dbug#SendMessage(msg)
+endfunction
+
+function! dbug#RunUntill(fname, lineno)
+	let msg = {"name": "run-untill", "filename": a:fname, "line": a:lineno}
+
 	call dbug#SendMessage(msg)
 endfunction
 

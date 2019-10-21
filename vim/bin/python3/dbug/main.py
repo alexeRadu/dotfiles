@@ -34,15 +34,13 @@ try:
 
             gdb.file_and_exec_symbols(filepath)
 
-        elif msg["name"] == "target-remote":
-            remote = msg["remote"]
-            port = msg["port"]
-            address = "%s:%s" % (remote, port)
+        elif msg["name"] == "remote":
+            address = msg["address"]
 
-            gdb.target_remote(address)
+            gdb.remote(address)
 
-        elif msg["name"] == "target-load":
-            gdb.target_load()
+        elif msg["name"] == "load":
+            gdb.load()
 
         elif msg["name"] == "toggle-breakpoint":
             filepath = msg["filename"]
@@ -82,6 +80,19 @@ try:
 
         elif msg["name"] == "step":
             gdb.step()
+
+        elif msg["name"] == "run-untill":
+            filepath = msg["filename"]
+            line = msg["line"]
+            location = "%s:%d" % (filepath, line)
+
+            if not gdb.insert_bp(location):
+                continue
+
+            bp_number = gdb.bp_number
+
+            gdb.go()
+            gdb.delete_bp(bp_number)
 
         else:
             logger.debug("Unknown message name: " + msg["name"])
