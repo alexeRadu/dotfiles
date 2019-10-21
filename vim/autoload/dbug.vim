@@ -17,6 +17,10 @@ function! dbug#StartDebug(...)
 	let options = {'in_mode':  'json', 'out_mode': 'json'}
 
 	let s:job = job_start(cmd, options)
+
+	if exists("g:dbug_file")
+		call dbug#File()
+	endif
 endfunction
 
 function! dbug#StopDebug()
