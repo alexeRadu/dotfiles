@@ -12,21 +12,6 @@ logger = logging.getLogger(__name__)
 logger.addHandler(handler)
 logger.setLevel(logging.DEBUG)
 
-
-logger.info("\n\n\n\n\n")
-
-try:
-    if len(sys.argv) == 1:
-        gdbmi = GdbController()
-        logger.info("GDB server started")
-    elif len(sys.argv) == 2:
-        gdb_path = sys.argv[1]
-        gdbmi = GdbController(gdb_path = gdb_path)
-        logger.info("GDB server started %s" % (gdb_path))
-except:
-    logger.exception("Unexpected exception")
-
-
 bpdb = BreakpointDB()
 
 bp_number = None
@@ -115,6 +100,16 @@ def parse_response(response):
 
 
 try:
+    logger.info("\n\n\n\n\n")
+
+    if len(sys.argv) == 1:
+        gdbmi = GdbController()
+        logger.info("GDB server started")
+    elif len(sys.argv) == 2:
+        gdb_path = sys.argv[1]
+        gdbmi = GdbController(gdb_path = gdb_path)
+        logger.info("GDB server started %s" % (gdb_path))
+
     while True:
         msg = vim.recv_msg()
 
