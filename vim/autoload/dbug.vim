@@ -27,7 +27,11 @@ endfunction
 
 function! dbug#File()
 	if !exists("g:dbug_file")
-		let g:dbug_file = input("Executable: ", "/home/radu/zephyrproject/zephyr/samples/hello_world/build/zephyr/zephyr.elf", "file")
+		if !exists("g:dbug_file_hint")
+			let g:dbug_file_hint = ""
+		endif
+
+		let g:dbug_file = input("Executable: ", g:dbug_file_hint, "file")
 	endif
 
 	if !executable(g:dbug_file)
