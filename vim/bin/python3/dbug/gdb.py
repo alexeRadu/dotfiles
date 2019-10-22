@@ -85,13 +85,14 @@ class Gdb:
                     p = r["payload"]
 
                     if 'frame' in p:
-                        self.pc.filepath = p["frame"]["fullname"]
-                        self.pc.line     = p["frame"]["line"]
+                        self.pc.filepath = p["frame"].get("fullname", None)
+                        self.pc.line     = p["frame"].get("line", None)
 
-                        # open file and move cursor on line
-                        vim.execute(":e %s" % (self.pc.filepath))
-                        vim.execute(":%s" % (self.pc.line))
-                        self.pc.place()
+                        if self.pc.filepath and self.pc.line:
+                            # open file and move cursor on line
+                            vim.execute(":e %s" % (self.pc.filepath))
+                            vim.execute(":%s" % (self.pc.line))
+                            self.pc.place()
 
                     if "reason" in p and p["reason"] == "signal-received":
                         vim.echo("GDB: Segmentation fault")
