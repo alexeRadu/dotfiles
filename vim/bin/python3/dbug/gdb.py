@@ -70,6 +70,12 @@ class Gdb:
 
         logger.info("Continue")
 
+    def pause(self):
+        self.gdbmi.interrupt_gdb()
+        response = self.gdbmi.get_gdb_response(timeout_sec=self.timeout)
+        self.__parse_response(response)
+        logger.info("Pause")
+
     def step(self):
         response = self.__write("-exec-step")
         self.__parse_response(response)

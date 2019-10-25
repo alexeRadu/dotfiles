@@ -17,10 +17,12 @@ command! -nargs=0 DbgLoad					call dbug#Load()
 command! -nargs=0 DbgBreakpoint		call dbug#ToggleBreakpoint(bufname("%"), getcurpos()[1])
 command! -nargs=0 DbgRun					call dbug#Run()
 command! -nargs=0 DbgContinue			call dbug#Continue()
+command! -nargs=0 DbgPause				call dbug#Pause()
 command! -nargs=0 DbgStep					call dbug#Step()
 
 nnoremap <silent> <f5>	:DbgRun<CR>
 nnoremap <silent> <f6>  :DbgContinue<CR>
+nnoremap <silent> <f7>	:DbgPause<CR>
 nnoremap <silent> <f9>  :DbgBreakpoint<CR>
 nnoremap <silent> <f10> :DbgStep<CR>
 nnoremap <silent> <f8> :call dbug#RunUntill(bufname("%"), getcurpos()[1])<CR>

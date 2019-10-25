@@ -82,6 +82,11 @@ function! dbug#Continue()
 	call dbug#SendMessage(msg)
 endfunction
 
+function! dbug#Pause()
+	let msg = {"name": "pause"}
+	call dbug#SendMessage(msg)
+endfunction
+
 function! dbug#Step()
 	let msg = {"name": "step"}
 	call dbug#SendMessage(msg)

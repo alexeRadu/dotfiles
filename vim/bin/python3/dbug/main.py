@@ -92,6 +92,9 @@ try:
         elif msg["name"] == "continue":
             gdb.go()
 
+        elif msg["name"] == "pause":
+            gdb.pause()
+
         elif msg["name"] == "step":
             gdb.step()
 
