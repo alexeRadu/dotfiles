@@ -149,3 +149,6 @@ let g:dbug_file_hint="/home/radu/zephyrproject/zephyr/samples/hello_world/build/
 let g:dbug_file="/home/radu/zephyrproject/zephyr/samples/hello_world/build/zephyr/zephyr.elf"
 let g:dbug_gdb_path="/home/radu/zephyr-sdk/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb"
 let g:dbug_remote_hint="localhost:3333"
+
+" Netrw {{{1
+nnoremap <silent> \ :Exp<CR>
