@@ -18,8 +18,13 @@ class Gdb:
         self.bp_line = None
         self.result = None
 
+        self.timeout = 3
+
+    def __write(self, cmd):
+        return self.gdbmi.write(cmd, timeout_sec = self.timeout)
+
     def file_and_exec_symbols(self, filepath):
-        response = self.gdbmi.write("-file-exec-and-symbols %s" % (filepath))
+        response = self.__write("-file-exec-and-symbols %s" % (filepath))
         self.__parse_response(response)
 
         if not self.result or self.result == "error":
@@ -29,7 +34,7 @@ class Gdb:
         logger.debug("GDB loaded exec and symbols file: %s" % filepath)
 
     def remote(self, address):
-        response = self.gdbmi.write("-target-select remote %s" % (address))
+        response = self.__write("-target-select remote %s" % (address))
         self.__parse_response(response)
 
         if not self.result or self.result == "error":
@@ -39,7 +44,7 @@ class Gdb:
         logger.debug("GDB connect to remote %s" % (address))
 
     def load(self):
-        response = self.gdbmi.write("-target-download")
+        response = self.__write("-target-download")
         self.__parse_response(response)
 
         if self.result and self.result == "error":
@@ -47,7 +52,7 @@ class Gdb:
             return
 
     def insert_bp(self, location):
-        response = self.gdbmi.write("-break-insert %s" % (location))
+        response = self.__write("-break-insert %s" % (location))
         self.__parse_response(response)
 
         if not self.result or self.result == "error":
@@ -56,17 +61,17 @@ class Gdb:
         return True
 
     def delete_bp(self, number):
-        response = self.gdbmi.write("-break-delete %s" % (number))
+        response = self.__write("-break-delete %s" % (number))
         self.__parse_response(response)
 
     def go(self):
-        response = self.gdbmi.write("-exec-continue")
+        response = self.__write("-exec-continue")
         self.__parse_response(response)
 
         logger.info("Continue")
 
     def step(self):
-        response = self.gdbmi.write("-exec-step")
+        response = self.__write("-exec-step")
         self.__parse_response(response)
 
         logger.info("Step")
