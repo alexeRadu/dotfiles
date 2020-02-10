@@ -1,6 +1,3 @@
-<!-- vim: tw=80 ai
--->
-
 * script to upload/manage keys for Github
 * script to upload/manage keys for Bitbucket
 * sddm - better (simpler) theme based on existing?
