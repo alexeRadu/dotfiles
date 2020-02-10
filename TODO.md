@@ -1,5 +1,3 @@
-* script to upload/manage keys for Github
-* script to upload/manage keys for Bitbucket
 * sddm - better (simpler) theme based on existing?
 * sddm - save existing theme (deepin)
 * git - update completion for git diff/add/checkout to use unstaged files
@@ -8,8 +6,3 @@
 * vim - set base16 colors
 * rofi - try
 * i3 - simplify 'theme' script
-* vim - setup listchars
-* vim - test "YCM" plugin for zephyr
-* vim: dbug: implement breakpoint command that takes a function name as input
-* vim: dbug: start gdb server automatically (not by hand) - maybe in python?
-* vim: dbug: implement "run_to_cursor" command
