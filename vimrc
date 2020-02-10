@@ -41,7 +41,7 @@ if &t_Co > 1
 	syntax on
 endif
 
-function SetColorColumn(value)
+function! SetColorColumn(value)
 	if exists('+colorcolumn')
 		let &l:colorcolumn=join(range(a:value, 256), ',')
 	endif
