@@ -12,8 +12,10 @@ let g:fff#split_direction = "nosplitbelow nosplitright"
 " Leader key; not sure yet if it is usefull but I'm willing to give it a try
 let mapleader = "\<space>"
 
-" TODO: listchars use
-" set list
+" Listchars to show better tabs/spaces demarcation
+set list
+set listchars=tab:»·
+set listchars+=space:·
 
 " Print line numbers in front of each line
 set number

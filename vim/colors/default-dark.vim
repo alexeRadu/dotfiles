@@ -75,6 +75,7 @@ hi StatusLineNC		ctermfg=245	ctermbg=237	cterm=none
 hi ColorColumn		ctermbg=237
 hi Folded		ctermfg=244	ctermbg=237
 hi VertSplit		ctermfg=244	ctermbg=none	cterm=bold
+hi SpecialKey		ctermfg=244
 
 "  Miscellaneaous {{{1
 hi ExtraWhitespace	ctermbg=1
