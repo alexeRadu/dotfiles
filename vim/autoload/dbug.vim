@@ -38,13 +38,25 @@ function! dbug#File()
 		endif
 
 		let g:dbug_file = input("Executable: ", g:dbug_file_hint, "file")
+		:redraw
+	endif
+
+	if g:dbug_file !~ "^\\(\\~/\\|/\\|\\./\\)"
+		g:dbug_file = "./" . g:dbug_file
 	endif
 
 	if !executable(g:dbug_file)
-		echo "File " . g:dbug_file . " is not a valid executable"
+		echo "File '" . g:dbug_file . "' is not a valid executable"
+		unlet g:dbug_file
+		return
 	endif
 
 	let fpath = exepath(g:dbug_file)
+	if fpath == ""
+		echo "File '" . g:dbug_file . "' is not a valid executable"
+		unlet g:dbug_file
+		return
+	endif
 
 	let msg = {"name": "file", "path": fpath}
 	call dbug#SendMessage(msg)
