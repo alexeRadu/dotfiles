@@ -1,4 +1,3 @@
-* display manager: try both cdm and Ly and see which one is better
 * git - update completion for git diff/add/checkout to use unstaged files
 * vim - set base16 colors
 * rofi - try

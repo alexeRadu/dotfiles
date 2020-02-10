@@ -81,6 +81,7 @@ function process {
 process vimrc
 process vim
 process bashrc
+process bash_profile
 process git-completion.bash
 process tmux.conf
 process emacs.d
