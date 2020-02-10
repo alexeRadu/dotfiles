@@ -14,8 +14,8 @@ let mapleader = "\<space>"
 
 " Listchars to show better tabs/spaces demarcation
 set list
-set listchars=tab:»·
-set listchars+=space:·
+set listchars=tab:\|\ 
+"set listchars+=space:·
 
 " Print line numbers in front of each line
 set number
