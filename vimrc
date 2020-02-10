@@ -41,25 +41,6 @@ if &t_Co > 1
 	syntax on
 endif
 
-function! SetColorColumn(value)
-	if exists('+colorcolumn')
-		let &l:colorcolumn=join(range(a:value, 256), ',')
-	endif
-endfunction
-
-" By default the 'colorcolumn' should be set at 80
-autocmd FileType c,h,cpp :call SetColorColumn(80)
-autocmd FileType vim :call SetColorColumn(80)
-autocmd FileType markdown :call SetColorColumn(80)
-autocmd FileType python :call SetColorColumn(80)
-
-" For certain filetypes on different projects the colorcolumn should be set to
-" a different value than the default
-
-" TODO: detect we are in a zephyr project
-" set 'colorcolumn' only for 'gitcommit' file type for the Zephyr project
-autocmd FileType gitcommit :call SetColorColumn(72)
-
 " Highlight current line
 set cursorline
 
