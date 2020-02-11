@@ -85,17 +85,16 @@ process bash_profile
 process git-completion.bash
 process tmux.conf
 process emacs.d
-process xinitrc
-process config/i3
-process config/i3status
-process config/termite
-process Xresources
-
 process bin
 
-# can be Cygwin or GNU/Linux
-platform=`uname -a | grep -oE '[^ ]+$'`
+if [[ $(uname -s) =~ ^Linux ]]; then
+	process xinitrc
+	process config/i3
+	process config/i3status
+	process config/termite
+	process Xresources
+fi
 
-if [ "${platform}" = "Cygwin" ]; then
+if [[ $(uname -s) =~ ^CYGWIN ]]; then
 	process minttyrc
 fi
