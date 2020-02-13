@@ -80,6 +80,10 @@ augroup whitespaces
 	if version >= 702
 		autocmd BufWinLeave * call clearmatches()
 	endif
+
+	" command to clear all whitespaces from the current document
+	command! -nargs=0 ClearWhitespaces :%s/\t*\zs \+\ze\t\+\|\s\+$/
+
 augroup END
 " }}}
 " Status Line {{{1
