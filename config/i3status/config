@@ -6,7 +6,7 @@ general {
 }
 
 #order += "ethernet enp0s3"
-#order += "wireless wlp2s0"
+order += "wireless wlp4s0"
 order += "volume master"
 order += "battery 0"
 order += "tztime date"
@@ -18,7 +18,7 @@ ethernet enp0s3 {
 	format_down = " <span size='small'>&#xf12a;</span> disconnected "
 }
 
-wireless wlp2s0 {
+wireless wlp4s0 {
 	format_up = " <span size='small'>&#xf1eb;</span> %essid "
 	format_down = " <span size='small'>&#xf1eb;</span> disconnected "
 }
