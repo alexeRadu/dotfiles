@@ -35,9 +35,10 @@ battery 0 {
 	last_full_capacity = true
 	format = " <span size='small'>%status</span> %percentage "
 	format_down = "No Battery"
-	status_chr = "&#x26a1;"
+	#status_chr = "&#x26a1;"
+	status_chr = "&#x1f50b;"
 	status_bat = "&#xf241;"
-	status_unk = "?"
+	status_unk = "&#xf241;"
 	status_full = "&#xf240;"
 	path = "/sys/class/power_supply/BAT%d/uevent"
 	low_threshold=10
