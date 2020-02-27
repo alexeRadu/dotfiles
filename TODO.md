@@ -5,3 +5,4 @@
 * file browser - should be portable to MinGW/CygWin/Linux
 * vim - change font on MinGW
 * plant-uml - vim syntax / auto-view in browser (on save)
+* plant-uml - configure for vim/automatic usage
