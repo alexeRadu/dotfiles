@@ -3,7 +3,6 @@
 * rofi - try
 * i3 - simplify 'theme' script
 * file browser - should be portable to MinGW/CygWin/Linux
-* vim - change font on MinGW
 * plant-uml - vim syntax / auto-view in browser (on save)
 * plant-uml - configure for vim/automatic usage
 * in case of msys make 'setup' script create links with cmd \c 'mklink target link'
