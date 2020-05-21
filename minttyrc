@@ -5,8 +5,9 @@ Rows=60
 Scrollbar=none
 ScrollbackLines=10000
 CursorType=block
-Font=Consolas
-FontHeight=9
+Font=IBM Plex Mono
+# Other font options: Source Code Pro, DM Mono
+FontHeight=10
 FontSmoothing=full
 
 CursorColour=120,81,140
