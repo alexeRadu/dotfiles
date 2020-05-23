@@ -74,7 +74,14 @@ function process {
 		return
 	fi
 
-	`ln -s $dst $src`
+	if [[ $(uname -s) =~ ^MSYS ]] ||
+		[[ $(uname -s) =~ MINGW ]]; then
+		dst=$(cygpath -w $dst)
+		src=$(cygpath -w $src)
+		cmd //c "MKLINK $src $dst"
+	else
+		`ln -s $dst $src`
+	fi
 	log "$target" "Linked .$target -> dotfiles/$target"
 }
 
@@ -95,6 +102,8 @@ if [[ $(uname -s) =~ ^Linux ]]; then
 	process Xresources
 fi
 
-if [[ $(uname -s) =~ ^CYGWIN ]]; then
+if [[ $(uname -s) =~ ^CYGWIN ]] ||
+	[[ $(uname -s) =~ ^MSYS ]] ||
+	[[ $(uname -s) =~ ^MINGW ]]; then
 	process minttyrc
 fi
