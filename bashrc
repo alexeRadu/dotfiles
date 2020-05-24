@@ -32,7 +32,9 @@ alias bb='bitbake'
 # git helpers
 source ~/.git-completion.bash
 
-[[ $(uname -s) =~ ^Linux ]] && source ~/.config/i3/scripts/theme-autocomplete
+if [[ $(uname -s) =~ ^Linux ]] && [ ! -z $(pgrep -x "i3") ]; then
+	source ~/.config/i3/scripts/theme-autocomplete
+fi
 
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold yellow)%d%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(green)- %an%C(reset)'"
 alias gist="git status"
