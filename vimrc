@@ -56,6 +56,8 @@ set modeline
 set wildmenu			" enable completion mode
 set wildmode=longest,list	" complete longest commont string then list alternatives
 
+set nowrap
+
 " {{{1 Whitespaces
 
 " Highlight extra whitespaces and remove them.
