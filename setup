@@ -94,7 +94,7 @@ process tmux.conf
 process emacs.d
 process bin
 
-if [[ $(uname -s) =~ ^Linux ]]; then
+if [[ $(uname -s) =~ ^Linux ]] && [ ! -z "$(pgrep -x 'i3')" ]; then
 	process xinitrc
 	process config/i3
 	process config/i3status
