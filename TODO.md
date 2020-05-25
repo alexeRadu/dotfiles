@@ -11,5 +11,5 @@
 * setup gitconfig user name/email on different machines (based on USER var?)
 * automatically use mintty icon
 * automatically use git credentials on new systems
-* vim: look into "vim-plug" to replace
-* vim: look into "vim-signature" to use "markers"
+* vim - look into "vim-plug" to replace
+* vim - look into "vim-signature" to use "markers"
