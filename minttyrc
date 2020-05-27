@@ -33,4 +33,3 @@ BoldWhite=215,216,217
 # * Command Line Options *
 # Settings that are the file-versions of command line options
 # They don't appear in the options dialog.
-Icon=~/dotfiles/icons/terminal.ico
