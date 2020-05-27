@@ -53,6 +53,7 @@ set background=dark
 set t_Co=256
 let base16colorspace=256
 colorscheme base16-oceanicnext
+hi CursorLineNr cterm=none
 
 " Ctags
 set tags=./tags;/
