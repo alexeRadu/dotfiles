@@ -3,6 +3,7 @@
 vim/.netrwhist
 vim/view
 vim/test/test
+vim/plugged
 
 # This is the directory that holds the files that are replaced with my dotfiles.
 # They can be restored to their original value once I am no longer the owner/

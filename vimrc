@@ -1,6 +1,10 @@
 " Packages {{{1
-" Install packages using pathogen
-execute pathogen#infect()
+call plug#begin('~/.vim/plugged')
+
+Plug 'chriskempson/base16-vim'
+
+call plug#end()
+
 syntax on
 filetype plugin indent on
 
@@ -45,7 +49,10 @@ endif
 set cursorline
 
 " Use colorscheme
-colorscheme default-dark
+set background=dark
+set t_Co=256
+let base16colorspace=256
+colorscheme base16-oceanicnext
 
 " Ctags
 set tags=./tags;/
@@ -64,6 +71,9 @@ set nowrap
 " references:
 "   http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 "   http://vim.wikia.com/wiki/Remove_unwanted_spaces
+
+hi ExtraWhitespace	ctermbg=1
+
 augroup whitespaces
 	autocmd!
 	" Detect any space withing a tab sequence and any trailing whitespace on
