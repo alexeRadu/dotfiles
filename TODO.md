@@ -1,5 +1,4 @@
 * git - update completion for git diff/add/checkout to use unstaged files
-* vim - set base16 colors
 * rofi - try
 * i3 - simplify 'theme' script
 * file browser - should be portable to MinGW/CygWin/Linux
@@ -10,6 +9,5 @@
 * setup gitconfig user name/email on different machines (based on USER var?)
 * automatically use mintty icon
 * automatically use git credentials on new systems
-* vim - look into "vim-plug" to replace
 * vim - look into "vim-signature" to use "markers"
 * setup - remove emacs and place it in a separate repo (as it already exist)
