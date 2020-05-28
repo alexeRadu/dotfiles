@@ -9,4 +9,10 @@
 * setup gitconfig user name/email on different machines (based on USER var?)
 * automatically use git credentials on new systems
 * vim - look into "vim-signature" to use "markers"
-* setup - remove emacs and place it in a separate repo (as it already exist)
+* vim - look into "vista.vim"
+* vim - look into "coc.vim" for C++
+* vim - look into "clewn.vim"
+* vim - look into "clang_complete"
+* vim - look into "fzf.vim"
+* bash - look into fzf
+* vim - look into "vim-projectile"
