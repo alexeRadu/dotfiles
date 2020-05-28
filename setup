@@ -91,7 +91,6 @@ process bashrc
 process bash_profile
 process git-completion.bash
 process tmux.conf
-process emacs.d
 process bin
 process config/base16-shell
 
