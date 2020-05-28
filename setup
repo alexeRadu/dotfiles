@@ -93,7 +93,7 @@ process git-completion.bash
 process tmux.conf
 process emacs.d
 process bin
-process config
+process config/base16-shell
 
 if [[ $(uname -s) =~ ^Linux ]] && [ ! -z "$(pgrep -x 'i3')" ]; then
 	process xinitrc
