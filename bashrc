@@ -58,3 +58,7 @@ BASE16_SHELL="$HOME/.config/base16-shell"
 if [ -s "$BASE16_SHELL/profile_helper.sh" ]; then
 	eval "$("$BASE16_SHELL/profile_helper.sh")"
 fi
+
+if [[ $(uname -s) =~ ^(MINGW|MSYS2) ]] && [ -d "/c/Program Files/nodejs" ]; then
+	export PATH=${PATH}:/c/Program\ Files/nodejs
+fi
