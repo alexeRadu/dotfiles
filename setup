@@ -92,7 +92,10 @@ process bash_profile
 process git-completion.bash
 process tmux.conf
 process bin
-process config/base16-shell
+
+if [[ $(uname -s) =~ ^MINGW ]]; then
+	process config
+fi
 
 if [[ $(uname -s) =~ ^Linux ]] && [ ! -z "$(pgrep -x 'i3')" ]; then
 	process xinitrc
