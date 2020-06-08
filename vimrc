@@ -2,11 +2,25 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'chriskempson/base16-vim'
+Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 
 call plug#end()
 
 syntax on
 filetype plugin indent on
+
+" LSP config {{{1
+set hidden
+let g:LanguageClient_serverCommands = {
+	\'cpp': ['clangd'],
+	\ }
+
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
+
+" fff File manager {{{2
+let g:fff#split = "30vnew"
+let g:fff#split_direction = "nosplitbelow nosplitright"
 
 " Basic settings {{{1
 
