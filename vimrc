@@ -9,6 +9,7 @@ syntax on
 filetype plugin indent on
 
 " Basic settings {{{1
+
 " Leader key; not sure yet if it is usefull but I'm willing to give it a try
 let mapleader = "\<space>"
 
@@ -17,14 +18,9 @@ set list
 set listchars=tab:\|\ 
 "set listchars+=space:·
 
-" Print line numbers in front of each line
+" Enable numbers and relative number (rnu)
 set number
-
-" Relative numbers (rnu)
-if exists("&rnu")
-	" For version <= 7.0.xxx rnu is not implemented
-	set rnu
-endif
+if exists("&rnu") | set rnu | endif
 
 " Disable all kinds of bells
 set noerrorbells
