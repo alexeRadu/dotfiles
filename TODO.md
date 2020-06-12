@@ -10,7 +10,6 @@
 * automatically use git credentials on new systems
 * vim - look into "vim-signature" to use "markers"
 * vim - look into "vista.vim"
-* vim - look into "coc.vim" for C++
 * vim - look into "clewn.vim"
 * vim - look into "clang_complete"
 * vim - look into "fzf.vim"
