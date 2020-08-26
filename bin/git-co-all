@@ -1,0 +1,3 @@
+#!/bin/bash
+
+git status -s | grep -e " \(D\|M\)" | cut -d" " -f 3 | xargs -L1 git checkout --
