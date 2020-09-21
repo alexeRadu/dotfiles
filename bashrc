@@ -40,6 +40,9 @@ alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold bl
 alias gist="git status"
 alias git-store-credentials="git config credential.helper store"
 
+alias cd..="cd .."
+alias ..="cd .."
+
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export TERM='xterm-256color'
