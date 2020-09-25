@@ -2,8 +2,6 @@
 * rofi - try
 * i3 - simplify 'theme' script
 * file browser - should be portable to MinGW/CygWin/Linux
-* plant-uml - vim syntax / auto-view in browser (on save)
-* plant-uml - configure for vim/automatic usage
 * make script to change used font
 * add font IBM Plex Mono to dotfiles and install them on different platforms
 * setup gitconfig user name/email on different machines (based on USER var?)
@@ -15,3 +13,5 @@
 * vim - look into "fzf.vim"
 * bash - look into fzf
 * vim - look into "vim-projectile"
+* vim - configure ctags for small c project
+* vim - small script to show c function in lswindow (see quickfix window)
