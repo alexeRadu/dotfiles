@@ -15,3 +15,5 @@
 * vim - look into "vim-projectile"
 * vim - configure ctags for small c project
 * vim - small script to show c function in lswindow (see quickfix window)
+* vim - snippets
+* vim - vim-commenter??
