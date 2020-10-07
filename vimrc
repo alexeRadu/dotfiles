@@ -2,6 +2,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'chriskempson/base16-vim'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
