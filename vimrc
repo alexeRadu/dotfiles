@@ -58,6 +58,7 @@ set wildmenu			" enable completion mode
 set wildmode=longest,list	" complete longest commont string then list alternatives
 
 set nowrap
+set noswapfile
 
 " {{{1 Whitespaces
 
