@@ -1,7 +1,7 @@
 " Packages {{{1
 call plug#begin('~/.vim/plugged')
 
-Plug 'chriskempson/base16-vim'
+Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 
 call plug#end()
@@ -43,9 +43,7 @@ set cursorline
 
 " Use colorscheme
 set background=dark
-set t_Co=256
-let base16colorspace=256
-colorscheme base16-oceanicnext
+colorscheme onedark
 hi CursorLineNr cterm=none
 
 " Ctags
