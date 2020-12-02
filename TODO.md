@@ -17,3 +17,4 @@
 * vim - small script to show c function in lswindow (see quickfix window)
 * vim - snippets
 * vim - vim-commenter??
+* vim - search for a word/selection (from code) in a directory
