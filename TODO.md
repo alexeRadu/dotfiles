@@ -22,3 +22,4 @@
 * vim - script to remove trailing whitespaces from visual selection
 * vim - script to do a regex for all function definitions and put them in the quick-list for easy navigation
 * vim - show diff using vim (both of current changes and previous commits)
+* vim - specify configs (ex. tab-size per project); how do I define a project?
