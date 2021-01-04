@@ -25,4 +25,3 @@
 * vim - specify configs (ex. tab-size per project); how do I define a project?
 * vim - count the number of matches of a patter/latest pattern (see https://vim.fandom.com/wiki/Count_number_of_matches_of_a_pattern)
 * vim - show current file in browser (on all platforms - Chrome)
-* vim - look into vim-table-mode (https://github.com/dhruvasagar/vim-table-mode)

@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
+Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 
