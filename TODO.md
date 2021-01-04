@@ -19,3 +19,5 @@
 * vim - vim-commenter??
 * vim - search for a word/selection (from code) in a directory
 * vim - install/learn how to use git-gutter
+* vim - script to remove trailing whitespaces from visual selection
+* vim - script to do a regex for all function definitions and put them in the quick-list for easy navigation
