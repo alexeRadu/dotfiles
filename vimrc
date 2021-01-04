@@ -145,3 +145,11 @@ let g:dbug_remote_hint="localhost:3333"
 
 " Netrw {{{1
 nnoremap <silent> \ :Exp<CR>
+
+" Opening in browser {{{1
+if has('win32')
+	" TODO: implement this in windows for different shells (mingw, cygwin,
+	" noshell)
+elseif has ('unix')
+	nnoremap <F5>  :execute "silent !google-chrome %:p &"<CR>
+endif
