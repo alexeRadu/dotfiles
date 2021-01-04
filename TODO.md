@@ -18,3 +18,4 @@
 * vim - snippets
 * vim - vim-commenter??
 * vim - search for a word/selection (from code) in a directory
+* vim - install/learn how to use git-gutter
