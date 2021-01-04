@@ -21,3 +21,4 @@
 * vim - install/learn how to use git-gutter
 * vim - script to remove trailing whitespaces from visual selection
 * vim - script to do a regex for all function definitions and put them in the quick-list for easy navigation
+* vim - show diff using vim (both of current changes and previous commits)
