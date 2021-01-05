@@ -151,5 +151,5 @@ if has('win32')
 	" TODO: implement this in windows for different shells (mingw, cygwin,
 	" noshell)
 elseif has ('unix')
-	nnoremap <F5>  :execute "silent !google-chrome %:p &"<CR>
+	nnoremap <F2>  :execute "silent !~/.vim/bin/open-in-browser.sh %:p"<CR>:redraw!<CR>
 endif
