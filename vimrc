@@ -151,9 +151,12 @@ nnoremap <silent> \ :Exp<CR>
 " When set open the file but keep the focus for the editor
 let g:open_in_browser_keep_focus=1
 
+" The browser used to open the file. Leave empty to use the default browser.
+" For Linux: google-chrome, firefox
+" For Windows: chrome, firefox
+let g:open_in_browser_used_browser=""
+
 if has('win32')
-	" TODO: implement this in windows for different shells (mingw, cygwin,
-	" noshell)
 elseif has('unix')
-	nnoremap <F2>  :execute "silent !~/.vim/bin/open-in-browser.sh %:p " . g:open_in_browser_keep_focus<CR>:redraw!<CR>
+	nnoremap <F2>  :execute "silent !~/.vim/bin/open-in-browser.sh %:p " . g:open_in_browser_keep_focus . " " . g:open_in_browser_used_browser<CR>:redraw!<CR>
 endif

@@ -24,6 +24,4 @@
 * vim - show diff using vim (both of current changes and previous commits)
 * vim - specify configs (ex. tab-size per project); how do I define a project?
 * vim - count the number of matches of a patter/latest pattern (see https://vim.fandom.com/wiki/Count_number_of_matches_of_a_pattern)
-* vim - show current file in browser: open using other browsers (ex. firefox)
-* vim - show current file in browser: when no browser is specified use default browser
 * vim - vim-markdown-preview - is it worth it?

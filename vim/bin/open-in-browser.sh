@@ -9,24 +9,27 @@ FILENAME=$1
 KEEP_FOCUS=$2
 if [ -z "${KEEP_FOCUS}" ]; then
 	KEEP_FOCUS=0
+	BROWSER=$2
 else
 	if [ "${KEEP_FOCUS}" != "0" ]; then
 		KEEP_FOCUS=1
 	fi
+	BROWSER=$3
 fi
 
 if [[ $(uname -s) =~ ^Linux ]]; then
 	if [ ${KEEP_FOCUS} -eq 1 ]; then
-		echo "Really"
 		# Get the window id of the current terminal. This way we can switch focus back
 		# to the terminal once the browser is open
 		term_win_id=$(xprop -root | grep -e "^_NET_ACTIVE_WINDOW" | cut -d# -f2 | sed 's/ //')
 	fi
 
-	# Open the page using the google-chrome
-	# TODO: maybe try to use the default browser and have it as option to use a
-	# certain browser
-	google-chrome ${FILENAME} >/dev/null 2>&1 &
+	# Open the page using either the provided browser or the default browser
+	if [ -z ${BROWSER} ]; then
+		BROWSER="sensible-browser"
+	fi
+
+	${BROWSER} ${FILENAME} >/dev/null 2>&1 &
 
 	if [ ${KEEP_FOCUS} -eq 1 ]; then
 		# Need to sleep at least 1s in order to be able to switch back focus. Otherwise
@@ -58,7 +61,13 @@ elif [[ $(uname -s) =~ ^MINGW ]]; then
 		term_win_hwnd=$(powershell -command - < "${SCRIPT_DIR}/get-foreground-wnd.ps1")
 	fi
 
-	start chrome $1
+	# TODO: test on windows
+	if [ -z ${BROWSER} ]; then
+		explorer ${FILENAME}
+	else
+		start ${BROWSER} ${FILENAME}
+	fi
+	# or use:
 	# powershell Start-Process chrome $1
 
 	if [ ${KEEP_FOCUS} -eq 1 ]; then
