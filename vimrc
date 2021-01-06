@@ -148,9 +148,12 @@ let g:dbug_remote_hint="localhost:3333"
 nnoremap <silent> \ :Exp<CR>
 
 " Opening in browser {{{1
+" When set open the file but keep the focus for the editor
+let g:open_in_browser_keep_focus=1
+
 if has('win32')
 	" TODO: implement this in windows for different shells (mingw, cygwin,
 	" noshell)
 elseif has('unix')
-	nnoremap <F2>  :execute "silent !~/.vim/bin/open-in-browser.sh %:p"<CR>:redraw!<CR>
+	nnoremap <F2>  :execute "silent !~/.vim/bin/open-in-browser.sh %:p " . g:open_in_browser_keep_focus<CR>:redraw!<CR>
 endif
