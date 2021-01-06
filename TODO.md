@@ -25,3 +25,5 @@
 * vim - specify configs (ex. tab-size per project); how do I define a project?
 * vim - count the number of matches of a patter/latest pattern (see https://vim.fandom.com/wiki/Count_number_of_matches_of_a_pattern)
 * vim - follow filename/link under cursor in browser
+* vim - syntax for powershell
+* vim - vim-markdown-preview - is it worth it?
