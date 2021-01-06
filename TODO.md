@@ -26,5 +26,4 @@
 * vim - count the number of matches of a patter/latest pattern (see https://vim.fandom.com/wiki/Count_number_of_matches_of_a_pattern)
 * vim - show current file in browser: open using other browsers (ex. firefox)
 * vim - show current file in browser: when no browser is specified use default browser
-* vim - follow filename/link under cursor in browser
 * vim - vim-markdown-preview - is it worth it?
