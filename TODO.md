@@ -27,5 +27,4 @@
 * vim - show current file in browser: open using other browsers (ex. firefox)
 * vim - show current file in browser: when no browser is specified use default browser
 * vim - follow filename/link under cursor in browser
-* vim - syntax for powershell
 * vim - vim-markdown-preview - is it worth it?
