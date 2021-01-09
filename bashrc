@@ -40,6 +40,15 @@ alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold bl
 alias gist="git status"
 alias git-store-credentials="git config credential.helper store"
 
+function ga {
+	FILES=`git status -s | grep --color=NEVER -e "\(.M\|??\)" | sed "s/^[[:space:]]*//g" | cut -d" " -f2 | fzf --reverse -m --no-info --height=20 --cycle` && git add $FILES
+}
+
+function gco {
+	FILES=`git status -s | grep --color=NEVER -e "^.M" | sed 's/^[[:space:]]//g' | cut -d" " -f2 | fzf --reverse -m --no-info --height=20 --cycle` && git checkout -- $FILES
+}
+
+
 alias cd..="cd .."
 alias ..="cd .."
 
