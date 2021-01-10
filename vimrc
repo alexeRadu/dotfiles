@@ -35,6 +35,11 @@ set mouse=a
 set incsearch
 set hlsearch
 
+" Search keynding: search all occurences of the word under cursor and type the
+" number of occurences in the statusline
+" For more info see: https://vim.fandom.com/wiki/Count_number_of_matches_of_a_pattern
+nnoremap ,* *<C-o>:%s///gn<CR><C-o>
+
 " Turn on the syntax highlighting only when the terminal supports colors.
 if &t_Co > 1
 	syntax on
