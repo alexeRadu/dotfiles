@@ -48,6 +48,10 @@ function gco {
 	FILES=`git status -s | grep --color=NEVER -e "^.M" | sed 's/^[[:space:]]//g' | cut -d" " -f2 | fzf --reverse -m --no-info --height=20 --cycle` && git checkout -- $FILES
 }
 
+function gd {
+	FILE=`git status -s | grep --color=NEVER -e "^.M" | sed 's/^[[:space:]]//g' | cut -d" " -f2 | fzf --reverse --no-info --height=20 --cycle` && git diff $FILE
+}
+
 
 alias cd..="cd .."
 alias ..="cd .."

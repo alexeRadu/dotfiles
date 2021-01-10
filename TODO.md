@@ -1,4 +1,3 @@
-* git - update completion for git diff/add/checkout to use unstaged files
 * rofi - try
 * i3 - simplify 'theme' script
 * file browser - should be portable to MinGW/CygWin/Linux
@@ -11,7 +10,6 @@
 * vim - look into "clewn.vim"
 * vim - look into "clang_complete"
 * vim - look into "fzf.vim"
-* bash - look into fzf
 * vim - look into "vim-projectile"
 * vim - configure ctags for small c project
 * vim - small script to show c function in lswindow (see quickfix window)
