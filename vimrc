@@ -5,11 +5,17 @@ Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'PProvost/vim-ps1'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
 syntax on
 filetype plugin indent on
+
+" FZF keymaps
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>b :Buffers<CR>
 
 " Basic settings {{{1
 

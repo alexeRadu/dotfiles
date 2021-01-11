@@ -9,7 +9,6 @@
 * vim - look into "vista.vim"
 * vim - look into "clewn.vim"
 * vim - look into "clang_complete"
-* vim - look into "fzf.vim"
 * vim - look into "vim-projectile"
 * vim - configure ctags for small c project
 * vim - small script to show c function in lswindow (see quickfix window)
