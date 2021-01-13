@@ -20,3 +20,4 @@
 * qt-neovim - make it work in windows with current setup
 * qt-neovim - make it work with coc.nvim
 * task-warrior - choose app & vim plugin to use
+* vim - checkout denite.nvim
