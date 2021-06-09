@@ -30,9 +30,9 @@ alias cl='clear'
 alias bb='bitbake'
 
 # switching to neovim
-if [[ $(uname -s) =~ ^Linux ]]; then
-	alias vim=nvim
-fi
+#if [[ $(uname -s) =~ ^Linux ]]; then
+#	alias vim=nvim
+#fi
 
 # git helpers
 source ~/.git-completion.bash

@@ -23,3 +23,4 @@
 * WSL/nvim - make nvim work with WSL
 * WSL/nvim - automatically install nvim from sources (0.5) on WSL
 * WSL - update colors to the bash/terminal
+* bash - define alias to neovim only if neovim exists
