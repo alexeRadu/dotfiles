@@ -99,12 +99,13 @@ fi
 
 if [[ $(uname -s) =~ ^Linux ]]; then
 	process config/nvim
-	if [ ! -z "$(pgrep -x 'i3')" ]; then
+	process Xresources
+
+	if pgrep -x i3; then
 		process xinitrc
 		process config/i3
 		process config/i3status
 		process config/termite
-		process Xresources
 	fi
 fi
 
