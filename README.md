@@ -8,3 +8,13 @@ To create links just run from this repository:
 ```bash
 ./setup
 ```
+
+Currently the following environments are maintained:
+
+| OS / environment      | terminal | shell      | editor       |
+|-----------------------|----------|------------|--------------|
+| Windows / Msys2/Mingw | MinTTY   | Bash       | vim          |
+| WSL / Ubuntu          | ??       | Bash       | vim / neovim |
+| Linux (Ubuntu, Arch)  |          | Bash       | vim / neovim |
+| Windows (neovim-qt)   |          | Bash / Cmd | neovim       |
+| Linux (neovim-qt)     |          | Bash       | neovim       |
