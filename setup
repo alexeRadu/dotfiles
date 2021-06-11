@@ -98,6 +98,10 @@ if [[ $(uname -s) =~ ^MINGW ]]; then
 fi
 
 if [[ $(uname -s) =~ ^Linux ]]; then
+	if [ ! -d ~/.config ]; then
+		mkdir ~/.config
+	fi
+
 	process config/nvim
 	process Xresources
 
