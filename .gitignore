@@ -1,7 +1,10 @@
 # python compiled files
 *.pyc
+
+# vim/neovim files
 vim/.netrwhist
 vim/view
+config/nvim/.netrwhist
 vim/test/test
 vim/plugged
 
