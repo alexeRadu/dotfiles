@@ -19,9 +19,5 @@
 * vim - checkout denite.nvim
 * nvim - switch to neovim (both linux/windows) [keep a simple setup for vim]
 * nvim - organize setup to easily install on windows/linux
-* WSL - update setup to take into account WSL
-* WSL/nvim - make nvim work with WSL
-* WSL/nvim - automatically install nvim from sources (0.5) on WSL
 * WSL - update colors to the bash/terminal
-* bash - define alias to neovim only if neovim exists
 * bash_profile - better condition for when to `exec startx` on linux
