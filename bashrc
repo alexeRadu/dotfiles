@@ -32,6 +32,7 @@ alias bb='bitbake'
 # switching to neovim: alias vim to neovim only if it exists
 if [ -n "$(which nvim)" ]; then
 	alias vim=nvim
+	alias vi=nvim
 fi
 
 # git helpers
