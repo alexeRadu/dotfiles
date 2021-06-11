@@ -1,10 +1,6 @@
-#
-# ~/.bash_profile
-#
+#!/bin/bash
 
-if shopt -q login_shell; then
-	[[ -f ~/.bashrc ]] && source ~/.bashrc
-	[[ -t 0 && $(tty) == /dev/tty1 && ! $DISPLAY ]] && exec startx
-else
-	exit 1 # non-bash or non-login shell
+# If bash has been invoked as a login shell run .bashrc
+if [ -f ~/.bashrc ]; then
+	source ~/.bashrc
 fi

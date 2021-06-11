@@ -24,3 +24,4 @@
 * WSL/nvim - automatically install nvim from sources (0.5) on WSL
 * WSL - update colors to the bash/terminal
 * bash - define alias to neovim only if neovim exists
+* bash_profile - better condition for when to `exec startx` on linux
