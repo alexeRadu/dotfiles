@@ -15,7 +15,6 @@
 * vim - script to do a regex for all function definitions and put them in the quick-list for easy navigation
 * vim - show diff using vim (both of current changes and previous commits)
 * vim - specify configs (ex. tab-size per project); how do I define a project?
-* qt-neovim - make it work with coc.nvim
 * vim - checkout denite.nvim
 * nvim - switch to neovim (both linux/windows) [keep a simple setup for vim]
 * nvim - organize setup to easily install on windows/linux
