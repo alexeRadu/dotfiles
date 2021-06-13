@@ -7,7 +7,6 @@
 * vim - look into "clang_complete"
 * vim - look into "vim-projectile"
 * vim - configure ctags for small c project
-* vim - snippets
 * vim - vim-commenter??
 * vim - search for a word/selection (from code) in a directory
 * vim - install/learn how to use git-gutter
@@ -16,7 +15,5 @@
 * vim - show diff using vim (both of current changes and previous commits)
 * vim - specify configs (ex. tab-size per project); how do I define a project?
 * vim - checkout denite.nvim
-* nvim - switch to neovim (both linux/windows) [keep a simple setup for vim]
-* nvim - organize setup to easily install on windows/linux
 * WSL - update colors to the bash/terminal
 * bash_profile - better condition for when to `exec startx` on linux
