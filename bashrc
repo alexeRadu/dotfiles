@@ -75,3 +75,6 @@ function get_git_branch {
 }
 
 export PS1='\u@\[\033[36m\]\h\[\033[32m\]`get_git_branch`\[\033[33m\] \w\[\033[00m\]\n\\$ '
+
+# source additional functions
+source ~/.bin/bash_utils/fzf.sh
