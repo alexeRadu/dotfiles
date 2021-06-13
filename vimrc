@@ -7,6 +7,9 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'PProvost/vim-ps1'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'lervag/vimtex'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -171,3 +174,15 @@ if has('win32')
 elseif has('unix')
 	nnoremap <F2>  :execute "silent !~/.vim/bin/open-in-browser.sh %:p " . g:open_in_browser_keep_focus . " " . g:open_in_browser_used_browser<CR>:redraw!<CR>
 endif
+
+" Latex {{{1
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+" Ultisnips {{{1
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
