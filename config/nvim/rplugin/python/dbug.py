@@ -121,12 +121,19 @@ class DbugPlugin(object):
     def dbg_load(self):
         self.gdb.write("-target-download", read_response=False)
 
-    @pynvim.command('DbgBreakpoint', nargs='?', sync=True)
-    def dbg_breakpoint_add(self, location):
-        if not location:
-            line  = self.vim.current.window.api.get_cursor()[0]
-            fname = self.vim.current.buffer.api.get_name()
-            location = "%s:%d" % (fname, line)
+    @pynvim.command('DbgBreakpoint', sync=True)
+    def dbg_breakpoint_toggle(self):
+        line  = self.vim.current.window.api.get_cursor()[0]
+        fname = self.vim.current.buffer.api.get_name()
+        location = "%s:%d" % (fname, line)
 
-        self.logger.info("Inserting breakpoint @location: %s" % location)
+        for no, bp in self.breakpoints.items():
+            if bp['line'] == line and bp['file'] == fname:
+                self.logger.info("Removing breakpoint %d at '%s'" % (no, location))
+                self.gdb.write("-break-delete %d" % no, read_response=False)
+                self.vim.command("sign unplace %d" % no)
+                del self.breakpoints[no]
+                return
+
+        self.logger.info("Inserting breakpoint at '%s'" % location)
         self.gdb.write("-break-insert %s" % location, read_response=False)
