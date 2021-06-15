@@ -42,7 +42,7 @@ class DbugPlugin(object):
             self.logger.debug("GDB: %s" % msg)
 
     def _place_bp(self, no, bp):
-        self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no, bp['line'], bp['file']))
+        self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
         self.logger.info("Placed breakpoint '%d' at '%s:%d'" % (no, bp['file'], bp['line']))
 
     def _update_pc(self, pc):
@@ -179,7 +179,7 @@ class DbugPlugin(object):
             if bp['line'] == line and bp['file'] == fname:
                 self.logger.info("Removing breakpoint %d at '%s'" % (no, location))
                 self.gdb.write("-break-delete %d" % no, read_response=False)
-                self.vim.command("sign unplace %d" % no)
+                self.vim.command("sign unplace %d" % (no + 2))
                 del self.breakpoints[no]
                 return
 
