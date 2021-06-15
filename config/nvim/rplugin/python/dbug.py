@@ -128,6 +128,10 @@ class DbugPlugin(object):
 
     @pynvim.command('DbgStop', sync=False)
     def dbg_stop(self):
+        if self.pc:
+            self.vim.command("sign unplace %d" % self.pc["number"])
+            self.pc = None
+
         self.run = False
         self.thread.join()
         self.target_disconnect()
