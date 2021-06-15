@@ -1,22 +1,13 @@
-if exists('g:autoloaded_dbug')
-	finish
-endif
-let g:autoloaded_dbug = 1
-
-let s:server = "/home/radu/.vim/bin/python3/dbug/main.py"
-
 function! dbug#StartDebug(...)
-	let cmd = ['python3', s:server]
+	let server = "/home/radu/.vim/bin/python3/dbug/main.py"
 
 	if !exists("g:dbug_gdb_path")
-		let cmd = ['python3', s:server]
+		let cmd = ['python3', server]
 	else
-		let cmd = ['python3', s:server, g:dbug_gdb_path]
+		let cmd = ['python3', server, g:dbug_gdb_path]
 	endif
 
-	let options = {'in_mode':  'json', 'out_mode': 'json'}
-
-	let s:job = job_start(cmd, options)
+	let s:job = job_start(cmd, {'in_mode': 'json', 'out_mode': 'json'})
 
 	if exists("g:dbug_file")
 		call dbug#File()
@@ -58,8 +49,7 @@ function! dbug#File()
 		return
 	endif
 
-	let msg = {"name": "file", "path": fpath}
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "file", "path": fpath})
 endfunction
 
 function! dbug#Remote()
@@ -69,45 +59,35 @@ function! dbug#Remote()
 
 	let address = input("Remote: ", g:dbug_remote_hint)
 
-	let msg = {"name": "remote", "address": address}
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "remote", "address": address})
 endfunction
 
 function! dbug#Load()
-	let msg = {"name": "load"}
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "load"})
 endfunction
 
 function! dbug#ToggleBreakpoint(fname, lineno)
-	let msg = {"name": "toggle-breakpoint", "filename": a:fname, "line": a:lineno}
-
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "toggle-breakpoint", "filename": a:fname, "line": a:lineno})
 endfunction
 
 function! dbug#Run()
-	let msg = {"name": "run"}
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "run"})
 endfunction
 
 function! dbug#Continue()
-	let msg = {"name": "continue"}
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "continue"})
 endfunction
 
 function! dbug#Pause()
-	let msg = {"name": "pause"}
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "pause"})
 endfunction
 
 function! dbug#Step()
-	let msg = {"name": "step"}
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "step"})
 endfunction
 
 function! dbug#RunUntill(fname, lineno)
-	let msg = {"name": "run-untill", "filename": a:fname, "line": a:lineno}
-
-	call dbug#SendMessage(msg)
+	call ch_sendexpr(s:job, {"name": "run-untill", "filename": a:fname, "line": a:lineno})
 endfunction
 
 function! dbug#CheckStatus()
@@ -117,8 +97,3 @@ function! dbug#CheckStatus()
 		echo "job not started"
 	endif
 endfunction
-
-function! dbug#SendMessage(msg)
-	call ch_sendexpr(s:job, a:msg)
-endfunction
-

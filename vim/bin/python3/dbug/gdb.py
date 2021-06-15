@@ -9,7 +9,7 @@ logger = logging.getLogger("__main__")
 class Gdb:
     def __init__(self, gdb_path = None):
         if gdb_path:
-            self.gdbmi = GdbController(gdb_path)
+            self.gdbmi = GdbController([gdb_path, "--interpreter=mi3"])
         else:
             self.gdbmi = GdbController()
 
@@ -25,6 +25,7 @@ class Gdb:
 
     def file_and_exec_symbols(self, filepath):
         response = self.__write("-file-exec-and-symbols %s" % (filepath))
+        logger.info("Response: " + str(response))
         self.__parse_response(response)
 
         if not self.result or self.result == "error":
@@ -52,6 +53,7 @@ class Gdb:
             return
 
     def insert_bp(self, location):
+        logger.info("Inserting breakpoint @location: " + location)
         response = self.__write("-break-insert %s" % (location))
         self.__parse_response(response)
 
@@ -61,6 +63,7 @@ class Gdb:
         return True
 
     def delete_bp(self, number):
+        logger.info("Deleting breakpoint: " + number)
         response = self.__write("-break-delete %s" % (number))
         self.__parse_response(response)
 
@@ -71,7 +74,8 @@ class Gdb:
         logger.info("Continue")
 
     def pause(self):
-        self.gdbmi.interrupt_gdb()
+        #self.gdbmi.interrupt_gdb()
+        self.__write("-exec-interrupt --all")
         response = self.gdbmi.get_gdb_response(timeout_sec=self.timeout)
         self.__parse_response(response)
         logger.info("Pause")
