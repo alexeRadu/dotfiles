@@ -12,6 +12,8 @@ class DbugPlugin(object):
         self.thread = None
         self.run = False
         self.breakpoints = {}
+        self.pc = None
+        self.pc_number = 1
 
         handler = logging.FileHandler('/tmp/dbug.log', 'w')
         handler.formatter = logging.Formatter('%(msecs)6d %(levelname)-5s   %(message)s')
@@ -43,6 +45,35 @@ class DbugPlugin(object):
         self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no, bp['line'], bp['file']))
         self.logger.info("Placed breakpoint '%d' at '%s:%d'" % (no, bp['file'], bp['line']))
 
+    def _update_pc(self, pc):
+        old_pc = None
+        if self.pc:
+            old_pc = self.pc
+            pc["number"] = (old_pc["number"] % 2) + 1
+        else:
+            pc["number"] = 1
+
+        self.pc = pc
+
+        buf_is_open = False
+        for buf in self.vim.api.list_bufs():
+            if buf.name == pc['file']:
+                self.vim.api.win_set_buf(0, buf)
+                self.vim.api.win_set_cursor(0, (pc['line'], 0))
+                buf_is_open = True
+                break
+
+        if not buf_is_open:
+            self.vim.command("e %s" % pc['file'])
+            self.vim.api.win_set_cursor(0, (pc['line'], 0))
+
+        self.vim.command("sign place %d line=%d name=dbg_pc file=%s" % (pc['number'], pc['line'], pc['file']))
+
+        # Update the old_pc here because first removing the sing and then placing
+        # when in the same file can cause flicker since the gutter is resized
+        if old_pc:
+            self.vim.command("sign unplace %s" % old_pc['number'])
+
     def parse_response(self):
         self.logger.debug("Started response parser thread")
 
@@ -64,6 +95,11 @@ class DbugPlugin(object):
 
                                     self.breakpoints[bkpt_no] = bkpt
                                     self.vim.async_call(self._place_bp, bkpt_no, bkpt)
+                                elif k in ['frame']:
+                                    if 'line' in v and 'fullname' in v:
+                                        self.logger.info("%s: %s" % (k, str(v)))
+                                        pc = {'line': int(v['line']), 'file': v['fullname']}
+                                        self.vim.async_call(self._update_pc, pc)
                                 else:
                                     self.logger.info("%s: %s" % (k, str(v)))
                     else:
@@ -120,6 +156,18 @@ class DbugPlugin(object):
     @pynvim.command('DbgLoad', sync=False)
     def dbg_load(self):
         self.gdb.write("-target-download", read_response=False)
+
+    @pynvim.command('DbgRun', sync=True)
+    def dbg_run(self):
+        self.gdb.write("-exec-continue", read_response=False)
+
+    @pynvim.command('DbgStep', sync=True)
+    def dbg_step(self):
+        self.gdb.write("-exec-step", read_response=False)
+
+    @pynvim.command('DbgNext', sync=True)
+    def dbg_next(self):
+        self.gdb.write("-exec-next", read_response=False)
 
     @pynvim.command('DbgBreakpoint', sync=True)
     def dbg_breakpoint_toggle(self):
