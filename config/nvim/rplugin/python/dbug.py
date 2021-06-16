@@ -35,6 +35,33 @@ class DbugPlugin(object):
         self.logger.info("Using '%s' as both executable and symbols file" % fname)
         self.gdb.write("-file-exec-and-symbols %s" % (fname), read_response=False)
 
+    def gdb_start(self):
+        gdb_path = self.vim.vars.get('dbug_gdb_path')
+        if not gdb_path or not os.path.isfile(gdb_path):
+            self.vim.command("echom \"Dbg: Incorrect path to gdb \"")
+            return
+
+        self.gdb = GdbController([gdb_path, "--interpreter=mi3"])
+
+        # Start the thread that listens for responses
+        self.thread = threading.Thread(target=self.parse_response)
+        self.run = True
+        self.thread.start()
+
+        self.logger.info("Started GDB debugger %s" % (gdb_path))
+
+    def gdb_stop(self):
+        # Stop the listening thread
+        self.run = False
+        self.thread.join()
+
+        # Gracefully disconnect and exit
+        self.target_disconnect()
+        self.gdb.exit()
+        self.gdb = None
+
+        self.logger.info("GDB debugger has stopped")
+
     def _pr_msg(self, hdr, messages):
         for msg in messages.split('\\n'):
             msg = msg.replace('\\"', '"')
@@ -123,14 +150,7 @@ class DbugPlugin(object):
 
     @pynvim.command('Dbg', sync=True)
     def dbg(self):
-        gdb_path = self.vim.vars.get('dbug_gdb_path')
-        self.gdb = GdbController([gdb_path, "--interpreter=mi3"])
-
-        self.thread = threading.Thread(target=self.parse_response)
-        self.run = True
-        self.thread.start()
-
-        self.logger.info("Started GDB debugger %s" % (gdb_path))
+        self.gdb_start()
 
         remote_address = self.vim.vars.get('dbug_remote_hint')
         if remote_address:
@@ -155,12 +175,8 @@ class DbugPlugin(object):
                 self.vim.command("sign unplace %d" % (no + 2))
         self.breakpoints = {}
 
-        self.run = False
-        self.thread.join()
-        self.target_disconnect()
-        self.gdb.exit()
-        self.gdb = None
-        self.logger.info("GDB debugger has stopped")
+        self.gdb_stop()
+
 
     @pynvim.command('DbgFile', nargs='?', sync=True)
     def dbg_file(self, args):
