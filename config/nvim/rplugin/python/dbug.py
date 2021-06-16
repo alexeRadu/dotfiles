@@ -128,11 +128,19 @@ class DbugPlugin(object):
         if fname:
             self.load_exec_and_symbol_file(fname)
 
+        load_on_start = self.vim.vars.get('dbug_load_on_start')
+        if load_on_start:
+            self.dbg_load()
+
     @pynvim.command('DbgStop', sync=False)
     def dbg_stop(self):
         if self.pc:
             self.vim.command("sign unplace %d" % self.pc["number"])
             self.pc = None
+
+        if len(self.breakpoints):
+            for no in self.breakpoints:
+                self.vim.command("sign unplace %d" % (no + 2))
         self.breakpoints = {}
 
         self.run = False
