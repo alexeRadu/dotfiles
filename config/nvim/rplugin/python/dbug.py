@@ -67,6 +67,7 @@ class DbugPlugin(object):
             self.vim.api.win_set_cursor(0, (pc['line'], 0))
 
         self.vim.command("sign place %d line=%d name=dbg_pc file=%s" % (pc['number'], pc['line'], pc['file']))
+        self.vim.command("normal! zz")
         self.logger.debug("Update PC at '%s:%d'" % (pc["file"], pc["line"]))
 
         # Update the old_pc here because first removing the sing and then placing
