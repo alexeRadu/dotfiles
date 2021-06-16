@@ -13,7 +13,6 @@ class DbugPlugin(object):
         self.run = False
         self.breakpoints = {}
         self.pc = None
-        self.pc_number = 1
 
         handler = logging.FileHandler('/tmp/dbug.log', 'w')
         handler.formatter = logging.Formatter('%(msecs)6d %(levelname)-5s   %(message)s')
@@ -134,6 +133,7 @@ class DbugPlugin(object):
         if self.pc:
             self.vim.command("sign unplace %d" % self.pc["number"])
             self.pc = None
+        self.breakpoints = {}
 
         self.run = False
         self.thread.join()
