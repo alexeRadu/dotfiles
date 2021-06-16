@@ -12,7 +12,9 @@ end
 
 -- Mappings for dbug plugin
 map('', '<f5>',  ':Dbg<CR>')
-map('', '<f9>',  ':DbgBreakpoint<CR>')
+map('', '<f6>',  ':DbgStop<CR>')
+map('', '<f8>',  ':DbgBreakpoint<CR>')
+map('', '<f9>',  ':DbgRun<CR>')
 map('', '<f10>', ':DbgNext<CR>')
 map('', '<f11>', ':DbgStep<CR>')
 
