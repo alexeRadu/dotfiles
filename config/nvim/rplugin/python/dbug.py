@@ -110,6 +110,8 @@ class DbugPlugin(object):
                                         # self.logger.info("%s: %s" % (k, str(v)))
                                         pc = {'line': int(v['line']), 'file': v['fullname']}
                                         self.vim.async_call(self._update_pc, pc)
+                                elif k in ['msg']:
+                                    self._pr_msg("gdb-%s" % r['type'], v)
                                 else:
                                     pass
                                     #self.logger.debug("%s: %s" % (k, str(v)))
