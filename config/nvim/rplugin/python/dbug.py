@@ -66,6 +66,11 @@ class DbugPlugin(object):
             self.vim.command("e %s" % pc['file'])
             self.vim.api.win_set_cursor(0, (pc['line'], 0))
 
+        for no, bp in self.breakpoints.items():
+            if bp["line"] == pc["line"] and bp["file"] == pc["file"]:
+                self.vim.command("sign unplace %d" % (no + 2))
+                break
+
         self.vim.command("sign place %d line=%d name=dbg_pc file=%s" % (pc['number'], pc['line'], pc['file']))
         self.vim.command("normal! zz")
         self.logger.debug("Update PC at '%s:%d'" % (pc["file"], pc["line"]))
@@ -74,6 +79,10 @@ class DbugPlugin(object):
         # when in the same file can cause flicker since the gutter is resized
         if old_pc:
             self.vim.command("sign unplace %s" % old_pc['number'])
+            for no, bp in self.breakpoints.items():
+                if bp["line"] == old_pc["line"] and bp["file"] == old_pc["file"]:
+                    self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
+                    break
 
     def parse_response(self):
         self.logger.debug("Started response parser thread")
