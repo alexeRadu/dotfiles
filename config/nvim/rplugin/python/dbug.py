@@ -36,10 +36,10 @@ class DbugPlugin(object):
         self.logger.info("Using '%s' as both executable and symbols file" % fname)
         self.gdb.write("-file-exec-and-symbols %s" % (fname), read_response=False)
 
-    def _pr_msg(self, messages):
+    def _pr_msg(self, hdr, messages):
         for msg in messages.split('\\n'):
             msg = msg.replace('\\"', '"')
-            self.logger.debug("GDB: %s" % msg)
+            self.logger.debug("%s: %s" % (hdr, msg))
 
     def _place_bp(self, no, bp):
         self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
@@ -68,6 +68,7 @@ class DbugPlugin(object):
             self.vim.api.win_set_cursor(0, (pc['line'], 0))
 
         self.vim.command("sign place %d line=%d name=dbg_pc file=%s" % (pc['number'], pc['line'], pc['file']))
+        self.logger.debug("Update PC at '%s:%d'" % (pc["file"], pc["line"]))
 
         # Update the old_pc here because first removing the sing and then placing
         # when in the same file can cause flicker since the gutter is resized
@@ -82,10 +83,10 @@ class DbugPlugin(object):
             if response:
                 for r in response:
                     if r['type'] in ['console', 'log', 'output']:
-                        self._pr_msg(r['message'] or r['payload'])
+                        self._pr_msg("gdb-%s" % r['type'], r['message'] or r['payload'])
 
                     elif r['type'] in ['notify', 'result']:
-                        self._pr_msg(r['message'])
+                        self._pr_msg("gdb-%s" % r['type'], r['message'])
 
                         if r['payload']:
                             for k, v in r['payload'].items():
@@ -97,13 +98,15 @@ class DbugPlugin(object):
                                     self.vim.async_call(self._place_bp, bkpt_no, bkpt)
                                 elif k in ['frame']:
                                     if 'line' in v and 'fullname' in v:
-                                        self.logger.info("%s: %s" % (k, str(v)))
+                                        # self.logger.info("%s: %s" % (k, str(v)))
                                         pc = {'line': int(v['line']), 'file': v['fullname']}
                                         self.vim.async_call(self._update_pc, pc)
                                 else:
-                                    self.logger.info("%s: %s" % (k, str(v)))
+                                    pass
+                                    #self.logger.debug("%s: %s" % (k, str(v)))
                     else:
-                        self.logger.info(str(r))
+                        pass
+                        #self.logger.debug(str(r))
 
         self.logger.debug("Response parser thread stopped")
 
