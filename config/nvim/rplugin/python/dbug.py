@@ -43,8 +43,11 @@ class DbugPlugin(object):
     def gdb_start(self):
         gdb_path = self.vim.vars.get('dbug_gdb_path')
         if not gdb_path or not os.path.isfile(gdb_path):
-            self.vim.command("echom \"Dbg: Incorrect path to gdb \"")
-            return
+            self.vim.command("echom \"Dbg: Using the default gdb installation\"")
+
+            # TODO: check if gdb is installed: `which gdb` on Linux (and try on
+            # windows as well)
+            gdb_path = "gdb"
 
         self.gdb = GdbController([gdb_path, "--interpreter=mi3"])
 
