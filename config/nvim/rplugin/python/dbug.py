@@ -3,6 +3,17 @@ import os
 import pynvim
 import threading
 from pygdbmi.gdbcontroller import GdbController
+import os
+import sys
+
+# for adding additional files to this plugin
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from log import setup_logging
+
+setup_logging()
+
+logger = logging.getLogger("dbug")
+error, debug, info, warn = (logger.error, logger.debug, logger.info, logger.warning)
 
 @pynvim.plugin
 class DbugPlugin(object):
@@ -14,25 +25,19 @@ class DbugPlugin(object):
         self.breakpoints = {}
         self.pc = None
 
-        handler = logging.FileHandler('/tmp/dbug.log', 'w')
-        handler.formatter = logging.Formatter('%(msecs)6d %(levelname)-5s   %(message)s')
-        self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(handler)
-        self.logger.setLevel(logging.DEBUG)
-
     def target_connect_remote(self, remote):
-        self.logger.info("Connecting remotely to %s" % remote)
+        info("Connecting remotely to %s" % remote)
         self.gdb.write("-target-select remote %s" % remote, read_response=False)
 
     def target_disconnect(self):
-        self.logger.info("Disconnecting from target")
+        info("Disconnecting from target")
         self.gdb.write("-target-disconnect", read_response=False)
 
     def load_exec_and_symbol_file(self, fname):
         if not os.path.isfile(fname):
-            self.logger.error("File '%s' doesn't exist" % (fname))
+            error("File '%s' doesn't exist" % (fname))
 
-        self.logger.info("Using '%s' as both executable and symbols file" % fname)
+        info("Using '%s' as both executable and symbols file" % fname)
         self.gdb.write("-file-exec-and-symbols %s" % (fname), read_response=False)
 
     def gdb_start(self):
@@ -48,7 +53,7 @@ class DbugPlugin(object):
         self.run = True
         self.thread.start()
 
-        self.logger.info("Started GDB debugger %s" % (gdb_path))
+        info("Started GDB debugger %s" % (gdb_path))
 
     def gdb_stop(self):
         # Stop the listening thread
@@ -60,16 +65,16 @@ class DbugPlugin(object):
         self.gdb.exit()
         self.gdb = None
 
-        self.logger.info("GDB debugger has stopped")
+        info("GDB debugger has stopped")
 
     def _pr_msg(self, hdr, messages):
         for msg in messages.split('\\n'):
             msg = msg.replace('\\"', '"')
-            self.logger.debug("%s: %s" % (hdr, msg))
+            debug("%s: %s" % (hdr, msg))
 
     def _place_bp(self, no, bp):
         self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
-        self.logger.info("Placed breakpoint '%d' at '%s:%d'" % (no, bp['file'], bp['line']))
+        info("Placed breakpoint '%d' at '%s:%d'" % (no, bp['file'], bp['line']))
 
     def _update_pc(self, pc):
         old_pc = None
@@ -100,7 +105,7 @@ class DbugPlugin(object):
 
         self.vim.command("sign place %d line=%d name=dbg_pc file=%s" % (pc['number'], pc['line'], pc['file']))
         self.vim.command("normal! zz")
-        self.logger.debug("Update PC at '%s:%d'" % (pc["file"], pc["line"]))
+        debug("Update PC at '%s:%d'" % (pc["file"], pc["line"]))
 
         # Update the old_pc here because first removing the sing and then placing
         # when in the same file can cause flicker since the gutter is resized
@@ -112,7 +117,7 @@ class DbugPlugin(object):
                     break
 
     def parse_response(self):
-        self.logger.debug("Started response parser thread")
+        debug("Started response parser thread")
 
         while self.run:
             response = self.gdb.get_gdb_response(timeout_sec=5, raise_error_on_timeout=False)
@@ -134,19 +139,19 @@ class DbugPlugin(object):
                                     self.vim.async_call(self._place_bp, bkpt_no, bkpt)
                                 elif k in ['frame']:
                                     if 'line' in v and 'fullname' in v:
-                                        # self.logger.info("%s: %s" % (k, str(v)))
+                                        # info("%s: %s" % (k, str(v)))
                                         pc = {'line': int(v['line']), 'file': v['fullname']}
                                         self.vim.async_call(self._update_pc, pc)
                                 elif k in ['msg']:
                                     self._pr_msg("gdb-%s" % r['type'], v)
                                 else:
                                     pass
-                                    #self.logger.debug("%s: %s" % (k, str(v)))
+                                    #debug("%s: %s" % (k, str(v)))
                     else:
                         pass
-                        #self.logger.debug(str(r))
+                        #debug(str(r))
 
-        self.logger.debug("Response parser thread stopped")
+        debug("Response parser thread stopped")
 
     @pynvim.command('Dbg', sync=True)
     def dbg(self):
@@ -220,11 +225,11 @@ class DbugPlugin(object):
 
         for no, bp in self.breakpoints.items():
             if bp['line'] == line and bp['file'] == fname:
-                self.logger.info("Removing breakpoint %d at '%s'" % (no, location))
+                info("Removing breakpoint %d at '%s'" % (no, location))
                 self.gdb.write("-break-delete %d" % no, read_response=False)
                 self.vim.command("sign unplace %d" % (no + 2))
                 del self.breakpoints[no]
                 return
 
-        self.logger.info("Inserting breakpoint at '%s'" % location)
+        info("Inserting breakpoint at '%s'" % location)
         self.gdb.write("-break-insert %s" % location, read_response=False)
