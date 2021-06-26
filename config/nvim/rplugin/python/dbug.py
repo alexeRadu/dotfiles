@@ -210,6 +210,10 @@ class DbugPlugin(object):
 
     @pynvim.command('DbgRun', sync=True)
     def dbg_run(self):
+        self.gdb.write("-exec-run", read_response=False)
+
+    @pynvim.command('DbgContinue', sync=True)
+    def dbg_continue(self):
         self.gdb.write("-exec-continue", read_response=False)
 
     @pynvim.command('DbgStep', sync=True)
