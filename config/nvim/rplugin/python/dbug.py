@@ -186,7 +186,7 @@ class DbugPlugin(object):
         self.gdb_stop()
 
 
-    @pynvim.command('DbgFile', nargs='?', sync=True)
+    @pynvim.command('DbgFile', nargs='?', complete="file", sync=True)
     def dbg_file(self, args):
         if len(args) == 0:
             fname = self.vim.vars.get('dbug_file')
