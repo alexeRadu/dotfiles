@@ -34,6 +34,7 @@ class DbugPlugin(object):
             self.gdb.load_exec_and_symbol_file(fname)
 
         self.gdb.download()
+        self.gdb.stack_info()
 
     @pynvim.command('DbgAttach', sync=True)
     def dbg_attach(self):
@@ -46,6 +47,8 @@ class DbugPlugin(object):
         fname = self.vim.vars.get('dbug_file')
         if fname:
             self.gdb.load_exec_and_symbol_file(fname)
+
+        self.gdb.stack_info()
 
     @pynvim.command('DbgStart', sync=True)
     def dbg_start(self):

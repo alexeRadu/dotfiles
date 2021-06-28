@@ -11,7 +11,7 @@ class Gdb(object):
         self.vim  = vim
         self.ctrl = None
         self.thread = None
-        self.run = False
+        self.running = False
         self.breakpoints = {}
         self.pc = None
 
@@ -28,7 +28,7 @@ class Gdb(object):
 
         # Start the thread that listens for responses
         self.thread = threading.Thread(target=self.parse_response)
-        self.run = True
+        self.running = True
         self.thread.start()
 
         info("Started GDB debugger %s" % (gdb_path))
@@ -46,7 +46,7 @@ class Gdb(object):
         self.breakpoints = {}
 
         # Stop the listening thread
-        self.run = False
+        self.running = False
         self.thread.join()
 
         # Gracefully disconnect and exit
@@ -100,6 +100,8 @@ class Gdb(object):
         info("Inserting breakpoint at '%s'" % location)
         self.ctrl.write("-break-insert %s" % location, read_response=False)
 
+    def stack_info(self):
+        self.ctrl.write("-stack-info-frame", read_response=False)
 
     def _pr_msg(self, hdr, messages):
         for msg in messages.split('\\n'):
@@ -153,7 +155,7 @@ class Gdb(object):
     def parse_response(self):
         debug("Started response parser thread")
 
-        while self.run:
+        while self.running:
             response = self.ctrl.get_gdb_response(timeout_sec=1, raise_error_on_timeout=False)
             if response:
                 for r in response:
