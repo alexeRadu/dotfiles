@@ -154,7 +154,7 @@ class Gdb(object):
         debug("Started response parser thread")
 
         while self.run:
-            response = self.ctrl.get_gdb_response(timeout_sec=5, raise_error_on_timeout=False)
+            response = self.ctrl.get_gdb_response(timeout_sec=1, raise_error_on_timeout=False)
             if response:
                 for r in response:
                     if r['type'] in ['console', 'log', 'output']:
