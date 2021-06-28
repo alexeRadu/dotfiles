@@ -11,12 +11,13 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Mappings for dbug plugin
-map('', '<f5>',  ':Dbg<CR>')
-map('', '<f6>',  ':DbgStop<CR>')
-map('', '<f8>',  ':DbgBreakpoint<CR>')
-map('', '<f9>',  ':DbgRun<CR>')
-map('', '<f10>', ':DbgNext<CR>')
-map('', '<f11>', ':DbgStep<CR>')
+map('', '<f5>',    ':Dbg<CR>')
+map('', '<f6>',    ':DbgAttach<CR>')
+map('', '<f7>',    ':DbgStop<CR>')
+map('', '<f9>',    ':DbgRun<CR>')
+map('', '<f10>',   ':DbgNext<CR>')
+map('', '<f11>',   ':DbgStep<CR>')
+map('', '<f12>',    ':DbgBreakpoint<CR>')
 
 api.nvim_command('set runtimepath ^=~/.vim')
 api.nvim_command('set runtimepath +=~/.vim/after')

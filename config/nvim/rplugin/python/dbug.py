@@ -33,9 +33,19 @@ class DbugPlugin(object):
         if fname:
             self.gdb.load_exec_and_symbol_file(fname)
 
-        load_on_start = self.vim.vars.get('dbug_load_on_start')
-        if load_on_start:
-            self.gdb.download()
+        self.gdb.download()
+
+    @pynvim.command('DbgAttach', sync=True)
+    def dbg_attach(self):
+        self.gdb.start()
+
+        remote_address = self.vim.vars.get('dbug_remote_hint')
+        if remote_address:
+            self.gdb.target_connect_remote(remote_address)
+
+        fname = self.vim.vars.get('dbug_file')
+        if fname:
+            self.gdb.load_exec_and_symbol_file(fname)
 
     @pynvim.command('DbgStart', sync=True)
     def dbg_start(self):
