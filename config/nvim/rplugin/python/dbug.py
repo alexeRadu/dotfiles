@@ -37,6 +37,10 @@ class DbugPlugin(object):
         if load_on_start:
             self.gdb.download()
 
+    @pynvim.command('DbgStart', sync=True)
+    def dbg_start(self):
+        self.gdb.start()
+
     @pynvim.command('DbgStop', sync=False)
     def dbg_stop(self):
         self.gdb.stop()
