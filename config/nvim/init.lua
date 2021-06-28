@@ -14,10 +14,10 @@ end
 map('', '<f5>',    ':Dbg<CR>')
 map('', '<f6>',    ':DbgAttach<CR>')
 map('', '<f7>',    ':DbgStop<CR>')
-map('', '<f9>',    ':DbgRun<CR>')
+map('', '<f9>',    ':DbgContinue<CR>')
 map('', '<f10>',   ':DbgNext<CR>')
 map('', '<f11>',   ':DbgStep<CR>')
-map('', '<f12>',    ':DbgBreakpoint<CR>')
+map('', '<f12>',   ':DbgBreakpoint<CR>')
 
 api.nvim_command('set runtimepath ^=~/.vim')
 api.nvim_command('set runtimepath +=~/.vim/after')
