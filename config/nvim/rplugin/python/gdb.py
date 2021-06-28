@@ -14,8 +14,15 @@ class Gdb(object):
         self.running = False
         self.breakpoints = {}
         self.pc = None
+        self.next_watch_no = 1
+        self.watches = {}
+        self.watch_buf = self.vim.api.create_buf(True, False)
+        self.watch_buf.name = "dbug-watch-expressions"
 
     def start(self):
+        if self.running:
+            self.stop()
+
         gdb_path = self.vim.vars.get('dbug_gdb_path')
         if not gdb_path or not os.path.isfile(gdb_path):
             self.vim.command("echom \"Dbg: Using the default gdb installation\"")
@@ -30,6 +37,8 @@ class Gdb(object):
         self.thread = threading.Thread(target=self.parse_response)
         self.running = True
         self.thread.start()
+
+        self.ctrl.write("-enable-pretty-printing", read_response=False)
 
         info("Started GDB debugger %s" % (gdb_path))
 
@@ -100,8 +109,24 @@ class Gdb(object):
         info("Inserting breakpoint at '%s'" % location)
         self.ctrl.write("-break-insert %s" % location, read_response=False)
 
+    def bp_list(self):
+        self.ctrl.write("-break-list", read_response=False)
+
     def stack_info(self):
         self.ctrl.write("-stack-info-frame", read_response=False)
+
+    def expr_watch(self, expr):
+        expr_no = self.next_watch_no
+        self.next_watch_no = self.next_watch_no + 1
+
+        expr_name = "var%d" % (expr_no)
+
+        self.watches[expr_no] = {"name": expr_name, "expr": expr}
+
+        self.ctrl.write("-var-create %s @ %s" % (expr_name, expr), read_response=False)
+
+    def expr_update(self):
+        self.ctrl.write("-var-update *", read_response=False)
 
     def _pr_msg(self, hdr, messages):
         for msg in messages.split('\\n'):
@@ -152,6 +177,24 @@ class Gdb(object):
                     self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
                     break
 
+    def _update_watches(self, n):
+        watch = self.watches[n]
+
+        if 'line' not in watch:
+            last_line = 0
+            for n, w in self.watches.items():
+                if 'line' in w and w['line'] > last_line:
+                    last_line = w['line']
+            self.watches[n]['line'] = last_line
+            watch = self.watches[n]
+
+        line = watch['line']
+        text = "{:<30s} {:<20s}[{:s}]".format(watch['expr'], watch['value'], watch['type'])
+
+        self.vim.api.buf_set_lines(self.watch_buf, 0, 0, True, [text])
+
+        info("Updated watch '%s' on line %d" % (text, line))
+
     def parse_response(self):
         debug("Started response parser thread")
 
@@ -166,6 +209,16 @@ class Gdb(object):
                         self._pr_msg("gdb-%s" % r['type'], r['message'])
 
                         if r['payload']:
+                            #debug("%s" % (r['payload']))
+
+                            if 'name' in r['payload'] and 'var' in r['payload']['name']:
+                                n = int(r['payload']['name'].split('var')[1])
+
+                                self.watches[n]['value'] = r['payload']['value']
+                                self.watches[n]['type']  = r['payload']['type']
+
+                                self.vim.async_call(self._update_watches, n)
+
                             for k, v in r['payload'].items():
                                 if k in ['bkpt']:
                                     bkpt_no = int(v['number'])
@@ -178,6 +231,16 @@ class Gdb(object):
                                         # info("%s: %s" % (k, str(v)))
                                         pc = {'line': int(v['line']), 'file': v['fullname']}
                                         self.vim.async_call(self._update_pc, pc)
+                                elif k in ['BreakpointTable']:
+                                    for bp in v["body"]:
+                                        bp_no = int(bp['number'])
+                                        bp = {'line': int(bp['line']), 'file': bp['fullname']}
+
+                                        if bp_no not in self.breakpoints:
+                                            self.breakpoints[bp_no] = bp
+                                            self.vim.async_call(self._place_bp, bp_no, bp)
+                                        else:
+                                            debug("Breakpoint %d already set '%s:%d'" % (bp_no, bp['file'], bp['line']))
                                 elif k in ['msg']:
                                     self._pr_msg("gdb-%s" % r['type'], v)
                                 else:

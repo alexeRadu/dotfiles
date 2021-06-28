@@ -35,6 +35,7 @@ class DbugPlugin(object):
 
         self.gdb.download()
         self.gdb.stack_info()
+        self.gdb.bp_list()
 
     @pynvim.command('DbgAttach', sync=True)
     def dbg_attach(self):
@@ -49,6 +50,7 @@ class DbugPlugin(object):
             self.gdb.load_exec_and_symbol_file(fname)
 
         self.gdb.stack_info()
+        self.gdb.bp_list()
 
     @pynvim.command('DbgStart', sync=True)
     def dbg_start(self):
@@ -101,3 +103,15 @@ class DbugPlugin(object):
         line  = self.vim.current.window.api.get_cursor()[0]
         fname = self.vim.current.buffer.api.get_name()
         self.gdb.bp_toggle(fname, line)
+
+    @pynvim.command('DbgBreakpointList', sync=True)
+    def dbg_breakpoint_list(self):
+        self.gdb.bp_list()
+
+    @pynvim.command('DbgWatchExpression', nargs='1', sync=True)
+    def dbg_expr_watch(self, expr):
+        self.gdb.expr_watch(expr[0])
+
+    @pynvim.command('DbgExpressionUpdate', sync=True)
+    def dbg_expr_update(self):
+        self.gdb.expr_update()
