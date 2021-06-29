@@ -18,6 +18,7 @@ class Gdb(object):
         self.watches = {}
         self.watch_buf = self.vim.api.create_buf(True, False)
         self.watch_buf.name = "dbug-watch-expressions"
+        self.vim.api.buf_set_keymap(self.watch_buf, 'n', '<leader>d', ':DbgWatchDelete<cr>', {'nowait': True})
 
     def start(self):
         if self.running:
@@ -128,6 +129,34 @@ class Gdb(object):
     def expr_update(self):
         self.ctrl.write("-var-update *", read_response=False)
 
+    def _pr_watch(self, watch):
+        line = watch['line']
+        text = "{:<30s} {:<30s}[{:s}]".format(watch['expr'], watch['value'], watch['type'])
+        self.vim.api.buf_set_lines(self.watch_buf, line, line, True, [text])
+
+    def watch_del(self, line):
+        watch = None
+        for n, w in self.watches.items():
+            if line == w["line"]:
+                watch = w
+                del self.watches[n]
+                break
+
+        if watch:
+            # update line numbers for each watch
+            for n, w in self.watches.items():
+                self.watches[n]['line'] = w['line'] - 1
+
+            # clear buffer
+            nlines = self.vim.api.buf_line_count(self.watch_buf)
+            self.vim.api.buf_set_lines(self.watch_buf, 0, nlines - 1, False, [])
+
+            # update with remaining watches
+            for n, w in self.watches.items():
+                self._pr_watch(w)
+
+            debug("Watch '{:s}' deleted".format(watch["expr"]))
+
     def _pr_msg(self, hdr, messages):
         for msg in messages.split('\\n'):
             msg = msg.replace('\\"', '"')
@@ -188,12 +217,8 @@ class Gdb(object):
             self.watches[n]['line'] = last_line
             watch = self.watches[n]
 
-        line = watch['line']
-        text = "{:<30s} {:<30s}[{:s}]".format(watch['expr'], watch['value'], watch['type'])
-
-        self.vim.api.buf_set_lines(self.watch_buf, line, line, True, [text])
-
-        info("Updated watch '%s' on line %d" % (text, line))
+        self._pr_watch(watch)
+        info("Updated watch '%s' on line %d" % (watch['expr'], watch['line']))
 
     def parse_response(self):
         debug("Started response parser thread")

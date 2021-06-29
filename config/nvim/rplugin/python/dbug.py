@@ -115,3 +115,8 @@ class DbugPlugin(object):
     @pynvim.command('DbgExpressionUpdate', sync=True)
     def dbg_expr_update(self):
         self.gdb.expr_update()
+
+    @pynvim.command('DbgWatchDelete', range=True, sync=True)
+    def dbg_watch_del(self, args):
+        line = int(args[0]) - 1
+        self.gdb.watch_del(line)
