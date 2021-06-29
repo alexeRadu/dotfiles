@@ -183,15 +183,15 @@ class Gdb(object):
         if 'line' not in watch:
             last_line = 0
             for n, w in self.watches.items():
-                if 'line' in w and w['line'] > last_line:
-                    last_line = w['line']
+                if 'line' in w and w['line'] >= last_line:
+                    last_line = w['line'] + 1
             self.watches[n]['line'] = last_line
             watch = self.watches[n]
 
         line = watch['line']
-        text = "{:<30s} {:<20s}[{:s}]".format(watch['expr'], watch['value'], watch['type'])
+        text = "{:<30s} {:<30s}[{:s}]".format(watch['expr'], watch['value'], watch['type'])
 
-        self.vim.api.buf_set_lines(self.watch_buf, 0, 0, True, [text])
+        self.vim.api.buf_set_lines(self.watch_buf, line, line, True, [text])
 
         info("Updated watch '%s' on line %d" % (text, line))
 
