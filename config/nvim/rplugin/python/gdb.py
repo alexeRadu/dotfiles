@@ -134,6 +134,11 @@ class Gdb(object):
         text = "{:<30s} {:<30s}[{:s}]".format(watch['expr'], watch['value'], watch['type'])
         self.vim.api.buf_set_lines(self.watch_buf, line, line, True, [text])
 
+    def _watch_refresh(self):
+        self.vim.api.buf_set_lines(self.watch_buf, 0, -1, False, [])
+        for n, w in self.watches.items():
+            self._pr_watch(w)
+
     def watch_del(self, line):
         watch = None
         for n, w in self.watches.items():
@@ -148,14 +153,7 @@ class Gdb(object):
                 if w['line'] > watch['line']:
                     self.watches[n]['line'] = w['line'] - 1
 
-            # clear buffer
-            nlines = self.vim.api.buf_line_count(self.watch_buf)
-            self.vim.api.buf_set_lines(self.watch_buf, 0, nlines - 1, False, [])
-
-            # update with remaining watches
-            for n, w in self.watches.items():
-                self._pr_watch(w)
-
+            self._watch_refresh()
             debug("Watch '{:s}' deleted".format(watch["expr"]))
 
     def _pr_msg(self, hdr, messages):
@@ -221,6 +219,18 @@ class Gdb(object):
         self._pr_watch(watch)
         info("Updated watch '%s' on line %d" % (watch['expr'], watch['line']))
 
+    def _watch_update(self, var):
+        response = self.ctrl.write("-var-evaluate-expression %s" % (var), read_response=True)
+        for r in response:
+            for k, v in r.items():
+                if k in ['payload']:
+                    n = int(var.split("var")[1])
+                    self.watches[n]["value"] = v['value']
+                    self.vim.async_call(self._watch_refresh)
+
+                    debug("Watch's %s value changed to %s" % (var, v['value']))
+
+
     def parse_response(self):
         debug("Started response parser thread")
 
@@ -235,8 +245,6 @@ class Gdb(object):
                         self._pr_msg("gdb-%s" % r['type'], r['message'])
 
                         if r['payload']:
-                            #debug("%s" % (r['payload']))
-
                             if 'name' in r['payload'] and 'var' in r['payload']['name']:
                                 n = int(r['payload']['name'].split('var')[1])
 
@@ -257,6 +265,9 @@ class Gdb(object):
                                         # info("%s: %s" % (k, str(v)))
                                         pc = {'line': int(v['line']), 'file': v['fullname']}
                                         self.vim.async_call(self._update_pc, pc)
+
+                                        # Update any watch that may be used
+                                        self.ctrl.write("-var-update *", read_response=False)
                                 elif k in ['BreakpointTable']:
                                     for bp in v["body"]:
                                         bp_no = int(bp['number'])
@@ -269,6 +280,9 @@ class Gdb(object):
                                             debug("Breakpoint %d already set '%s:%d'" % (bp_no, bp['file'], bp['line']))
                                 elif k in ['msg']:
                                     self._pr_msg("gdb-%s" % r['type'], v)
+                                elif k in ['changelist']:
+                                    for w in v:
+                                        self._watch_update(w['name'])
                                 else:
                                     pass
                                     #debug("%s: %s" % (k, str(v)))
