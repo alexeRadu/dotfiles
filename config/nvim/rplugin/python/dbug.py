@@ -109,8 +109,8 @@ class DbugPlugin(object):
         self.gdb.bp_list()
 
     @pynvim.command('DbgWatchExpression', nargs='1', sync=True)
-    def dbg_expr_watch(self, expr):
-        self.gdb.expr_watch(expr[0])
+    def dbg_expr_watch(self, args):
+        self.gdb.expr_watch(args[0])
 
     @pynvim.command('DbgExpressionUpdate', sync=True)
     def dbg_expr_update(self):
