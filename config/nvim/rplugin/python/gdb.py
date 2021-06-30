@@ -145,7 +145,8 @@ class Gdb(object):
         if watch:
             # update line numbers for each watch
             for n, w in self.watches.items():
-                self.watches[n]['line'] = w['line'] - 1
+                if w['line'] > watch['line']:
+                    self.watches[n]['line'] = w['line'] - 1
 
             # clear buffer
             nlines = self.vim.api.buf_line_count(self.watch_buf)

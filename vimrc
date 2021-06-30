@@ -158,6 +158,18 @@ let g:dbug_file="/mnt/c/nxp/ot-nxp/build_k32w1/openthread/examples/apps/cli/ot-c
 let g:dbug_gdb_path="/usr/local/bin/arm-none-eabi-gdb"
 let g:dbug_remote_hint="localhost:2331"
 
+function! DbugWatchExpression(type)
+	if a:type ==# 'v'
+		execute "normal! `<v`>y"
+	else
+		return
+	endif
+
+	silent execute "DbgWatchExpression " .  @@
+endfunction
+
+vnoremap <leader>w :<c-u>call DbugWatchExpression(visualmode())<cr>
+
 " Netrw {{{1
 nnoremap <silent> \ :Exp<CR>
 
