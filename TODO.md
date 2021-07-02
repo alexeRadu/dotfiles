@@ -17,7 +17,6 @@
 * vim - checkout denite.nvim
 * WSL - update colors to the bash/terminal
 * bash_profile - better condition for when to `exec startx` on linux
-* nvim: dbug: - make 'watches' window read-only/not request save ?? (investigation is needed)
 * nvim: dbug: - if a watch expression exists don't add another one just like it
 * nvim: dbug: - investigate error with breakpoints (it seems that there are multiple BPs)
 * nvim: dbug: - list BPs
