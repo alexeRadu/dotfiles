@@ -15,12 +15,19 @@ class Gdb(object):
         self.breakpoints = {}
         self.pc = None
         self.next_watch_no = 1
+
+        # --- watches
         self.watches = {}
         self.watch_buf = self.vim.api.create_buf(True, False)
         self.watch_buf.name = "dbug-watch-expressions"
         self.watch_buf.api.set_option("bt", "nofile")
         #self.watch_buf.api.set_option("readonly", True)
         self.vim.api.buf_set_keymap(self.watch_buf, 'n', '<leader>d', ':DbgWatchDelete<cr>', {'nowait': True})
+
+        # --- backtrace
+        self.bt_buf = self.vim.api.create_buf(True, False)
+        self.bt_buf.name = "dbug-backtrace"
+        self.bt_buf.api.set_option("bt", "nofile")
 
     def start(self):
         if self.running:
@@ -117,6 +124,9 @@ class Gdb(object):
 
     def stack_info(self):
         self.ctrl.write("-stack-info-frame", read_response=False)
+
+    def stack_list(self):
+        self.ctrl.write("-stack-list-frames", read_response=False)
 
     def expr_watch(self, expr):
         expr_no = self.next_watch_no
@@ -232,6 +242,16 @@ class Gdb(object):
 
                     debug("Watch's %s value changed to %s" % (var, v['value']))
 
+    def _bt_update(self, data):
+        # clear window
+        self.vim.api.buf_set_lines(self.bt_buf, 0, -1, False, [])
+
+        n = 0
+        for line in data:
+            text = "{:<30s} {:<s}:{:s}".format(line['func'], line['file'], line['line'])
+            self.vim.api.buf_set_lines(self.bt_buf, n, n, True, [text])
+            n = n + 1
+            #debug("--> " + str(line))
 
     def parse_response(self):
         debug("Started response parser thread")
@@ -285,10 +305,16 @@ class Gdb(object):
                                 elif k in ['changelist']:
                                     for w in v:
                                         self._watch_update(w['name'])
+
+                                elif k in ['stack']:
+                                    self.vim.async_call(self._bt_update, v)
+
                                 else:
-                                    pass
-                                    #debug("%s: %s" % (k, str(v)))
+                                    #pass
+                                    debug("%s: %s" % (k, str(v)))
                     else:
-                        pass
-                        #debug(str(r))
+                        #pass
+                        debug("")
+                        debug(str(r))
+                        debug("")
         debug("Response parser thread stopped")

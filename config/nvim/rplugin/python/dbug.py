@@ -120,3 +120,7 @@ class DbugPlugin(object):
     def dbg_watch_del(self, args):
         line = int(args[0]) - 1
         self.gdb.watch_del(line)
+
+    @pynvim.command('DbgBacktrace', sync=True)
+    def dbg_backtrace(self):
+        self.gdb.stack_list()
