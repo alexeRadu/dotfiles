@@ -1,10 +1,15 @@
 import logging
 from pygdbmi.gdbcontroller import GdbController
 import os
+import sys
 import threading
 
 logger = logging.getLogger("dbug")
 error, debug, info, warn = (logger.error, logger.debug, logger.info, logger.warning)
+
+# for adding additional files to this plugin
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from backtrace import Backtrace
 
 class Gdb(object):
     def __init__(self, vim):
@@ -24,10 +29,7 @@ class Gdb(object):
         #self.watch_buf.api.set_option("readonly", True)
         self.vim.api.buf_set_keymap(self.watch_buf, 'n', '<leader>d', ':DbgWatchDelete<cr>', {'nowait': True})
 
-        # --- backtrace
-        self.bt_buf = self.vim.api.create_buf(True, False)
-        self.bt_buf.name = "dbug-backtrace"
-        self.bt_buf.api.set_option("bt", "nofile")
+        self.bt = Backtrace(vim)
 
     def start(self):
         if self.running:
@@ -242,17 +244,6 @@ class Gdb(object):
 
                     debug("Watch's %s value changed to %s" % (var, v['value']))
 
-    def _bt_update(self, data):
-        # clear window
-        self.vim.api.buf_set_lines(self.bt_buf, 0, -1, False, [])
-
-        n = 0
-        for line in data:
-            text = "{:<30s} {:<s}:{:s}".format(line['func'], line['file'], line['line'])
-            self.vim.api.buf_set_lines(self.bt_buf, n, n, True, [text])
-            n = n + 1
-            #debug("--> " + str(line))
-
     def parse_response(self):
         debug("Started response parser thread")
 
@@ -307,7 +298,7 @@ class Gdb(object):
                                         self._watch_update(w['name'])
 
                                 elif k in ['stack']:
-                                    self.vim.async_call(self._bt_update, v)
+                                    self.vim.async_call(self.bt.update, v)
 
                                 else:
                                     #pass
