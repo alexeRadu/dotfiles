@@ -17,8 +17,14 @@ class Backtrace(object):
 
         n = 0
         for line in data:
-            text = "{:<30s} {:<s}:{:s}".format(line['func'], line['file'], line['line'])
+            debug("--> " + str(line))
+
+            text = "{:s}:".format(line['addr'])
+            if 'file' in line:
+                text = text + "{:30s} {:<s}:{:s}".format(line['func'], line['file'], line['line'])
+            else:
+                text = text + "{:s}".format(line['func'])
+
             self.vim.api.buf_set_lines(self.buf, n, n, True, [text])
             n = n + 1
-            #debug("--> " + str(line))
 
