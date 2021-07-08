@@ -74,6 +74,11 @@ set wildmode=longest,list	" complete longest commont string then list alternativ
 set nowrap
 set noswapfile
 
+" {{{1 Find functions in C Files
+nnoremap <leader>f :vimgrep /^\(\(phyStatus_t\\|static\\|void\\|int8_t\\|otError\\|otRadioState\\|otRadioCaps\\|bool\)\s\+\)\+\(\w\)\+(/ %<CR>
+nnoremap <leader>n :cn<CR>
+nnoremap <leader>p :cp<CR>
+
 " {{{1 Whitespaces
 
 " Highlight extra whitespaces and remove them.
