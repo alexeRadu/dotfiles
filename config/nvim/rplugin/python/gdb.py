@@ -10,6 +10,7 @@ error, debug, info, warn = (logger.error, logger.debug, logger.info, logger.warn
 # for adding additional files to this plugin
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from backtrace import Backtrace
+from breakpoint import BPList, Breakpoint
 
 class Gdb(object):
     def __init__(self, vim):
@@ -30,6 +31,7 @@ class Gdb(object):
         self.vim.api.buf_set_keymap(self.watch_buf, 'n', '<leader>d', ':DbgWatchDelete<cr>', {'nowait': True})
 
         self.bt = Backtrace(vim)
+        self.bplist = BPList(vim)
 
     def start(self):
         if self.running:
@@ -108,7 +110,15 @@ class Gdb(object):
         self.ctrl.write("-exec-next", read_response=False)
 
     def bp_toggle(self, fname, line):
-        location = "%s:%d" % (fname, line)
+        bp = Breakpoint(fname, line)
+
+        if not bp in self.bplist:
+            self.ctrl.write(f'-break-insert {bp}', read_response=False)
+        else:
+            self.ctrl.write(f'-break-delete {bp}', read_response=False)
+            pass
+
+        return
 
         for no, bp in self.breakpoints.items():
             if bp['line'] == line and bp['file'] == fname:
@@ -118,7 +128,6 @@ class Gdb(object):
                 del self.breakpoints[no]
                 return
 
-        info("Inserting breakpoint at '%s'" % location)
         self.ctrl.write("-break-insert %s" % location, read_response=False)
 
     def bp_list(self):
@@ -268,11 +277,11 @@ class Gdb(object):
 
                             for k, v in r['payload'].items():
                                 if k in ['bkpt']:
-                                    bkpt_no = int(v['number'])
-                                    bkpt = {'line': int(v['line']), 'file': v['fullname']}
+                                    # This is after the command '-break-insert' has been issued
+                                    # debug("%s: %s" % (k, str(v)))
 
-                                    self.breakpoints[bkpt_no] = bkpt
-                                    self.vim.async_call(self._place_bp, bkpt_no, bkpt)
+                                    bp = Breakpoint(v['fullname'], int(v['line']), int(v['number']))
+                                    self.vim.async_call(self.bplist.add, bp)
                                 elif k in ['frame']:
                                     if 'line' in v and 'fullname' in v:
                                         # info("%s: %s" % (k, str(v)))
@@ -282,6 +291,7 @@ class Gdb(object):
                                         # Update any watch that may be used
                                         self.ctrl.write("-var-update *", read_response=False)
                                 elif k in ['BreakpointTable']:
+                                    debug("-------")
                                     for bp in v["body"]:
                                         bp_no = int(bp['number'])
                                         bp = {'line': int(bp['line']), 'file': bp['fullname']}
