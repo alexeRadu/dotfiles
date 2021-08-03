@@ -179,11 +179,6 @@ class Gdb(object):
             self._watch_refresh()
             debug("Watch '{:s}' deleted".format(watch["expr"]))
 
-    def _pr_msg(self, hdr, messages):
-        for msg in messages.split('\\n'):
-            msg = msg.replace('\\"', '"')
-            debug("%s: %s" % (hdr, msg))
-
     def _place_bp(self, no, bp):
         self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
         info("Placed breakpoint '%d' at '%s:%d'" % (no, bp['file'], bp['line']))
@@ -253,69 +248,99 @@ class Gdb(object):
 
                     debug("Watch's %s value changed to %s" % (var, v['value']))
 
+    ### PRINT FUNCTIONS
+    ### Used for logging messages from GDB; they exist because the string has
+    ### to be modified (escaped) before printed to the screen
+
+    def _info(self, hdr, msg):
+        if msg:
+            for m in msg.split('\\n'):
+                m = m.replace('\\"', '"')
+                info("%s: %s" % (hdr, m))
+
+    def _debug(self, hdr, msg):
+        if msg:
+            for m in msg.split('\\n'):
+                m = m.replace('\\"', '"')
+                debug("%s: %s" % (hdr, m))
+
+    ### PARSING THE RESPONSE
+    ### This function if run by a thread, waits in a loop for messages from GDB
+    ### and then calls the corresponding handling functions
+
     def parse_response(self):
         debug("Started response parser thread")
 
         while self.running:
             response = self.ctrl.get_gdb_response(timeout_sec=1, raise_error_on_timeout=False)
-            if response:
-                for r in response:
-                    if r['type'] in ['console', 'log', 'output']:
-                        self._pr_msg("gdb-%s" % r['type'], r['message'] or r['payload'])
 
-                    elif r['type'] in ['notify', 'result']:
-                        self._pr_msg("gdb-%s" % r['type'], r['message'])
+            # The response is a list of dictionaries with each entry in the list
+            # of the form:
+            # {'type': '', 'message': '', 'payload': ''}
+            #
+            # where:
+            # type    := 'console' | 'log' | 'output' | 'result' | 'notify'
+            # message := None | 'Some message'
+            # payload := None | 'Some message' | a dictionary/list carrying more information
+            #
+            # the other fields are ignored
 
-                        if r['payload']:
-                            if 'name' in r['payload'] and 'var' in r['payload']['name']:
-                                n = int(r['payload']['name'].split('var')[1])
+            for r in response:
+                debug('--------')
+                debug(r)
 
-                                self.watches[n]['value'] = r['payload']['value']
-                                self.watches[n]['type']  = r['payload']['type']
+                # The information that is printed on the screen can be found in the
+                # 'message' field (if not None) and in the 'payload' field if it is
+                # of string type; additionally it can be found int r['payload']['msg']
+                # if 'payload' is a dictionary
+                self._info(f"gdb-{r['type']}[m]", r['message'] if r['message'] else None)
+                self._info(f"gdb-{r['type']}[p]", r['payload'] if type(r['payload']) == type('') else None)
+                self._info(f"gdb-{r['type']}", r['payload']['msg'] if type(r['payload']) == type({}) and 'msg' in r['payload'] else None)
 
-                                self.vim.async_call(self._update_watches, n)
+                if r['type'] in ['notify', 'result'] and type(r['payload']) == type({}):
+                    # When the 'payload' field is a dictionary is as a response to a command
+                    # and carries additional information that is used
+                    # The contents of the 'payload' is dependent on the command sent and
 
-                            for k, v in r['payload'].items():
-                                if k in ['bkpt']:
-                                    # This is after the command '-break-insert' has been issued
-                                    # debug("%s: %s" % (k, str(v)))
+                    for k, v in r['payload'].items():
+                        if k in ['name'] and 'var' in r['payload']['name']:
+                            n = int(r['payload']['name'].split('var')[1])
 
-                                    bp = Breakpoint(v['fullname'], int(v['line']), int(v['number']))
-                                    self.vim.async_call(self.bplist.add, bp)
-                                elif k in ['frame']:
-                                    if 'line' in v and 'fullname' in v:
-                                        # info("%s: %s" % (k, str(v)))
-                                        pc = {'line': int(v['line']), 'file': v['fullname']}
-                                        self.vim.async_call(self._update_pc, pc)
+                            self.watches[n]['value'] = r['payload']['value']
+                            self.watches[n]['type']  = r['payload']['type']
 
-                                        # Update any watch that may be used
-                                        self.ctrl.write("-var-update *", read_response=False)
-                                elif k in ['BreakpointTable']:
-                                    debug("-------")
-                                    for bp in v["body"]:
-                                        bp_no = int(bp['number'])
-                                        bp = {'line': int(bp['line']), 'file': bp['fullname']}
+                            self.vim.async_call(self._update_watches, n)
 
-                                        if bp_no not in self.breakpoints:
-                                            self.breakpoints[bp_no] = bp
-                                            self.vim.async_call(self._place_bp, bp_no, bp)
-                                        else:
-                                            debug("Breakpoint %d already set '%s:%d'" % (bp_no, bp['file'], bp['line']))
-                                elif k in ['msg']:
-                                    self._pr_msg("gdb-%s" % r['type'], v)
-                                elif k in ['changelist']:
-                                    for w in v:
-                                        self._watch_update(w['name'])
+                        if k in ['bkpt']:
+                            bkpt_no = int(v['number'])
+                            bkpt = {'line': int(v['line']), 'file': v['fullname']}
 
-                                elif k in ['stack']:
-                                    self.vim.async_call(self.bt.update, v)
+                            self.breakpoints[bkpt_no] = bkpt
+                            self.vim.async_call(self._place_bp, bkpt_no, bkpt)
 
+                        elif k in ['frame'] and 'line' in v and 'fullname' in v:
+                            # info("%s: %s" % (k, str(v)))
+                            pc = {'line': int(v['line']), 'file': v['fullname']}
+                            self.vim.async_call(self._update_pc, pc)
+
+                            # Update any watch that may be used
+                            self.ctrl.write("-var-update *", read_response=False)
+                        elif k in ['BreakpointTable']:
+                            for bp in v["body"]:
+                                bp_no = int(bp['number'])
+                                bp = {'line': int(bp['line']), 'file': bp['fullname']}
+
+                                if bp_no not in self.breakpoints:
+                                    self.breakpoints[bp_no] = bp
+                                    self.vim.async_call(self._place_bp, bp_no, bp)
                                 else:
-                                    #pass
-                                    debug("%s: %s" % (k, str(v)))
-                    else:
-                        #pass
-                        debug("")
-                        debug(str(r))
-                        debug("")
+                                    debug("Breakpoint %d already set '%s:%d'" % (bp_no, bp['file'], bp['line']))
+
+                        elif k in ['changelist']:
+                            for w in v:
+                                self._watch_update(w['name'])
+
+                        elif k in ['stack']:
+                            self.vim.async_call(self.bt.update, v)
+
         debug("Response parser thread stopped")
