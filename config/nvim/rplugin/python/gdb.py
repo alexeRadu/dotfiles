@@ -10,7 +10,7 @@ error, debug, info, warn = (logger.error, logger.debug, logger.info, logger.warn
 # for adding additional files to this plugin
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from backtrace import Backtrace
-from breakpoint import BPList, Breakpoint
+from breakpoints import Breakpoint, BreakpointList
 
 class Gdb(object):
     def __init__(self, vim):
@@ -31,7 +31,7 @@ class Gdb(object):
         self.vim.api.buf_set_keymap(self.watch_buf, 'n', '<leader>d', ':DbgWatchDelete<cr>', {'nowait': True})
 
         self.bt = Backtrace(vim)
-        self.bplist = BPList(vim)
+        self.bpl = BreakpointList(vim)
 
     def start(self):
         if self.running:
@@ -114,31 +114,14 @@ class Gdb(object):
     def bp_toggle(self, fname, line):
         bp = Breakpoint(fname, line)
 
-        if not bp in self.bplist:
-            self.ctrl.write(f'-break-insert {bp}', read_response=False)
+        if bp in self.bpl:
+            self.ctrl.write(f"-break-delete {bp.num()}", read_response=False)
+            self.bpl.remove(bp)
         else:
-            self.ctrl.write(f'-break-delete {bp}', read_response=False)
-            pass
-
-        return
-
-        for no, bp in self.breakpoints.items():
-            if bp['line'] == line and bp['file'] == fname:
-                info("Removing breakpoint %d at '%s'" % (no, location))
-                self.ctrl.write("-break-delete %d" % no, read_response=False)
-                self.vim.command("sign unplace %d" % (no + 2))
-                del self.breakpoints[no]
-                return
-
-        self.ctrl.write("-break-insert %s" % location, read_response=False)
+            self.ctrl.write(f"-break-insert {str(bp)}", read_response=False)
 
     def bp_list(self):
         self.ctrl.write("-break-list", read_response=False)
-
-    ### Handles {{{2
-    def _place_bp(self, no, bp):
-        self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
-        info("Placed breakpoint '%d' at '%s:%d'" % (no, bp['file'], bp['line']))
 
     ### PROGRAM-COUNTER (PC) {{{1
     def _update_pc(self, pc):
@@ -322,19 +305,9 @@ class Gdb(object):
                             self.vim.async_call(self._update_watches, n)
 
                         if k in ['bkpt']:
-                            bkpt_no = int(v['number'])
-                            bkpt = {'line': int(v['line']), 'file': v['fullname']}
+                            bp =  Breakpoint(v['fullname'], v['line'], int(v['number']))
+                            self.vim.async_call(self.bpl.add, bp)
 
-                            self.breakpoints[bkpt_no] = bkpt
-                            self.vim.async_call(self._place_bp, bkpt_no, bkpt)
-
-                        elif k in ['frame'] and 'line' in v and 'fullname' in v:
-                            # info("%s: %s" % (k, str(v)))
-                            pc = {'line': int(v['line']), 'file': v['fullname']}
-                            self.vim.async_call(self._update_pc, pc)
-
-                            # Update any watch that may be used
-                            self.ctrl.write("-var-update *", read_response=False)
                         elif k in ['BreakpointTable']:
                             for bp in v["body"]:
                                 bp_no = int(bp['number'])
@@ -346,6 +319,14 @@ class Gdb(object):
                                 else:
                                     debug("Breakpoint %d already set '%s:%d'" % (bp_no, bp['file'], bp['line']))
 
+
+                        elif k in ['frame'] and 'line' in v and 'fullname' in v:
+                            # info("%s: %s" % (k, str(v)))
+                            pc = {'line': int(v['line']), 'file': v['fullname']}
+                            self.vim.async_call(self._update_pc, pc)
+
+                            # Update any watch that may be used
+                            self.ctrl.write("-var-update *", read_response=False)
                         elif k in ['changelist']:
                             for w in v:
                                 self._watch_update(w['name'])
