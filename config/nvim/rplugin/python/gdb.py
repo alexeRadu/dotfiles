@@ -109,6 +109,8 @@ class Gdb(object):
     def next(self):
         self.ctrl.write("-exec-next", read_response=False)
 
+    ### BREAKPOINTS {{{1
+    ### Commands {{{2
     def bp_toggle(self, fname, line):
         bp = Breakpoint(fname, line)
 
@@ -133,56 +135,12 @@ class Gdb(object):
     def bp_list(self):
         self.ctrl.write("-break-list", read_response=False)
 
-    def stack_info(self):
-        self.ctrl.write("-stack-info-frame", read_response=False)
-
-    def stack_list(self):
-        self.ctrl.write("-stack-list-frames", read_response=False)
-
-    def expr_watch(self, expr):
-        expr_no = self.next_watch_no
-        self.next_watch_no = self.next_watch_no + 1
-
-        expr_name = "var%d" % (expr_no)
-
-        self.watches[expr_no] = {"name": expr_name, "expr": expr}
-
-        self.ctrl.write("-var-create %s @ %s" % (expr_name, expr), read_response=False)
-
-    def expr_update(self):
-        self.ctrl.write("-var-update *", read_response=False)
-
-    def _pr_watch(self, watch):
-        line = watch['line']
-        text = "{:<30s} {:<30s}[{:s}]".format(watch['expr'], watch['value'], watch['type'])
-        self.vim.api.buf_set_lines(self.watch_buf, line, line, True, [text])
-
-    def _watch_refresh(self):
-        self.vim.api.buf_set_lines(self.watch_buf, 0, -1, False, [])
-        for n, w in self.watches.items():
-            self._pr_watch(w)
-
-    def watch_del(self, line):
-        watch = None
-        for n, w in self.watches.items():
-            if line == w["line"]:
-                watch = w
-                del self.watches[n]
-                break
-
-        if watch:
-            # update line numbers for each watch
-            for n, w in self.watches.items():
-                if w['line'] > watch['line']:
-                    self.watches[n]['line'] = w['line'] - 1
-
-            self._watch_refresh()
-            debug("Watch '{:s}' deleted".format(watch["expr"]))
-
+    ### Handles {{{2
     def _place_bp(self, no, bp):
         self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
         info("Placed breakpoint '%d' at '%s:%d'" % (no, bp['file'], bp['line']))
 
+    ### PROGRAM-COUNTER (PC) {{{1
     def _update_pc(self, pc):
         old_pc = None
         if self.pc:
@@ -223,6 +181,58 @@ class Gdb(object):
                     self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
                     break
 
+
+    ### STACK {{{1
+    ### Commands {{{2
+    def stack_info(self):
+        self.ctrl.write("-stack-info-frame", read_response=False)
+
+    def stack_list(self):
+        self.ctrl.write("-stack-list-frames", read_response=False)
+
+    ### WATCHES {{{1
+    ### Commands {{{2
+    def expr_watch(self, expr):
+        expr_no = self.next_watch_no
+        self.next_watch_no = self.next_watch_no + 1
+
+        expr_name = "var%d" % (expr_no)
+
+        self.watches[expr_no] = {"name": expr_name, "expr": expr}
+
+        self.ctrl.write("-var-create %s @ %s" % (expr_name, expr), read_response=False)
+
+    def expr_update(self):
+        self.ctrl.write("-var-update *", read_response=False)
+
+    def watch_del(self, line):
+        watch = None
+        for n, w in self.watches.items():
+            if line == w["line"]:
+                watch = w
+                del self.watches[n]
+                break
+
+        if watch:
+            # update line numbers for each watch
+            for n, w in self.watches.items():
+                if w['line'] > watch['line']:
+                    self.watches[n]['line'] = w['line'] - 1
+
+            self._watch_refresh()
+            debug("Watch '{:s}' deleted".format(watch["expr"]))
+    ### Utilities {{{2
+    def _pr_watch(self, watch):
+        line = watch['line']
+        text = "{:<30s} {:<30s}[{:s}]".format(watch['expr'], watch['value'], watch['type'])
+        self.vim.api.buf_set_lines(self.watch_buf, line, line, True, [text])
+
+    def _watch_refresh(self):
+        self.vim.api.buf_set_lines(self.watch_buf, 0, -1, False, [])
+        for n, w in self.watches.items():
+            self._pr_watch(w)
+
+    ### Handles {{{2
     def _update_watches(self, n):
         watch = self.watches[n]
 
@@ -248,7 +258,7 @@ class Gdb(object):
 
                     debug("Watch's %s value changed to %s" % (var, v['value']))
 
-    ### PRINT FUNCTIONS
+    ### PRINT FUNCTIONS {{{1
     ### Used for logging messages from GDB; they exist because the string has
     ### to be modified (escaped) before printed to the screen
 
@@ -264,7 +274,7 @@ class Gdb(object):
                 m = m.replace('\\"', '"')
                 debug("%s: %s" % (hdr, m))
 
-    ### PARSING THE RESPONSE
+    ### PARSING THE RESPONSE {{{1
     ### This function if run by a thread, waits in a loop for messages from GDB
     ### and then calls the corresponding handling functions
 
