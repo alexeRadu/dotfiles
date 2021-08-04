@@ -2,15 +2,14 @@
 	status = auto
 	grep = auto
 	diff = auto
-[user]
-	name = Radu Alexe
-	email = radu.alexe@nxp.com
+
 [core]
 	editor = vim
-[sendmail]
-	from = Radu Alexe <radu.alexe@nxp.com>
-	confirm = always
-	smtpserver = remotesmtp.freescale.net
-	aliasesfile = /home/b47441/.mailrc
-	aliasfiletype = mailrc
+
+[user]
+	name = Radu Alexe
+	email = alexeradu2007@gmail.com
+
+[includeIf "gitdif:/mnt/c/nxp/"]
+	path = .gitconfig-nxp
 

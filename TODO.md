@@ -1,5 +1,4 @@
 * add font IBM Plex Mono to dotfiles and install them on different platforms
-* setup gitconfig user name/email on different machines (based on USER var?)
 * automatically use git credentials on new systems
 * vim - look into "vim-signature" to use "markers"
 * vim - look into "vista.vim"

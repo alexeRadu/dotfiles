@@ -92,6 +92,11 @@ process bash_profile
 process git-completion.bash
 process tmux.conf
 process bin
+process gitconfig
+
+if [[ $(printenv USER) =~ nxa06732 ]]; then
+	process gitconfig-nxp
+fi
 
 if [[ $(uname -s) =~ ^MINGW ]]; then
 	process config
