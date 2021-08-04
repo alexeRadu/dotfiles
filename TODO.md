@@ -21,4 +21,5 @@
 * nvim: dbug: - delete BPs (from the list)
 * nvim: dbug: - go to BP (from list)
 * nvim: dbug: - update BPs by interogating gdb
+* nvim: dbug: - make BP to be enabled/disabled
 * nvim: dbug: - update watches by interogating gdb
