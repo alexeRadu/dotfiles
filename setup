@@ -116,6 +116,12 @@ if [[ $(uname -s) =~ ^Linux ]]; then
 		process config/i3status
 		process config/termite
 	fi
+
+	if [ ! -d !/.fonts ]; then
+		mkdir ~/.fonts
+
+		process fonts/plex
+	fi
 fi
 
 if [[ $(uname -s) =~ ^CYGWIN ]] ||
