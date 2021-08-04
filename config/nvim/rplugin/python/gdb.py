@@ -18,7 +18,6 @@ class Gdb(object):
         self.ctrl = None
         self.thread = None
         self.running = False
-        self.breakpoints = {}
         self.pc = None
         self.next_watch_no = 1
 
@@ -62,11 +61,7 @@ class Gdb(object):
             self.vim.command("sign unplace %d" % self.pc["number"])
             self.pc = None
 
-        # clear all breakpoint signs (if any)
-        if len(self.breakpoints):
-            for no in self.breakpoints:
-                self.vim.command("sign unplace %d" % (no + 2))
-        self.breakpoints = {}
+        self.bpl.purge()
 
         # Stop the listening thread
         self.running = False
@@ -110,13 +105,12 @@ class Gdb(object):
         self.ctrl.write("-exec-next", read_response=False)
 
     ### BREAKPOINTS {{{1
-    ### Commands {{{2
     def bp_toggle(self, fname, line):
         bp = Breakpoint(fname, line)
 
         if bp in self.bpl:
-            self.ctrl.write(f"-break-delete {bp.num()}", read_response=False)
-            self.bpl.remove(bp)
+            bp = self.bpl.remove(bp)
+            self.ctrl.write(f"-break-delete {bp.number}", read_response=False)
         else:
             self.ctrl.write(f"-break-insert {str(bp)}", read_response=False)
 
@@ -146,10 +140,10 @@ class Gdb(object):
             self.vim.command("e %s" % pc['file'])
             self.vim.api.win_set_cursor(0, (pc['line'], 0))
 
-        for no, bp in self.breakpoints.items():
-            if bp["line"] == pc["line"] and bp["file"] == pc["file"]:
-                self.vim.command("sign unplace %d" % (no + 2))
-                break
+        #for no, bp in self.breakpoints.items():
+        #    if bp["line"] == pc["line"] and bp["file"] == pc["file"]:
+        #        self.vim.command("sign unplace %d" % (no + 2))
+        #        break
 
         self.vim.command("sign place %d line=%d name=dbg_pc file=%s" % (pc['number'], pc['line'], pc['file']))
         self.vim.command("normal! zz")
@@ -159,10 +153,10 @@ class Gdb(object):
         # when in the same file can cause flicker since the gutter is resized
         if old_pc:
             self.vim.command("sign unplace %s" % old_pc['number'])
-            for no, bp in self.breakpoints.items():
-                if bp["line"] == old_pc["line"] and bp["file"] == old_pc["file"]:
-                    self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
-                    break
+            #for no, bp in self.breakpoints.items():
+            #    if bp["line"] == old_pc["line"] and bp["file"] == old_pc["file"]:
+            #        self.vim.command("sign place %d line=%d name=dbg_bp file=%s" % (no + 2, bp['line'], bp['file']))
+            #        break
 
 
     ### STACK {{{1
@@ -279,8 +273,7 @@ class Gdb(object):
             # the other fields are ignored
 
             for r in response:
-                debug('--------')
-                debug(r)
+                # debug(r)
 
                 # The information that is printed on the screen can be found in the
                 # 'message' field (if not None) and in the 'payload' field if it is
@@ -296,7 +289,28 @@ class Gdb(object):
                     # The contents of the 'payload' is dependent on the command sent and
 
                     for k, v in r['payload'].items():
-                        if k in ['name'] and 'var' in r['payload']['name']:
+                        # ---> Breakpoints
+                        if k in ['bkpt']:
+                            bp =  Breakpoint(v['fullname'], int(v['line']), int(v['number']))
+                            self.vim.async_call(self.bpl.add, bp)
+
+                        elif k in ['BreakpointTable']:
+                            for b in v["body"]:
+                                bp =  Breakpoint(b['fullname'], int(b['line']), int(b['number']))
+
+                                if bp not in self.bpl:
+                                    self.vim.async_call(self.bpl.add, bp)
+
+                        # ---> Program Counter (PC)
+                        elif k in ['frame'] and 'line' in v and 'fullname' in v:
+                            pc = {'line': int(v['line']), 'file': v['fullname']}
+                            self.vim.async_call(self._update_pc, pc)
+
+                            # Update any watch that may be used
+                            self.ctrl.write("-var-update *", read_response=False)
+
+                        # ---> Watches
+                        elif k in ['name'] and 'var' in r['payload']['name']:
                             n = int(r['payload']['name'].split('var')[1])
 
                             self.watches[n]['value'] = r['payload']['value']
@@ -304,33 +318,11 @@ class Gdb(object):
 
                             self.vim.async_call(self._update_watches, n)
 
-                        if k in ['bkpt']:
-                            bp =  Breakpoint(v['fullname'], v['line'], int(v['number']))
-                            self.vim.async_call(self.bpl.add, bp)
-
-                        elif k in ['BreakpointTable']:
-                            for bp in v["body"]:
-                                bp_no = int(bp['number'])
-                                bp = {'line': int(bp['line']), 'file': bp['fullname']}
-
-                                if bp_no not in self.breakpoints:
-                                    self.breakpoints[bp_no] = bp
-                                    self.vim.async_call(self._place_bp, bp_no, bp)
-                                else:
-                                    debug("Breakpoint %d already set '%s:%d'" % (bp_no, bp['file'], bp['line']))
-
-
-                        elif k in ['frame'] and 'line' in v and 'fullname' in v:
-                            # info("%s: %s" % (k, str(v)))
-                            pc = {'line': int(v['line']), 'file': v['fullname']}
-                            self.vim.async_call(self._update_pc, pc)
-
-                            # Update any watch that may be used
-                            self.ctrl.write("-var-update *", read_response=False)
                         elif k in ['changelist']:
                             for w in v:
                                 self._watch_update(w['name'])
 
+                        # ---> Backtrace
                         elif k in ['stack']:
                             self.vim.async_call(self.bt.update, v)
 

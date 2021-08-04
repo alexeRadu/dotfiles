@@ -20,10 +20,10 @@ class Breakpoint(object):
         pass
 
     def place(self, vim):
-        vim.command(f"sign place {self.number} line={self.line} name=dbg_bp file={self.filename}")
+        vim.command(f"sign place {self.number + 2} line={self.line} name=dbg_bp file={self.filename}")
 
     def unplace(self, vim):
-        vim.command(f"sign unplace {self.number}")
+        vim.command(f"sign unplace {self.number + 2}")
 
 
 class BreakpointList(object):
@@ -32,9 +32,7 @@ class BreakpointList(object):
         self.bps = []
 
     def __contains__(self, bp):
-        info("__contains__")
         for b in self.bps:
-            info(f'--{b}--{type(b)}---')
             if bp == b:
                 return True
 
@@ -43,11 +41,19 @@ class BreakpointList(object):
     def remove(self, bp):
         for b in self.bps:
             if bp == b:
-                bp = self.bps.remove(b)
-                bp.unplace(self.vim)
-                break
+                self.bps.remove(b)
+                b.unplace(self.vim)
+                return b
 
     def add(self, bp):
         self.bps.append(bp)
         bp.place(self.vim)
         info(f"Breakpoint inserted at '{str(bp)}'")
+
+    def purge(self):
+        for b in self.bps:
+            b.unplace(self.vim)
+        self.bps = []
+
+    def refresh(self):
+        pass
