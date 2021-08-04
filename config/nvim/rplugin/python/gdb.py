@@ -335,3 +335,5 @@ class Gdb(object):
                             self.vim.async_call(self.bt.update, v)
 
         debug("Response parser thread stopped")
+
+# vim: fdm=marker
