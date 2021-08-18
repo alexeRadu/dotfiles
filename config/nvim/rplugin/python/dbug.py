@@ -33,7 +33,9 @@ class DbugPlugin(object):
         if fname:
             self.gdb.load_exec_and_symbol_file(fname)
 
-        self.gdb.download()
+        if remote_address:
+            self.gdb.download()
+
         self.gdb.stack_info()
         self.gdb.bp_list()
 
