@@ -27,7 +27,7 @@ class Gdb(object):
         self.watch_buf.name = "dbug-watch-expressions"
         self.watch_buf.api.set_option("bt", "nofile")
         #self.watch_buf.api.set_option("readonly", True)
-        self.vim.api.buf_set_keymap(self.watch_buf, 'n', '<leader>d', ':DbgWatchDelete<cr>', {'nowait': True})
+        self.vim.api.buf_set_keymap(self.watch_buf, 'n', 'd', ':DbgWatchDelete<cr>', {'nowait': True})
 
         self.bt = Backtrace(vim)
         self.bpl = BreakpointList(vim)
