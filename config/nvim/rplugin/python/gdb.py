@@ -295,6 +295,7 @@ class Gdb(object):
                             self.vim.async_call(self.bpl.add, bp)
 
                         elif k in ['BreakpointTable']:
+                            debug('---BreakpointTable')
                             for b in v["body"]:
                                 bp =  Breakpoint(b['fullname'], int(b['line']), int(b['number']))
 

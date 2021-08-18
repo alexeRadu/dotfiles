@@ -31,6 +31,10 @@ class BreakpointList(object):
         self.vim = vim
         self.bps = []
 
+        self.buf = self.vim.api.create_buf(True, False)
+        self.buf.name = "dbug-breakpoints"
+        self.buf.api.set_option("bt", "nofile")
+
     def __contains__(self, bp):
         for b in self.bps:
             if bp == b:
@@ -43,6 +47,7 @@ class BreakpointList(object):
             if bp == b:
                 self.bps.remove(b)
                 b.unplace(self.vim)
+                self.refresh()
                 return b
 
     def add(self, bp):
@@ -50,10 +55,22 @@ class BreakpointList(object):
         bp.place(self.vim)
         info(f"Breakpoint inserted at '{str(bp)}'")
 
+        self.refresh()
+
     def purge(self):
         for b in self.bps:
             b.unplace(self.vim)
         self.bps = []
 
+        self.vim.api.buf_set_lines(self.buf, 0, -1, False, [])
+
     def refresh(self):
-        pass
+        self.vim.api.buf_set_lines(self.buf, 0, -1, False, [])
+
+        debug('refresh')
+
+        line = 0
+        for bp in self.bps:
+            text = f"{bp.number}  {str(bp)}"
+            self.vim.api.buf_set_lines(self.buf, line, line, True, [text])
+            line = line + 1
