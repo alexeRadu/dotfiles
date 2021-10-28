@@ -199,6 +199,12 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
+command! Compile exe ":silent !pdflatex -interaction=nonstopmode " . expand("%:p")
+augroup latex_autocmds
+	autocmd!
+	autocmd BufWritePost *.tex :Compile
+augroup END
+
 " Ultisnips {{{1
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
