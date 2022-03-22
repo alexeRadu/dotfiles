@@ -1,8 +1,6 @@
 --vim.cmd "packadd packer.nvim"
 local preset, packer = pcall(require, "packer")
 
-print("Hello")
-
 if not present then
 	local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 
@@ -27,6 +25,7 @@ end
 
 local plugins = {
 	{ "nvim-lua/plenary.nvim" },
+	{ "lukas-reineke/indent-blankline.nvim" },
 }
 
 return require('packer').startup(function()
