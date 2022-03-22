@@ -47,7 +47,8 @@ if [[ $(uname -s) =~ ^Linux ]] && [ ! -z $(pgrep -x "i3") ]; then
 fi
 
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold yellow)%d%C(reset) %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(green)- %an%C(reset)'"
-alias gist="git status"
+alias gs="git status"
+alias gd="git diff"
 alias git-store-credentials="git config credential.helper store"
 
 function ga {
@@ -57,11 +58,6 @@ function ga {
 function gco {
 	FILES=`git status -s | grep --color=NEVER -e "^.M" | sed 's/^[[:space:]]//g' | cut -d" " -f2 | fzf --reverse -m --no-info --height=20 --cycle` && git checkout -- $FILES
 }
-
-function gd {
-	FILE=`git status -s | grep --color=NEVER -e "^.M" | sed 's/^[[:space:]]//g' | cut -d" " -f2 | fzf --reverse --no-info --height=20 --cycle` && git diff $FILE
-}
-
 
 alias cd..="cd .."
 alias ..="cd .."
