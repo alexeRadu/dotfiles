@@ -23,3 +23,6 @@
 * nvim: dbug: - update BPs by interogating gdb
 * nvim: dbug: - make BP to be enabled/disabled
 * nvim: dbug: - update watches by interogating gdb
+* nvim: why is packer always cloned? (how to not do that)
+* nvim: packer - read docs
+* nvim: telescope - read docs/better configs
