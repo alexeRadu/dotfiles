@@ -6,7 +6,7 @@ print("Hello")
 if not present then
 	local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 
---	print "Cloning packer .."
+	print "Cloning packer .."
 	vim.fn.system {
 		"git",
 		"clone",
@@ -26,17 +26,11 @@ if not present then
 end
 
 local plugins = {
-	{"nvim-lua/plenary.nvim"},
-	{"lukas-reineke/indent-blankline.nvim"}
+	{ "nvim-lua/plenary.nvim" },
 }
 
-require('packer').startup(function()
+return require('packer').startup(function()
 	for _, p in pairs(plugins) do
 		use(p)
 	end
 end)
-
-require("indent_blankline").setup {
-	show_current_context = true,
-	show_current_context_start = true,
-}
