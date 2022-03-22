@@ -26,6 +26,7 @@ end
 local plugins = {
 	{ "nvim-lua/plenary.nvim" },
 	{ "lukas-reineke/indent-blankline.nvim" },
+	{ "nvim-telescope/telescope.nvim", requires = { {"nvim-lua/plenary.nvim"} } }
 }
 
 return require('packer').startup(function()
