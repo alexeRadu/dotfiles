@@ -10,6 +10,10 @@ fi
 tty=`ps -p $$ | tail -n +2 | grep -oE '[^ \/]+$'`
 platform=`uname -a | grep -oE '[^ ]+$'`
 
+export PATH=${HOME}/.bin:${PATH}
+export PATH=${HOME}/.local/bin:${PATH}
+export PATH=${HOME}/local/nvim/bin:${PATH}
+
 # LS colors
 if [ "$tty" = "busybox" ]; then
 	alias ls='ls --color=auto'
@@ -67,8 +71,6 @@ export LC_CTYPE="en_US.UTF-8"
 export TERM='xterm-256color'
 export EDITOR=vim
 
-export PATH=${HOME}/.bin:${PATH}
-export PATH=${HOME}/.local/bin:${PATH}
 
 function get_git_branch {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
