@@ -39,3 +39,9 @@ vim.cmd [[colorscheme vscode ]]
 
 -- gitsigns.nvim
 require('gitsigns').setup()
+
+-- neogit.nvim
+require('neogit').setup {
+}
+
+api.nvim_set_keymap("n", "<leader>g", ":Neogit<cr>", {})

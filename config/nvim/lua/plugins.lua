@@ -36,7 +36,8 @@ local plugins = {
 	{ "lukas-reineke/indent-blankline.nvim" },
 
 	-- git
-	{ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } },
+	{ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" },
+	{ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" },
 }
 
 return require('packer').startup(function()
