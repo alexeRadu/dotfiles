@@ -25,5 +25,3 @@
 * nvim: dbug: - update watches by interogating gdb
 * nvim: why is packer always cloned? (how to not do that)
 * nvim: packer - read docs
-* nvim: telescope - read docs/better configs
-* nvim: set leader as <space> correctly in neovim
