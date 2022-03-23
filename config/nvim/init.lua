@@ -39,3 +39,7 @@ vim.cmd [[colorscheme vscode ]]
 
 -- gitsigns.nvim
 require('gitsigns').setup()
+
+-- neogit.nvim
+require('neogit').setup {
+}
