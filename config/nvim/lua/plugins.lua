@@ -4,7 +4,7 @@ local preset, packer = pcall(require, "packer")
 if not present then
 	local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
 
-	print "Cloning packer .."
+	-- print "Cloning packer .."
 	vim.fn.system {
 		"git",
 		"clone",
@@ -17,16 +17,23 @@ if not present then
 	vim.cmd "packadd packer.nvim"
 	present, packer = pcall(require, "packer")
 	if present then
-	--	print "Packer cloned successfully."
+		-- print "Packer cloned successfully."
 	else
 		error("Couldn't clone packer!\nPacker path: " .. packer_path .. "\n" .. packer)
 	end
 end
 
 local plugins = {
+	-- telescope
 	{ "nvim-lua/plenary.nvim" },
+	{ "nvim-telescope/telescope.nvim", requires = { {"nvim-lua/plenary.nvim"} } },
+	{ "nvim-telescope/telescope-file-browser.nvim" },
+
+	-- themes
+	{ "Mofiqul/vscode.nvim" },
+
+	-- ui
 	{ "lukas-reineke/indent-blankline.nvim" },
-	{ "nvim-telescope/telescope.nvim", requires = { {"nvim-lua/plenary.nvim"} } }
 }
 
 return require('packer').startup(function()
