@@ -38,6 +38,8 @@ local plugins = {
 	-- git
 	{ "lewis6991/gitsigns.nvim", requires = "nvim-lua/plenary.nvim" },
 	{ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" },
+
+	{ "numToStr/Comment.nvim" },
 }
 
 return require('packer').startup(function()

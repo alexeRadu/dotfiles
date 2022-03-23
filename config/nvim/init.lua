@@ -45,3 +45,6 @@ require('neogit').setup {
 }
 
 api.nvim_set_keymap("n", "<leader>g", ":Neogit<cr>", {})
+
+-- Comment.nvim
+require('Comment').setup()
