@@ -36,3 +36,6 @@ api.nvim_set_keymap("n", "<leader>fe", ":Telescope file_browser<cr>", { noremap 
 -- VSCode.nvim settings
 vim.g.vscode_style = "dark"
 vim.cmd [[colorscheme vscode ]]
+
+-- gitsigns.nvim
+require('gitsigns').setup()
