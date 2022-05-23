@@ -38,7 +38,8 @@ vim.g.vscode_style = "dark"
 vim.cmd [[colorscheme vscode ]]
 
 -- gitsigns.nvim
-require('gitsigns').setup()
+-- TODO: if this is enabled exiting nvim takes a lot of time ... try to optimize (or at least understand why)
+-- require('gitsigns').setup()
 
 -- neogit.nvim
 require('neogit').setup {
