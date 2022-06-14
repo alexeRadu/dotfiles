@@ -1,51 +1,69 @@
 local fn  = vim.fn
 local api = vim.api
+local g   = vim.g
+local o   = vim.o
+
+function bind_key(mode, key, result)
+	vim.api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
+end
+
+g.mapleader  = ' '
+
+o.background     = 'dark'
+o.errorbells     = false
+o.number         = true
+o.relativenumber = true
+o.termguicolors  = true
+o.list           = true
+vim.opt.listchars:append('space: ')
+vim.opt.listchars:append("eol:↴")
+
+vim.cmd [[packadd packer.nvim]]
+
+require('packer').startup(function()
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = { {'nvim-lua/plenary.nvim'} }
+	}
+
+	use {
+		'kyazdani42/nvim-tree.lua',
+		requires = {
+			'kyazdani42/nvim-web-devicons',
+		},
+	}
+
+	use {'nvim-treesitter/nvim-treesitter'}
+	use {'neovim/nvim-lspconfig'}
+	use {'williamboman/nvim-lsp-installer'}
+	use {'simrat39/symbols-outline.nvim'}
+  use {'lukas-reineke/indent-blankline.nvim'}
+  use {'lukas-reineke/onedark.nvim'}
+  use {'numToStr/Comment.nvim'}
+end)
 
 
---api.nvim_set_option("guifont", "IBM Plex Mono Light:h10")
-api.nvim_set_keymap("n", "<f5>", ":luafile %<cr>", {})
-
-vim.g.mapleader = " "
-
--- settings
-vim.o.number = true
-vim.o.rnu = true
-vim.o.cursorline = true
-vim.o.mouse = 'a'
-
-require("plugins")
-
--- telescope.nvim settings
-require("telescope").setup {
-	extensions = {
-		file_browser = {
-			--theme = "ivy",
-		}
-	},
+require('nvim-tree').setup { }
+require('nvim-treesitter.configs').setup {
+	ensure_installed = {"c", "lua", "python"},
+	highlight = {enable = true}
 }
-
-require("telescope").load_extension "file_browser"
-
-api.nvim_set_keymap("n", "<leader>ff", ":Telescope find_files<cr>", {})
-api.nvim_set_keymap("n", "<leader>fb", ":Telescope buffers<cr>", {})
-
-
--- telescope-file-browser.nvim settings
-api.nvim_set_keymap("n", "<leader>fe", ":Telescope file_browser<cr>", { noremap = true })
-
--- VSCode.nvim settings
-vim.g.vscode_style = "dark"
-vim.cmd [[colorscheme vscode ]]
-
--- gitsigns.nvim
--- TODO: if this is enabled exiting nvim takes a lot of time ... try to optimize (or at least understand why)
--- require('gitsigns').setup()
-
--- neogit.nvim
-require('neogit').setup {
+require('indent_blankline').setup {
+  show_current_context = true,
+  show_current_context_start = true,
+  show_end_of_line     = true,
 }
-
-api.nvim_set_keymap("n", "<leader>g", ":Neogit<cr>", {})
-
--- Comment.nvim
+require('onedark').setup()
 require('Comment').setup()
+
+bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
+bind_key('n', '<leader>fb', ':Telescope buffers<CR>')
+bind_key("n", "<leader>fe", ":Telescope file_browser<CR>")
+bind_key('n', '<leader>n', ':NvimTreeToggle<CR>')
+
+bind_key('n', '<leader>o', ':edit $MYVIMRC<CR>')
+
+vim.api.nvim_create_user_command("Gigi", function(args)
+  print("Hello there Radu " .. vim.inspect(args))
+end, {})
+>>>>>>> d3a57e3 (nvim: basic init)
