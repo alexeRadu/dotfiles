@@ -158,11 +158,6 @@ augroup END
 let g:CommandTWildIgnore=",*.obj"
 
 " Debugging {{{1
-let g:dbug_file_hint="/mnt/c/nxp/ot-nxp/build_k32w1/openthread/examples/apps/cli/ot-cli-ftd"
-let g:dbug_file="/mnt/c/nxp/ot-nxp/build_k32w1/openthread/examples/apps/cli/ot-cli-ftd"
-let g:dbug_gdb_path="/usr/local/bin/arm-none-eabi-gdb"
-let g:dbug_remote_hint="localhost:2331"
-
 function! DbugWatchExpression(type)
 	if a:type ==# 'v'
 		execute "normal! `<v`>y"
@@ -174,6 +169,12 @@ function! DbugWatchExpression(type)
 endfunction
 
 vnoremap <leader>w :<c-u>call DbugWatchExpression(visualmode())<cr>
+
+"let g:dbug_file_hint="/mnt/c/nxp/ot-nxp/build_k32w1/openthread/examples/apps/cli/ot-cli-ftd"
+let g:dbug_file="./fact"
+"let g:dbug_gdb_path="/usr/local/bin/arm-none-eabi-gdb"
+"let g:dbug_remote_hint="localhost:2331"
+"let g:dbug_load_on_start=1
 
 " Netrw {{{1
 nnoremap <silent> \ :Exp<CR>
