@@ -66,6 +66,11 @@ alias mk-ls='make -qpRr | egrep --color=always -e "^[a-z].*:"'
 alias d2u='find . -type f -print0 | xargs -0 dos2unix'
 alias u2d='find . -type f -print0 | xargs -0 unix2dos'
 
+# nnn configuration
+alias n="nnn -e"
+
+export NNN_BMS="u:/home/radu;d:/home/radu/documents;w:/home/radu/work"
+
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export TERM='xterm-256color'
