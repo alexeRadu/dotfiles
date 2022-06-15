@@ -34,6 +34,7 @@ require('packer').startup(function()
 	}
 
 	use {'nvim-treesitter/nvim-treesitter'}
+  use {'nvim-treesitter/playground'}
 	use {'neovim/nvim-lspconfig'}
 	use {'williamboman/nvim-lsp-installer'}
 	use {'simrat39/symbols-outline.nvim'}
@@ -44,10 +45,23 @@ end)
 
 
 require('nvim-tree').setup { }
-require('nvim-treesitter.configs').setup {
-	ensure_installed = {"c", "lua", "python"},
-	highlight = {enable = true}
-}
+-- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
+-- require('nvim-treesitter.configs').setup {
+-- 	ensure_installed = {"c", "lua", "python"},
+-- 	highlight = {
+--     enable = true,
+--     use_languagetree = true,
+--     additional_vim_regex_highlighting = false,
+--   },
+--   playground = {
+--     enable = true
+--   },
+--   query_linter = {
+--     enable = true,
+--     use_virtual_text = true,
+--     lint_events = {"BufWrite", "CursorHold"},
+--   },
+-- }
 require('indent_blankline').setup {
   show_current_context = true,
   show_current_context_start = true,
