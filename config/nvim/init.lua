@@ -7,6 +7,14 @@ function bind_key(mode, key, result)
 	vim.api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
 end
 
+function bash_exec(cmd)
+  local handle = io.popen(cmd)
+  local result = handle:read("*a")
+  handle:close()
+
+  return result
+end
+
 g.mapleader  = ' '
 
 o.background     = 'dark'
@@ -45,23 +53,25 @@ end)
 
 
 require('nvim-tree').setup { }
--- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
--- require('nvim-treesitter.configs').setup {
--- 	ensure_installed = {"c", "lua", "python"},
--- 	highlight = {
---     enable = true,
---     use_languagetree = true,
---     additional_vim_regex_highlighting = false,
---   },
---   playground = {
---     enable = true
---   },
---   query_linter = {
---     enable = true,
---     use_virtual_text = true,
---     lint_events = {"BufWrite", "CursorHold"},
---   },
--- }
+if bash_exec('printenv | grep WSL')  == '' then
+  -- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = {"c", "lua", "python"},
+    highlight = {
+      enable = true,
+      use_languagetree = true,
+      additional_vim_regex_highlighting = false,
+    },
+    playground = {
+      enable = true
+    },
+    query_linter = {
+      enable = true,
+      use_virtual_text = true,
+      lint_events = {"BufWrite", "CursorHold"},
+    },
+}
+end
 require('indent_blankline').setup {
   show_current_context = true,
   show_current_context_start = true,
