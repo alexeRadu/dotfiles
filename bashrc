@@ -86,3 +86,8 @@ export PS1='\u@\[\033[36m\]\h\[\033[32m\]`get_git_branch`\[\033[33m\] \w\[\033[0
 # source additional functions
 # TODO: fix this!
 # source ~/.bin/bash_utils/fzf.sh
+
+# Exercism completions
+if [ -f ~/.config/exercism/exercism_completion.bash ]; then
+	source ~/.config/exercism/exercism_completion.bash
+fi
