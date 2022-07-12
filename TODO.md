@@ -6,3 +6,4 @@
 * nvim: dbug: - update BPs by interogating gdb
 * nvim: dbug: - make BP to be enabled/disabled
 * nvim: dbug: - update watches by interogating gdb
+* Comment.nvim: - implement comment operator mapping (delete/select/change ... comment)
