@@ -23,6 +23,8 @@ o.number         = true
 o.relativenumber = true
 o.termguicolors  = true
 o.list           = true
+o.splitbelow     = true
+o.splitright     = true
 vim.opt.listchars:append('space: ')
 vim.opt.listchars:append("eol:↴")
 
@@ -42,20 +44,20 @@ require('packer').startup(function()
 	}
 
 	use {'nvim-treesitter/nvim-treesitter'}
-  use {'nvim-treesitter/playground'}
+    use {'nvim-treesitter/playground'}
 	use {'neovim/nvim-lspconfig'}
 	use {'williamboman/nvim-lsp-installer'}
 	use {'simrat39/symbols-outline.nvim'}
-  use {'lukas-reineke/indent-blankline.nvim'}
-  use {'lukas-reineke/onedark.nvim'}
-  use {'numToStr/Comment.nvim'}
+    use {'lukas-reineke/indent-blankline.nvim'}
+    use {'lukas-reineke/onedark.nvim'}
+    use {'numToStr/Comment.nvim'}
 end)
 
 
 require('nvim-tree').setup { }
 if bash_exec('printenv | grep WSL')  == '' then
-  -- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
-  require('nvim-treesitter.configs').setup {
+    -- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
+    require('nvim-treesitter.configs').setup {
     ensure_installed = {"c", "lua", "python"},
     highlight = {
       enable = true,
@@ -88,5 +90,5 @@ bind_key('n', '<leader>n', ':NvimTreeToggle<CR>')
 bind_key('n', '<leader>o', ':edit $MYVIMRC<CR>')
 
 vim.api.nvim_create_user_command("Gigi", function(args)
-  print("Hello there Radu " .. vim.inspect(args))
+    print("Hello there Radu " .. vim.inspect(args))
 end, {})
