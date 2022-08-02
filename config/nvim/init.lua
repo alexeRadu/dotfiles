@@ -92,6 +92,4 @@ bind_key('n', '<leader>n', ':NvimTreeToggle<CR>')
 bind_key('n', '<leader>o', ':edit $MYVIMRC<CR>')
 bind_key('n', '<leader>e', ':luafile %<CR>')
 
-vim.api.nvim_create_user_command("Gigi", function(args)
-    print("Hello there Radu " .. vim.inspect(args))
-end, {})
+bind_key('n', '<leader>c', ':Croniker<CR>')
