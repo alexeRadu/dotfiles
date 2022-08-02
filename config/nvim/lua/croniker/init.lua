@@ -25,10 +25,20 @@ function close_window()
 end
 
 function create_window()
+    local date = os.date("%A %d/%m/%Y", os.time())
+    local ww   = "ww" .. os.date("%W", os.time())
+    local time = os.date("%H:%M:%S", os.time())
+
+    local field_len = math.max(#date, #ww, #time)
+
+    local date_space = (field_len - #date) / 2
+    local ww_space   = (field_len - #ww) / 2
+    local time_space = (field_len - #time) / 2
+
     local info = {
-        os.date("%A %d/%m/%Y", os.time()),
-        "ww" .. os.date("%W", os.time()),
-        os.date("%H:%M:%S", os.time()),
+        string.format('%' .. tostring(date_space) .. 's', ' ') .. date .. string.format('%' .. tostring(date_space) .. 's', ' '),
+        string.format('%' .. tostring(ww_space) .. 's', ' ')   .. ww   .. string.format('%' .. tostring(ww_space) .. 's', ' '),
+        string.format('%' .. tostring(time_space) .. 's', ' ') .. time .. string.format('%' .. tostring(time_space) .. 's', ' ')
     }
 
     win = popup.create(info, opts)
@@ -43,8 +53,10 @@ function create_window()
         local pad_top  = opts.padding[1]
         local pad_left = opts.padding[4]
 
+        local time_space = (field_len - #time) / 2
+
         if buf then
-            vim.api.nvim_buf_set_text(buf, pad_top + 2, pad_left, pad_top + 2, pad_left + #time, {time})
+            vim.api.nvim_buf_set_text(buf, pad_top + 2, pad_left + time_space, pad_top + 2, pad_left + time_space + #time, {time})
         end
     end))
 end
