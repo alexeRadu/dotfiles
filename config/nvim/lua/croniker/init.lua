@@ -43,7 +43,9 @@ function create_window()
         local pad_top  = opts.padding[1]
         local pad_left = opts.padding[4]
 
-        vim.api.nvim_buf_set_text(buf, pad_top + 2, pad_left, pad_top + 2, pad_left + #time, {time})
+        if buf then
+            vim.api.nvim_buf_set_text(buf, pad_top + 2, pad_left, pad_top + 2, pad_left + #time, {time})
+        end
     end))
 end
 
