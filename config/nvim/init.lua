@@ -51,6 +51,7 @@ require('packer').startup(function()
     use {'lukas-reineke/indent-blankline.nvim'}
     use {'lukas-reineke/onedark.nvim'}
     use {'numToStr/Comment.nvim'}
+    use {'gaborvecsei/cryptoprice.nvim'}
 end)
 
 
@@ -81,6 +82,7 @@ require('indent_blankline').setup {
 }
 require('onedark').setup()
 require('Comment').setup()
+require('cryptoprice').setup({base_currency = "eur"})
 
 bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
 bind_key('n', '<leader>fb', ':Telescope buffers<CR>')
@@ -88,6 +90,7 @@ bind_key("n", "<leader>fe", ":Telescope file_browser<CR>")
 bind_key('n', '<leader>n', ':NvimTreeToggle<CR>')
 
 bind_key('n', '<leader>o', ':edit $MYVIMRC<CR>')
+bind_key('n', '<leader>e', ':luafile %<CR>')
 
 vim.api.nvim_create_user_command("Gigi", function(args)
     print("Hello there Radu " .. vim.inspect(args))
