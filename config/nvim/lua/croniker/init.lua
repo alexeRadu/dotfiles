@@ -36,9 +36,9 @@ function create_window()
     local time_space = (field_len - #time) / 2
 
     local info = {
-        string.format('%' .. tostring(date_space) .. 's', ' ') .. date .. string.format('%' .. tostring(date_space) .. 's', ' '),
-        string.format('%' .. tostring(ww_space) .. 's', ' ')   .. ww   .. string.format('%' .. tostring(ww_space) .. 's', ' '),
-        string.format('%' .. tostring(time_space) .. 's', ' ') .. time .. string.format('%' .. tostring(time_space) .. 's', ' ')
+        string.rep(' ', date_space) .. date .. string.rep(' ', date_space),
+        string.rep(' ', ww_space)   .. ww   .. string.rep(' ', ww_space),
+        string.rep(' ', time_space) .. time .. string.rep(' ', time_space)
     }
 
     win = popup.create(info, opts)
