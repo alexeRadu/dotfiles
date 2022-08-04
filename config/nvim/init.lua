@@ -25,6 +25,7 @@ o.termguicolors  = true
 o.list           = true
 o.splitbelow     = true
 o.splitright     = true
+o.cursorline     = true
 vim.opt.listchars:append('space: ')
 vim.opt.listchars:append("eol:↴")
 
