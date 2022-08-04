@@ -44,6 +44,9 @@ function create_window()
     win = popup.create(info, opts)
     buf = vim.api.nvim_win_get_buf(win)
 
+    -- make the buffer no-modifiable since we don't want the user to change it
+    vim.api.nvim_buf_set_option(buf, 'modifiable', false)
+
     vim.api.nvim_buf_set_keymap(buf, "n", "q", ":lua require('croniker').toggle_window()<cr>", {silent = true})
 
     timer = vim.loop.new_timer()
@@ -56,7 +59,14 @@ function create_window()
         local time_space = (field_len - #time) / 2
 
         if buf then
-            vim.api.nvim_buf_set_text(buf, pad_top + 2, pad_left + time_space, pad_top + 2, pad_left + time_space + #time, {time})
+            vim.api.nvim_buf_set_option(buf, 'modifiable', true)
+            vim.api.nvim_buf_set_text(buf,
+                                      math.floor(pad_top + 2),
+                                      math.floor(pad_left + time_space),
+                                      math.floor(pad_top + 2),
+                                      math.floor(pad_left + time_space + #time),
+                                      {time})
+            vim.api.nvim_buf_set_option(buf, 'modifiable', false)
         end
     end))
 end
