@@ -7,7 +7,9 @@ local timer = vim.loop.new_timer()
 local opts = {
     title = "Croniker",
     padding = {2, 5, 2, 5},
-    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    cursorline = true,
+    highlight = true
 }
 
 
