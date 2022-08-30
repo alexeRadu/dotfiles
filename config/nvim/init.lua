@@ -87,6 +87,7 @@ require('cryptoprice').setup({base_currency = "eur"})
 
 bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
 bind_key('n', '<leader>fb', ':Telescope buffers<CR>')
+bind_key('n', '<leader>fg', ':Telescope live_grep<CR>')
 bind_key("n", "<leader>fe", ":Telescope file_browser<CR>")
 bind_key('n', '<leader>n', ':NvimTreeToggle<CR>')
 
