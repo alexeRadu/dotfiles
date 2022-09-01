@@ -95,3 +95,6 @@ bind_key('n', '<leader>o', ':edit $MYVIMRC<CR>')
 bind_key('n', '<leader>e', ':luafile %<CR>')
 
 bind_key('n', '<leader>c', ':Croniker<CR>')
+
+bind_key('n', '<leader>m', ':lua require("utils").show_loaded_packages()<CR>')
+require('utils')
