@@ -91,3 +91,7 @@ export PS1='\u@\[\033[36m\]\h\[\033[32m\]`get_git_branch`\[\033[33m\] \w\[\033[0
 if [ -f ~/.config/exercism/exercism_completion.bash ]; then
 	source ~/.config/exercism/exercism_completion.bash
 fi
+
+if [ -f ~/.local_conf.bash ]; then
+	source ~/.local_conf.bash
+fi
