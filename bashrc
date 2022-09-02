@@ -67,7 +67,7 @@ alias d2u='find . -type f -print0 | xargs -0 dos2unix'
 alias u2d='find . -type f -print0 | xargs -0 unix2dos'
 
 # nnn configuration
-alias n="nnn -e"
+alias n="nnn -A -e"
 
 export NNN_BMS="u:/home/radu;d:/home/radu/documents;w:/home/radu/work"
 
