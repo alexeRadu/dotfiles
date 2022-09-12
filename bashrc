@@ -67,7 +67,22 @@ alias d2u='find . -type f -print0 | xargs -0 dos2unix'
 alias u2d='find . -type f -print0 | xargs -0 unix2dos'
 
 # nnn configuration
-alias n="nnn -A -e"
+nn() {
+	if [[ "${NNNLVL:-0}" -ge 1 ]]; then
+		echo "nnn is already running"
+		return
+	fi
+
+	export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+	\nnn -A -e "$@"
+
+	if [ -f "$NNN_TMPFILE" ]; then
+		. "$NNN_TMPFILE"
+		rm -f "$NNN_TMPFILE" > /dev/null
+	fi
+}
+alias n="nn -A -e"
 
 export NNN_BMS="u:/home/radu;d:/home/radu/documents;w:/home/radu/work"
 
