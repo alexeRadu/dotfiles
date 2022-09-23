@@ -110,3 +110,5 @@ fi
 if [ -f ~/.local_conf.bash ]; then
 	source ~/.local_conf.bash
 fi
+
+n
