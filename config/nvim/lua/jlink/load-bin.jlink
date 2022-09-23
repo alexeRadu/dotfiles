@@ -1,0 +1,2 @@
+loadbin C:\nxp\bringup\rw610.bin 0x08000000
+exit
