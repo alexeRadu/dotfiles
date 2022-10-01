@@ -98,5 +98,7 @@ bind_key('n', '<leader>c', ':Croniker<CR>')
 
 bind_key('n', '<leader>m', ':lua require("utils").show_loaded_packages()<CR>')
 
-bind_key('n', '<leader>pp', ':lua require("project").projects()<CR>')
+bind_key('n', '<leader>pp', ':lua require("project").list_projects()<CR>')
+bind_key('n', '<leader>pq', ':lua require("project").quit_project()<CR>')
+
 require('utils')
