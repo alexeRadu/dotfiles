@@ -50,6 +50,17 @@ function project_find_files()
     })
 end
 
+function project_grep()
+    local project = config.current_loaded_project
+    if project == nil then
+        return
+    end
+
+    require("telescope.builtin.__files").live_grep({
+        search_dirs = project.search_dirs,
+    })
+end
+
 local function open_project(prompt_bufnr)
     local selected_entry = state.get_selected_entry(prompt_bufnr)
     if selected_entry == nil then
@@ -79,6 +90,7 @@ local function open_project(prompt_bufnr)
     end
 
     vim.keymap.set('n', config.find_files_keys, project_find_files, {noremap = true, silent = true})
+    vim.keymap.set('n', config.grep_keys, project_grep, {noremap = true, silent = true})
 
     lsp.enable()
 end
