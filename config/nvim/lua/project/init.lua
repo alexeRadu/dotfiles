@@ -5,6 +5,7 @@ local state   = require "telescope.actions.state"
 local conf    = require("telescope.config").values
 local config  = require("project.config").config
 local lsp     = require("project.lsp")
+local nt_api  = require("nvim-tree.api")
 
 local projects = {
     {
@@ -87,6 +88,11 @@ local function open_project(prompt_bufnr)
 
     if project.path ~= vim.fn.getcwd() then
         vim.api.nvim_set_current_dir(project.path)
+    end
+
+    if config.update_nvim_tree then
+        nt_api.tree.change_root(project.path)
+        nt_api.tree.reload()
     end
 
     vim.keymap.set('n', config.find_files_keys, project_find_files, {noremap = true, silent = true})
