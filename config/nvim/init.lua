@@ -56,7 +56,12 @@ require('packer').startup(function()
 end)
 
 
-require('nvim-tree').setup { }
+require('nvim-tree').setup {
+    view = {
+        adaptive_size = true,
+    },
+}
+
 if bash_exec('printenv | grep WSL')  == '' then
     -- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
     require('nvim-treesitter.configs').setup {
