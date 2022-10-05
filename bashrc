@@ -51,6 +51,8 @@ alias gs="git status"
 alias gd="git diff"
 alias git-store-credentials="git config credential.helper store"
 
+alias lg='lazygit'
+
 function ga {
 	FILES=`git status -s | grep --color=NEVER -e "\(.M\|??\)" | sed "s/^[[:space:]]*//g" | cut -d" " -f2 | fzf --reverse -m --no-info --height=20 --cycle` && git add $FILES
 }
