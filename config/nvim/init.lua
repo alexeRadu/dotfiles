@@ -57,6 +57,10 @@ end)
 
 
 require('nvim-tree').setup {
+    -- TODO: maybe I should just disable this in .vimrc so that
+    -- it's not loaded in the first place instead of loading it and then
+    -- disabling it
+    disable_netrw = true,
     view = {
         adaptive_size = true,
     },
