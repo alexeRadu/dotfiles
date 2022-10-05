@@ -12,8 +12,8 @@ local projects = {
         path = "/mnt/c/nxp/ot-nxp",
         build_dir = "build_rw610",
         search_dirs = {
-            "../sdk-rw610/middleware/wireless/framework",
             "../sdk-rw610/middleware/wireless/ieee-802.15.4",
+            "../sdk-rw610/middleware/wireless/framework",
             "./src/rw/rw610",
         },
     },
