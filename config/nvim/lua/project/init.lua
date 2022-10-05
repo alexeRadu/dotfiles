@@ -39,7 +39,7 @@ local projects = {
 local M = {}
 
 
-function M.project_find_files()
+function project_find_files()
     local project = config.current_loaded_project
     if project == nil then
         return
@@ -78,7 +78,7 @@ local function open_project(prompt_bufnr)
         vim.api.nvim_set_current_dir(project.path)
     end
 
-    vim.keymap.set('n', config.find_files_keys, M.project_find_files, {noremap = true, silent = true})
+    vim.keymap.set('n', config.find_files_keys, project_find_files, {noremap = true, silent = true})
 
     lsp.enable()
 end
