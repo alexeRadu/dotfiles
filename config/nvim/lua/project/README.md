@@ -5,8 +5,6 @@ A plugin to help you navigate between projects and customize different tools to 
 ## TODO:
 [ ] Validate that config paths are correct (when change the project directory); maybe add a function to check the health of the project
 [ ] Add functions to add/remove (all) keybindings
-[ ] Add code/keybindings to grep project
-[ ] Refresh nvim-tree with the newly updated project base directory
 [ ] Research how to exclude certain directories/files? (what is the application for this?)
 [ ] Test functionality with a lua project (nvim lua project?)
 [ ] Test functionality with a python project
