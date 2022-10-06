@@ -64,6 +64,7 @@ alias d2u='find . -type f -print0 | xargs -0 dos2unix'
 alias u2d='find . -type f -print0 | xargs -0 unix2dos'
 
 # nnn configuration
+# -----------------------------------------------------------------------------
 nn() {
 	if [[ "${NNNLVL:-0}" -ge 1 ]]; then
 		echo "nnn is already running"
@@ -89,19 +90,29 @@ export TERM='xterm-256color'
 export EDITOR=nvim
 
 
+# Prompt
+# -----------------------------------------------------------------------------
 get_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 export PS1='\u@\[\033[36m\]\h\[\033[32m\]`get_git_branch`\[\033[33m\] \w\[\033[00m\]\n\\$ '
 
+
+# Fzf
+# -----------------------------------------------------------------------------
 export FZF_DEFAULT_OPTS='--height=40% --layout=reverse --border'
 
-# Exercism completions
+
+# Exercism
+# -----------------------------------------------------------------------------
 if [ -f ~/.config/exercism/exercism_completion.bash ]; then
 	source ~/.config/exercism/exercism_completion.bash
 fi
 
+# Local settings: these bash settings are specific to each computer I use and
+# therefore should not be published on the github
+# -----------------------------------------------------------------------------
 if [ -f ~/.local_conf.bash ]; then
 	source ~/.local_conf.bash
 fi
