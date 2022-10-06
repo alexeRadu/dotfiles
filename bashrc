@@ -1,14 +1,9 @@
 # .bashrc
 
-# User specific aliases and functions
-
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
+[ -z "${PLATFORM}" ] && export PLATFORM=$(uname -s)
+[ -f /etc/bashrc ] && . /etc/bashrc
 
 tty=`ps -p $$ | tail -n +2 | grep -oE '[^ \/]+$'`
-platform=`uname -a | grep -oE '[^ ]+$'`
 
 export PATH=${HOME}/.bin:${PATH}
 export PATH=${HOME}/.local/bin:${PATH}
