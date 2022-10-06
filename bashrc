@@ -103,6 +103,36 @@ export PS1='\u@\[\033[36m\]\h\[\033[32m\]`get_git_branch`\[\033[33m\] \w\[\033[0
 # -----------------------------------------------------------------------------
 export FZF_DEFAULT_OPTS='--height=40% --layout=reverse --border'
 
+# Bookmark utility
+# -----------------------------------------------------------------------------
+sp() {
+    cd ${HOME}
+    [ -f ".bookmarks" ] && path="$(cat .bookmarks | fzf)"
+
+    if [ ! -z "$path" ]; then
+        cd $path
+    else
+        cd - > /dev/null
+    fi
+}
+
+bp() {
+    local path="$(pwd)"
+    cd $HOME
+
+    if [ ! -f ".bookmarks" ]; then
+        echo "$path" > .bookmarks
+    else
+        local query="^${path}$"
+        local result=$(cat .bookmarks | grep "$query")
+        if [ -z "$result" ]; then
+            echo "$path" >> .bookmarks
+        fi
+    fi
+
+    cd - > /dev/null
+}
+
 
 # Exercism
 # -----------------------------------------------------------------------------
