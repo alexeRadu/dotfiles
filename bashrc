@@ -100,9 +100,7 @@ function get_git_branch {
 
 export PS1='\u@\[\033[36m\]\h\[\033[32m\]`get_git_branch`\[\033[33m\] \w\[\033[00m\]\n\\$ '
 
-# source additional functions
-# TODO: fix this!
-# source ~/.bin/bash_utils/fzf.sh
+export FZF_DEFAULT_OPTS='--height=40% --layout=reverse --border'
 
 # Exercism completions
 if [ -f ~/.config/exercism/exercism_completion.bash ]; then
@@ -113,4 +111,3 @@ if [ -f ~/.local_conf.bash ]; then
 	source ~/.local_conf.bash
 fi
 
-n
