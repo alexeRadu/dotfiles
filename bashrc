@@ -53,11 +53,11 @@ alias git-store-credentials="git config credential.helper store"
 
 alias lg='lazygit'
 
-function ga {
+ga() {
 	FILES=`git status -s | grep --color=NEVER -e "\(.M\|??\)" | sed "s/^[[:space:]]*//g" | cut -d" " -f2 | fzf --reverse -m --no-info --height=20 --cycle` && git add $FILES
 }
 
-function gco {
+gco() {
 	FILES=`git status -s | grep --color=NEVER -e "^.M" | sed 's/^[[:space:]]//g' | cut -d" " -f2 | fzf --reverse -m --no-info --height=20 --cycle` && git checkout -- $FILES
 }
 
@@ -94,7 +94,7 @@ export TERM='xterm-256color'
 export EDITOR=nvim
 
 
-function get_git_branch {
+get_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
