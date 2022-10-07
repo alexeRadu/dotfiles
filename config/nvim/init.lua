@@ -29,6 +29,10 @@ o.cursorline     = true
 vim.opt.listchars:append('space: ')
 vim.opt.listchars:append("eol:↴")
 
+-- disable netrw
+g.loaded = 1
+g.loaded_netrwPlugin = 1
+
 vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function()
@@ -57,9 +61,6 @@ end)
 
 
 require('nvim-tree').setup {
-    -- TODO: maybe I should just disable this in .vimrc so that
-    -- it's not loaded in the first place instead of loading it and then
-    -- disabling it
     disable_netrw = true,
     view = {
         adaptive_size = true,
