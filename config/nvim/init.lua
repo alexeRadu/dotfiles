@@ -48,6 +48,7 @@ require('packer').startup(function()
 		},
 	}
 
+    use {'nvim-telescope/telescope-file-browser.nvim'}
 	use {'nvim-treesitter/nvim-treesitter'}
     use {'nvim-treesitter/playground'}
 	use {'neovim/nvim-lspconfig'}
@@ -66,6 +67,17 @@ require('nvim-tree').setup {
         adaptive_size = true,
     },
 }
+
+require("telescope").setup {
+    extensions = {
+        file_browser = {
+            theme = "dropdown",
+            -- previewer = false,
+        },
+    },
+}
+
+require("telescope").load_extension "file_browser"
 
 if bash_exec('printenv | grep WSL')  == '' then
     -- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
