@@ -70,22 +70,23 @@ require('nvim-tree').setup {
 if bash_exec('printenv | grep WSL')  == '' then
     -- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
     require('nvim-treesitter.configs').setup {
-    ensure_installed = {"c", "lua", "python"},
-    highlight = {
-      enable = true,
-      use_languagetree = true,
-      additional_vim_regex_highlighting = false,
-    },
-    playground = {
-      enable = true
-    },
-    query_linter = {
-      enable = true,
-      use_virtual_text = true,
-      lint_events = {"BufWrite", "CursorHold"},
-    },
-}
+        ensure_installed = {"c", "lua", "python"},
+        highlight = {
+          enable = true,
+          use_languagetree = true,
+          additional_vim_regex_highlighting = false,
+        },
+        playground = {
+          enable = true
+        },
+        query_linter = {
+          enable = true,
+          use_virtual_text = true,
+          lint_events = {"BufWrite", "CursorHold"},
+        },
+    }
 end
+
 require('indent_blankline').setup {
   show_current_context = true,
   show_current_context_start = true,
