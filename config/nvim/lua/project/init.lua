@@ -110,11 +110,13 @@ function M.list_projects()
     end
 
     pickers.new(opts, {
-        prompt_title = "Select a Projects",
-        finder       = finders.new_table({ results = project_names }),
-        sorter       = conf.generic_sorter(opts),
-        previewer    = false,
-        attach_mappings = function(prompt_bufnr, map)
+        prompt_title     = "Project Select",
+        layout_strategy  = "center",
+        sorting_strategy = "ascending",
+        finder           = finders.new_table({ results = project_names }),
+        sorter           = conf.generic_sorter(opts),
+        previewer        = false,
+        attach_mappings  = function(prompt_bufnr, map)
             local function on_project_selected()
                 open_project(prompt_bufnr)
             end
