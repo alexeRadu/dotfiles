@@ -16,6 +16,8 @@ local projects = {
             "../sdk-rw610/middleware/wireless/ieee-802.15.4",
             "../sdk-rw610/middleware/wireless/framework",
             "./src/rw/rw610",
+            "./src/rw",
+            "./openthread",
         },
     },
     {
