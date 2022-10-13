@@ -11,6 +11,10 @@ function M.enable()
         return
     end
 
+    if project.build_dir == nil then
+        return
+    end
+
     group = vim.api.nvim_create_augroup("Project", { clear = true })
 
     autocmd = vim.api.nvim_create_autocmd({"BufEnter"}, {
