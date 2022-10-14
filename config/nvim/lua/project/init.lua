@@ -17,7 +17,7 @@ local projects = {
             "../sdk-rw610/middleware/wireless/framework",
             "../sdk-rw610/rtos/freertos",
             "../sdk-rw610/devices/RW610",
-            "../sdk-rw610/boards/rdrw610/"
+            "../sdk-rw610/boards/rdrw610",
             "../sdk-rw610/platform/drivers/ctimer",
             "../sdk-rw610/components/timer",
             "../sdk-rw610/components/serial_manager",
