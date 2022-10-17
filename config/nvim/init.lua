@@ -72,7 +72,13 @@ require("telescope").setup {
     extensions = {
         file_browser = {
             theme = "dropdown",
-            -- previewer = false,
+            previewer = false,
+            layout_config = {
+                center = {
+                    height = 0.8,
+                    width = 0.4,
+                }
+            }
         },
     },
 }
