@@ -5,3 +5,4 @@
 * nvim:		- make explorer window not show preview (and make larger)
 * nvim:		- toggle preview window on explorer
 * nvim:		- toggle preview window for telescope
+* nvim:		- configure folds (https://www.reddit.com/r/neovim/comments/psl8rq/sexy_folds/)
