@@ -80,7 +80,6 @@ require("telescope").setup {
 require("telescope").load_extension "file_browser"
 
 if bash_exec('printenv | grep WSL')  == '' then
-    -- TODO: setting treesitter on WSL makes quiting nvim very slow -> investigate
     require('nvim-treesitter.configs').setup {
         ensure_installed = {"c", "lua", "python"},
         highlight = {
