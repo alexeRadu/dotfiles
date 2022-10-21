@@ -11,7 +11,6 @@ local projects = {
     {
         name = "ot-nxp rw610",
         path = "/mnt/c/nxp/ot-nxp",
-        build_dir = "build_rw610",
         search_dirs = {
             "../sdk-rw610/middleware/wireless/ieee-802.15.4",
             "../sdk-rw610/middleware/wireless/framework",
@@ -40,15 +39,22 @@ local projects = {
             "./src/rw",
             "./openthread",
         },
+        lsp = {
+            name = 'clangd',
+            cmd = {'clangd-12', '--compile-commands-dir=build_rw610'},
+        },
     },
     {
         name = "ot-nxp k32w1",
         path = "/mnt/c/nxp/ot-nxp",
-        build_dir = "build_k32w1",
         search_dirs = {
             "../sdk-k32w1/middleware/wireless/framework",
             "../sdk-k32w1/middleware/wireless/ieee-802.15.4",
             ".",
+        },
+        lsp = {
+            name = 'clangd',
+            cmd = {'clangd-12', '--compile-commands-dir=build_k32w1'},
         },
     },
     {
@@ -56,6 +62,8 @@ local projects = {
         path = "~/.config/nvim",
         search_dirs = {
             ".",
+        },
+        lsp = {
         },
     },
 }

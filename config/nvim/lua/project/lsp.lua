@@ -11,7 +11,7 @@ function M.enable()
         return
     end
 
-    if project.build_dir == nil then
+    if project.lsp == nil or project.lsp.name == nil or project.lsp.cmd == nil then
         return
     end
 
@@ -22,8 +22,8 @@ function M.enable()
         group    = group,
         callback = function()
             vim.lsp.start({
-                name = 'clangd',
-                cmd = {'clangd-12', '--compile-commands-dir=' .. project.build_dir},
+                name     = project.lsp.name,
+                cmd      = project.lsp.cmd,
                 root_dir = project.path,
             })
         end,
