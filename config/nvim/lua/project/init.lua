@@ -34,9 +34,9 @@ local projects = {
             "../sdk-rw610/middleware/wireless/framework/FunctionLib",
             "../sdk-rw610/middleware/wireless/framework/FileSystem",
             "../sdk-rw610/middleware/wireless/framework/platform/rdrw610",
-            "../sdk-rw610/middleware/wireless/littlefs",
+            "../sdk-rw610/middleware/littlefs",
             "./src/rw/rw610",
-            "./src/rw",
+            "./src/common",
             "./openthread",
         },
         lsp = {
