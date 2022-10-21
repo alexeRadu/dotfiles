@@ -109,7 +109,7 @@ local function open_project(prompt_bufnr)
 
     for _, project in ipairs(projects) do
         if project["name"] == project_name then
-            config.current_loaded_project = project
+            config.current_loaded_project = vim.deepcopy(project)
             break
         end
     end
@@ -119,6 +119,16 @@ local function open_project(prompt_bufnr)
 
     if project.path ~= vim.fn.getcwd() then
         vim.api.nvim_set_current_dir(project.path)
+    end
+
+    -- remove any directories that don't exist
+    search_dirs = {}
+    for _, path in ipairs(project.search_dirs) do
+        if vim.fn.isdirectory(path) == 1 then
+            search_dirs[#search_dirs + 1] = path
+        else
+            print(string.format("Path '%s' is not a valid directory", path))
+        end
     end
 
     if config.update_nvim_tree then
