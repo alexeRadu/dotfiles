@@ -3,8 +3,23 @@ local api = vim.api
 local g   = vim.g
 local o   = vim.o
 
+function pp(var)
+    vim.pretty_print(var)
+end
+
 function bind_key(mode, key, result)
 	vim.api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
+end
+
+local function pkg_config(name, config)
+    local status_ok, pkg = pcall(require, name)
+    if not status_ok then
+        vim.notify(string.format("Package '%s' unable to load", name), vim.log.levels.DEBUG)
+        return
+    end
+
+    pkg.setup(config)
+    -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
 end
 
 function bash_exec(cmd)
@@ -60,15 +75,16 @@ require('packer').startup(function()
     use {'gaborvecsei/cryptoprice.nvim'}
 end)
 
+for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
+    local _, _, pkgname = string.find(file, '([%w_-]+).lua$')
 
-require('nvim-tree').setup {
-    disable_netrw = true,
-    view = {
-        adaptive_size = true,
-    },
-}
+    if pkgname then
+        local pkg = require("packages/" .. pkgname)
+        pkg_config(pkgname, pkg.config)
+    end
+end
 
-require("telescope").setup {
+pkg_config('telescope', {
     extensions = {
         file_browser = {
             theme = "dropdown",
@@ -81,7 +97,7 @@ require("telescope").setup {
             }
         },
     },
-}
+})
 
 require("telescope").load_extension "file_browser"
 
@@ -104,13 +120,7 @@ if bash_exec('printenv | grep WSL')  == '' then
     }
 end
 
-require('indent_blankline').setup {
-  show_current_context = true,
-  show_current_context_start = true,
-  show_end_of_line     = true,
-}
-require('onedark').setup()
-require('Comment').setup()
+
 require('cryptoprice').setup({base_currency = "eur"})
 
 bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
