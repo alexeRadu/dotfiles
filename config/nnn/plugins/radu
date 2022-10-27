@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+
+echo "Radu says hello"
+# git log -p -- "$1"
+#
+read -r _

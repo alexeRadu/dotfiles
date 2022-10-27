@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+. "$(dirname "$0")"/.nnn-plugin-helper
+
+path="$(cat ~/.bookmarks | fzf)"
+nnn_cd "$path" 0
+

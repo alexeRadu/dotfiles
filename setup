@@ -108,6 +108,7 @@ if [[ $(uname -s) =~ ^Linux ]]; then
 	fi
 
 	process config/nvim
+    process config/nnn
 	process Xresources
 
 	if pgrep -x i3; then
