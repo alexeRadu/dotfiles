@@ -85,7 +85,7 @@ nn() {
 alias n="nn -A -e"
 
 export NNN_BMS="u:/home/radu;d:/home/radu/documents;w:/home/radu/work"
-export NNN_PLUG="s:jump"
+export NNN_PLUG="s:switch-path"
 
 export LANG="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
