@@ -9,6 +9,8 @@ export PATH=${HOME}/.bin:${PATH}
 export PATH=${HOME}/.local/bin:${PATH}
 export PATH=${HOME}/local/nvim/bin:${PATH}
 
+export BASH_ENV=$HOME/.bashrc
+
 # LS colors
 if [ "$tty" = "busybox" ]; then
 	alias ls='ls --color=auto'
