@@ -113,7 +113,8 @@ sp() {
     [ -f ".bookmarks" ] && path="$(cat .bookmarks | fzf)"
 
     if [ ! -z "$path" ]; then
-        cd $path
+        # cd $path
+        n $path
     else
         cd - > /dev/null
     fi
