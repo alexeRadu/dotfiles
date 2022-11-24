@@ -18,7 +18,7 @@ function M.enable()
     group = vim.api.nvim_create_augroup("Project", { clear = true })
 
     autocmd = vim.api.nvim_create_autocmd({"BufEnter"}, {
-        pattern  = {"*c", "*h"},
+        pattern  = project.lsp.file_pattern,
         group    = group,
         callback = function()
             vim.lsp.start({

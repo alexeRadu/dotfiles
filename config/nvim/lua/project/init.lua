@@ -9,9 +9,10 @@ local nt_api  = require("nvim-tree.api")
 
 local projects = {
     {
-        name = "ot-nxp rw610",
-        path = "/mnt/c/nxp/ot-nxp",
-        search_dirs = {
+        name         = "ot-nxp rw610",
+        path         = "/mnt/c/nxp/ot-nxp",
+        file_pattern = {"*c", "*cpp", "*cc", "*hpp","*h"},
+        search_dirs  = {
             "../sdk-rw610/middleware/wireless/ieee-802.15.4",
             "../sdk-rw610/middleware/wireless/framework",
             "../sdk-rw610/rtos/freertos",
@@ -40,32 +41,49 @@ local projects = {
             "./openthread",
         },
         lsp = {
-            name = 'clangd',
-            cmd = {'clangd-12', '--compile-commands-dir=build_rw610'},
+            name         = 'clangd',
+            cmd          = {'clangd-12', '--compile-commands-dir=build_rw610'},
+            file_pattern = {"*c", "*cpp", "*cc", "*hpp","*h"},
         },
     },
     {
-        name = "ot-nxp k32w1",
-        path = "/mnt/c/nxp/ot-nxp",
-        search_dirs = {
+        name         = "ot-nxp k32w1",
+        path         = "/mnt/c/nxp/ot-nxp",
+        search_dirs  = {
             "../sdk-k32w1/middleware/wireless/framework",
             "../sdk-k32w1/middleware/wireless/ieee-802.15.4",
             ".",
         },
         lsp = {
-            name = 'clangd',
-            cmd = {'clangd-12', '--compile-commands-dir=build_k32w1'},
+            name         = 'clangd',
+            cmd          = {'clangd-12', '--compile-commands-dir=build_k32w1'},
+            file_pattern = {"*c", "*cpp", "*cc", "*hpp","*h"},
         },
     },
     {
-        name = "project.nvim",
-        path = "~/.config/nvim",
-        search_dirs = {
-            ".",
-        },
-        lsp = {
+        name         = "nvim-config",
+        path         = "~/.config/nvim",
+        search_dirs  = { "." },
+        lsp          = {
+            name         = "lua-language-lsp",
+            file_pattern = { "*.lua" },
+            cmd          = {'/home/radu/code/lua-language-server/bin/lua-language-server'},
+            settings     = {
+            }
         },
     },
+    {
+        name         = "project-nvim",
+        path         = "~/dotfiles/config/nvim/lua/project",
+        search_dirs  = { "~/dotfiles/config/nvim/lua/project" },
+        lsp = {
+            name         = "lua-language-lsp",
+            cmd          = {'/home/radu/code/lua-language-server/bin/lua-language-server'},
+            file_pattern = { "*.lua" },
+            settings     = {
+            }
+        }
+    }
 }
 
 local M = {}
