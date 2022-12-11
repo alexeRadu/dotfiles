@@ -22,8 +22,11 @@ local function pkg_config(name, config)
     -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
 end
 
-function bash_exec(cmd)
+local function bash_exec(cmd)
   local handle = io.popen(cmd)
+  if not handle then
+      return
+  end
   local result = handle:read("*a")
   handle:close()
 
@@ -51,18 +54,8 @@ g.loaded_netrwPlugin = 1
 vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function()
-	use {
-		'nvim-telescope/telescope.nvim',
-		requires = { {'nvim-lua/plenary.nvim'} }
-	}
-
-	use {
-		'kyazdani42/nvim-tree.lua',
-		requires = {
-			'kyazdani42/nvim-web-devicons',
-		},
-	}
-
+	use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
+	use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
     use {'nvim-telescope/telescope-file-browser.nvim'}
 	use {'nvim-treesitter/nvim-treesitter'}
     use {'nvim-treesitter/playground'}
