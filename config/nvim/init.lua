@@ -8,7 +8,7 @@ function pp(var)
 end
 
 function bind_key(mode, key, result)
-	vim.api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
+	api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
 end
 
 local function pkg_config(name, config)
