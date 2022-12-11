@@ -116,6 +116,44 @@ end
 
 require('cryptoprice').setup({base_currency = "eur"})
 
+local sumneko_binary = "/home/" .. vim.fn.expand('$USER') .. '/lua-language-server/bin/lua-language-server'
+
+local on_attach = function(client, bufnr)
+    api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    local bufopts = {noremap = true, silent = true, buffer = bufnr}
+
+    vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', '<c-]>', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    vim.keymap.set('n', '<leader>wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, bufopts)
+end
+
+require('lspconfig').sumneko_lua.setup({
+    cmd = {sumneko_binary},
+    on_attach = on_attach,
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                path = vim.split(package.path, ';'),
+            },
+            diagnostics = {
+                globals = {'vim'}
+            },
+            workspace = {
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                }
+            }
+        },
+    },
+})
+
 bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
 bind_key('n', '<leader>fb', ':Telescope buffers<CR>')
 bind_key('n', '<leader>fg', ':Telescope live_grep<CR>')
