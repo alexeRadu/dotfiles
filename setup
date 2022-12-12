@@ -111,12 +111,12 @@ if [[ $(uname -s) =~ ^Linux ]]; then
     process config/nnn
 	process Xresources
 
-	if pgrep -x i3; then
+	# if pgrep -x i3; then
 		process xinitrc
 		process config/i3
 		process config/i3status
-		process config/termite
-	fi
+		process config/kitty
+	# fi
 
 	if [ ! -d !/.fonts ]; then
 		mkdir ~/.fonts
