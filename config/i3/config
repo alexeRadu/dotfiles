@@ -5,7 +5,7 @@ gaps inner 4
 gaps outer 4
 
 # Alt is mod for WMs
-set $mod Mod1
+set $mod Mod4
 
 font pango:Source Code Pro 9
 
@@ -14,11 +14,14 @@ floating_modifier $mod
 
 # Keyginding to start applications
 bindsym $mod+d	    exec dmenu_run	# dmenu
-bindsym $mod+Return exec termite	# terminal
+bindsym $mod+Return exec kitty		# terminal
 bindsym $mod+F2     exec chromium       # browser
 
+# locking
+bindsym $mod+Tab    exec "i3lock -c 000000 -f"
+
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # change focus
 bindsym $mod+h focus left
@@ -151,19 +154,19 @@ bar {
 	mode dock
 	font pango:Source Code Pro 11
 
-	colors {
-	    background $base00
-	    separator  $base01
-	    statusline $base04
+	 colors {
+	     background $base00
+	     separator  $base01
+	     statusline $base04
 
-	    # State             Border  BG      Text
-	    focused_workspace   $base05 $base0D $base00
-	    active_workspace    $base05 $base03 $base00
-	    inactive_workspace  $base03 $base01 $base05
-	    urgent_workspace    $base08 $base08 $base00
-	    binding_mode        $base00 $base0A $base00
+	     # State             Border  BG      Text
+	     focused_workspace   $base05 $base0D $base00
+	     active_workspace    $base05 $base03 $base00
+	     inactive_workspace  $base03 $base01 $base05
+	     urgent_workspace    $base08 $base08 $base00
+	     binding_mode        $base00 $base0A $base00
 	}
 }
 
 # Launch applications at startup
-exec termite
+exec kitty
