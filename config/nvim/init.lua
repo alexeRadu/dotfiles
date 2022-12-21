@@ -156,8 +156,6 @@ end
 
 require('cryptoprice').setup({base_currency = "eur"})
 
-local sumneko_binary = "/home/" .. vim.fn.expand('$USER') .. '/lua-language-server/bin/lua-language-server'
-
 local on_attach = function(client, bufnr)
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -173,7 +171,6 @@ local on_attach = function(client, bufnr)
 end
 
 require('lspconfig').sumneko_lua.setup({
-    cmd = {sumneko_binary},
     on_attach = on_attach,
     settings = {
         Lua = {
