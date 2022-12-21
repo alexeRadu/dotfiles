@@ -147,7 +147,7 @@ fi
 # Local settings: these bash settings are specific to each computer I use and
 # therefore should not be published on the github
 # -----------------------------------------------------------------------------
-if [ -f ~/.local_conf.bash ]; then
-	source ~/.local_conf.bash
+if [ -f ~/.local.conf ]; then
+	source ~/.local.conf
 fi
 
