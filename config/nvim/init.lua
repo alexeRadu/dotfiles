@@ -157,17 +157,32 @@ end
 require('cryptoprice').setup({base_currency = "eur"})
 
 local on_attach = function(client, bufnr)
+    local nmap = function(keys, func, desc)
+        if desc then
+            desc = 'LSP: ' .. desc
+        end
+
+        vim.keymap.set('n', keys, func, {
+            noremap = true,
+            buffer = bufnr,
+            silent = true,
+            desc = desc,
+        })
+    end
+
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local bufopts = {noremap = true, silent = true, buffer = bufnr}
+    nmap('<c-]>', vim.lsp.buf.definition, 'Goto Definition')
+    nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+    nmap('K', vim.lsp.buf.hover)
+    nmap('gi', vim.lsp.buf.implementation)
 
-    vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', '<c-]>', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<leader>wl', function()
+    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+    nmap('<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
+    end)
 end
 
 require('lspconfig').sumneko_lua.setup({
@@ -195,6 +210,9 @@ require('lspconfig').clangd.setup {
     on_attach = on_attach,
     settings = {
     }
+}
+
+require('lspconfig').pylsp.setup {
 }
 
 bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
