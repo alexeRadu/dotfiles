@@ -191,6 +191,12 @@ require('lspconfig').sumneko_lua.setup({
     },
 })
 
+require('lspconfig').clangd.setup {
+    on_attach = on_attach,
+    settings = {
+    }
+}
+
 bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
 bind_key('n', '<leader>fb', ':Telescope buffers<CR>')
 bind_key('n', '<leader>fg', ':Telescope live_grep<CR>')
