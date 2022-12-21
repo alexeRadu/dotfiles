@@ -49,13 +49,21 @@ o.cursorline     = true
 vim.opt.listchars:append('space: ')
 vim.opt.listchars:append("eol:↴")
 
+-- Install packer
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local is_bootstrap = false
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    is_bootstrap = true
+    vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomas/packer.nvim', install_path }
+    vim.cmd [[packadd packer.nvim]]
+end
+
 -- disable netrw
 g.loaded = 1
 g.loaded_netrwPlugin = 1
 
-vim.cmd [[packadd packer.nvim]]
-
 require('packer').startup(function()
+    use {'wbthomason/packer.nvim'}
 	use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
 	use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
     use {'nvim-telescope/telescope-file-browser.nvim'}
@@ -68,7 +76,27 @@ require('packer').startup(function()
     use {'lukas-reineke/onedark.nvim'}
     use {'numToStr/Comment.nvim'}
     use {'gaborvecsei/cryptoprice.nvim'}
+
+    if is_bootstrap then
+        require('packer').sync()
+    end
 end)
+
+if is_bootstrap then
+    print '=================================='
+    print '    Plugins are being installed'
+    print '    Wait until Packer completes,'
+    print '       then restart nvim'
+    print '=================================='
+    return
+end
+
+local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+    command = 'source <afile> | PackerCompile',
+    group = packer_group,
+    pattern = vim.fn.expand '$MYVIMRC',
+})
 
 for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
     local _, _, pkgname = string.find(file, '([%w_-]+).lua$')
