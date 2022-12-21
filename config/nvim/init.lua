@@ -64,7 +64,17 @@ g.loaded_netrwPlugin = 1
 
 require('packer').startup(function()
     use {'wbthomason/packer.nvim'}
-	use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}}
+
+	use { 'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
+        requires = { 'nvim-lua/plenary.nvim' }
+    }
+
+    use { 'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+        cond = vim.fn.executable 'make' == 1,
+    }
+
 	use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
     use {'nvim-telescope/telescope-file-browser.nvim'}
 	use {'nvim-treesitter/nvim-treesitter'}
