@@ -33,7 +33,9 @@ local function bash_exec(cmd)
   return result
 end
 
-g.mapleader  = ' '
+g.mapleader      = ' '
+g.maplocalleader = ' '
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 o.background     = 'dark'
 o.errorbells     = false
