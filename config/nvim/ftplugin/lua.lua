@@ -22,4 +22,4 @@ end
 o.expandtab = true
 
 
-bind_key('n', '<leader><cr>', ':luafile %<cr>')
+api.nvim_set_keymap('n', '<leader><cr>', ':luafile %<cr>', {noremap = true, silent = true})

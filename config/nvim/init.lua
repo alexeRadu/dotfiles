@@ -7,10 +7,6 @@ function pp(var)
     vim.pretty_print(var)
 end
 
-local function bind_key(mode, key, result)
-	api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
-end
-
 local function pkg_config(name, config)
     local status_ok, pkg = pcall(require, name)
     if not status_ok then
@@ -209,6 +205,10 @@ require('lspconfig').clangd.setup {
 
 require('lspconfig').pylsp.setup {
 }
+
+local function bind_key(mode, key, result)
+	api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
+end
 
 bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
 bind_key('n', '<leader>fb', ':Telescope buffers<CR>')
