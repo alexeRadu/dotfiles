@@ -102,6 +102,11 @@ for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
 end
 
 pkg_config('telescope', {
+    pickers = {
+        colorscheme = {
+            enable_preview = true,
+        },
+    },
     extensions = {
         file_browser = {
             theme = "dropdown",
