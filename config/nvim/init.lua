@@ -42,7 +42,7 @@ end
 g.loaded = 1
 g.loaded_netrwPlugin = 1
 
-require('packer').startup(function()
+require('packer').startup(function(use)
     use {'wbthomason/packer.nvim'}
 
 	use { 'nvim-telescope/telescope.nvim',
