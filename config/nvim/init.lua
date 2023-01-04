@@ -7,7 +7,7 @@ function pp(var)
     vim.pretty_print(var)
 end
 
-function bind_key(mode, key, result)
+local function bind_key(mode, key, result)
 	api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
 end
 
