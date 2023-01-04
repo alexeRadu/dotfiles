@@ -30,8 +30,7 @@ o.list           = true
 o.splitbelow     = true
 o.splitright     = true
 o.cursorline     = true
-vim.opt.listchars:append('space: ')
-vim.opt.listchars:append("eol:↴")
+vim.opt.listchars = { eol = '~', tab = '» ', trail = '·' }
 
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
