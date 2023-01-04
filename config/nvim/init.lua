@@ -141,9 +141,6 @@ if os.getenv("WSL_DISTRO_NAME") == '' then
     }
 end
 
-
-require('cryptoprice').setup({base_currency = "eur"})
-
 local on_attach = function(client, bufnr)
     local nmap = function(keys, func, desc)
         if desc then
