@@ -2,7 +2,7 @@ local api = vim.api
 local g   = vim.g
 local o   = vim.o
 
-local function pkg_config(name, config)
+local function pkg_config(name, config, post_setup)
     local status_ok, pkg = pcall(require, name)
     if not status_ok then
         vim.notify(string.format("Package '%s' unable to load", name), vim.log.levels.DEBUG)
@@ -11,6 +11,10 @@ local function pkg_config(name, config)
 
     pkg.setup(config)
     -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
+
+    if post_setup and type(post_setup) == "function" then
+        post_setup()
+    end
 end
 
 g.mapleader      = ' '
@@ -93,7 +97,7 @@ for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
 
     if pkgname then
         local pkg = require("packages/" .. pkgname)
-        pkg_config(pkgname, pkg.config)
+        pkg_config(pkgname, pkg.config, pkg.post_setup)
     end
 end
 
