@@ -22,17 +22,6 @@ local function pkg_config(name, config)
     -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
 end
 
-local function bash_exec(cmd)
-  local handle = io.popen(cmd)
-  if not handle then
-      return
-  end
-  local result = handle:read("*a")
-  handle:close()
-
-  return result
-end
-
 g.mapleader      = ' '
 g.maplocalleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
@@ -134,7 +123,7 @@ pkg_config('telescope', {
 
 require("telescope").load_extension "file_browser"
 
-if bash_exec('printenv | grep WSL')  == '' then
+if os.getenv("WSL_DISTRO_NAME") == '' then
     require('nvim-treesitter.configs').setup {
         ensure_installed = {"c", "lua", "python"},
         highlight = {
