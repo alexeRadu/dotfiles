@@ -63,7 +63,7 @@ require('packer').startup(function(use)
 	use {'williamboman/nvim-lsp-installer'}
 	use {'simrat39/symbols-outline.nvim'}
     use {'lukas-reineke/indent-blankline.nvim'}
-    use {'lukas-reineke/onedark.nvim'}
+    use {'navarasu/onedark.nvim'}
     use {'numToStr/Comment.nvim'}
     use {'gaborvecsei/cryptoprice.nvim'}
 
