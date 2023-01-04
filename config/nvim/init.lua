@@ -1,11 +1,6 @@
-local fn  = vim.fn
 local api = vim.api
 local g   = vim.g
 local o   = vim.o
-
-function pp(var)
-    vim.pretty_print(var)
-end
 
 local function pkg_config(name, config)
     local status_ok, pkg = pcall(require, name)
