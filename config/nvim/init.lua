@@ -174,7 +174,13 @@ local on_attach = function(client, bufnr)
     end)
 end
 
+local sumneko_cmd = nil
+if os.getenv("NAME") == "NXL49106" then
+    sumneko_cmd = { "/home/" .. os.getenv("USER") .. "/code/lua-language-server/bin/lua-language-server" }
+end
+
 require('lspconfig').sumneko_lua.setup({
+    cmd = sumneko_cmd,
     on_attach = on_attach,
     settings = {
         Lua = {
