@@ -201,24 +201,20 @@ require('lspconfig').clangd.setup {
 require('lspconfig').pylsp.setup {
 }
 
-local function bind_key(mode, key, result)
-	api.nvim_set_keymap(mode, key, result, {noremap = true, silent = true})
-end
+vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
+vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
+vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>', { silent = true })
+vim.keymap.set("n", "<leader>fe", ":Telescope file_browser<CR>", { silent = true })
+vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { silent = true })
 
-bind_key('n', '<leader>ff', ':Telescope find_files<CR>')
-bind_key('n', '<leader>fb', ':Telescope buffers<CR>')
-bind_key('n', '<leader>fg', ':Telescope live_grep<CR>')
-bind_key("n", "<leader>fe", ":Telescope file_browser<CR>")
-bind_key('n', '<leader>n', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>o', ':edit $MYVIMRC<CR>', { silent = true })
+vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
 
-bind_key('n', '<leader>o', ':edit $MYVIMRC<CR>')
-bind_key('n', '<leader>e', ':luafile %<CR>')
+vim.keymap.set('n', '<leader>c', ':Croniker<CR>', { silent = true })
 
-bind_key('n', '<leader>c', ':Croniker<CR>')
+vim.keymap.set('n', '<leader>m', ':lua require("utils").show_loaded_packages()<CR>', { silent = true })
 
-bind_key('n', '<leader>m', ':lua require("utils").show_loaded_packages()<CR>')
-
-bind_key('n', '<leader>pp', ':lua require("project").list_projects()<CR>')
-bind_key('n', '<leader>pq', ':lua require("project").quit_project()<CR>')
+vim.keymap.set('n', '<leader>pp', ':lua require("project").list_projects()<CR>', { silent = true })
+vim.keymap.set('n', '<leader>pq', ':lua require("project").quit_project()<CR>', { silent = true })
 
 require('utils')
