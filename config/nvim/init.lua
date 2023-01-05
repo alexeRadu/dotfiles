@@ -219,7 +219,7 @@ require('lspconfig').clangd.setup {
     }
 }
 
-require('lspconfig').pylsp.setup {
+require('lspconfig').pyright.setup {
 }
 
 require('nvim-semantic-tokens').setup {
