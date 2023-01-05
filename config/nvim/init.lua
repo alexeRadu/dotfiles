@@ -68,7 +68,7 @@ require('packer').startup(function(use)
     use {'lukas-reineke/indent-blankline.nvim'}
     use {'navarasu/onedark.nvim'}
     use {'numToStr/Comment.nvim'}
-    use {'gaborvecsei/cryptoprice.nvim'}
+    use {'theHamsta/nvim-semantic-tokens'}
 
     if is_bootstrap then
         require('packer').sync()
@@ -168,6 +168,22 @@ local on_attach = function(client, bufnr)
     nmap('<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end)
+
+    -- TODO: this should be removed for neovim 0.9 since 'semanticTokens' functionatlity
+    -- will be included in the default neovim
+    local caps = client.server_capabilities
+    if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
+        local augroup = vim.api.nvim_create_augroup("SemanticTokens", {})
+        vim.api.nvim_create_autocmd("TextChanged", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.semantic_tokens_full()
+            end,
+        })
+
+        vim.lsp.buf.semantic_tokens_full()
+    end
 end
 
 local sumneko_cmd = nil
@@ -204,6 +220,11 @@ require('lspconfig').clangd.setup {
 }
 
 require('lspconfig').pylsp.setup {
+}
+
+require('nvim-semantic-tokens').setup {
+    preset = "default",
+    highlighters = { require 'nvim-semantic-tokens.table-highlighter' },
 }
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
