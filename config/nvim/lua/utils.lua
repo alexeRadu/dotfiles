@@ -47,7 +47,7 @@ api.nvim_create_autocmd({"BufWritePost"}, {
         local stdpath = api.nvim_eval('stdpath("data")')
 
         if string.match(path, stdpath) then
-            modulename = string.match(path, "([_%-%w]*)%.lua$")
+            local modulename = string.match(path, "([_%-%w]*)%.lua$")
 
             for m, _ in pairs(package.loaded) do
                 -- the condition is that the module has to contain the name of the file
