@@ -129,7 +129,28 @@ pkg_config('telescope', {
 require("telescope").load_extension "file_browser"
 
 require('nvim-treesitter.configs').setup {
-    ensure_installed = {"c", "lua", "vim", "python", "json", "markdown", "java", "javascript", "html", "css"},
+    ensure_installed = {
+        "c",
+        "cpp",
+        "lua",
+        "vim",
+        "python",
+        "bash",
+        "cmake",
+        "make",
+        "ninja",
+        "diff",
+        "gitattributes",
+        "gitcommit",
+        "json",
+        "markdown",
+        "java",
+        "javascript",
+        "typescript",
+        "html",
+        "http",
+        "css",
+    },
     auto_install = true,
     sync_install = false,
 
