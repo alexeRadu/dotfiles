@@ -60,7 +60,13 @@ require('packer').startup(function(use)
 
 	use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
     use {'nvim-telescope/telescope-file-browser.nvim'}
-	use {'nvim-treesitter/nvim-treesitter'}
+
+	use {'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
     use {'nvim-treesitter/playground'}
 	use {'neovim/nvim-lspconfig'}
 	use {'williamboman/nvim-lsp-installer'}
@@ -122,24 +128,31 @@ pkg_config('telescope', {
 
 require("telescope").load_extension "file_browser"
 
-if os.getenv("WSL_DISTRO_NAME") == '' then
-    require('nvim-treesitter.configs').setup {
-        ensure_installed = {"c", "lua", "python"},
-        highlight = {
-          enable = true,
-          use_languagetree = true,
-          additional_vim_regex_highlighting = false,
-        },
-        playground = {
-          enable = true
-        },
-        query_linter = {
-          enable = true,
-          use_virtual_text = true,
-          lint_events = {"BufWrite", "CursorHold"},
-        },
-    }
-end
+require('nvim-treesitter.configs').setup {
+    ensure_installed = {"c", "lua", "vim", "python", "json", "markdown", "java", "javascript", "html", "css"},
+    auto_install = true,
+    sync_install = false,
+
+    highlight = {
+      enable = true,
+      -- use_languagetree = true,
+      -- additional_vim_regex_highlighting = false,
+    },
+
+    indents = {
+        enable = true,
+    },
+
+    playground = {
+      enable = true
+    },
+
+    query_linter = {
+      enable = true,
+      use_virtual_text = true,
+      lint_events = {"BufWrite", "CursorHold"},
+    },
+}
 
 local on_attach = function(client, bufnr)
     local nmap = function(keys, func, desc)
