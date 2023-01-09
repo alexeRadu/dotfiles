@@ -1,4 +1,3 @@
-* nvim:lsp:	- watch the whole movie (TJ) relating to enabling LSP (what can I get out of that?)
 * nvim:		- toggle preview window on explorer
 * nvim:		- toggle preview window for telescope
 * nvim:		- configure folds (https://www.reddit.com/r/neovim/comments/psl8rq/sexy_folds/)

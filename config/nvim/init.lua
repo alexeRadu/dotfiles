@@ -31,6 +31,7 @@ o.splitbelow     = true
 o.splitright     = true
 o.cursorline     = true
 vim.opt.listchars = { tab = '» ', trail = '·' }
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
@@ -70,6 +71,10 @@ require('packer').startup(function(use)
     use {'nvim-treesitter/playground'}
 	use {'neovim/nvim-lspconfig'}
 	use {'williamboman/nvim-lsp-installer'}
+    use {'hrsh7th/nvim-cmp'}
+    use {'hrsh7th/cmp-nvim-lsp'}
+    use {'hrsh7th/cmp-buffer'}
+    use {'hrsh7th/cmp-path'}
 	use {'simrat39/symbols-outline.nvim'}
     use {'lukas-reineke/indent-blankline.nvim'}
     use {'navarasu/onedark.nvim'}
@@ -191,8 +196,8 @@ local on_attach = function(client, bufnr)
 
     api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    nmap('<c-]>', vim.lsp.buf.definition, 'Goto Definition')
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+    nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
     nmap('K', vim.lsp.buf.hover)
     nmap('gi', vim.lsp.buf.implementation)
 
@@ -202,6 +207,13 @@ local on_attach = function(client, bufnr)
     nmap('<leader>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end)
+
+    nmap('<leader>dn', vim.diagnostic.goto_next)
+    nmap('<leader>dp', vim.diagnostic.goto_prev)
+    nmap('<leader>dl', "<cmd>Telescope diagnostics<cr>")
+
+    nmap('<leader>rn', vim.lsp.buf.rename)
+    nmap('<leader>ca', vim.lsp.buf.code_action)
 
     -- TODO: this should be removed for neovim 0.9 since 'semanticTokens' functionatlity
     -- will be included in the default neovim
@@ -220,6 +232,8 @@ local on_attach = function(client, bufnr)
     end
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 local sumneko_cmd = nil
 if os.getenv("NAME") == "NXL49106" then
     sumneko_cmd = { "/home/" .. os.getenv("USER") .. "/code/lua-language-server/bin/lua-language-server" }
@@ -228,6 +242,7 @@ end
 require('lspconfig').sumneko_lua.setup({
     cmd = sumneko_cmd,
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         Lua = {
             runtime = {
@@ -249,16 +264,39 @@ require('lspconfig').sumneko_lua.setup({
 
 require('lspconfig').clangd.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
     }
 }
 
 require('lspconfig').pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+    }
 }
 
 require('nvim-semantic-tokens').setup {
     preset = "default",
     highlighters = { require 'nvim-semantic-tokens.table-highlighter' },
+}
+
+-- TODO: install LuaSnip and luasnip-cmp
+local cmp = require('cmp')
+
+cmp.setup {
+    mapping = cmp.mapping.preset.insert {
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm { select = true },
+    },
+    sources = cmp.config.sources ({
+        { name = 'nvim_lsp' },
+    }, {
+        { name = 'buffer' },
+    }),
 }
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
