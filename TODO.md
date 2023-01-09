@@ -20,3 +20,4 @@
 		                   2. maybe
 				   3. I don't need them
 * nvim:		- watch all TJDevries videos and do the exercises
+* nvim:		- color #ifdefs differently (or just remove them entirely for clarity)
