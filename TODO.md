@@ -1,10 +1,8 @@
-* nvim:		- toggle preview window on explorer
-* nvim:		- toggle preview window for telescope
+* nvim:		- automatically (maybe by scripts) configure IAR projects (build/compile_commands.json generation)
+		  there is already a command for iarbuild that can be used: debug/investigate why it doesn't work
 * nvim:		- configure folds (https://www.reddit.com/r/neovim/comments/psl8rq/sexy_folds/)
 * fonts:	- save the used font in the repo under 'fonts' and create a script that 'installs' the fonts
 * nvim:		- git signs? or some sort of other such plugin
-* nvim:		- automatically (maybe by scripts) configure IAR projects (build/compile_commands.json generation)
-		  there is already a command for iarbuild that can be used: debug/investigate why it doesn't work
 * nvim:		- symbol-outline plugin - install and use
 * nvim:		- leap.nvim - should I use it? (maybe install and test-drive a couple of weeks)
 * nvim:		- DAP usage; here there are a few options:
