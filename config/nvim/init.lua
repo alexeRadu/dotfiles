@@ -264,10 +264,16 @@ require('lspconfig').sumneko_lua.setup({
     },
 })
 
+local clangd_cmd = { "clangd" }
+if os.getenv("NAME") == "NXL49106" then
+    clangd_cmd = { "/mnt/c/tmp/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04/bin/clangd" }
+end
+
 require('lspconfig').clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
+        cmd = clangd_cmd,
     }
 }
 
