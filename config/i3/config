@@ -15,7 +15,7 @@ floating_modifier $mod
 # Keyginding to start applications
 bindsym $mod+d	    exec dmenu_run	# dmenu
 bindsym $mod+Return exec kitty		# terminal
-bindsym $mod+F2     exec chromium       # browser
+bindsym $mod+b      exec chromium       # browser
 
 # locking
 bindsym $mod+Tab    exec "i3lock -c 000000 -f"
