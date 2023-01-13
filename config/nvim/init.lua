@@ -80,6 +80,7 @@ require('packer').startup(function(use)
     use {'navarasu/onedark.nvim'}
     use {'numToStr/Comment.nvim'}
     use {'theHamsta/nvim-semantic-tokens'}
+    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
     if is_bootstrap then
         require('packer').sync()
@@ -306,6 +307,17 @@ cmp.setup {
         { name = 'buffer' },
     }),
 }
+
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+})
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
 vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
