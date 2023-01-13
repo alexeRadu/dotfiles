@@ -1,4 +1,3 @@
-* nvim:		- configure folds (https://www.reddit.com/r/neovim/comments/psl8rq/sexy_folds/)
 * nvim:		- git signs? or some sort of other such plugin
 * nvim:		- symbol-outline plugin - install and use
 * nvim:		- leap.nvim - should I use it? (maybe install and test-drive a couple of weeks)
