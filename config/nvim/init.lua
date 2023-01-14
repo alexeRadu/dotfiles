@@ -81,6 +81,7 @@ require('packer').startup(function(use)
     use {'numToStr/Comment.nvim'}
     use {'theHamsta/nvim-semantic-tokens'}
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+    use {'lewis6991/gitsigns.nvim'}
 
     if is_bootstrap then
         require('packer').sync()
@@ -318,6 +319,8 @@ require('ufo').setup({
         return {'treesitter', 'indent'}
     end
 })
+
+require('gitsigns').setup()
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
 vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
