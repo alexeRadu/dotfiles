@@ -1,4 +1,3 @@
-* nvim:		- git signs? or some sort of other such plugin
 * nvim:		- symbol-outline plugin - install and use
 * nvim:		- leap.nvim - should I use it? (maybe install and test-drive a couple of weeks)
 * nvim:		- DAP usage; here there are a few options:
