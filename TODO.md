@@ -1,5 +1,4 @@
 * nvim:		- symbol-outline plugin - install and use
-* nvim:		- leap.nvim - should I use it? (maybe install and test-drive a couple of weeks)
 * nvim:		- DAP usage; here there are a few options:
                 1. try to use the Typescript adapter (??? I don't remember which project?)
                 2. try to compile DAP support for arm-none-eabi-gcc compiler (since it's already been added as a patch)

@@ -82,6 +82,7 @@ require('packer').startup(function(use)
     use {'theHamsta/nvim-semantic-tokens'}
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
     use {'lewis6991/gitsigns.nvim'}
+    use {'ggandor/leap.nvim'}
 
     if is_bootstrap then
         require('packer').sync()
@@ -323,6 +324,8 @@ require('ufo').setup({
 })
 
 require('gitsigns').setup()
+
+require('leap').add_default_mappings()
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
 vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
