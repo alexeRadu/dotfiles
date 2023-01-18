@@ -13,3 +13,4 @@
 * kitty:    - read config commands and simplify the actual used config
 * nvim:		- watch all TJDevries videos and do the exercises
 * nvim:		- color #ifdefs differently (or just remove them entirely for clarity)
+* nvim:     - UFO: use different chars for markers of the folding regions
