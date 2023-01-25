@@ -289,6 +289,13 @@ require('lspconfig').pyright.setup {
     }
 }
 
+require('lspconfig').tsserver.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+    }
+}
+
 require('nvim-semantic-tokens').setup {
     preset = "default",
     highlighters = { require 'nvim-semantic-tokens.table-highlighter' },
