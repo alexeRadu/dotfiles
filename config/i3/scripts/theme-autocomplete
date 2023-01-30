@@ -1,5 +1,7 @@
 #!/bin/bash
 
-themes=$(ls -l "${HOME}/.config/i3/themes/base16-i3/colors" | cut -d" " -f9 | cut -d"." -f1 | cut -d"-" -f2-)
+if [ -f "${HOME}/.config.i3/themes/base16-i3/colors" ]; then
+    themes=$(ls -l "${HOME}/.config/i3/themes/base16-i3/colors" | cut -d" " -f9 | cut -d"." -f1 | cut -d"-" -f2-)
 
-complete -W "$themes" theme
+    complete -W "$themes" theme
+fi
