@@ -39,7 +39,7 @@ fi
 # git helpers
 source ~/.git-completion.bash
 
-if [[ $(uname -s) =~ ^Linux ]] && [ ! -z $(pgrep -x "i3") ]; then
+if [[ $(uname -s) =~ ^Linux ]] && [ ! -z "$(pgrep -x "i3")" ]; then
 	source ~/.config/i3/scripts/theme-autocomplete
 fi
 
