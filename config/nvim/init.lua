@@ -30,6 +30,7 @@ o.list           = true
 o.splitbelow     = true
 o.splitright     = true
 o.cursorline     = true
+o.autoread       = true
 vim.opt.listchars = { tab = '» ', trail = '·' }
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
