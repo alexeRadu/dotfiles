@@ -84,6 +84,8 @@ require('packer').startup(function(use)
     use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
     use {'lewis6991/gitsigns.nvim'}
     use {'ggandor/leap.nvim'}
+    use {'mfussenegger/nvim-dap'}
+    use {'rcarriga/nvim-dap-ui'}
 
     if is_bootstrap then
         require('packer').sync()
@@ -334,6 +336,34 @@ require('ufo').setup({
 require('gitsigns').setup()
 
 require('leap').add_default_mappings()
+
+local dap = require('dap')
+
+-- for debugging purposes
+dap.set_log_level('TRACE')
+
+dap.configurations.c = {
+    {
+        type = "cppdbg",
+        name = "Launch CPP",
+        request = "launch",
+        program = "/home/radu/code/test/build/test",
+    }
+}
+
+dap.adapters.cppdbg = {
+    type = 'executable',
+    command = 'gdb',
+    args = { "-i", "dap" },
+}
+
+require('dapui').setup()
+
+-- Dap Keymaps
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<leader>b', function() require('dap').toggle_breakpoint() end)
+
 
 vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
 vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
