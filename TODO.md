@@ -1,10 +1,10 @@
+* fonts:    - store Agave Nerd font in the dotfiles repo
 * nvim:		- symbol-outline plugin - install and use
-* nvim:		- DAP usage; here there are a few options:
-                1. try to use the Typescript adapter (??? I don't remember which project?)
-                2. try to compile DAP support for arm-none-eabi-gcc compiler (since it's already been added as a patch)
-                3. try to use 'vimspector'? or some other plugin that interacts directly with the GDB server
+* nvim-dap:	- setup on remote machine
+                1. do debugging on the cli
+                2. setup dap to do debugging for a ot-cli application (RW610 or K32w1)
+                3. setup dap debugging for all projects
 * remote:	- setup remote with flusing scripts / automatic build
-* remote:	- install 'iarbuild'
 * nvim:		- go through 'awesome nvim' plugins to decide which plugins could be helpfull (rate them into:
                 1. have to have them (or maybe just those)
                 2. maybe
