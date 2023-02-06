@@ -14,3 +14,6 @@
 * nvim:		- watch all TJDevries videos and do the exercises
 * nvim:		- color #ifdefs differently (or just remove them entirely for clarity)
 * nvim:     - UFO: use different chars for markers of the folding regions
+* nvim:     - go through each plugin installed to read the source code -> maybe customize the setup?
+* nvim:     - go through vim help/tutorial
+* tmux:     - better config?
