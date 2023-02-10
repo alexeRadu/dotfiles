@@ -1,4 +1,3 @@
-* fonts:    - store Agave Nerd font in the dotfiles repo
 * nvim:		- symbol-outline plugin - install and use
 * nvim-dap:	- setup on remote machine
                 1. do debugging on the cli

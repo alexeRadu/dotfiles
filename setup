@@ -118,7 +118,7 @@ if [[ $(uname -s) =~ ^Linux ]]; then
 		process config/kitty
 	# fi
 
-    cp fonts/* ~/.fonts
+    process fonts
 fi
 
 if [[ $(uname -s) =~ ^CYGWIN ]] ||
