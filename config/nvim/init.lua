@@ -34,6 +34,11 @@ o.autoread       = true
 vim.opt.listchars = { tab = '» ', trail = '·' }
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
+-- These mappings should be as close to the top as possible since they are usefull with a vanilla installation
+-- of neovim and don't remquire any packages
+vim.keymap.set('n', '<leader>o', ':edit $MYVIMRC<CR>', { silent = true })
+vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
+
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
@@ -370,9 +375,6 @@ vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
 vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>', { silent = true })
 vim.keymap.set("n", "<leader>fe", ":Telescope file_browser<CR>", { silent = true })
 vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { silent = true })
-
-vim.keymap.set('n', '<leader>o', ':edit $MYVIMRC<CR>', { silent = true })
-vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
 
 vim.keymap.set('n', '<leader>c', ':Croniker<CR>', { silent = true })
 
