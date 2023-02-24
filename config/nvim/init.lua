@@ -36,7 +36,7 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 -- These mappings should be as close to the top as possible since they are usefull with a vanilla installation
 -- of neovim and don't remquire any packages
-vim.keymap.set('n', '<leader>o', ':edit $MYVIMRC<CR>', { silent = true })
+vim.keymap.set('n', '<leader>i', ':edit $MYVIMRC<CR>', { silent = true })
 vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
 
 -- Install packer
@@ -371,16 +371,17 @@ dap.adapters.cppdbg = {
 
 require('dapui').setup()
 
+
 -- Dap Keymaps
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<leader>b', function() require('dap').toggle_breakpoint() end)
 
 
-vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>', { silent = true })
-vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
-vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>', { silent = true })
-vim.keymap.set("n", "<leader>fe", ":Telescope file_browser<CR>", { silent = true })
+vim.keymap.set('n', '<leader>f', ':Telescope find_files<CR>', { silent = true })
+vim.keymap.set('n', '<leader>b', ':Telescope buffers<CR>', { silent = true })
+vim.keymap.set('n', '<leader>g', ':Telescope live_grep<CR>', { silent = true })
+vim.keymap.set("n", "<leader>e", ":Telescope file_browser<CR>", { silent = true })
 vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { silent = true })
 
 vim.keymap.set('n', '<leader>c', ':Croniker<CR>', { silent = true })
