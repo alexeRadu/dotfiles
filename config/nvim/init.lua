@@ -250,6 +250,8 @@ if os.getenv("NAME") == "NXL49106" then
     sumneko_cmd = { "/home/" .. os.getenv("USER") .. "/code/lua-language-server/bin/lua-language-server" }
 elseif vim.fn.system('hostname') == 'tp\n' then
     sumneko_cmd = { "/home/" .. os.getenv("USER") .. "/lua-language-server/bin/lua-language-server" }
+elseif vim.fn.system('hostname')  == 'asr\n' then
+    sumneko_cmd = { "/home/" .. os.getenv("USER") .. "/lua-language-server/bin/lua-language-server" }
 end
 
 vim.api.nvim_set_hl(0, "LspComment", { link = "Comment" })
