@@ -284,9 +284,9 @@ if os.getenv("NAME") == "NXL49106" then
     clangd_cmd = { "/mnt/c/tmp/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04/bin/clangd" }
 end
 
-if os.getenv("OT_CURRENT_PLATFORM") == "rw610" then
+if os.getenv("OT_CURRENT_PLATFORM") == "rw612" then
     clangd_cmd[#clangd_cmd + 1] = "--compile-commands-dir"
-    clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build_rw610"
+    clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build_rw612"
 end
 
 -- print("clangd_cmd: " .. vim.inspect(clangd_cmd))
