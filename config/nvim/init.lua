@@ -376,7 +376,9 @@ dap.adapters.cppdbg = {
 
 require('dapui').setup()
 
-require("symbols-outline").setup()
+require("symbols-outline").setup {
+    position = "left",
+}
 
 vim.keymap.set('n', '<leader>o', function()
     require('symbols-outline').toggle_outline()
