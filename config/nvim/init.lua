@@ -287,6 +287,9 @@ end
 if os.getenv("OT_CURRENT_PLATFORM") == "rw612" then
     clangd_cmd[#clangd_cmd + 1] = "--compile-commands-dir"
     clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build_rw612"
+elseif os.getenv("OT_CURRENT_PLATFORM") == "k32w1" then
+    clangd_cmd[#clangd_cmd + 1] = "--compile-commands-dir"
+    clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build_k32w1"
 end
 
 -- print("clangd_cmd: " .. vim.inspect(clangd_cmd))
