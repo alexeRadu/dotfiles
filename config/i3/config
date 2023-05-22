@@ -18,7 +18,8 @@ bindsym $mod+Return exec kitty		# terminal
 bindsym $mod+b      exec chromium       # browser
 
 # locking
-bindsym $mod+Tab    exec "i3lock -c 000000 -f"
+# bindsym $mod+Tab    exec "i3lock -c 000000 -f"
+bindsym --release $mod+Tab	exec "slock -m $(ip address show enp0s31f6 | grep 'inet ' | awk '{print $2}' | cut -f1 -d'/')"
 
 # kill focused window
 bindsym $mod+q kill
