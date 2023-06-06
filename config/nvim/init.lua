@@ -368,10 +368,20 @@ dap.configurations.c = {
     }
 }
 
+dap.configurations.cpp = {
+    {
+        type = "cppdbg",
+        name = "Attach CPP",
+        request = "launch",
+        -- program = "~/work/ot-nxp/build_rw612/bin/ot-cli-rw612.elf"
+        program = "~/work/ot-nxp/build_rw612/bin/ot-br-rw612.elf"
+    }
+}
+
 dap.adapters.cppdbg = {
     type = 'executable',
-    command = 'gdb',
-    args = { "-i", "dap" },
+    command = '/home/radu/code/binutils-gdb/arm-none-eabi/bin/arm-none-eabi-gdb',
+    args = { '-i', 'dap', '-ex', 'target remote localhost:2331'},
 }
 
 require('dapui').setup()
