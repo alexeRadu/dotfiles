@@ -55,7 +55,7 @@ ga() {
 }
 
 gco() {
-	FILES=`git status -s | grep --color=NEVER -e "^.M" | sed 's/^[[:space:]]//g' | cut -d" " -f2 | fzf --reverse -m --no-info --height=20 --cycle` && git checkout -- $FILES
+    git checkout $(git show-ref | cut -d" " -f2 | fzf)
 }
 
 alias cd..="cd .."
