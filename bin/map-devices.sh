@@ -23,8 +23,8 @@ for port in {6..7}; do
     if [ -n "${device}" ]; then
         echo "Found device ${device} on port ${port}"
         echo "  {" >> $filepath
-        echo "      'id': ${device}" >> $filepath
-        echo "      'port': ${port}" >> $filepath
+        echo "      \"id\": ${device}," >> $filepath
+        echo "      \"port\": ${port}" >> $filepath
         echo "  }" >> $filepath
     fi
 done
