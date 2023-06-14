@@ -18,6 +18,4 @@
 * tmux:     - better config?
 * nvim:     - make script/function to start server when debugging
 * nvim:     - stop gdb server on debugging
-* nvim:     - dap: investigate why "step-over" does actually "step-in"
-* nvim:     - dap: handle error when at the end of the function
 * nvim:     - dap: how can I store breakpoints in-between sessions?
