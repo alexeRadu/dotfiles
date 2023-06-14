@@ -12,7 +12,7 @@ rm -Rf $filepath
 
 echo "[" > /home/radu/.devices.json
 
-for port in {6..7}; do
+for port in {0..7}; do
     power-on ${port}
     sleep 1
 
