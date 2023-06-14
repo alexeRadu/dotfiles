@@ -61,7 +61,7 @@ gco() {
 alias cd..="cd .."
 alias ..="cd .."
 
-alias mk-ls='make -qpRr | egrep --color=always -e "^[a-z].*:"'
+alias mk-ls='make -qpRr | grep --color=always -e "^[a-z].*:"'
 alias d2u='find . -type f -print0 | xargs -0 dos2unix'
 alias u2d='find . -type f -print0 | xargs -0 unix2dos'
 
