@@ -39,6 +39,16 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.keymap.set('n', '<leader>i', ':edit $MYVIMRC<CR>', { silent = true })
 vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
 
+-- open help in a horizontal split
+local horizontal_help_split_group = api.nvim_create_augroup("HorizontalHelpSplit", { clear = true })
+api.nvim_create_autocmd("FileType", {
+    command = 'wincmd L',
+    group   = horizontal_help_split_group,
+    pattern = "help"
+})
+
+vim.keymap.set('n', '<leader>h', ':help ', { silent = false })
+
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
