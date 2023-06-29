@@ -12,4 +12,5 @@
 
 [includeIf "gitdif:/mnt/c/nxp/"]
 	path = .gitconfig-nxp
-
+[includeIf "gitdif:~/work"]
+	path = .gitconfig-nxp
