@@ -5,6 +5,7 @@
 vim/.netrwhist
 vim/view
 config/nvim/.netrwhist
+config/nvim/plugin/packer_compiled.lua
 vim/test/test
 vim/plugged
 
