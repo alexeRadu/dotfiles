@@ -405,11 +405,52 @@ vim.keymap.set('n', '<leader>o', function()
 end)
 
 -- Dap Keymaps
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-vim.keymap.set('n', '<F9>', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<S-F11>', function() require('dap').step_out() end)
+-- vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+-- vim.keymap.set('n', '<F9>', function() require('dap').toggle_breakpoint() end)
+-- vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+-- vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+-- vim.keymap.set('n', '<S-F11>', function() require('dap').step_out() end)
+
+-- Termdebug setup
+vim.cmd [[packadd termdebug]]
+
+vim.g.termdebug_config = {
+    ["command"]    = '/home/radu/code/binutils-gdb/arm-none-eabi/bin/arm-none-eabi-gdb',
+    ["use_prompt"] = false,
+}
+
+vim.keymap.set('n', '<F5>',   ':Continue<CR>')
+vim.keymap.set('n', '<F6>',   ':Stop<CR>')
+vim.keymap.set('n', '<F9>',   ':Break<CR>')
+vim.keymap.set('n', '<F10>',  ':Over<CR>')
+vim.keymap.set('n', '<F11>',  ':Step<CR>')
+
+local cmd  = "/home/radu/work/JLink/JLinkGDBServerCLExe"
+local args  = {"-device", "RW610", "-if", "SWD", "-nogui"}
+require('daemon').create {
+    name    = 'GDB',
+    command = cmd,
+    args    = args,
+}
+
+vim.api.nvim_create_user_command('StartDebug', function()
+    require('daemon').start('GDB')
+    vim.cmd ':TermdebugCommand ./build_rw612/bin/ot-br-rw612.elf'
+    vim.fn.TermDebugSendCommand('target remote localhost:2331')
+
+    -- close gdb window
+    vim.cmd ':Gdb'
+    vim.cmd ':q'
+
+    -- close program window
+    vim.cmd ':Program'
+    vim.cmd ':q'
+end, {nargs = 0})
+
+vim.api.nvim_create_user_command('StopDebug', function()
+    vim.fn.TermDebugSendCommand('exit 1')
+    require('daemon').stop('GDB')
+end, {nargs = 0})
 
 
 vim.keymap.set('n', '<leader>f', ':Telescope find_files<CR>', { silent = true })
