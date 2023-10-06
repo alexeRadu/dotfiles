@@ -93,6 +93,7 @@ process git-completion.bash
 process tmux.conf
 process bin
 process gitconfig
+process gdbinit
 
 if [[ $(printenv USER) =~ nxa06732 ]]; then
 	process gitconfig-nxp
