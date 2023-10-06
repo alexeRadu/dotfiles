@@ -7,4 +7,3 @@
 * nvim:     - fold lua comments
 * nvim:     - color lua doc comments
 * nvim:     - handle the case where tabs settings is different then what I wan
-* tmux/ssh  - make COPY+PASTE work seamleasly
