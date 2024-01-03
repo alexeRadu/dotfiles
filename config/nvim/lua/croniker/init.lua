@@ -13,7 +13,7 @@ local opts = {
 }
 
 
-function close_window()
+local function close_window()
     if win then
         vim.api.nvim_win_close(win, true)
         win = nil
@@ -26,7 +26,7 @@ function close_window()
     end
 end
 
-function create_window()
+local function create_window()
     local date = os.date("%A %d/%m/%Y", os.time())
     local ww   = "ww" .. os.date("%W", os.time())
     local time = os.date("%H:%M:%S", os.time())
