@@ -83,13 +83,13 @@ require('packer').startup(function(use)
         end,
     }
     use {'nvim-treesitter/playground'}
-	use {'neovim/nvim-lspconfig'}
-	use {'williamboman/nvim-lsp-installer'}
+    use {'neovim/nvim-lspconfig'}
+    use {'williamboman/nvim-lsp-installer'}
     use {'hrsh7th/nvim-cmp'}
     use {'hrsh7th/cmp-nvim-lsp'}
     use {'hrsh7th/cmp-buffer'}
     use {'hrsh7th/cmp-path'}
-	use {'simrat39/symbols-outline.nvim'}
+    use {'simrat39/symbols-outline.nvim'}
     use {'lukas-reineke/indent-blankline.nvim',
         main="ibl",
         opt={}
