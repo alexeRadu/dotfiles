@@ -64,21 +64,19 @@ g.loaded_netrwPlugin = 1
 
 require('packer').startup(function(use)
     use {'wbthomason/packer.nvim'}
-
-	use { 'nvim-telescope/telescope.nvim',
+    use {'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
         requires = { 'nvim-lua/plenary.nvim' }
     }
-
-    use { 'nvim-telescope/telescope-fzf-native.nvim',
+    use {'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
         cond = vim.fn.executable 'make' == 1,
     }
-
-	use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
+    use {'kyazdani42/nvim-tree.lua',
+        requires = {'kyazdani42/nvim-web-devicons'}
+    }
     use {'nvim-telescope/telescope-file-browser.nvim'}
-
-	use {'nvim-treesitter/nvim-treesitter',
+    use {'nvim-treesitter/nvim-treesitter',
         run = function()
             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
             ts_update()
@@ -92,11 +90,16 @@ require('packer').startup(function(use)
     use {'hrsh7th/cmp-buffer'}
     use {'hrsh7th/cmp-path'}
 	use {'simrat39/symbols-outline.nvim'}
-    use {'lukas-reineke/indent-blankline.nvim'}
+    use {'lukas-reineke/indent-blankline.nvim',
+        main="ibl",
+        opt={}
+    }
     use {'navarasu/onedark.nvim'}
     use {'numToStr/Comment.nvim'}
     use {'theHamsta/nvim-semantic-tokens'}
-    use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
+    use {'kevinhwang91/nvim-ufo',
+        requires = 'kevinhwang91/promise-async'
+    }
     use {'lewis6991/gitsigns.nvim'}
     use {'ggandor/leap.nvim'}
     use {'mfussenegger/nvim-dap'}
