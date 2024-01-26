@@ -204,6 +204,8 @@ require('nvim-treesitter.configs').setup {
     },
 }
 
+-- require("ibl").setup()
+
 local on_attach = function(client, bufnr)
     local nmap = function(keys, func, desc)
         if desc then
@@ -299,13 +301,17 @@ end
 
 if os.getenv("OT_CURRENT_PLATFORM") == "rw612" then
     clangd_cmd[#clangd_cmd + 1] = "--compile-commands-dir"
-    clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build_rw612"
+    clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build_rw612/rw612_ot_br_wifi"
+    -- clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build"
 elseif os.getenv("OT_CURRENT_PLATFORM") == "k32w1" then
     clangd_cmd[#clangd_cmd + 1] = "--compile-commands-dir"
     clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build_k32w1"
 elseif os.getenv("OT_CURRENT_PLATFORM") == "mcxw72" then
     clangd_cmd[#clangd_cmd + 1] = "--compile-commands-dir"
     clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd() .. "/build_mcxw72"
+else
+    clangd_cmd[#clangd_cmd + 1] = "--compile-commands-dir"
+    clangd_cmd[#clangd_cmd + 1] = vim.fn.getcwd()
 end
 
 -- print("clangd_cmd: " .. vim.inspect(clangd_cmd))
@@ -361,6 +367,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
 require('ufo').setup({
+    close_fold_kinds = {'comment'},
     provider_selector = function(bufnr, filetype, buftype)
         return {'treesitter', 'indent'}
     end
@@ -374,6 +381,7 @@ local dap = require('dap')
 
 -- for debugging purposes
 dap.set_log_level('TRACE')
+
 
 dap.configurations.c = {
     {
@@ -389,8 +397,8 @@ dap.configurations.cpp = {
         type = "cppdbg",
         name = "Attach CPP",
         request = "launch",
-        -- program = "~/work/ot-nxp/build_rw612/bin/ot-cli-rw612.elf"
-        program = "~/work/ot-nxp/build_rw612/bin/ot-br-rw612.elf"
+        program = "~/work/ot-nxp/build_rw612/bin/ot-cli-rw612.elf"
+        -- program = "~/work/ot-nxp/build_rw612/bin/ot-br-rw612.elf"
     }
 }
 
@@ -421,7 +429,7 @@ end)
 vim.cmd [[packadd termdebug]]
 
 vim.g.termdebug_config = {
-    ["command"]    = '/home/radu/code/binutils-gdb/arm-none-eabi/bin/arm-none-eabi-gdb',
+    ["command"]    = 'arm-none-eabi-gdb',
     ["use_prompt"] = false,
 }
 
@@ -431,7 +439,7 @@ vim.keymap.set('n', '<F9>',   ':Break<CR>')
 vim.keymap.set('n', '<F10>',  ':Over<CR>')
 vim.keymap.set('n', '<F11>',  ':Step<CR>')
 
-local cmd  = "/home/radu/work/JLink/JLinkGDBServerCLExe"
+local cmd  = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe"
 local args  = {"-device", "RW610", "-if", "SWD", "-nogui"}
 require('daemon').create {
     name    = 'GDB',
@@ -441,12 +449,12 @@ require('daemon').create {
 
 vim.api.nvim_create_user_command('StartDebug', function()
     require('daemon').start('GDB')
-    vim.cmd ':TermdebugCommand ./build_rw612/bin/ot-br-rw612.elf'
+    vim.cmd ':TermdebugCommand ./build_rw612/rw612_ot_br_wifi/bin/ot-br-rw612.elf'
     vim.fn.TermDebugSendCommand('target remote localhost:2331')
 
     -- close gdb window
-    vim.cmd ':Gdb'
-    vim.cmd ':q'
+    -- vim.cmd ':Gdb'
+    -- vim.cmd ':q'
 
     -- close program window
     vim.cmd ':Program'
@@ -466,7 +474,7 @@ vim.keymap.set('v', '<leader>g', 'y<ESC>:Telescope live_grep default_text=<c-r>0
 -- vim.keymap.set("n", "<leader>e", ":Telescope file_browser<CR>", { silent = true })
 vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { silent = true })
 
-vim.keymap.set('n', '<leader>c', ':Croniker<CR>', { silent = true })
+-- vim.keymap.set('n', '<leader>c', ':Croniker<CR>', { silent = true })
 
 -- vim.keymap.set('n', '<leader>m', ':lua require("utils").show_loaded_packages()<CR>', { silent = true })
 
@@ -484,5 +492,8 @@ end, {nargs = 0})
 vim.keymap.set('n', '<leader>m', function()
     require('dapui').eval('a = 0')
 end)
+
+-- require("ibl").setup()
+
 
 require('utils')
