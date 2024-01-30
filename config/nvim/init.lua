@@ -38,6 +38,7 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 -- of neovim and don't remquire any packages
 vim.keymap.set('n', '<leader>i', ':edit $MYVIMRC<CR>', { silent = true })
 vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
 -- open help in a horizontal split
 local horizontal_help_split_group = api.nvim_create_augroup("HorizontalHelpSplit", { clear = true })
