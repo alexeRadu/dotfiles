@@ -1,20 +1,6 @@
 vim.g.mapleader      = ' '
 vim.g.maplocalleader = ' '
 
-local function pkg_config(name, config, post_setup)
-    local status_ok, pkg = pcall(require, name)
-    if not status_ok then
-        vim.notify(string.format("Package '%s' unable to load", name), vim.log.levels.DEBUG)
-        return
-    end
-
-    pkg.setup(config)
-    -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
-
-    if post_setup and type(post_setup) == "function" then
-        post_setup()
-    end
-end
 -- disable netrw
 vim.g.loaded             = 1
 vim.g.loaded_netrwPlugin = 1
@@ -121,6 +107,22 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     group = packer_group,
     pattern = vim.fn.expand '$MYVIMRC',
 })
+
+local pkg_config = function(name, config, post_setup)
+    local status_ok, pkg = pcall(require, name)
+    if not status_ok then
+        vim.notify(string.format("Package '%s' unable to load", name), vim.log.levels.DEBUG)
+        return
+    end
+
+    pkg.setup(config)
+    -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
+
+    if post_setup and type(post_setup) == "function" then
+        post_setup()
+    end
+end
+
 
 for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
     local _, _, pkgname = string.find(file, '([%w_-]+).lua$')
