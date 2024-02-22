@@ -7,4 +7,8 @@ M.config =  {
     },
 }
 
+M.post_setup = function()
+    vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { silent = true })
+end
+
 return M

@@ -118,11 +118,14 @@ local pkg_config = function(name, config, post_setup)
         return
     end
 
-    pkg.setup(config)
-    -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
+    if config then
+        pkg.setup(config)
+        vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
+    end
 
     if post_setup and type(post_setup) == "function" then
         post_setup()
+        vim.notify(string.format("Package '%s' post_setup", name), vim.log.levels.INFO)
     end
 end
 
@@ -132,12 +135,13 @@ for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
     if pkgname then
         local pkg = require("packages/" .. pkgname)
 
-        pkgname = vim.F.if_nil(pkg.name, pkgname)
+        if pkg.disable == nil or pkg.disable == false then
+            pkgname = vim.F.if_nil(pkg.name, pkgname)
 
-        pkg_config(pkgname, pkg.config, pkg.post_setup)
+            pkg_config(pkgname, pkg.config, pkg.post_setup)
+        end
     end
 end
-
 
 local on_attach = function(client, bufnr)
     local nmap = function(keys, func, desc)
@@ -271,48 +275,6 @@ require('lspconfig').tsserver.setup {
     }
 }
 
-require('leap').add_default_mappings()
-
-local dap = require('dap')
-
--- for debugging purposes
-dap.set_log_level('TRACE')
-
-
-dap.configurations.c = {
-    {
-        type = "cppdbg",
-        name = "Launch CPP",
-        request = "launch",
-        program = "/home/radu/code/test/build/test",
-    }
-}
-
-dap.configurations.cpp = {
-    {
-        type = "cppdbg",
-        name = "Attach CPP",
-        request = "launch",
-        program = "~/work/ot-nxp/build_rw612/bin/ot-cli-rw612.elf"
-        -- program = "~/work/ot-nxp/build_rw612/bin/ot-br-rw612.elf"
-    }
-}
-
-dap.adapters.cppdbg = {
-    type = 'executable',
-    command = '/home/radu/code/binutils-gdb/arm-none-eabi/bin/arm-none-eabi-gdb',
-    args = { '-i', 'dap', '-ex', 'target remote localhost:2331'},
-}
-
-pkg_config('dapui', {})
-
--- Dap Keymaps
--- vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
--- vim.keymap.set('n', '<F9>', function() require('dap').toggle_breakpoint() end)
--- vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
--- vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
--- vim.keymap.set('n', '<S-F11>', function() require('dap').step_out() end)
-
 -- Termdebug setup
 vim.cmd [[packadd termdebug]]
 
@@ -373,28 +335,9 @@ vim.api.nvim_create_user_command('DebugStop', function()
 end, {nargs = 0})
 
 
-vim.keymap.set('n', '<leader>f', ':Telescope find_files<CR>', { silent = true })
-vim.keymap.set('n', '<leader>b', ':Telescope buffers<CR>', { silent = true })
-vim.keymap.set('n', '<leader>g', ':Telescope live_grep<CR>', { silent = true })
-vim.keymap.set('v', '<leader>g', 'y<ESC>:Telescope live_grep default_text=<c-r>0<CR>', { silent = true })
-vim.keymap.set("n", "<leader>y", ":Telescope file_browser<CR>", { silent = true })
-vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>', { silent = true })
-
 -- vim.keymap.set('n', '<leader>c', ':Croniker<CR>', { silent = true })
 -- vim.keymap.set('n', '<leader>m', ':lua require("utils").show_loaded_packages()<CR>', { silent = true })
 -- vim.keymap.set('n', '<leader>pp', ':lua require("project").list_projects()<CR>', { silent = true })
 -- vim.keymap.set('n', '<leader>pq', ':lua require("project").quit_project()<CR>', { silent = true })
 
--- vim.api.nvim_create_user_command('DapuiOpen', function()
---     require('dapui').open()
--- end, {nargs = 0})
---
--- vim.api.nvim_create_user_command('DapuiClose', function()
---     require('dapui').close()
--- end, {nargs = 0})
---
--- vim.keymap.set('n', '<leader>m', function()
---     require('dapui').eval('a = 0')
--- end)
---
 -- require('utils')
