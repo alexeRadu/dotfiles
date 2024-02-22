@@ -126,7 +126,6 @@ local pkg_config = function(name, config, post_setup)
     end
 end
 
-
 for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
     local _, _, pkgname = string.find(file, '([%w_-]+).lua$')
 
@@ -154,11 +153,11 @@ pkg_config('telescope', {
             }
         },
     },
-})
+}, function()
+    require("telescope").load_extension "file_browser"
+end)
 
-require("telescope").load_extension "file_browser"
-
-require('nvim-treesitter.configs').setup {
+pkg_config('nvim-treesitter.configs', {
     ensure_installed = {
         "c",
         "cpp",
@@ -183,27 +182,23 @@ require('nvim-treesitter.configs').setup {
     },
     auto_install = true,
     sync_install = false,
-
     highlight = {
       enable = true,
       -- use_languagetree = true,
       -- additional_vim_regex_highlighting = false,
     },
-
     indents = {
         enable = true,
     },
-
     playground = {
       enable = true
     },
-
     query_linter = {
       enable = true,
       use_virtual_text = true,
       lint_events = {"BufWrite", "CursorHold"},
     },
-}
+})
 
 local on_attach = function(client, bufnr)
     local nmap = function(keys, func, desc)
@@ -337,15 +332,14 @@ require('lspconfig').tsserver.setup {
     }
 }
 
-require('nvim-semantic-tokens').setup {
+pkg_config('nvim-semantic-tokens', {
     preset = "default",
     highlighters = { require 'nvim-semantic-tokens.table-highlighter' },
-}
+})
 
 -- TODO: install LuaSnip and luasnip-cmp
 local cmp = require('cmp')
-
-cmp.setup {
+pkg_config('cmp',{
     mapping = cmp.mapping.preset.insert {
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -358,17 +352,16 @@ cmp.setup {
     }, {
         { name = 'buffer' },
     }),
-}
+})
 
-
-require('ufo').setup({
+pkg_config('ufo',{
     close_fold_kinds = {'comment'},
     provider_selector = function(bufnr, filetype, buftype)
         return {'treesitter', 'indent'}
     end
 })
 
-require('gitsigns').setup()
+pkg_config('gitsigns', {})
 
 require('leap').add_default_mappings()
 
@@ -403,14 +396,14 @@ dap.adapters.cppdbg = {
     args = { '-i', 'dap', '-ex', 'target remote localhost:2331'},
 }
 
-require('dapui').setup()
+pkg_config('dapui', {})
 
-require("symbols-outline").setup {
-    position = "left",
-}
-
-vim.keymap.set('n', '<leader>o', function()
-    require('symbols-outline').toggle_outline()
+pkg_config("symbols-outline", {
+    position = "left"
+}, function ()
+    vim.keymap.set('n', '<leader>o', function()
+        require('symbols-outline').toggle_outline()
+    end)
 end)
 
 -- Dap Keymaps
