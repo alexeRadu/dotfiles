@@ -462,8 +462,25 @@ vim.api.nvim_create_user_command('StartDebug', function()
     vim.cmd ':q'
 end, {nargs = 0})
 
+vim.api.nvim_create_autocmd("User", {
+    pattern = "TermdebugStopPost",
+    callback = function(ev)
+        print("Debugging stopped")
+
+        for _, buf in pairs(vim.api.nvim_list_bufs()) do
+            local bufname = vim.api.nvim_buf_get_name(buf)
+            if string.find(bufname, "^term:") ~= nil then
+                -- TODO: maybe refine this condition
+                vim.api.nvim_buf_delete(buf, {force = true})
+            end
+        end
+    end
+})
+
 vim.api.nvim_create_user_command('StopDebug', function()
-    vim.fn.TermDebugSendCommand('exit 1')
+    vim.fn.TermDebugSendCommand('exit')
+    vim.fn.TermDebugSendCommand('y')
+
     require('daemon').stop('GDB')
 end, {nargs = 0})
 
