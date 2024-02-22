@@ -1,6 +1,5 @@
-local api = vim.api
-local g   = vim.g
-local o   = vim.o
+vim.g.mapleader      = ' '
+vim.g.maplocalleader = ' '
 
 local function pkg_config(name, config, post_setup)
     local status_ok, pkg = pcall(require, name)
@@ -17,20 +16,22 @@ local function pkg_config(name, config, post_setup)
     end
 end
 
-g.mapleader      = ' '
-g.maplocalleader = ' '
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
-o.background     = 'dark'
-o.errorbells     = false
-o.number         = true
-o.relativenumber = true
-o.termguicolors  = true
-o.list           = true
-o.splitbelow     = true
-o.splitright     = true
-o.cursorline     = true
-o.autoread       = true
+-- disable netrw
+vim.g.loaded             = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.o.background     = 'dark'
+vim.o.errorbells     = false
+vim.o.number         = true
+vim.o.relativenumber = true
+vim.o.termguicolors  = true
+vim.o.list           = true
+vim.o.splitbelow     = true
+vim.o.splitright     = true
+vim.o.cursorline     = true
+vim.o.autoread       = true
 vim.opt.listchars = { tab = '» ', trail = '·' }
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
@@ -41,8 +42,8 @@ vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 
 -- open help in a horizontal split
-local horizontal_help_split_group = api.nvim_create_augroup("HorizontalHelpSplit", { clear = true })
-api.nvim_create_autocmd("FileType", {
+local horizontal_help_split_group = vim.api.nvim_create_augroup("HorizontalHelpSplit", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
     command = 'wincmd L',
     group   = horizontal_help_split_group,
     pattern = "help"
@@ -59,9 +60,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.cmd [[packadd packer.nvim]]
 end
 
--- disable netrw
-g.loaded = 1
-g.loaded_netrwPlugin = 1
 
 require('packer').startup(function(use)
     use {'wbthomason/packer.nvim'}
@@ -221,7 +219,7 @@ local on_attach = function(client, bufnr)
         })
     end
 
-    api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
