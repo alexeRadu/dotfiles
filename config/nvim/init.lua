@@ -435,13 +435,14 @@ require('daemon').create {
     args    = args,
 }
 
-vim.api.nvim_create_user_command('StartDebug', function()
+vim.api.nvim_create_user_command('DebugStart', function()
     require('daemon').start('GDB')
     vim.cmd ':TermdebugCommand ./build_rw612/rw612_ot_br_wifi/bin/ot-br-rw612.elf'
     vim.fn.TermDebugSendCommand('target remote localhost:2331')
 
     -- close gdb window
     -- vim.cmd ':Gdb'
+    --
     -- vim.cmd ':q'
 
     -- close program window
@@ -464,7 +465,7 @@ vim.api.nvim_create_autocmd("User", {
     end
 })
 
-vim.api.nvim_create_user_command('StopDebug', function()
+vim.api.nvim_create_user_command('DebugStop', function()
     vim.fn.TermDebugSendCommand('exit')
     vim.fn.TermDebugSendCommand('y')
 
