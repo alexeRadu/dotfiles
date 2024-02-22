@@ -19,8 +19,8 @@ vim.o.foldcolumn     = '1'
 vim.o.foldlevel      = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable     = true
-vim.opt.listchars = { tab = '» ', trail = '·' }
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+vim.opt.listchars    = { tab = '» ', trail = '·' }
+vim.opt.completeopt  = { 'menu', 'menuone', 'noselect' }
 
 -- These mappings should be as close to the top as possible since they are
 -- usefull with a vanilla installation of neovim and don't remquire any packages
