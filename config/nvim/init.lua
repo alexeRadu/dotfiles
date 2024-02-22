@@ -15,6 +15,10 @@ vim.o.splitbelow     = true
 vim.o.splitright     = true
 vim.o.cursorline     = true
 vim.o.autoread       = true
+vim.o.foldcolumn     = '1'
+vim.o.foldlevel      = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable     = true
 vim.opt.listchars = { tab = '» ', trail = '·' }
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
@@ -42,7 +46,6 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomas/packer.nvim', install_path }
     vim.cmd [[packadd packer.nvim]]
 end
-
 
 require('packer').startup(function(use)
     use {'wbthomason/packer.nvim'}
@@ -357,10 +360,6 @@ cmp.setup {
     }),
 }
 
-vim.o.foldcolumn = '1'
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
 
 require('ufo').setup({
     close_fold_kinds = {'comment'},
