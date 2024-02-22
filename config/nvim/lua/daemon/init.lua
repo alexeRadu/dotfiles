@@ -19,17 +19,12 @@ local function find_daemon_by_name(name)
 end
 
 function M.create(o)
-    if not o.name or type(o.name) ~= "string" then
-        print("Please provide a daemon name")
-        return nil
-    end
     local name    = o.name
     local bufname = "Daemon[" .. name .. "]"
+    local daemon  = find_daemon_by_name(name)
 
-    for _, daemon in ipairs(M.daemons) do
-        if daemon.name == name then
-            return
-        end
+    if daemon ~= nil then
+        return
     end
 
     local buf = vim.api.nvim_create_buf(true, true);
