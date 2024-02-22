@@ -131,74 +131,13 @@ for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
 
     if pkgname then
         local pkg = require("packages/" .. pkgname)
+
+        pkgname = vim.F.if_nil(pkg.name, pkgname)
+
         pkg_config(pkgname, pkg.config, pkg.post_setup)
     end
 end
 
-pkg_config('telescope', {
-    pickers = {
-        colorscheme = {
-            enable_preview = true,
-        },
-    },
-    extensions = {
-        file_browser = {
-            theme = "dropdown",
-            previewer = false,
-            layout_config = {
-                center = {
-                    height = 0.8,
-                    width = 0.4,
-                }
-            }
-        },
-    },
-}, function()
-    require("telescope").load_extension "file_browser"
-end)
-
-pkg_config('nvim-treesitter.configs', {
-    ensure_installed = {
-        "c",
-        "cpp",
-        "lua",
-        "vim",
-        "python",
-        "bash",
-        "cmake",
-        "make",
-        "ninja",
-        "diff",
-        "gitattributes",
-        "gitcommit",
-        "json",
-        "markdown",
-        "java",
-        "javascript",
-        "typescript",
-        "html",
-        "http",
-        "css",
-    },
-    auto_install = true,
-    sync_install = false,
-    highlight = {
-      enable = true,
-      -- use_languagetree = true,
-      -- additional_vim_regex_highlighting = false,
-    },
-    indents = {
-        enable = true,
-    },
-    playground = {
-      enable = true
-    },
-    query_linter = {
-      enable = true,
-      use_virtual_text = true,
-      lint_events = {"BufWrite", "CursorHold"},
-    },
-})
 
 local on_attach = function(client, bufnr)
     local nmap = function(keys, func, desc)
@@ -332,37 +271,6 @@ require('lspconfig').tsserver.setup {
     }
 }
 
-pkg_config('nvim-semantic-tokens', {
-    preset = "default",
-    highlighters = { require 'nvim-semantic-tokens.table-highlighter' },
-})
-
--- TODO: install LuaSnip and luasnip-cmp
-local cmp = require('cmp')
-pkg_config('cmp',{
-    mapping = cmp.mapping.preset.insert {
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm { select = true },
-    },
-    sources = cmp.config.sources ({
-        { name = 'nvim_lsp' },
-    }, {
-        { name = 'buffer' },
-    }),
-})
-
-pkg_config('ufo',{
-    close_fold_kinds = {'comment'},
-    provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
-    end
-})
-
-pkg_config('gitsigns', {})
-
 require('leap').add_default_mappings()
 
 local dap = require('dap')
@@ -397,14 +305,6 @@ dap.adapters.cppdbg = {
 }
 
 pkg_config('dapui', {})
-
-pkg_config("symbols-outline", {
-    position = "left"
-}, function ()
-    vim.keymap.set('n', '<leader>o', function()
-        require('symbols-outline').toggle_outline()
-    end)
-end)
 
 -- Dap Keymaps
 -- vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
