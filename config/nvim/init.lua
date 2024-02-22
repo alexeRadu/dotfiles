@@ -203,8 +203,6 @@ require('nvim-treesitter.configs').setup {
     },
 }
 
--- require("ibl").setup()
-
 local on_attach = function(client, bufnr)
     local nmap = function(keys, func, desc)
         if desc then
@@ -508,8 +506,5 @@ end, {nargs = 0})
 vim.keymap.set('n', '<leader>m', function()
     require('dapui').eval('a = 0')
 end)
-
--- require("ibl").setup()
-
 
 require('utils')
