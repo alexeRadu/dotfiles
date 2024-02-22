@@ -15,9 +15,6 @@ local function pkg_config(name, config, post_setup)
         post_setup()
     end
 end
-
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
 -- disable netrw
 vim.g.loaded             = 1
 vim.g.loaded_netrwPlugin = 1
@@ -35,11 +32,13 @@ vim.o.autoread       = true
 vim.opt.listchars = { tab = '» ', trail = '·' }
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
--- These mappings should be as close to the top as possible since they are usefull with a vanilla installation
--- of neovim and don't remquire any packages
+-- These mappings should be as close to the top as possible since they are
+-- usefull with a vanilla installation of neovim and don't remquire any packages
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<leader>i', ':edit $MYVIMRC<CR>', { silent = true })
 vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
+vim.keymap.set('n', '<leader>h', ':help ', { silent = false })
 
 -- open help in a horizontal split
 local horizontal_help_split_group = vim.api.nvim_create_augroup("HorizontalHelpSplit", { clear = true })
@@ -48,8 +47,6 @@ vim.api.nvim_create_autocmd("FileType", {
     group   = horizontal_help_split_group,
     pattern = "help"
 })
-
-vim.keymap.set('n', '<leader>h', ':help ', { silent = false })
 
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
