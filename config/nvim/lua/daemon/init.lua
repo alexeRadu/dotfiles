@@ -27,9 +27,6 @@ function M.create(o)
         return
     end
 
-    local buf = vim.api.nvim_create_buf(true, true);
-    vim.api.nvim_buf_set_name(buf, bufname)
-
     local on_output = vim.schedule_wrap(function(err, line, job)
         local daemon = find_daemon_by_name(name)
         if daemon and not daemon.stopped then
@@ -53,23 +50,28 @@ function M.create(o)
 
     local job = Job:new(o)
     if not job then
-        print("Unable to create job for " .. o.command)
-        vim.api.nvim_buf_delete(buf, {})
+        return
     end
 
     M.daemons[#M.daemons + 1] = {
-        name          = name,
-        buffer_name   = bufname,
-        buffer        = buf,
-        job           = job,
-        stopped       = true,
+        name    = name,
+        bufname = bufname,
+        job     = job,
+        stopped = true,
     }
 end
 
 function M.start(name)
     local daemon = find_daemon_by_name(name)
+    if daemon == nil then
+        return
+    end
 
     if daemon and daemon.stopped then
+        local buf = vim.api.nvim_create_buf(true, true);
+        vim.api.nvim_buf_set_name(buf, daemon.bufname)
+        daemon.buffer = buf
+
         daemon.job:start()
         daemon.stopped = false
     end
@@ -77,11 +79,15 @@ end
 
 function M.stop(name)
     local daemon = find_daemon_by_name(name)
+    if daemon == nil then
+        return
+    end
 
     if daemon and not daemon.stopped then
         local uv = vim.loop
         uv.kill(daemon.job.pid, uv.constants.SIGTERM)
         daemon.stopped = true
+        vim.api.nvim_buf_delete(daemon.buffer, {})
     end
 end
 
