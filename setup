@@ -1,31 +1,25 @@
 #!/bin/bash
 
-function log {
-	local module=$1
-	local msg=$2
-
-	printf "%-20s $msg\n" "$module"
-}
-
 function process {
-	target=$1
-	src="$HOME/.${target}"
-	dst="`pwd`/${target}"
+    target=$1
 
-	if [ -L $src ]; then
-		unlink $src
-	elif [ -f $src ]; then
-		rm $src
-	elif [ -d $src ]; then
-		rm -Rf $src
-	fi
+    src="$HOME/.${target}"
+    dst="`pwd`/${target}"
 
-	`ln -s $dst $src`
-	log "$target" "Linked .$target -> dotfiles/$target"
+    if [ -L $src ]; then
+        unlink $src
+    elif [ -f $src ]; then
+        rm $src
+    elif [ -d $src ]; then
+        rm -Rf $src
+    fi
+
+    ln -s $dst $src
+    printf "%-20s -> dotfiles/${target}\n" "~/.${target}"
 }
 
-# process vimrc
-# process vim
+process vimrc
+process vim
 # process bashrc
 # process bash_profile
 # process git-completion.bash
