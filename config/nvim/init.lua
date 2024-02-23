@@ -151,11 +151,7 @@ vim.g.termdebug_config = {
     ["use_prompt"] = false,
 }
 
-vim.keymap.set('n', '<F5>',   ':Continue<CR>')
-vim.keymap.set('n', '<F6>',   ':Stop<CR>')
-vim.keymap.set('n', '<F9>',   ':Break<CR>')
-vim.keymap.set('n', '<F10>',  ':Over<CR>')
-vim.keymap.set('n', '<F11>',  ':Step<CR>')
+vim.keymap.set('n', '<F5>',    ':DebugStart<CR>', {silent = true})
 
 local cmd  = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe"
 local args  = {"-device", "RW610", "-if", "SWD", "-nogui"}
@@ -171,13 +167,19 @@ vim.api.nvim_create_user_command('DebugStart', function()
     vim.fn.TermDebugSendCommand('target remote localhost:2331')
 
     -- close gdb window
-    -- vim.cmd ':Gdb'
-    --
-    -- vim.cmd ':q'
+    vim.cmd ':Gdb'
+    vim.cmd ':q'
 
     -- close program window
     vim.cmd ':Program'
     vim.cmd ':q'
+
+    vim.keymap.set('n', '<F5>',    ':Continue<CR>',  {silent = true})
+    vim.keymap.set('n', '<F6>',    ':Stop<CR>',      {silent = true})
+    vim.keymap.set('n', '<F9>',    ':Break<CR>',     {silent = true})
+    vim.keymap.set('n', '<F10>',   ':Over<CR>',      {silent = true})
+    vim.keymap.set('n', '<F11>',   ':Step<CR>',      {silent = true})
+    vim.keymap.set('n', '<F12>',   ':DebugStop<CR>', {silent = true})
 end, {nargs = 0})
 
 vim.api.nvim_create_autocmd("User", {
@@ -200,6 +202,13 @@ vim.api.nvim_create_user_command('DebugStop', function()
     vim.fn.TermDebugSendCommand('y')
 
     require('daemon').stop('GDB')
+
+    vim.keymap.set('n', '<F5>',    ':DebugStart<CR>', {silent = true})
+    vim.keymap.del('n', '<F6>')
+    vim.keymap.del('n', '<F9>')
+    vim.keymap.del('n', '<F10>')
+    vim.keymap.del('n', '<F11>')
+    vim.keymap.del('n', '<F12>')
 end, {nargs = 0})
 
 
