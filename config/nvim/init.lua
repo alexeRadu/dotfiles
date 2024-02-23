@@ -120,12 +120,12 @@ local pkg_config = function(name, config, post_setup)
 
     if config then
         pkg.setup(config)
-        vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
+        -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
     end
 
     if post_setup and type(post_setup) == "function" then
         post_setup()
-        vim.notify(string.format("Package '%s' post_setup", name), vim.log.levels.INFO)
+        -- vim.notify(string.format("Package '%s' post_setup", name), vim.log.levels.INFO)
     end
 end
 
