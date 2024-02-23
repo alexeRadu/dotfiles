@@ -18,24 +18,22 @@ local function find_daemon_by_name(name)
     return nil
 end
 
-function M.create(o)
-    local name    = o.name
-    local bufname = "Daemon[" .. name .. "]"
-    local daemon  = find_daemon_by_name(name)
+local on_output = vim.schedule_wrap(function(err, line, job)
+    local name = job.name
+    local daemon = find_daemon_by_name(name)
+    if daemon and daemon.job ~= nil then
+        vim.api.nvim_buf_set_lines(daemon.buffer, -1, -1, false, {line})
+    end
+end)
 
+local on_exit = vim.schedule_wrap(function(code, signal)
+end)
+
+function M.create(o)
+    local daemon  = find_daemon_by_name(o.name)
     if daemon ~= nil then
         return
     end
-
-    local on_output = vim.schedule_wrap(function(err, line, job)
-        local daemon = find_daemon_by_name(name)
-        if daemon and not daemon.stopped then
-            vim.api.nvim_buf_set_lines(daemon.buffer, -1, -1, false, {line})
-        end
-    end)
-
-    local on_exit = vim.schedule_wrap(function(code, signal)
-    end)
 
     -- force some defaults
     o.interactive      = false
@@ -48,47 +46,42 @@ function M.create(o)
     o.on_stderr = on_output
     o.on_exit   = on_exit
 
-    local job = Job:new(o)
-    if not job then
-        return
-    end
-
     M.daemons[#M.daemons + 1] = {
-        name    = name,
-        bufname = bufname,
-        job     = job,
-        stopped = true,
+        name = o.name,
+        opts = o
     }
 end
 
 function M.start(name)
     local daemon = find_daemon_by_name(name)
-    if daemon == nil then
+    if daemon == nil or daemon.job ~= nil then
         return
     end
 
-    if daemon and daemon.stopped then
-        local buf = vim.api.nvim_create_buf(true, true);
-        vim.api.nvim_buf_set_name(buf, daemon.bufname)
-        daemon.buffer = buf
-
-        daemon.job:start()
-        daemon.stopped = false
+    local job = Job:new(daemon.opts)
+    if not job then
+        return
     end
+
+    local buf = vim.api.nvim_create_buf(true, true);
+    vim.api.nvim_buf_set_name(buf, "Daemon[" .. name .. "]")
+
+    daemon.job:start()
+
+    daemon.buffer = buf
+    daemon.job = job
 end
 
 function M.stop(name)
     local daemon = find_daemon_by_name(name)
-    if daemon == nil then
+    if daemon == nil or daemon.job == nil then
         return
     end
 
-    if daemon and not daemon.stopped then
-        local uv = vim.loop
-        uv.kill(daemon.job.pid, uv.constants.SIGTERM)
-        daemon.stopped = true
-        vim.api.nvim_buf_delete(daemon.buffer, {})
-    end
+    vim.loop.kill(daemon.job.pid, uv.constants.SIGTERM)
+    vim.api.nvim_buf_delete(daemon.buffer, {})
+    daemon.job = nil
+    daemon.buffer = nil
 end
 
 function M.killall()
