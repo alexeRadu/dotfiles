@@ -66,7 +66,7 @@ function M.start(name)
     local buf = vim.api.nvim_create_buf(true, true);
     vim.api.nvim_buf_set_name(buf, "Daemon[" .. name .. "]")
 
-    daemon.job:start()
+    job:start()
 
     daemon.buffer = buf
     daemon.job = job
