@@ -21,7 +21,8 @@ end
 local on_output = vim.schedule_wrap(function(err, line, job)
     local name = job.name
     local daemon = find_daemon_by_name(name)
-    if daemon and daemon.job ~= nil then
+
+    if daemon and daemon.job then
         vim.api.nvim_buf_set_lines(daemon.buffer, -1, -1, false, {line})
     end
 end)
@@ -62,6 +63,7 @@ function M.start(name)
     if not job then
         return
     end
+    job.name = name
 
     local buf = vim.api.nvim_create_buf(true, true);
     vim.api.nvim_buf_set_name(buf, "Daemon[" .. name .. "]")
@@ -74,11 +76,12 @@ end
 
 function M.stop(name)
     local daemon = find_daemon_by_name(name)
-    if daemon == nil or daemon.job == nil then
+    if not daemon or not daemon.job then
         return
     end
 
-    vim.loop.kill(daemon.job.pid, uv.constants.SIGTERM)
+    vim.loop.kill(daemon.job.pid, vim.loop.constants.SIGTERM)
+
     vim.api.nvim_buf_delete(daemon.buffer, {})
     daemon.job = nil
     daemon.buffer = nil
