@@ -15,10 +15,6 @@ vim.o.splitbelow     = true
 vim.o.splitright     = true
 vim.o.cursorline     = true
 vim.o.autoread       = true
-vim.o.foldcolumn     = '1'
-vim.o.foldlevel      = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable     = true
 vim.opt.listchars    = { tab = '» ', trail = '·' }
 vim.opt.completeopt  = { 'menu', 'menuone', 'noselect' }
 
