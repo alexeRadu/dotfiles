@@ -23,8 +23,14 @@ vim.opt.completeopt  = { 'menu', 'menuone', 'noselect' }
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<leader>i', ':edit $MYVIMRC<CR>', { silent = true })
 vim.keymap.set('n', '<leader>e', ':luafile %<CR>', { silent = true })
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { silent = true })
 vim.keymap.set('n', '<leader>h', ':help ', { silent = false })
+
+-- Terminal keybindings
+vim.keymap.set('t', '<C-z>', [[<C-\><C-n>]], { silent = true })
+vim.keymap.set('t', '<C-w>h', '<C-\\><C-n><C-w>h', { silent = true})
+vim.keymap.set('t', '<C-w>l', '<C-\\><C-n><C-w>l', { silent = true})
+vim.keymap.set('t', '<C-w>k', '<C-\\><C-n><C-w>k', { silent = true})
+vim.keymap.set('t', '<C-w>j', '<C-\\><C-n><C-w>j', { silent = true})
 
 -- open help in a horizontal split
 local horizontal_help_split_group = vim.api.nvim_create_augroup("HorizontalHelpSplit", { clear = true })
