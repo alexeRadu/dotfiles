@@ -15,7 +15,7 @@ export BASH_ENV=$HOME/.bashrc
 if [ "$tty" = "busybox" ]; then
 	alias ls='ls --color=auto'
 else
-	alias ls='ls --color=auto --group-directories-first'
+	alias ls='ls -h --color=auto --group-directories-first'
 	alias grep='grep --color=always --exclude=*.o --exclude=*.a --exclude=*.obj --exclude=*.lib --exclude=*.elf --exclude=*.axf --exclude=*.map --exclude-dir=.svn --exclude-dir=.git'
 fi
 alias ll='ls -l'
