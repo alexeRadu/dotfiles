@@ -1,0 +1,7 @@
+[main]
+color-tsharks = ['/usr/bin/tshark']
+last-used-tshark = '/usr/bin/tshark'
+layout = 'altview2'
+recent-filters = ['mdns']
+validated-tsharks = ['/usr/bin/tshark']
+
