@@ -33,3 +33,4 @@ process config/nvim
 # process config/i3
 # process config/i3status
 # process config/kitty
+process config/termshark
