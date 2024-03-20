@@ -1,5 +1,6 @@
 [main]
 color-tsharks = ['/usr/bin/tshark']
+key-mappings = ['l <Right>', 'h <Left>']
 last-used-tshark = '/usr/bin/tshark'
 layout = 'altview2'
 recent-filters = ['mdns']
