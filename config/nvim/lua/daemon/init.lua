@@ -4,34 +4,16 @@ local M = {}
 
 M.daemons = {}
 
-local function find_daemon_by_name(name)
-    if type(name) ~= "string" then
-        return nil
-    end
-
-    for _, daemon in ipairs(M.daemons) do
-        if daemon.name == name then
-            return daemon
-        end
-    end
-
-    return nil
-end
-
 local on_output = vim.schedule_wrap(function(err, line, job)
-    local name = job.name
-    local daemon = find_daemon_by_name(name)
-
-    if daemon and daemon.job then
-        vim.api.nvim_buf_set_lines(daemon.buffer, -1, -1, false, {line})
-    end
+    vim.api.nvim_buf_set_lines(job.buffer, -1, -1, false, {line})
 end)
 
-local on_exit = vim.schedule_wrap(function(code, signal)
+local on_exit = vim.schedule_wrap(function(job, code, signal)
+    vim.api.nvim_buf_delete(job.buffer, {})
 end)
 
 function M.create(o)
-    local daemon  = find_daemon_by_name(o.name)
+    local daemon  = M.daemons[o.name]
     if daemon ~= nil then
         return
     end
@@ -47,14 +29,14 @@ function M.create(o)
     o.on_stderr = on_output
     o.on_exit   = on_exit
 
-    M.daemons[#M.daemons + 1] = {
+    M.daemons[o.name] = {
         name = o.name,
         opts = o
     }
 end
 
 function M.start(name)
-    local daemon = find_daemon_by_name(name)
+    local daemon = M.daemons[name]
     if daemon == nil or daemon.job ~= nil then
         return
     end
@@ -63,34 +45,30 @@ function M.start(name)
     if not job then
         return
     end
-    job.name = name
 
     local buf = vim.api.nvim_create_buf(true, true);
     vim.api.nvim_buf_set_name(buf, "Daemon[" .. name .. "]")
 
     job:start()
-
-    daemon.buffer = buf
+    job.buffer = buf
     daemon.job = job
 end
 
 function M.stop(name)
-    local daemon = find_daemon_by_name(name)
+    local daemon = M.daemons[name]
     if not daemon or not daemon.job then
         return
     end
 
     -- Kill the Job and delete the buffer
     vim.loop.kill(daemon.job.pid, vim.loop.constants.SIGTERM)
-    vim.api.nvim_buf_delete(daemon.buffer, {})
-
+    -- vim.api.nvim_buf_delete(daemon.job.buffer, {})
     daemon.job = nil
-    daemon.buffer = nil
 end
 
 function M.killall()
-    for _, daemon in ipairs(M.daemons) do
-        M.stop(daemon.name)
+    for name, _ in ipairs(M.daemons) do
+        M.stop(name)
     end
 end
 

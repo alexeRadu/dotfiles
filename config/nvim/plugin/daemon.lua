@@ -6,9 +6,9 @@ end, {
         local results = {}
         local daemons = require("daemon").daemons
 
-        for _, daemon in ipairs(daemons) do
-            if daemon.stopped then
-                results[#results + 1] = daemon.name
+        for name, daemon in pairs(daemons) do
+            if daemon.job == nil then
+                results[#results + 1] = name
             end
         end
 
@@ -24,9 +24,9 @@ end, {
         local results = {}
         local daemons = require("daemon").daemons
 
-        for _, daemon in ipairs(daemons) do
-            if not daemon.stopped then
-                results[#results + 1] = daemon.name
+        for name, daemon in pairs(daemons) do
+            if daemon.job ~= nil then
+                results[#results + 1] = name
             end
         end
 
@@ -37,22 +37,15 @@ end, {
 vim.api.nvim_create_user_command("DaemonList", function()
     local daemons = require("daemon").daemons
 
-    if #daemons == 0 then
-        print("No daemons found")
-        return
-    end
-
-    for _, daemon in ipairs(daemons) do
+    for name, daemon in pairs(daemons) do
         local state = "started"
-        if daemon.stopped then
+        if daemon.job == nil then
             state = "stopped"
         end
 
-        print(daemon.name .. "[" .. state .. "]")
+        print(name .. "[" .. state .. "]")
     end
-end, {
-    nargs = 0,
-})
+end, { nargs = 0, })
 
 local daemon_exit_group = vim.api.nvim_create_augroup("DaemonExitGroup", {clear = true})
 vim.api.nvim_create_autocmd("ExitPre", {
