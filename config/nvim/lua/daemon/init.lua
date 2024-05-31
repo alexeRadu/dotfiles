@@ -80,20 +80,17 @@ function M.stop(name)
         return
     end
 
+    -- Kill the Job and delete the buffer
     vim.loop.kill(daemon.job.pid, vim.loop.constants.SIGTERM)
-
     vim.api.nvim_buf_delete(daemon.buffer, {})
+
     daemon.job = nil
     daemon.buffer = nil
 end
 
 function M.killall()
     for _, daemon in ipairs(M.daemons) do
-        if not daemon.stopped then
-            local uv = vim.loop
-            uv.kill(daemon.job.pid, uv.constants.SIGTERM)
-            daemon.stopped = true
-        end
+        M.stop(daemon.name)
     end
 end
 
