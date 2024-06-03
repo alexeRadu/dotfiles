@@ -35,11 +35,37 @@ function M.create(o)
     }
 end
 
+function M.update_args(name)
+    local daemon = M.daemons[name]
+    if not daemon then
+        return
+    end
+
+    local args = {}
+    for k, v in pairs(daemon.opts.config) do
+        if k == 'interface' then
+            args[#args + 1] = '-if'
+        else
+            args[#args + 1] = "-" .. k
+        end
+
+        if type(v) == "string" then
+            args[#args + 1] = v
+        elseif type(v) == "number" then
+            args[#args + 1] = tostring(v)
+        end
+    end
+
+    daemon.opts['args'] = args
+end
+
 function M.start(name)
     local daemon = M.daemons[name]
     if daemon == nil or daemon.job ~= nil then
         return
     end
+
+    M.update_args(name)
 
     local job = Job:new(daemon.opts)
     if not job then
