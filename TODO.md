@@ -6,3 +6,4 @@
 * nvim:     - color lua doc comments
 * nvim:     - handle the case where tabs settings is different then what I wan
 * nvim:     - UFO: disable automatic fold-all on save
+* nnn:      - perform grep on folder/
