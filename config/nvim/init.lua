@@ -170,18 +170,63 @@ vim.g.termdebug_config = {
 
 vim.keymap.set('n', '<F5>',    ':DebugStart<CR>', {silent = true})
 
-local cmd  = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe"
-local args  = {"-device", "RW610", "-if", "SWD", "-nogui"}
-require('daemon').create {
-    name    = 'GDB',
-    command = cmd,
-    args    = args,
+local gdb_configs = {
+    mcxw72_host = {
+        command    = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe",
+        device     = "KW47B42ZB7_M33_0",
+        interface  = "SWD",
+        port       = 2331,
+        filename   = "/home/radu/work/ot-nxp/build_mcxw72/bin/ot-cli-ftd.elf",
+    },
+    mcxw72_nbu = {
+        command    = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe",
+        device     = "KW47B42ZB7_M33_1",
+        interface  = "SWD",
+        port       = 2341,
+        filename   = "/home/radu/work/ot-nxp/third_party/github_sdk/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/boards/kw47/nbu_15_4/bm/iar/Debug/Exe/nbu_15_4.out"
+    },
+    rw612_ot_br = {
+        command    = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe",
+        device     = "RW612",
+        interface  = "SWD",
+        port       = 2331,
+        filename   = "/home/radu/work/ot-nxp/build_rw612/rw612_ot_br_wifi/bin/ot-br-rw612.elf",
+    },
+    k32w1_15_4_controller = {
+        command    = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe",
+        device     = "KW45Z41083",
+        interface  = "SWD",
+        port       = 2331,
+        filename   = "/home/radu/work/conn-test/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/ieee_802_15_4/examples/controller/build/15.4-controller.elf",
+    }
 }
 
+-- local current_gdb_config = nil
+local current_gdb_config = "k32w1_15_4_controller"
+
 vim.api.nvim_create_user_command('DebugStart', function()
-    require('daemon').start('GDB')
-    vim.cmd ':TermdebugCommand ./build_rw612/rw612_ot_br_wifi/bin/ot-br-rw612.elf'
-    vim.fn.TermDebugSendCommand('target remote localhost:2331')
+    if current_gdb_config == nil then
+        local available_configs = {}
+        for config_name, _ in pairs(gdb_configs) do
+            available_configs[#available_configs + 1] = config_name
+        end
+
+        vim.ui.select(available_configs, { prompt = "Select GDB config: " }, function(choice)
+            if current_gdb_config then
+                print("Gdb already running")
+                return
+            else
+                current_gdb_config = choice
+            end
+        end)
+    end
+
+    local config = gdb_configs[current_gdb_config]
+
+    require('daemon').start(current_gdb_config, config)
+
+    vim.cmd(":TermdebugCommand " .. config.filename)
+    vim.fn.TermDebugSendCommand('target remote localhost:' .. config.port)
 
     -- close gdb window
     vim.cmd ':Gdb'
