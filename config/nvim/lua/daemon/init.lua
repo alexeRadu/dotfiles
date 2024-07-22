@@ -9,65 +9,37 @@ local on_output = vim.schedule_wrap(function(err, line, job)
 end)
 
 local on_exit = vim.schedule_wrap(function(job, code, signal)
-    vim.api.nvim_buf_delete(job.buffer, {})
+    print("Exiting Job")
+    -- vim.api.nvim_buf_delete(job.buffer, {})
+    M.stop(job.name)
 end)
 
-function M.create(o)
-    local daemon  = M.daemons[o.name]
-    if daemon ~= nil then
-        return
-    end
+function M.start(name, config)
+    local opts = {}
 
     -- force some defaults
-    o.interactive      = false
-    o.detached         = true
-    o.enable_recording = false
+    opts.interactive      = false
+    opts.detached         = true
+    opts.enable_recording = false
 
     -- add specific handlers
-    o.enable_handlers = true
-    o.on_stdout = on_output
-    o.on_stderr = on_output
-    o.on_exit   = on_exit
+    opts.enable_handlers = true
+    opts.on_stdout = on_output
+    opts.on_stderr = on_output
+    opts.on_exit   = on_exit
 
-    M.daemons[o.name] = {
-        name = o.name,
-        opts = o
+    opts.command = config.command
+    opts.args = {
+        "-device",
+        config.device,
+        "-if",
+        config.interface,
+        "-nogui",
+        "-port",
+        config.port
     }
-end
 
-function M.update_args(name)
-    local daemon = M.daemons[name]
-    if not daemon then
-        return
-    end
-
-    local args = {}
-    for k, v in pairs(daemon.opts.config) do
-        if k == 'interface' then
-            args[#args + 1] = '-if'
-        else
-            args[#args + 1] = "-" .. k
-        end
-
-        if type(v) == "string" then
-            args[#args + 1] = v
-        elseif type(v) == "number" then
-            args[#args + 1] = tostring(v)
-        end
-    end
-
-    daemon.opts['args'] = args
-end
-
-function M.start(name)
-    local daemon = M.daemons[name]
-    if daemon == nil or daemon.job ~= nil then
-        return
-    end
-
-    M.update_args(name)
-
-    local job = Job:new(daemon.opts)
+    local job = Job:new(opts)
     if not job then
         return
     end
@@ -77,7 +49,13 @@ function M.start(name)
 
     job:start()
     job.buffer = buf
-    daemon.job = job
+    job.name = name -- needed when the Job is not able to start
+
+    M.daemons[name] = {
+        opts   = opts,
+        job    = job,
+        config = config
+    }
 end
 
 function M.stop(name)
@@ -90,6 +68,7 @@ function M.stop(name)
     vim.loop.kill(daemon.job.pid, vim.loop.constants.SIGTERM)
     -- vim.api.nvim_buf_delete(daemon.job.buffer, {})
     daemon.job = nil
+    -- M.daemons[daemon.job.name] = nil
 end
 
 function M.killall()
