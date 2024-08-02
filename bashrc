@@ -8,6 +8,7 @@ tty=`ps -p $$ | tail -n +2 | grep -oE '[^ \/]+$'`
 export PATH=${HOME}/.bin:${PATH}
 export PATH=${HOME}/.local/bin:${PATH}
 export PATH=${HOME}/local/nvim/bin:${PATH}
+export PATH=${HOME}/.local/bin/lua-language-server/bin:${PATH}
 
 export BASH_ENV=$HOME/.bashrc
 
@@ -151,3 +152,5 @@ if [ -f ~/.local.conf ]; then
 	source ~/.local.conf
 fi
 
+
+alias luamake="/home/radu/.local/bin/lua-language-server/3rd/luamake/luamake"
