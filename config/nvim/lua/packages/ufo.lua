@@ -1,7 +1,7 @@
 local M = {}
 
 M.config = {
-    close_fold_kinds = {'comment'},
+    close_fold_kinds_for_ft = {'comment'},
     provider_selector = function(bufnr, filetype, buftype)
         return {'treesitter', 'indent'}
     end
