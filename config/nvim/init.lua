@@ -172,28 +172,28 @@ vim.keymap.set('n', '<F5>',    ':DebugStart<CR>', {silent = true})
 
 local gdb_configs = {
     mcxw72_host = {
-        command    = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe",
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW47B42ZB7_M33_0",
         interface  = "SWD",
         port       = 2331,
         filename   = "/home/radu/work/ot-nxp/build_mcxw72/bin/ot-cli-ftd.elf",
     },
     mcxw72_nbu = {
-        command    = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe",
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW47B42ZB7_M33_1",
         interface  = "SWD",
         port       = 2341,
-        filename   = "/home/radu/work/ot-nxp/third_party/github_sdk/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/boards/kw47/nbu_15_4/bm/iar/Debug/Exe/nbu_15_4.out"
+        filename   = "/home/radu/work/MCZB-2294/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/boards/mcxw72/nbu_15_4/bm/iar/Debug/Exe/nbu_15_4.out"
     },
     rw612_ot_br = {
-        command    = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe",
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "RW612",
         interface  = "SWD",
         port       = 2331,
         filename   = "/home/radu/work/ot-nxp/build_rw612/rw612_ot_br_wifi/bin/ot-br-rw612.elf",
     },
     k32w1_15_4_controller = {
-        command    = "/home/radu/work/JLink/JLink/JLinkGDBServerCLExe",
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW45Z41083",
         interface  = "SWD",
         port       = 2331,
