@@ -201,26 +201,16 @@ local gdb_configs = {
     }
 }
 
--- local current_gdb_config = nil
-local current_gdb_config = "k32w1_15_4_controller"
+local current_gdb_config = nil
+-- local current_gdb_config = "k32w1_15_4_controller"
+-- local current_gdb_config = "mcxw72_host"
 
-vim.api.nvim_create_user_command('DebugStart', function()
+local start_gdb = function()
+    print("current_gdb_config: " .. current_gdb_config)
     if current_gdb_config == nil then
-        local available_configs = {}
-        for config_name, _ in pairs(gdb_configs) do
-            available_configs[#available_configs + 1] = config_name
-        end
-
-        vim.ui.select(available_configs, { prompt = "Select GDB config: " }, function(choice)
-            if current_gdb_config then
-                print("Gdb already running")
-                return
-            else
-                current_gdb_config = choice
-            end
-        end)
+        warn('no gdb config chosen')
+        return
     end
-
     local config = gdb_configs[current_gdb_config]
 
     require('daemon').start(current_gdb_config, config)
@@ -242,6 +232,56 @@ vim.api.nvim_create_user_command('DebugStart', function()
     vim.keymap.set('n', '<F10>',   ':Over<CR>',      {silent = true})
     vim.keymap.set('n', '<F11>',   ':Step<CR>',      {silent = true})
     vim.keymap.set('n', '<F12>',   ':DebugStop<CR>', {silent = true})
+end
+
+vim.api.nvim_create_user_command('DebugStart', function()
+    if current_gdb_config == nil then
+        local available_configs = {}
+        for config_name, _ in pairs(gdb_configs) do
+            available_configs[#available_configs + 1] = config_name
+        end
+
+        local pickers = require('telescope.pickers')
+        local finders = require('telescope.finders')
+        local conf = require('telescope.config').values
+
+        pickers.new({
+            require('telescope.themes').get_dropdown({}),
+        }, {
+            prompt_title = "Select GDB config",
+            finder = finders.new_table({
+                results = available_configs
+            }),
+            sorter = conf.generic_sorter({}),
+            attach_mappings = function(prompt_bufnr, map)
+                local actions = require 'telescope.actions'
+                local action_state = require "telescope.actions.state"
+
+                actions.select_default:replace(function()
+                    actions.close(prompt_bufnr)
+                    local selection = action_state.get_selected_entry()
+
+                     -- TODO: handle case where nothing has been selected
+                     current_gdb_config = selection[1]
+
+                     start_gdb()
+                end)
+                return true
+            end,
+        }):find()
+
+        -- vim.ui.select(available_configs, { prompt = "Select GDB config: " }, function(choice)
+        --     if current_gdb_config then
+        --         print("Gdb already running")
+        --         return
+        --     else
+        --         current_gdb_config = choice
+        --     end
+        -- end)
+    else
+        start_gdb()
+    end
+
 end, {nargs = 0})
 
 vim.api.nvim_create_autocmd("User", {
