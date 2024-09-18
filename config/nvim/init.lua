@@ -40,6 +40,12 @@ vim.keymap.set('n', '<C-w>l', ':rightbelow vsplit<CR>', { silent = true })
 vim.keymap.set('n', '<C-w>j', ':rightbelow split<CR>', { silent = true })
 vim.keymap.set('n', '<C-w>k', ':leftabove split<CR>', { silent = true })
 
+-- Moving in insert mode
+vim.keymap.set('i', '<C-h>', '<C-c>', { silent = true })
+vim.keymap.set('i', '<C-j>', '<C-c>lj', { silent = true })
+vim.keymap.set('i', '<C-k>', '<C-c>lk', { silent = true })
+vim.keymap.set('i', '<C-l>', '<C-c>ll', { silent = true })
+
 -- Terminal keybindings
 vim.keymap.set('t', '<C-z>', [[<C-\><C-n>]], { silent = true })
 vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h', { silent = true})
