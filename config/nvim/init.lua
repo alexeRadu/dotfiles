@@ -196,8 +196,27 @@ local gdb_configs = {
         command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW45Z41083",
         interface  = "SWD",
-        port       = 2331,
-        filename   = "/home/radu/work/conn-test/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/ieee_802_15_4/examples/controller/build/15.4-controller.elf",
+        port       = 2351,
+        select     = "usb=1062430063",
+        filename   = "/home/radu/work/MCZB-2274/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/ieee_802_15_4/examples/controller/build/15.4-controller.elf",
+    },
+    k32w1_15_4_conn_test = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW45Z41083",
+        interface  = "SWD",
+        port       = 2351,
+        select     = "usb=1063040867",
+        -- select     = "usb=1066710819",
+        filename   = "/home/radu/work/sdk-next/mcu-sdk-3.0/build/15_4_connectivity_test_k32w148evk_bm.elf",
+    },
+    mcxw72_15_4_controller = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW47B42ZB7_M33_0",
+        -- device     = "KW45Z41083",
+        interface  = "SWD",
+        port       = 2341,
+        select     = "usb=1067654650",
+        filename   = "/home/radu/work/MCZB-2274/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/ieee_802_15_4/examples/controller/build/15.4-controller.elf",
     }
 }
 

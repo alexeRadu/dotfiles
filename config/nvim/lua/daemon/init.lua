@@ -36,7 +36,9 @@ function M.start(name, config)
         config.interface,
         "-nogui",
         "-port",
-        config.port
+        config.port,
+        "-select",
+        config.select
     }
 
     local job = Job:new(opts)
