@@ -1,6 +1,6 @@
 local config = {}
 
-config.name = "pyright"
+config.name = "pylsp"
 config.settings = {}
 
 return config
