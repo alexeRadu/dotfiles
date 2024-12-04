@@ -66,6 +66,15 @@ alias mk-ls='make -qpRr | grep --color=always -e "^[a-z].*:"'
 alias d2u='find . -type f -print0 | xargs -0 dos2unix'
 alias u2d='find . -type f -print0 | xargs -0 unix2dos'
 
+fkill() {
+    local pid
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+    if [ "x$pid" != x ]; then
+        echo $pid | xargs kill -9
+    fi
+}
+
 # nnn configuration
 # -----------------------------------------------------------------------------
 nn() {
