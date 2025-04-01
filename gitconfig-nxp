@@ -1,9 +1,0 @@
-[user]
-	email = radu.alexe@nxp.com
-
-[sendmail]
-	from = Radu Alexe <radu.alexe@nxp.com>
-	confirm = always
-	smtpserver = remotesmtp.freescale.net
-	aliasesfile = /home/b47441/.mailrc
-	aliasfiletype = mailrc

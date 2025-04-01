@@ -1,0 +1,12 @@
+[user]
+	name = Radu Alexe
+	email = alexeradu2007@gmail.com
+
+[color]
+	status = auto
+	grep = auto
+	diff = auto
+
+[core]
+	editor = nvim
+
