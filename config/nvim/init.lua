@@ -102,7 +102,15 @@ require('packer').startup(function(use)
         main="ibl",
         opt={}
     }
+
+    -- themes
     use {'navarasu/onedark.nvim'}
+    use {'catppuccin/nvim', as = "catppuccin" }
+    use {'EdenEast/nightfox.nvim'}
+    use {'rebelot/kanagawa.nvim'}
+    use {'folke/tokyonight.nvim'}
+    use {'scottmckendry/cyberdream.nvim'}
+
     use {'numToStr/Comment.nvim'}
     use {'theHamsta/nvim-semantic-tokens'}
     use {'kevinhwang91/nvim-ufo',
@@ -343,3 +351,5 @@ end, {nargs = 0})
 -- vim.keymap.set('n', '<leader>m', ':lua require("utils").show_loaded_packages()<CR>', { silent = true })
 -- vim.keymap.set('n', '<leader>pp', ':lua require("project").list_projects()<CR>', { silent = true })
 -- vim.keymap.set('n', '<leader>pq', ':lua require("project").quit_project()<CR>', { silent = true })
+
+vim.cmd("colorscheme nightfox")
