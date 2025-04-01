@@ -120,6 +120,11 @@ require('packer').startup(function(use)
     use {'ggandor/leap.nvim'}
     use {'mfussenegger/nvim-dap'}
     use {'rcarriga/nvim-dap-ui'}
+    use {'rbong/vim-flog',
+        requires = {
+            'tpope/vim-fugitive'
+        }
+    }
 
     if is_bootstrap then
         require('packer').sync()
