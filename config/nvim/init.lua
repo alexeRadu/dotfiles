@@ -250,6 +250,7 @@ local start_gdb = function()
 
     vim.cmd(":TermdebugCommand " .. config.filename)
     vim.fn.TermDebugSendCommand('target remote localhost:' .. config.port)
+    vim.fn.TermDebugSendCommand('set print pretty')
 
     -- close gdb window
     vim.cmd ':Gdb'
