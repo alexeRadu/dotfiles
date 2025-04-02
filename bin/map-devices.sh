@@ -2,7 +2,7 @@
 
 echo "Resetting all devices"
 for port in {0..7}; do
-    power-off ${port}
+    poff ${port}
 done
 
 filepath="/home/radu/.devices.json"
@@ -13,12 +13,12 @@ rm -Rf $filepath
 echo "[" > /home/radu/.devices.json
 
 for port in {0..7}; do
-    power-on ${port}
+    pon ${port}
     sleep 1
 
     device=$(jld | grep -o --color=never -e '[0-9]\{5,15\}')
 
-    power-off ${port}
+    poff ${port}
 
     if [ -n "${device}" ]; then
         echo "Found device ${device} on port ${port}"
