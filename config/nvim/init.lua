@@ -110,6 +110,7 @@ require('packer').startup(function(use)
     use {'rebelot/kanagawa.nvim'}
     use {'folke/tokyonight.nvim'}
     use {'scottmckendry/cyberdream.nvim'}
+    use {'rose-pine/neovim'}
 
     use {'numToStr/Comment.nvim'}
     use {'theHamsta/nvim-semantic-tokens'}
