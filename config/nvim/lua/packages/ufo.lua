@@ -2,10 +2,10 @@ local M = {}
 
 M.config = {
     close_fold_kinds_for_ft = {
-        default = {},
-        lua = {'function_definition'},
-        cpp = {'comment', 'function_definition'},
-        c = {'comment', 'function_definition'}
+        default = {'comment', 'function_definition'},
+        -- lua = {'function_definition'},
+        -- cpp = {'comment', 'function_definition'},
+        -- c = {'comment', 'function_definition'}
     },
     provider_selector = function(bufnr, filetype, buftype)
         return {'treesitter', 'indent'}
