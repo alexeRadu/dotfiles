@@ -166,7 +166,7 @@ local pkg_config = function(name, config, post_setup)
     end
 end
 
-for file, type in vim.fs.dir("~/.config/nvim/lua/packages") do
+for file, _ in vim.fs.dir("~/.config/nvim/lua/packages") do
     local _, _, pkgname = string.find(file, '([%w_-]+).lua$')
 
     if pkgname then
@@ -391,7 +391,7 @@ end, {nargs = 0})
 
 vim.api.nvim_create_autocmd("User", {
     pattern = "TermdebugStopPost",
-    callback = function(ev)
+    callback = function(_)
         print("Debugging stopped")
 
         for _, buf in pairs(vim.api.nvim_list_bufs()) do
