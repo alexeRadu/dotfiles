@@ -14,7 +14,7 @@ local on_attach = function(client, bufnr)
         })
     end
 
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     nmap('gd', vim.lsp.buf.definition, 'Goto Definition')
@@ -35,21 +35,6 @@ local on_attach = function(client, bufnr)
     nmap('<leader>rn', vim.lsp.buf.rename)
     nmap('<leader>ca', vim.lsp.buf.code_action)
 
-    -- TODO: this should be removed for neovim 0.9 since 'semanticTokens' functionatlity
-    -- will be included in the default neovim
-    local caps = client.server_capabilities
-    if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-        local augroup = vim.api.nvim_create_augroup("SemanticTokens", {})
-        vim.api.nvim_create_autocmd("TextChanged", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.semantic_tokens_full()
-            end,
-        })
-
-        vim.lsp.buf.semantic_tokens_full()
-    end
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()

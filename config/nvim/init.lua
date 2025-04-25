@@ -113,7 +113,6 @@ require('packer').startup(function(use)
     use {'rose-pine/neovim'}
 
     use {'numToStr/Comment.nvim'}
-    use {'theHamsta/nvim-semantic-tokens'}
     use {'kevinhwang91/nvim-ufo',
         requires = 'kevinhwang91/promise-async'
     }
