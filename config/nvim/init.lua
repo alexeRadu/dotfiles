@@ -125,6 +125,13 @@ require('packer').startup(function(use)
             'tpope/vim-fugitive'
         }
     }
+    use {'SuperBo/fugit2.nvim',
+        requires = {
+            'MunifTanjim/nui.nvim',
+            'nvim-tree/nvim-web-devicons',
+        }
+    }
+    use {'isakbm/gitgraph.nvim'}
 
     if is_bootstrap then
         require('packer').sync()
