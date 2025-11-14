@@ -9,7 +9,7 @@ PATH=${PATH}:${HOME}/.bin
 PATH=${PATH}:${HOME}/local/nvim/bin
 PATH=${PATH}:${HOME}/.local/bin/lua-language-server/bin
 
-export BASH_ENV=$HOME/.bashrc
+# export BASH_ENV=$HOME/.bashrc
 
 # LS colors
 if [ "$tty" = "busybox" ]; then
