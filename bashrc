@@ -5,10 +5,9 @@
 
 tty=`ps -p $$ | tail -n +2 | grep -oE '[^ \/]+$'`
 
-export PATH=${HOME}/.bin:${PATH}
-export PATH=${HOME}/.local/bin:${PATH}
-export PATH=${HOME}/local/nvim/bin:${PATH}
-export PATH=${HOME}/.local/bin/lua-language-server/bin:${PATH}
+PATH=${PATH}:${HOME}/.bin
+PATH=${PATH}:${HOME}/local/nvim/bin
+PATH=${PATH}:${HOME}/.local/bin/lua-language-server/bin
 
 export BASH_ENV=$HOME/.bashrc
 
