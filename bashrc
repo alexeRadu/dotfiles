@@ -147,6 +147,19 @@ bp() {
 }
 
 
+# Kill process
+# -----------------------------------------------------------------------------
+k() {
+    local pids
+
+    # Show only a simplified view of the existing processes
+    pids=$(ps -e -o pid,comm -u "$USER" --no-headers | fzf -m | awk '{print $1}')
+
+    if [ "x$pids" != "x" ]; then
+        echo $pids | xargs kill -${1:-9}
+    fi
+}
+
 # Exercism
 # -----------------------------------------------------------------------------
 if [ -f ~/.config/exercism/exercism_completion.bash ]; then
