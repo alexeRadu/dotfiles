@@ -30,15 +30,13 @@ function M.start(name, config)
 
     opts.command = config.command
     opts.args = {
-        "-device",
-        config.device,
-        "-if",
-        config.interface,
+        "-device", config.device,
+        "-if", config.interface,
         "-nogui",
-        "-port",
-        config.port,
-        "-select",
-        config.select
+        "-port", config.port,
+        "-SWOPort", config.port + 1,
+        "-TelnetPort", config.port + 2,
+        "-select", config.select
     }
 
     local job = Job:new(opts)
