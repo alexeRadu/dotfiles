@@ -133,6 +133,14 @@ require('packer').startup(function(use)
     }
     use {'isakbm/gitgraph.nvim'}
 
+    use {
+        'chomosuke/typst-preview.nvim',
+        tag = 'v1.*',
+        config = function()
+            require 'typst-preview'.setup {}
+        end,
+    }
+
     if is_bootstrap then
         require('packer').sync()
     end
