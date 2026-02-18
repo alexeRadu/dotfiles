@@ -117,7 +117,7 @@ require('packer').startup(function(use)
         requires = 'kevinhwang91/promise-async'
     }
     use {'lewis6991/gitsigns.nvim'}
-    use {'ggandor/leap.nvim'}
+    -- use {'ggandor/leap.nvim'}
     use {'mfussenegger/nvim-dap'}
     use {'rcarriga/nvim-dap-ui'}
     use {'rbong/vim-flog',
