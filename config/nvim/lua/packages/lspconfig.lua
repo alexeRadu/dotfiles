@@ -55,7 +55,7 @@ M.post_setup = function()
             setup_settings.cmd = config.cmd
         end
 
-        require('lspconfig')[config_name].setup(setup_settings)
+       vim.lsp.config(config_name, setup_settings)
     end
 end
 
