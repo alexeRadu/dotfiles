@@ -43,7 +43,7 @@ vim.keymap.set('n', '<C-w>k', ':leftabove split<CR>', { silent = true })
 -- Moving in insert mode
 vim.keymap.set('i', '<C-h>', '<C-c>', { silent = true })
 vim.keymap.set('i', '<C-j>', '<C-c>lj', { silent = true })
-vim.keymap.set('i', '<C-k>', '<C-c>lk', { silent = true })
+-- vim.keymap.set('i', '<C-k>', '<C-c>lk', { silent = true })
 vim.keymap.set('i', '<C-l>', '<C-c>ll', { silent = true })
 
 -- Terminal keybindings
@@ -205,159 +205,134 @@ vim.g.termdebug_config = {
 vim.keymap.set('n', '<F5>',    ':DebugStart<CR>', {silent = true})
 
 local gdb_configs = {
-    mcxw72_mac_fsci_bb = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW47B42ZB7_M33_0",
-        interface  = "SWD",
-        port       = 2341,
-        select     = "usb=1067654650",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/mcxw72evk/mac_fsci_bb/mac_fsci_black_box_split_cm33_core0.elf",
-    },
-    mcxw71_mac_fsci_bb = {
+    mcxw71_conn_test_split = {
         command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW45Z41083",
         interface  = "SWD",
-        port       = 2341,
+        port       = 2321,
         select     = "usb=1066710819",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/mcxw71evk/mac_fsci_bb/mac_fsci_black_box_split.elf",
+        filename   ="/home/radu/work/workspace/mcuxsdk/build/mcxw71evk/conn_test_split/15_4_connectivity_test_bm.elf"
     },
-    mcxw72_host = {
+    mcxw71_ot_cli = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW45Z41083",
+        interface  = "SWD",
+        port       = 2321,
+        select     = "usb=1066710819",
+        filename   ="/home/radu/work/workspace/ot-nxp/build_mcxw71/bin/ot-cli-ftd.elf"
+    },
+    mcxw71_zboss_cli = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW45Z41083",
+        interface  = "SWD",
+        port       = 2321,
+        select     = "usb=1066710819",
+        filename   ="/home/radu/work/nxp_zephyr_zboss/build/mcxw71/cli_nxp_zed/zephyr/zephyr.elf"
+    },
+    mcxw71_zboss_on_off = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW45Z41083",
+        interface  = "SWD",
+        port       = 2321,
+        select     = "usb=1066710819",
+        filename   ="/home/radu/work/nxp_zephyr_zboss/build/mcxw71/on_off_switch_zed/zephyr/zephyr.elf"
+    },
+    mcxw71_zephyr_echo_server = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW45Z41083",
+        interface  = "SWD",
+        port       = 2321,
+        select     = "usb=1066710819",
+        filename   ="/home/radu/work/zephyrproject/zephyr/build/frdm_mcxw71/echo_server/zephyr/zephyr.elf"
+    },
+    mcxw71_nbu_dyn_mac = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW45B41Z83_NBU",
+        interface  = "SWD",
+        port       = 2382,
+        select     = "usb=1066710819",
+        filename   ="/home/radu/work/workspace/mcuxsdk/build/mcxw71evk/nbu_dyn_mac_split/nbu_ble_15_4_dyn_mac_split.elf"
+    },
+    mcxw71_nbu = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW45B41Z83_NBU",
+        interface  = "SWD",
+        port       = 2361,
+        select     = "usb=1066710819",
+        filename   = "/home/radu/work/workspace/mcuxsdk/build/mcxw71evk/nbu_15_4/nbu_15_4.elf"
+    },
+    mcxw72_conn_test_split = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW47B42ZB7_M33_0",
+        interface  = "SWD",
+        port       = 2321,
+        select     = "usb=1061068817",
+        filename   ="/home/radu/work/workspace/mcuxsdk/build/mcxw72evk/conn_test_split/15_4_connectivity_test_bm_cm33_core0.elf"
+    },
+    mcxw72_conn_test_standalone = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW47B42ZB7_M33_0",
+        interface  = "SWD",
+        port       = 2321,
+        select     = "usb=1061068817",
+        filename   ="/home/radu/work/workspace/mcuxsdk/build/mcxw72evk/conn_test_standalone/15.4_connectivity_test_bm_cm33_core0.elf"
+    },
+    mcxw72_ot_cli = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW47B42ZB7_M33_0",
+        interface  = "SWD",
+        port       = 2321,
+        select     = "usb=1061068817",
+        filename   ="/home/radu/work/workspace/ot-nxp/build_mcxw72/bin/ot-cli-ftd.elf"
+    },
+    mcxw72_dual_app = {
         command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW47B42ZB7_M33_0",
         interface  = "SWD",
         port       = 2331,
-        filename   = "/home/radu/work/ot-nxp/build_mcxw72/bin/ot-cli-ftd.elf",
+        select     = "usb=1064975873",
+        filename   = "/home/radu/work/workspace/ot-nxp/build_mcxw72/ot_cli_ftd_ble_shell/bin/ot-cli-ftd-ble-shell-mcxw72.elf"
+    },
+    mcxw72_nbu_dyn = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW47B42ZB7_M33_1",
+        interface  = "SWD",
+        port       = 2372,
+        select     = "usb=1061068817",
+        -- select     = "usb=1064975873",
+        filename   = "/home/radu/work/workspace/mcuxsdk/build/mcxw72evk/nbu_dyn_phy_split/nbu_ble_15_4_dyn_phy_split_cm33_core1.elf",
     },
     mcxw72_nbu = {
         command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW47B42ZB7_M33_1",
         interface  = "SWD",
         port       = 2361,
-        -- select     = "usb=1069060107",
-        select     = "usb=1067654650",
-        -- filename   = "/home/radu/work/MCZB-2473/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/boards/mcxw72/nbu_15_4/bm/iar/Debug/Exe/nbu_15_4.out"
-        filename   = "/home/radu/work/sdk-next/mcu-sdk-3.0/middleware/wireless/ieee-802.15.4_private/boards/mcxw72/nbu_ble_15_4_dyn/Debug/Exe/nbu_ble_15_4_dyn.out"
+        select     = "usb=1061068817",
+        filename   = "/home/radu/work/workspace/mcuxsdk/build/mcxw72evk/nbu_15_4/nbu_15_4_cm33_core1.elf"
     },
-    mcxw72_ot = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW47B42ZB7_M33_0",
-        interface  = "SWD",
-        port       = 2371,
-        select     = "usb=1069060107",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/ot-nxp/build_mcxw72/bin/ot-cli-ftd.elf",
-    },
-    mcxw72_ot_loc_reader = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW47B42ZB7_M33_0",
-        interface  = "SWD",
-        port       = 2381,
-        select     = "usb=1069060107",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/ot-nxp/build_mcxw72/ot_cli_ftd_ble_loc_reader/bin/ot-cli-ftd-ble-loc-reader-mcxw72.elf",
-    },
-    k32w1_15_4_controller = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW45Z41083",
-        interface  = "SWD",
-        port       = 2351,
-        select     = "usb=1063040867",
-        filename   = "/home/radu/work/MCZB-2274/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/ieee_802_15_4/examples/controller/build/15.4-controller.elf",
-    },
-    k32w1_15_4_conn_test = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW45Z41083",
-        interface  = "SWD",
-        port       = 2351,
-        -- select     = "usb=1067654650",
-        -- select     = "usb=1063040867",
-        select     = "usb=1066710819",
-        filename   = "./Debug/frdmmcxw71_15_4_connectivity_test_bm.axf",
-    },
-    mcxw71_ot = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW45Z41083",
-        interface  = "SWD",
-        port       = 2381,
-        select     = "usb=1066710819",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/ot-nxp/build_mcxw71/bin/ot-cli-ftd.elf",
-    },
-    k32w1_nbu = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW45Z41083",
-        interface  = "SWD",
-        port       = 2391,
-        select     = "usb=1066710819",
-        -- select     = "usb=1066710819",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/middleware/wireless/ieee-802.15.4_private/boards/k32w1_mcxw71/nbu_ble_15_4_dyn/Debug/Exe/nbu_ble_15_4_dyn.out"
-    },
-    mcxw72_15_4_controller = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW47B42ZB7_M33_0",
-        -- device     = "KW45Z41083",
-        interface  = "SWD",
-        port       = 2341,
-        -- select     = "usb=1067654650",
-        select     = "usb=1069060107",
-        filename   = "/home/radu/work/MCZB-2274/mcu-sdk-2.0/middleware/wireless/ieee-802.15.4/ieee_802_15_4/examples/controller/build/15.4-controller.elf",
-    },
-    mcxw72_15_4_conn_test = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW47B42ZB7_M33_0",
-        interface  = "SWD",
-        port       = 2341,
-        select     = "usb=1067654650",
-        filename   ="/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/mcxw72evk/conn_test/15.4_connectivity_test_bm_cm33_core0.elf"
-    },
-    mcxw72_lighting_app = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW47B42ZB7_M33_0",
-        interface  = "SWD",
-        port       = 2341,
-        select     = "usb=1069060107",
-        -- select     = "usb=1067654650",
-        filename   = "/home/radu/work/connectedhomeip/examples/lighting-app/nxp/mcxw72/out/debug/chip-mcxw72-light-example.elf"
-    },
-    mcxw72_lock_app = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW47B42ZB7_M33_0",
-        interface  = "SWD",
-        port       = 2341,
-        select     = "usb=1069060107",
-        filename   = "/home/radu/work/connectedhomeip/examples/lock-app/nxp/mcxw72/out/debug/chip-mcxw72-lock-example"
-    },
-    mcxw71_lighting_app = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW45Z41083",
-        interface  = "SWD",
-        port       = 2341,
-        select     = "usb=1066710819",
-        filename   = "/home/radu/work/connectedhomeip/examples/lighting-app/nxp/mcxw71/out/debug/chip-mcxw71-light-example.elf"
-    },
-    mcxw72_loc_reader = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW47B42ZB7_M33_0",
-        interface  = "SWD",
-        port       = 2341,
-        select     = "usb=1069060107",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/loc_reader_bm_cm33_core0.elf"
-    },
-    kw43_15_4_conn_test = {
+    kw43_conn_test_split = {
         command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW43B43ZC7",
         interface  = "SWD",
         port       = 2741,
         select     = "usb=601007884",
-        -- filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/conn_test/iar/15_4_connectivity_test_bm.out"
-        -- filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/kw43evk/conn_test/15_4_connectivity_test_bm.elf"
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/kw43evk/conn_test/15.4_connectivity_test_bm.elf"
+        filename   = "/home/radu/work/workspace/mcuxsdk/build/kw43evk/conn_test_split/15_4_connectivity_test_bm.elf"
+    },
+    kw43_dual_app = {
+        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
+        device     = "KW43B43ZC7",
+        interface  = "SWD",
+        port       = 2741,
+        select     = "usb=601007884",
+        filename   = "/home/radu/work/workspace/ot-nxp/build_mcxw30/ot_cli_ftd_ble_shell/bin/ot-cli-ftd-ble-shell-mcxw30.elf"
     },
     kw43_nbu = {
         command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
         device     = "KW43B43ZC7_NBU",
         interface  = "SWD",
-        port       = 2361,
+        port       = 2362,
         select     = "usb=601007884",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/kw43evk/nbu_15_4/nbu_15_4.elf"
-        -- filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/kw43evk/nbu_15_4/iar/nbu_15_4.out"
+        filename   = "/home/radu/work/workspace/mcuxsdk/build/kw43evk/nbu_15_4/nbu_15_4.elf"
     },
     kw43_nbu_dyn = {
         command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
@@ -365,30 +340,11 @@ local gdb_configs = {
         interface  = "SWD",
         port       = 2361,
         select     = "usb=601007884",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/middleware/wireless/ieee-802.15.4_private/boards/mcxw30/nbu_ble_15_4_dyn/Debug/Exe/nbu_ble_15_4_dyn.out"
-    },
-    kw43_15_4_ot = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW43B43ZC7",
-        interface  = "SWD",
-        port       = 2741,
-        select     = "usb=601007884",
-        -- filename   = "/home/radu/work/sdk/mcuxsdk-workspace/mcuxsdk/build/conn_test/iar/15_4_connectivity_test_bm.out"
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/ot-nxp/build_mcxw30/bin/ot-cli-ftd.elf"
-    },
-    kw43_15_4_ot_ble_shell = {
-        command    = "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        device     = "KW43B43ZC7",
-        interface  = "SWD",
-        port       = 2741,
-        select     = "usb=601007884",
-        filename   = "/home/radu/work/sdk/mcuxsdk-workspace/ot-nxp/build_mcxw30/ot_cli_ftd_ble_shell/bin/ot-cli-ftd-ble-shell-mcxw30.elf"
+        filename   = "/home/radu/work/workspace/mcuxsdk/build/kw43evk/nbu_dyn_phy_split/nbu_ble_15_4_dyn_phy_split.elf"
     },
 }
 
 local current_gdb_config = nil
--- local current_gdb_config = "k32w1_15_4_controller"
--- local current_gdb_config = "mcxw72_host"
 
 local start_gdb = function()
     print("current_gdb_config: " .. current_gdb_config)
