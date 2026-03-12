@@ -4,6 +4,16 @@ local M = {}
 
 M.daemons = {}
 
+function M.setup(config)
+    -- add autocommand to kill job when neovim exists
+    vim.api.nvim_create_autocmd("VimLeavePre", {
+        callback = function()
+            M.killall()
+        end
+    })
+
+end
+
 local on_output = vim.schedule_wrap(function(err, line, job)
     vim.api.nvim_buf_set_lines(job.buffer, -1, -1, false, {line})
 end)

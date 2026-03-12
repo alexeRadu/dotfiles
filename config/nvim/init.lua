@@ -105,6 +105,9 @@ vim.g.termdebug_config = {
     ["use_prompt"] = false,
 }
 
+-- Daemon package
+require('daemon').setup({})
+
 vim.keymap.set('n', '<F5>',    ':DebugStart<CR>', {silent = true})
 
 local gdb_configs = {
