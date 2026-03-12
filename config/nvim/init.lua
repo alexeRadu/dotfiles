@@ -1,22 +1,10 @@
 vim.g.mapleader      = ' '
 vim.g.maplocalleader = ' '
 
--- disable netrw
-vim.g.loaded             = 1
-vim.g.loaded_netrwPlugin = 1
-
-vim.o.background     = 'dark'
-vim.o.errorbells     = false
-vim.o.number         = true
-vim.o.relativenumber = true
-vim.o.termguicolors  = true
-vim.o.list           = true
-vim.o.splitbelow     = true
-vim.o.splitright     = true
-vim.o.cursorline     = true
-vim.o.autoread       = true
-vim.opt.listchars    = { tab = '» ', trail = '·' }
-vim.opt.completeopt  = { 'menu', 'menuone', 'noselect' }
+-- Basic settings
+-- This should come first becase if there are some issues later on with the initialization
+-- we still have some settings in place
+require "settings"
 
 -- These mappings should be as close to the top as possible since they are
 -- usefull with a vanilla installation of neovim and don't remquire any packages
