@@ -61,6 +61,9 @@ vim.api.nvim_create_autocmd("FileType", {
     pattern = "help"
 })
 
+-- Boostraping the plugin manager
+require "lazy-bootstrap"
+
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
