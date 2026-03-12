@@ -22,100 +22,74 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Boostraping the plugin manager
 require "lazy-bootstrap"
 
--- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    is_bootstrap = true
-    vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-    vim.cmd [[packadd packer.nvim]]
-end
+require("lazy").setup("plugins")
 
-require('packer').startup(function(use)
-    use {'wbthomason/packer.nvim'}
-    use {'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
-        requires = { 'nvim-lua/plenary.nvim' }
-    }
-    use {'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'make',
-        cond = vim.fn.executable 'make' == 1,
-    }
-    use {'kyazdani42/nvim-tree.lua',
-        requires = {'kyazdani42/nvim-web-devicons'}
-    }
-    use {'nvim-telescope/telescope-file-browser.nvim'}
-    use {'nvim-treesitter/nvim-treesitter',
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end,
-    }
-    use {'nvim-treesitter/playground'}
-    use {'neovim/nvim-lspconfig'}
-    use {'williamboman/nvim-lsp-installer'}
-    use {'hrsh7th/nvim-cmp'}
-    use {'hrsh7th/cmp-nvim-lsp'}
-    use {'hrsh7th/cmp-buffer'}
-    use {'hrsh7th/cmp-path'}
-    use {'simrat39/symbols-outline.nvim'}
-    use {'lukas-reineke/indent-blankline.nvim',
-        main="ibl",
-        opt={}
-    }
-
-    -- themes
-    use {'navarasu/onedark.nvim'}
-    use {'catppuccin/nvim', as = "catppuccin" }
-    use {'EdenEast/nightfox.nvim'}
-    use {'rebelot/kanagawa.nvim'}
-    use {'folke/tokyonight.nvim'}
-    use {'scottmckendry/cyberdream.nvim'}
-    use {'rose-pine/neovim'}
-
-    use {'numToStr/Comment.nvim'}
-    use {'kevinhwang91/nvim-ufo',
-        requires = 'kevinhwang91/promise-async'
-    }
-    use {'lewis6991/gitsigns.nvim'}
-    -- use {'ggandor/leap.nvim'}
-    use {'mfussenegger/nvim-dap'}
-    use {'rcarriga/nvim-dap-ui'}
-    use {'rbong/vim-flog',
-        requires = {
-            'tpope/vim-fugitive'
-        }
-    }
-    use {'SuperBo/fugit2.nvim',
-        requires = {
-            'MunifTanjim/nui.nvim',
-            'nvim-tree/nvim-web-devicons',
-        }
-    }
-    use {'isakbm/gitgraph.nvim'}
-
-    use {
-        'chomosuke/typst-preview.nvim',
-        tag = 'v1.*',
-        config = function()
-            require('typst-preview').setup {}
-        end,
-    }
-
-    if is_bootstrap then
-        require('packer').sync()
-    end
-end)
-
-if is_bootstrap then
-    print '=================================='
-    print '    Plugins are being installed'
-    print '    Wait until Packer completes,'
-    print '       then restart nvim'
-    print '=================================='
-    return
-end
-
+-- require('packer').startup(function(use)
+--     use {'kyazdani42/nvim-tree.lua',
+--         requires = {'kyazdani42/nvim-web-devicons'}
+--     }
+--     use {'nvim-treesitter/nvim-treesitter',
+--         run = function()
+--             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+--             ts_update()
+--         end,
+--     }
+--     use {'nvim-treesitter/playground'}
+--     use {'neovim/nvim-lspconfig'}
+--     use {'williamboman/nvim-lsp-installer'}
+--     use {'hrsh7th/nvim-cmp'}
+--     use {'hrsh7th/cmp-nvim-lsp'}
+--     use {'hrsh7th/cmp-buffer'}
+--     use {'hrsh7th/cmp-path'}
+--     use {'simrat39/symbols-outline.nvim'}
+--     use {'lukas-reineke/indent-blankline.nvim',
+--         main="ibl",
+--         opt={}
+--     }
+--
+--     -- themes
+--     use {'navarasu/onedark.nvim'}
+--     use {'catppuccin/nvim', as = "catppuccin" }
+--     use {'EdenEast/nightfox.nvim'}
+--     use {'rebelot/kanagawa.nvim'}
+--     use {'folke/tokyonight.nvim'}
+--     use {'scottmckendry/cyberdream.nvim'}
+--     use {'rose-pine/neovim'}
+--
+--     use {'numToStr/Comment.nvim'}
+--     use {'kevinhwang91/nvim-ufo',
+--         requires = 'kevinhwang91/promise-async'
+--     }
+--     use {'lewis6991/gitsigns.nvim'}
+--     -- use {'ggandor/leap.nvim'}
+--     use {'mfussenegger/nvim-dap'}
+--     use {'rcarriga/nvim-dap-ui'}
+--     use {'rbong/vim-flog',
+--         requires = {
+--             'tpope/vim-fugitive'
+--         }
+--     }
+--     use {'SuperBo/fugit2.nvim',
+--         requires = {
+--             'MunifTanjim/nui.nvim',
+--             'nvim-tree/nvim-web-devicons',
+--         }
+--     }
+--     use {'isakbm/gitgraph.nvim'}
+--
+--     use {
+--         'chomosuke/typst-preview.nvim',
+--         tag = 'v1.*',
+--         config = function()
+--             require('typst-preview').setup {}
+--         end,
+--     }
+--
+--     if is_bootstrap then
+--         require('packer').sync()
+--     end
+-- end)
+--
 -- local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 -- vim.api.nvim_create_autocmd('BufWritePost', {
 --     command = 'source <afile> | PackerCompile',
@@ -123,40 +97,8 @@ end
 --     pattern = vim.fn.expand '$MYVIMRC',
 -- })
 
-local pkg_config = function(name, config, post_setup)
-    local status_ok, pkg = pcall(require, name)
-    if not status_ok then
-        vim.notify(string.format("Package '%s' unable to load", name), vim.log.levels.DEBUG)
-        return
-    end
-
-    if config then
-        pkg.setup(config)
-        -- vim.notify(string.format("Package '%s' configured", name), vim.log.levels.INFO)
-    end
-
-    if post_setup and type(post_setup) == "function" then
-        post_setup()
-        -- vim.notify(string.format("Package '%s' post_setup", name), vim.log.levels.INFO)
-    end
-end
-
-for file, _ in vim.fs.dir("~/.config/nvim/lua/packages") do
-    local _, _, pkgname = string.find(file, '([%w_-]+).lua$')
-
-    if pkgname then
-        local pkg = require("packages/" .. pkgname)
-
-        if pkg.disable == nil or pkg.disable == false then
-            pkgname = vim.F.if_nil(pkg.name, pkgname)
-
-            pkg_config(pkgname, pkg.config, pkg.post_setup)
-        end
-    end
-end
-
 -- Termdebug setup
-vim.cmd [[packadd termdebug]]
+-- vim.cmd [[packadd termdebug]]
 
 vim.g.termdebug_config = {
     ["command"]    = 'arm-none-eabi-gdb',
@@ -422,4 +364,4 @@ end, {nargs = 0})
 -- vim.keymap.set('n', '<leader>pp', ':lua require("project").list_projects()<CR>', { silent = true })
 -- vim.keymap.set('n', '<leader>pq', ':lua require("project").quit_project()<CR>', { silent = true })
 
-vim.cmd("colorscheme nightfox")
+-- vim.cmd("colorscheme nightfox")
