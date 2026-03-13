@@ -5,4 +5,5 @@ return {
     { 'projekt0n/github-nvim-theme' },
     { 'ldelossa/vimdark' },
     { 'Everblush/nvim' },
+    { 'mikovskii/obscure.nvim' },
 }
