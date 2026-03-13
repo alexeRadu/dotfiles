@@ -291,11 +291,3 @@ vim.api.nvim_create_user_command('DebugStop', function()
     vim.keymap.del('n', '<F11>')
     vim.keymap.del('n', '<F12>')
 end, {nargs = 0})
-
-
--- vim.keymap.set('n', '<leader>c', ':Croniker<CR>', { silent = true })
--- vim.keymap.set('n', '<leader>m', ':lua require("utils").show_loaded_packages()<CR>', { silent = true })
--- vim.keymap.set('n', '<leader>pp', ':lua require("project").list_projects()<CR>', { silent = true })
--- vim.keymap.set('n', '<leader>pq', ':lua require("project").quit_project()<CR>', { silent = true })
-
--- vim.cmd("colorscheme nightfox")
