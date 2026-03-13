@@ -26,7 +26,7 @@ require("lazy").setup("plugins")
 
 
 -- Termdebug setup
--- vim.cmd [[packadd termdebug]]
+vim.cmd [[packadd termdebug]]
 
 vim.g.termdebug_config = {
     ["command"]    = 'arm-none-eabi-gdb',
