@@ -1,5 +1,6 @@
 -- disable netrw
-vim.g.loaded             = 1
+-- this is required advised by nvim-tree
+vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.o.background     = 'dark'
