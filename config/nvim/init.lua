@@ -25,16 +25,6 @@ require "lazy-bootstrap"
 require("lazy").setup("plugins")
 
 -- require('packer').startup(function(use)
---     use {'kyazdani42/nvim-tree.lua',
---         requires = {'kyazdani42/nvim-web-devicons'}
---     }
---     use {'nvim-treesitter/nvim-treesitter',
---         run = function()
---             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
---             ts_update()
---         end,
---     }
---     use {'nvim-treesitter/playground'}
 --     use {'neovim/nvim-lspconfig'}
 --     use {'williamboman/nvim-lsp-installer'}
 --     use {'hrsh7th/nvim-cmp'}
@@ -84,18 +74,7 @@ require("lazy").setup("plugins")
 --             require('typst-preview').setup {}
 --         end,
 --     }
---
---     if is_bootstrap then
---         require('packer').sync()
---     end
 -- end)
---
--- local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
--- vim.api.nvim_create_autocmd('BufWritePost', {
---     command = 'source <afile> | PackerCompile',
---     group = packer_group,
---     pattern = vim.fn.expand '$MYVIMRC',
--- })
 
 -- Termdebug setup
 -- vim.cmd [[packadd termdebug]]
