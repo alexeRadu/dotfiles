@@ -24,6 +24,9 @@ require "lazy-bootstrap"
 
 require("lazy").setup("plugins")
 
+-- Themes
+-- vim.cmd("colorscheme teide-darker")
+vim.cmd("colorscheme everblush")
 
 -- Termdebug setup
 vim.cmd [[packadd termdebug]]
