@@ -46,7 +46,6 @@ require("lazy").setup("plugins")
 --     use {'scottmckendry/cyberdream.nvim'}
 --     use {'rose-pine/neovim'}
 --
---     use {'numToStr/Comment.nvim'}
 --     use {'kevinhwang91/nvim-ufo',
 --         requires = 'kevinhwang91/promise-async'
 --     }
