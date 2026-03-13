@@ -13,7 +13,7 @@ return {
         config = function()
 
             -- Keymaps
-            local map = require('utils').map
+            local map = require('helpers').map
             local telescope = require('telescope.builtin')
 
             map('n', '<leader>f', telescope.find_files, "Find Files")

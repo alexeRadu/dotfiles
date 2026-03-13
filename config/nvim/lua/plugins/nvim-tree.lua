@@ -49,7 +49,7 @@ return {
             require('nvim-tree').setup(config)
 
             -- Keymaps
-            local map = require('utils').map
+            local map = require('helpers').map
             local api = require('nvim-tree.api')
 
             local toggle_nv_tree = function()
