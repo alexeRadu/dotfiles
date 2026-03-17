@@ -22,7 +22,12 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Boostraping the plugin manager
 require "lazy-bootstrap"
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+    change_detection = {
+        enabled = true,     -- keep automatic reloads
+        notify = false,     -- stop showing "Config Change Detected"
+    },
+})
 
 -- Themes
 vim.cmd("colorscheme teide-darker")
