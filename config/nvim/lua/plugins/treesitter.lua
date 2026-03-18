@@ -38,11 +38,8 @@ return {
                     local lang  = vim.treesitter.language.get_lang(ft)
 
                     if lang == nil then
-                        print("Lang nil?")
                         return
                     end
-
-                    print("Found ft: " .. vim.inspect(ft) .. ", lang: " .. vim.inspect(lang))
 
                     if not vim.treesitter.language.add(lang) then
                         local available = vim.g.ts_available or require('nvim-treesitter').get_available()
@@ -58,7 +55,6 @@ return {
 
                     if vim.treesitter.language.add(lang) then
                         -- start treesitter highlighting
-                        print("starting ...")
                         vim.treesitter.start(args.buf, lang)
                     end
                 end,
