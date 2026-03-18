@@ -24,6 +24,9 @@ return {
             local ufo = require('ufo')
 
             ufo.setup({
+                close_fold_kinds_for_ft = {
+                    default = {'comment', 'function_definition'},
+                },
                 provider_selector = function(bufnr, filetype, buftype)
                     return {'treesitter', 'indent'}
                 end
