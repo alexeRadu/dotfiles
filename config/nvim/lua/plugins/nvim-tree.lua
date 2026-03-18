@@ -40,7 +40,7 @@ return {
                 view = {
                     cursorline = true,
                     float = {
-                        enable = true,
+                        enable = false,
                         open_win_config = config_window,
                     },
                 },
