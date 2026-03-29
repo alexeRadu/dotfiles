@@ -23,5 +23,8 @@ return {
             map('n', '<leader>g', telescope.live_grep,  "Grep")
             map('v', '<leader>g', live_grep_selected,   "Live Grep")
         end
+    },
+    {
+        'nvim-telescope/telescope-symbols.nvim',
     }
 }
