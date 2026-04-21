@@ -4,6 +4,7 @@ return {
         dependencies = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
+            { 'folke/lazydev.nvim', ft = "lua", opts = {} },
         },
         config = function()
             -- We install a list of LSP servers via mason
